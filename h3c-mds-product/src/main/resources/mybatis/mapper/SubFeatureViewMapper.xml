@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.SubFeatureViewMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.product.entity.SubFeatureView">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="SUBFEATURENo" jdbcType="NVARCHAR" property="subfeatureno" />
+    <result column="SUBFEATURE" jdbcType="NVARCHAR" property="subfeature" />
+    <result column="SUBFEATUREOld" jdbcType="NVARCHAR" property="subfeatureold" />
+    <result column="engSUBFEATURE" jdbcType="NVARCHAR" property="engsubfeature" />
+    <result column="PLIPMTNo" jdbcType="NVARCHAR" property="plipmtno" />
+    <result column="PRODLINENo" jdbcType="NVARCHAR" property="prodlineno" />
+    <result column="PRODUCTNo" jdbcType="NVARCHAR" property="productno" />
+    <result column="VERSIONNo" jdbcType="NVARCHAR" property="versionno" />
+    <result column="RELEASENo" jdbcType="NVARCHAR" property="releaseno" />
+    <result column="FEATURENo" jdbcType="NVARCHAR" property="featureno" />
+    <result column="Readers" jdbcType="NVARCHAR" property="readers" />
+    <result column="Remark" jdbcType="NVARCHAR" property="remark" />
+    <result column="Status" jdbcType="NVARCHAR" property="status" />
+    <result column="CREATED_USER" jdbcType="NVARCHAR" property="createdUser" />
+    <result column="CREATED_DATE" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="MODIFY_USER" jdbcType="NVARCHAR" property="modifyUser" />
+    <result column="MODIFY_DATA" jdbcType="TIMESTAMP" property="modifyData" />
+    <result column="STANDBY1" jdbcType="NVARCHAR" property="standby1" />
+    <result column="STANDBY2" jdbcType="NVARCHAR" property="standby2" />
+    <result column="STANDBY3" jdbcType="NVARCHAR" property="standby3" />
+    <result column="STANDBY4" jdbcType="NVARCHAR" property="standby4" />
+    <result column="STANDBY5" jdbcType="NVARCHAR" property="standby5" />
+    <result column="STANDBY6" jdbcType="NVARCHAR" property="standby6" />
+    <result column="STANDBY7" jdbcType="NVARCHAR" property="standby7" />
+    <result column="STANDBY8" jdbcType="NVARCHAR" property="standby8" />
+    <result column="STANDBY9" jdbcType="NVARCHAR" property="standby9" />
+    <result column="STANDBY10" jdbcType="NVARCHAR" property="standby10" />
+    <result column="PRODLINE" jdbcType="NVARCHAR" property="prodline" />
+    <result column="Product" jdbcType="NVARCHAR" property="product" />
+    <result column="release" jdbcType="NVARCHAR" property="release" />
+    <result column="feature" jdbcType="NVARCHAR" property="feature" />
+    <result column="plipmt" jdbcType="NVARCHAR" property="plipmt" />
+    <result column="plipmt_order" jdbcType="INTEGER" property="plipmtOrder" />
+    <result column="pl_order" jdbcType="INTEGER" property="plOrder" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, SUBFEATURENo, SUBFEATURE, SUBFEATUREOld, engSUBFEATURE, PLIPMTNo, PRODLINENo, 
+    PRODUCTNo, VERSIONNo, RELEASENo, FEATURENo, Readers, Remark, Status, CREATED_USER, 
+    CREATED_DATE, MODIFY_USER, MODIFY_DATA, STANDBY1, STANDBY2, STANDBY3, STANDBY4, STANDBY5, 
+    STANDBY6, STANDBY7, STANDBY8, STANDBY9, STANDBY10, PRODLINE, Product, release, feature, 
+    plipmt, plipmt_order, pl_order
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.product.entity.SubFeatureViewExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SubFeatureView
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.product.entity.SubFeatureViewExample">
+    delete from SubFeatureView
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.product.entity.SubFeatureView">
+    insert into SubFeatureView (ID, SUBFEATURENo, SUBFEATURE, 
+      SUBFEATUREOld, engSUBFEATURE, PLIPMTNo, 
+      PRODLINENo, PRODUCTNo, VERSIONNo, 
+      RELEASENo, FEATURENo, Readers, 
+      Remark, Status, CREATED_USER, 
+      CREATED_DATE, MODIFY_USER, MODIFY_DATA, 
+      STANDBY1, STANDBY2, STANDBY3, 
+      STANDBY4, STANDBY5, STANDBY6, 
+      STANDBY7, STANDBY8, STANDBY9, 
+      STANDBY10, PRODLINE, Product, 
+      release, feature, plipmt, 
+      plipmt_order, pl_order)
+    values (#{id,jdbcType=INTEGER}, #{subfeatureno,jdbcType=NVARCHAR}, #{subfeature,jdbcType=NVARCHAR}, 
+      #{subfeatureold,jdbcType=NVARCHAR}, #{engsubfeature,jdbcType=NVARCHAR}, #{plipmtno,jdbcType=NVARCHAR}, 
+      #{prodlineno,jdbcType=NVARCHAR}, #{productno,jdbcType=NVARCHAR}, #{versionno,jdbcType=NVARCHAR}, 
+      #{releaseno,jdbcType=NVARCHAR}, #{featureno,jdbcType=NVARCHAR}, #{readers,jdbcType=NVARCHAR}, 
+      #{remark,jdbcType=NVARCHAR}, #{status,jdbcType=NVARCHAR}, #{createdUser,jdbcType=NVARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{modifyUser,jdbcType=NVARCHAR}, #{modifyData,jdbcType=TIMESTAMP}, 
+      #{standby1,jdbcType=NVARCHAR}, #{standby2,jdbcType=NVARCHAR}, #{standby3,jdbcType=NVARCHAR}, 
+      #{standby4,jdbcType=NVARCHAR}, #{standby5,jdbcType=NVARCHAR}, #{standby6,jdbcType=NVARCHAR}, 
+      #{standby7,jdbcType=NVARCHAR}, #{standby8,jdbcType=NVARCHAR}, #{standby9,jdbcType=NVARCHAR}, 
+      #{standby10,jdbcType=NVARCHAR}, #{prodline,jdbcType=NVARCHAR}, #{product,jdbcType=NVARCHAR}, 
+      #{release,jdbcType=NVARCHAR}, #{feature,jdbcType=NVARCHAR}, #{plipmt,jdbcType=NVARCHAR}, 
+      #{plipmtOrder,jdbcType=INTEGER}, #{plOrder,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.product.entity.SubFeatureView">
+    insert into SubFeatureView
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="subfeatureno != null">
+        SUBFEATURENo,
+      </if>
+      <if test="subfeature != null">
+        SUBFEATURE,
+      </if>
+      <if test="subfeatureold != null">
+        SUBFEATUREOld,
+      </if>
+      <if test="engsubfeature != null">
+        engSUBFEATURE,
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo,
+      </if>
+      <if test="prodlineno != null">
+        PRODLINENo,
+      </if>
+      <if test="productno != null">
+        PRODUCTNo,
+      </if>
+      <if test="versionno != null">
+        VERSIONNo,
+      </if>
+      <if test="releaseno != null">
+        RELEASENo,
+      </if>
+      <if test="featureno != null">
+        FEATURENo,
+      </if>
+      <if test="readers != null">
+        Readers,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="createdUser != null">
+        CREATED_USER,
+      </if>
+      <if test="createdDate != null">
+        CREATED_DATE,
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER,
+      </if>
+      <if test="modifyData != null">
+        MODIFY_DATA,
+      </if>
+      <if test="standby1 != null">
+        STANDBY1,
+      </if>
+      <if test="standby2 != null">
+        STANDBY2,
+      </if>
+      <if test="standby3 != null">
+        STANDBY3,
+      </if>
+      <if test="standby4 != null">
+        STANDBY4,
+      </if>
+      <if test="standby5 != null">
+        STANDBY5,
+      </if>
+      <if test="standby6 != null">
+        STANDBY6,
+      </if>
+      <if test="standby7 != null">
+        STANDBY7,
+      </if>
+      <if test="standby8 != null">
+        STANDBY8,
+      </if>
+      <if test="standby9 != null">
+        STANDBY9,
+      </if>
+      <if test="standby10 != null">
+        STANDBY10,
+      </if>
+      <if test="prodline != null">
+        PRODLINE,
+      </if>
+      <if test="product != null">
+        Product,
+      </if>
+      <if test="release != null">
+        release,
+      </if>
+      <if test="feature != null">
+        feature,
+      </if>
+      <if test="plipmt != null">
+        plipmt,
+      </if>
+      <if test="plipmtOrder != null">
+        plipmt_order,
+      </if>
+      <if test="plOrder != null">
+        pl_order,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="subfeatureno != null">
+        #{subfeatureno,jdbcType=NVARCHAR},
+      </if>
+      <if test="subfeature != null">
+        #{subfeature,jdbcType=NVARCHAR},
+      </if>
+      <if test="subfeatureold != null">
+        #{subfeatureold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engsubfeature != null">
+        #{engsubfeature,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmtno != null">
+        #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="productno != null">
+        #{productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionno != null">
+        #{versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releaseno != null">
+        #{releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="featureno != null">
+        #{featureno,jdbcType=NVARCHAR},
+      </if>
+      <if test="readers != null">
+        #{readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="createdUser != null">
+        #{createdUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyData != null">
+        #{modifyData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="standby1 != null">
+        #{standby1,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby2 != null">
+        #{standby2,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby3 != null">
+        #{standby3,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby4 != null">
+        #{standby4,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby5 != null">
+        #{standby5,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby6 != null">
+        #{standby6,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby7 != null">
+        #{standby7,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby8 != null">
+        #{standby8,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby9 != null">
+        #{standby9,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby10 != null">
+        #{standby10,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodline != null">
+        #{prodline,jdbcType=NVARCHAR},
+      </if>
+      <if test="product != null">
+        #{product,jdbcType=NVARCHAR},
+      </if>
+      <if test="release != null">
+        #{release,jdbcType=NVARCHAR},
+      </if>
+      <if test="feature != null">
+        #{feature,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmt != null">
+        #{plipmt,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmtOrder != null">
+        #{plipmtOrder,jdbcType=INTEGER},
+      </if>
+      <if test="plOrder != null">
+        #{plOrder,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.product.entity.SubFeatureViewExample" resultType="java.lang.Long">
+    select count(*) from SubFeatureView
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SubFeatureView
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.subfeatureno != null">
+        SUBFEATURENo = #{record.subfeatureno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.subfeature != null">
+        SUBFEATURE = #{record.subfeature,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.subfeatureold != null">
+        SUBFEATUREOld = #{record.subfeatureold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engsubfeature != null">
+        engSUBFEATURE = #{record.engsubfeature,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plipmtno != null">
+        PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodlineno != null">
+        PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productno != null">
+        PRODUCTNo = #{record.productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.versionno != null">
+        VERSIONNo = #{record.versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releaseno != null">
+        RELEASENo = #{record.releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.featureno != null">
+        FEATURENo = #{record.featureno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.readers != null">
+        Readers = #{record.readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remark != null">
+        Remark = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null">
+        Status = #{record.status,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createdUser != null">
+        CREATED_USER = #{record.createdUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createdDate != null">
+        CREATED_DATE = #{record.createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyUser != null">
+        MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modifyData != null">
+        MODIFY_DATA = #{record.modifyData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.standby1 != null">
+        STANDBY1 = #{record.standby1,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby2 != null">
+        STANDBY2 = #{record.standby2,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby3 != null">
+        STANDBY3 = #{record.standby3,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby4 != null">
+        STANDBY4 = #{record.standby4,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby5 != null">
+        STANDBY5 = #{record.standby5,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby6 != null">
+        STANDBY6 = #{record.standby6,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby7 != null">
+        STANDBY7 = #{record.standby7,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby8 != null">
+        STANDBY8 = #{record.standby8,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby9 != null">
+        STANDBY9 = #{record.standby9,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby10 != null">
+        STANDBY10 = #{record.standby10,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodline != null">
+        PRODLINE = #{record.prodline,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.product != null">
+        Product = #{record.product,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.release != null">
+        release = #{record.release,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.feature != null">
+        feature = #{record.feature,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plipmt != null">
+        plipmt = #{record.plipmt,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plipmtOrder != null">
+        plipmt_order = #{record.plipmtOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.plOrder != null">
+        pl_order = #{record.plOrder,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SubFeatureView
+    set ID = #{record.id,jdbcType=INTEGER},
+      SUBFEATURENo = #{record.subfeatureno,jdbcType=NVARCHAR},
+      SUBFEATURE = #{record.subfeature,jdbcType=NVARCHAR},
+      SUBFEATUREOld = #{record.subfeatureold,jdbcType=NVARCHAR},
+      engSUBFEATURE = #{record.engsubfeature,jdbcType=NVARCHAR},
+      PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      PRODUCTNo = #{record.productno,jdbcType=NVARCHAR},
+      VERSIONNo = #{record.versionno,jdbcType=NVARCHAR},
+      RELEASENo = #{record.releaseno,jdbcType=NVARCHAR},
+      FEATURENo = #{record.featureno,jdbcType=NVARCHAR},
+      Readers = #{record.readers,jdbcType=NVARCHAR},
+      Remark = #{record.remark,jdbcType=NVARCHAR},
+      Status = #{record.status,jdbcType=NVARCHAR},
+      CREATED_USER = #{record.createdUser,jdbcType=NVARCHAR},
+      CREATED_DATE = #{record.createdDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      MODIFY_DATA = #{record.modifyData,jdbcType=TIMESTAMP},
+      STANDBY1 = #{record.standby1,jdbcType=NVARCHAR},
+      STANDBY2 = #{record.standby2,jdbcType=NVARCHAR},
+      STANDBY3 = #{record.standby3,jdbcType=NVARCHAR},
+      STANDBY4 = #{record.standby4,jdbcType=NVARCHAR},
+      STANDBY5 = #{record.standby5,jdbcType=NVARCHAR},
+      STANDBY6 = #{record.standby6,jdbcType=NVARCHAR},
+      STANDBY7 = #{record.standby7,jdbcType=NVARCHAR},
+      STANDBY8 = #{record.standby8,jdbcType=NVARCHAR},
+      STANDBY9 = #{record.standby9,jdbcType=NVARCHAR},
+      STANDBY10 = #{record.standby10,jdbcType=NVARCHAR},
+      PRODLINE = #{record.prodline,jdbcType=NVARCHAR},
+      Product = #{record.product,jdbcType=NVARCHAR},
+      release = #{record.release,jdbcType=NVARCHAR},
+      feature = #{record.feature,jdbcType=NVARCHAR},
+      plipmt = #{record.plipmt,jdbcType=NVARCHAR},
+      plipmt_order = #{record.plipmtOrder,jdbcType=INTEGER},
+      pl_order = #{record.plOrder,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+</mapper>

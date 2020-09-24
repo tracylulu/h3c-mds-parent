@@ -1,0 +1,1 @@
+insert into IBDS_PROJECT_CODE_RECOMMEND(pdt_no, pdt_name, status)    select pdtno, pdt, status   from IBDS_PDT; 

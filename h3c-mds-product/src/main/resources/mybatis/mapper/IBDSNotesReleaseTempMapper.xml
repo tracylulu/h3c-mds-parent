@@ -1,0 +1,1360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.IBDSNotesReleaseTempMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.product.entity.IBDSNotesReleaseTemp">
+    <result column="fldBversion_1" jdbcType="NVARCHAR" property="fldbversion1" />
+    <result column="fldBversion_2" jdbcType="NVARCHAR" property="fldbversion2" />
+    <result column="fldBversion_3" jdbcType="NVARCHAR" property="fldbversion3" />
+    <result column="fldBversion_4" jdbcType="NVARCHAR" property="fldbversion4" />
+    <result column="fldBver_1" jdbcType="NVARCHAR" property="fldbver1" />
+    <result column="fldBversion_5" jdbcType="NVARCHAR" property="fldbversion5" />
+    <result column="fldBversion_6" jdbcType="NVARCHAR" property="fldbversion6" />
+    <result column="fldBversion_7" jdbcType="NVARCHAR" property="fldbversion7" />
+    <result column="fldBversion_8" jdbcType="NVARCHAR" property="fldbversion8" />
+    <result column="fldBversion_9" jdbcType="NVARCHAR" property="fldbversion9" />
+    <result column="fldBversion_10" jdbcType="NVARCHAR" property="fldbversion10" />
+    <result column="fldBversion_11" jdbcType="NVARCHAR" property="fldbversion11" />
+    <result column="fldBversion_12" jdbcType="NVARCHAR" property="fldbversion12" />
+    <result column="fldBversion_13" jdbcType="NVARCHAR" property="fldbversion13" />
+    <result column="fldBversion_14" jdbcType="NVARCHAR" property="fldbversion14" />
+    <result column="fldBversion_15" jdbcType="NVARCHAR" property="fldbversion15" />
+    <result column="fldBversion_16" jdbcType="NVARCHAR" property="fldbversion16" />
+    <result column="fldBversion_17" jdbcType="NVARCHAR" property="fldbversion17" />
+    <result column="fldBversion_18" jdbcType="NVARCHAR" property="fldbversion18" />
+    <result column="fldBversion_19" jdbcType="NVARCHAR" property="fldbversion19" />
+    <result column="fldBversion_20" jdbcType="NVARCHAR" property="fldbversion20" />
+    <result column="RELEASENo" jdbcType="NVARCHAR" property="releaseno" />
+    <result column="RELEASE" jdbcType="NVARCHAR" property="release" />
+    <result column="P" jdbcType="NVARCHAR" property="p" />
+    <result column="V" jdbcType="NVARCHAR" property="v" />
+    <result column="R" jdbcType="NVARCHAR" property="r" />
+    <result column="RELEASEOld" jdbcType="NVARCHAR" property="releaseold" />
+    <result column="engRELEASE" jdbcType="NVARCHAR" property="engrelease" />
+    <result column="PLIPMTNo" jdbcType="NVARCHAR" property="plipmtno" />
+    <result column="PRODLINENo" jdbcType="NVARCHAR" property="prodlineno" />
+    <result column="ProductNO" jdbcType="NVARCHAR" property="productno" />
+    <result column="VersionNo" jdbcType="NVARCHAR" property="versionno" />
+    <result column="PDTNo" jdbcType="NVARCHAR" property="pdtno" />
+    <result column="PROJECTNo" jdbcType="NVARCHAR" property="projectno" />
+    <result column="PROJECTCOACode" jdbcType="NVARCHAR" property="projectcoacode" />
+    <result column="PROJECT" jdbcType="NVARCHAR" property="project" />
+    <result column="engPROJECT" jdbcType="NVARCHAR" property="engproject" />
+    <result column="RELEASENo_Software" jdbcType="NVARCHAR" property="releasenoSoftware" />
+    <result column="PROJECTStatus" jdbcType="NVARCHAR" property="projectstatus" />
+    <result column="Match" jdbcType="NVARCHAR" property="match" />
+    <result column="RELEASEMatch" jdbcType="NVARCHAR" property="releasematch" />
+    <result column="ProdDataID" jdbcType="NVARCHAR" property="proddataid" />
+    <result column="POP_ID" jdbcType="NVARCHAR" property="popId" />
+    <result column="CMO_ID" jdbcType="NVARCHAR" property="cmoId" />
+    <result column="Testing_Mnger" jdbcType="NVARCHAR" property="testingMnger" />
+    <result column="TechSupport_Mnger" jdbcType="NVARCHAR" property="techsupportMnger" />
+    <result column="Product_Mnger" jdbcType="NVARCHAR" property="productMnger" />
+    <result column="MarketTM" jdbcType="NVARCHAR" property="markettm" />
+    <result column="softmg" jdbcType="NVARCHAR" property="softmg" />
+    <result column="hardmg" jdbcType="NVARCHAR" property="hardmg" />
+    <result column="fldPDE" jdbcType="NVARCHAR" property="fldpde" />
+    <result column="RNDPDT_ID" jdbcType="NVARCHAR" property="rndpdtId" />
+    <result column="Oversea_Mnger" jdbcType="NVARCHAR" property="overseaMnger" />
+    <result column="PilotProduction_Mnger" jdbcType="NVARCHAR" property="pilotproductionMnger" />
+    <result column="OMC_Mnger" jdbcType="NVARCHAR" property="omcMnger" />
+    <result column="System_Mnger" jdbcType="NVARCHAR" property="systemMnger" />
+    <result column="Quality_Mnger" jdbcType="NVARCHAR" property="qualityMnger" />
+    <result column="Equipment_Mnger" jdbcType="NVARCHAR" property="equipmentMnger" />
+    <result column="Documents_Mnger" jdbcType="NVARCHAR" property="documentsMnger" />
+    <result column="Purchase_Mnger" jdbcType="NVARCHAR" property="purchaseMnger" />
+    <result column="Sales_Mnger" jdbcType="NVARCHAR" property="salesMnger" />
+    <result column="PPPDT_ID" jdbcType="NVARCHAR" property="pppdtId" />
+    <result column="Manufacture_Mnger" jdbcType="NVARCHAR" property="manufactureMnger" />
+    <result column="FF_ID" jdbcType="NVARCHAR" property="ffId" />
+    
+    <result column="Readers" jdbcType="NVARCHAR" property="readers" />
+    <result column="Remark" jdbcType="NVARCHAR" property="remark" />
+    <result column="Status" jdbcType="NVARCHAR" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    fldBversion_1, fldBversion_2, fldBversion_3, fldBversion_4, fldBver_1, fldBversion_5, 
+    fldBversion_6, fldBversion_7, fldBversion_8, fldBversion_9, fldBversion_10, fldBversion_11, 
+    fldBversion_12, fldBversion_13, fldBversion_14, fldBversion_15, fldBversion_16, fldBversion_17, 
+    fldBversion_18, fldBversion_19, fldBversion_20, RELEASENo, RELEASE, P, V, R, RELEASEOld, 
+    engRELEASE, PLIPMTNo, PRODLINENo, ProductNO, VersionNo, PDTNo, PROJECTNo, PROJECTCOACode, 
+    PROJECT, engPROJECT, RELEASENo_Software, PROJECTStatus, Match, RELEASEMatch, ProdDataID, 
+    POP_ID, CMO_ID, Testing_Mnger, TechSupport_Mnger, Product_Mnger, MarketTM, softmg, 
+    hardmg, fldPDE, RNDPDT_ID, Oversea_Mnger, PilotProduction_Mnger, OMC_Mnger, System_Mnger, 
+    Quality_Mnger, Equipment_Mnger, Documents_Mnger, Purchase_Mnger, Sales_Mnger, PPPDT_ID, 
+    Manufacture_Mnger, FF_ID, DifficultyCoefficient, DifficultyCoefficient_2, DifficultyCoefficient_3, 
+    DifficultyCoefficient_4, DifficultyCoefficient_5, DifficultyCoefficient_6, DifficultyCoefficient_7, 
+    DifficultyCoefficient_8, DifficultyCoefficient_9, DifficultyCoefficient_10, DifficultyCoefficient_11, 
+    DifficultyCoefficient_12, DifficultyCoefficient_13, DifficultyCoefficient_14, DifficultyCoefficient_15, 
+    DifficultyCoefficient_16, DifficultyCoefficient_17, DifficultyCoefficient_18, DifficultyCoefficient_19, 
+    DifficultyCoefficient_20, DifficultyCoefficient_1, DifficultyCoefficient_1_2, DifficultyCoefficient_1_3, 
+    DifficultyCoefficient_1_4, DifficultyCoefficient_1_5, DifficultyCoefficient_1_6, 
+    DifficultyCoefficient_1_7, DifficultyCoefficient_1_8, DifficultyCoefficient_1_9, 
+    DifficultyCoefficient_1_10, DifficultyCoefficient_1_11, DifficultyCoefficient_1_12, 
+    DifficultyCoefficient_1_13, DifficultyCoefficient_1_14, DifficultyCoefficient_1_15, 
+    DifficultyCoefficient_1_16, DifficultyCoefficient_1_17, DifficultyCoefficient_1_18, 
+    DifficultyCoefficient_1_19, DifficultyCoefficient_1_20, Readers, Remark, Status
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.product.entity.IBDSNotesReleaseTempExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_Notes_ReleaseTemp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.product.entity.IBDSNotesReleaseTempExample">
+    delete from IBDS_Notes_ReleaseTemp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.product.entity.IBDSNotesReleaseTemp">
+    insert into IBDS_Notes_ReleaseTemp (fldBversion_1, fldBversion_2, fldBversion_3, 
+      fldBversion_4, fldBver_1, fldBversion_5, 
+      fldBversion_6, fldBversion_7, fldBversion_8, 
+      fldBversion_9, fldBversion_10, fldBversion_11, 
+      fldBversion_12, fldBversion_13, fldBversion_14, 
+      fldBversion_15, fldBversion_16, fldBversion_17, 
+      fldBversion_18, fldBversion_19, fldBversion_20, 
+      RELEASENo, RELEASE, P, 
+      V, R, RELEASEOld, 
+      engRELEASE, PLIPMTNo, PRODLINENo, 
+      ProductNO, VersionNo, PDTNo, 
+      PROJECTNo, PROJECTCOACode, PROJECT, 
+      engPROJECT, RELEASENo_Software, PROJECTStatus, 
+      Match, RELEASEMatch, ProdDataID, 
+      POP_ID, CMO_ID, Testing_Mnger, 
+      TechSupport_Mnger, Product_Mnger, MarketTM, 
+      softmg, hardmg, fldPDE, 
+      RNDPDT_ID, Oversea_Mnger, PilotProduction_Mnger, 
+      OMC_Mnger, System_Mnger, Quality_Mnger, 
+      Equipment_Mnger, Documents_Mnger, Purchase_Mnger, 
+      Sales_Mnger, PPPDT_ID, Manufacture_Mnger, 
+      FF_ID, DifficultyCoefficient, DifficultyCoefficient_2, 
+      DifficultyCoefficient_3, DifficultyCoefficient_4, 
+      DifficultyCoefficient_5, DifficultyCoefficient_6, 
+      DifficultyCoefficient_7, DifficultyCoefficient_8, 
+      DifficultyCoefficient_9, DifficultyCoefficient_10, 
+      DifficultyCoefficient_11, DifficultyCoefficient_12, 
+      DifficultyCoefficient_13, DifficultyCoefficient_14, 
+      DifficultyCoefficient_15, DifficultyCoefficient_16, 
+      DifficultyCoefficient_17, DifficultyCoefficient_18, 
+      DifficultyCoefficient_19, DifficultyCoefficient_20, 
+      DifficultyCoefficient_1, DifficultyCoefficient_1_2, 
+      DifficultyCoefficient_1_3, DifficultyCoefficient_1_4, 
+      DifficultyCoefficient_1_5, DifficultyCoefficient_1_6, 
+      DifficultyCoefficient_1_7, DifficultyCoefficient_1_8, 
+      DifficultyCoefficient_1_9, DifficultyCoefficient_1_10, 
+      DifficultyCoefficient_1_11, DifficultyCoefficient_1_12, 
+      DifficultyCoefficient_1_13, DifficultyCoefficient_1_14, 
+      DifficultyCoefficient_1_15, DifficultyCoefficient_1_16, 
+      DifficultyCoefficient_1_17, DifficultyCoefficient_1_18, 
+      DifficultyCoefficient_1_19, DifficultyCoefficient_1_20, 
+      Readers, Remark, Status
+      )
+    values (#{fldbversion1,jdbcType=NVARCHAR}, #{fldbversion2,jdbcType=NVARCHAR}, #{fldbversion3,jdbcType=NVARCHAR}, 
+      #{fldbversion4,jdbcType=NVARCHAR}, #{fldbver1,jdbcType=NVARCHAR}, #{fldbversion5,jdbcType=NVARCHAR}, 
+      #{fldbversion6,jdbcType=NVARCHAR}, #{fldbversion7,jdbcType=NVARCHAR}, #{fldbversion8,jdbcType=NVARCHAR}, 
+      #{fldbversion9,jdbcType=NVARCHAR}, #{fldbversion10,jdbcType=NVARCHAR}, #{fldbversion11,jdbcType=NVARCHAR}, 
+      #{fldbversion12,jdbcType=NVARCHAR}, #{fldbversion13,jdbcType=NVARCHAR}, #{fldbversion14,jdbcType=NVARCHAR}, 
+      #{fldbversion15,jdbcType=NVARCHAR}, #{fldbversion16,jdbcType=NVARCHAR}, #{fldbversion17,jdbcType=NVARCHAR}, 
+      #{fldbversion18,jdbcType=NVARCHAR}, #{fldbversion19,jdbcType=NVARCHAR}, #{fldbversion20,jdbcType=NVARCHAR}, 
+      #{releaseno,jdbcType=NVARCHAR}, #{release,jdbcType=NVARCHAR}, #{p,jdbcType=NVARCHAR}, 
+      #{v,jdbcType=NVARCHAR}, #{r,jdbcType=NVARCHAR}, #{releaseold,jdbcType=NVARCHAR}, 
+      #{engrelease,jdbcType=NVARCHAR}, #{plipmtno,jdbcType=NVARCHAR}, #{prodlineno,jdbcType=NVARCHAR}, 
+      #{productno,jdbcType=NVARCHAR}, #{versionno,jdbcType=NVARCHAR}, #{pdtno,jdbcType=NVARCHAR}, 
+      #{projectno,jdbcType=NVARCHAR}, #{projectcoacode,jdbcType=NVARCHAR}, #{project,jdbcType=NVARCHAR}, 
+      #{engproject,jdbcType=NVARCHAR}, #{releasenoSoftware,jdbcType=NVARCHAR}, #{projectstatus,jdbcType=NVARCHAR}, 
+      #{match,jdbcType=NVARCHAR}, #{releasematch,jdbcType=NVARCHAR}, #{proddataid,jdbcType=NVARCHAR}, 
+      #{popId,jdbcType=NVARCHAR}, #{cmoId,jdbcType=NVARCHAR}, #{testingMnger,jdbcType=NVARCHAR}, 
+      #{techsupportMnger,jdbcType=NVARCHAR}, #{productMnger,jdbcType=NVARCHAR}, #{markettm,jdbcType=NVARCHAR}, 
+      #{softmg,jdbcType=NVARCHAR}, #{hardmg,jdbcType=NVARCHAR}, #{fldpde,jdbcType=NVARCHAR}, 
+      #{rndpdtId,jdbcType=NVARCHAR}, #{overseaMnger,jdbcType=NVARCHAR}, #{pilotproductionMnger,jdbcType=NVARCHAR}, 
+      #{omcMnger,jdbcType=NVARCHAR}, #{systemMnger,jdbcType=NVARCHAR}, #{qualityMnger,jdbcType=NVARCHAR}, 
+      #{equipmentMnger,jdbcType=NVARCHAR}, #{documentsMnger,jdbcType=NVARCHAR}, #{purchaseMnger,jdbcType=NVARCHAR}, 
+      #{salesMnger,jdbcType=NVARCHAR}, #{pppdtId,jdbcType=NVARCHAR}, #{manufactureMnger,jdbcType=NVARCHAR}, 
+      #{ffId,jdbcType=NVARCHAR}, #{difficultycoefficient,jdbcType=NVARCHAR}, #{difficultycoefficient2,jdbcType=NVARCHAR}, 
+      #{difficultycoefficient3,jdbcType=NVARCHAR}, #{difficultycoefficient4,jdbcType=NVARCHAR}, 
+      #{difficultycoefficient5,jdbcType=NVARCHAR}, #{difficultycoefficient6,jdbcType=NVARCHAR}, 
+      #{difficultycoefficient7,jdbcType=NVARCHAR}, #{difficultycoefficient8,jdbcType=NVARCHAR}, 
+      #{difficultycoefficient9,jdbcType=NVARCHAR}, #{difficultycoefficient10,jdbcType=NVARCHAR}, 
+      #{difficultycoefficient11,jdbcType=NVARCHAR}, #{difficultycoefficient12,jdbcType=NVARCHAR}, 
+      #{difficultycoefficient13,jdbcType=NVARCHAR}, #{difficultycoefficient14,jdbcType=NVARCHAR}, 
+      #{difficultycoefficient15,jdbcType=NVARCHAR}, #{difficultycoefficient16,jdbcType=NVARCHAR}, 
+      #{difficultycoefficient17,jdbcType=NVARCHAR}, #{difficultycoefficient18,jdbcType=NVARCHAR}, 
+      #{difficultycoefficient19,jdbcType=NVARCHAR}, #{difficultycoefficient20,jdbcType=NVARCHAR}, 
+      #{difficultycoefficient1,jdbcType=NVARCHAR}, #{difficultycoefficient12,jdbcType=NVARCHAR}, 
+      #{difficultycoefficient13,jdbcType=NVARCHAR}, #{difficultycoefficient14,jdbcType=NVARCHAR}, 
+      #{difficultycoefficient15,jdbcType=NVARCHAR}, #{difficultycoefficient16,jdbcType=NVARCHAR}, 
+      #{difficultycoefficient17,jdbcType=NVARCHAR}, #{difficultycoefficient18,jdbcType=NVARCHAR}, 
+      #{difficultycoefficient19,jdbcType=NVARCHAR}, #{difficultycoefficient110,jdbcType=NVARCHAR}, 
+      #{difficultycoefficient111,jdbcType=NVARCHAR}, #{difficultycoefficient112,jdbcType=NVARCHAR}, 
+      #{difficultycoefficient113,jdbcType=NVARCHAR}, #{difficultycoefficient114,jdbcType=NVARCHAR}, 
+      #{difficultycoefficient115,jdbcType=NVARCHAR}, #{difficultycoefficient116,jdbcType=NVARCHAR}, 
+      #{difficultycoefficient117,jdbcType=NVARCHAR}, #{difficultycoefficient118,jdbcType=NVARCHAR}, 
+      #{difficultycoefficient119,jdbcType=NVARCHAR}, #{difficultycoefficient120,jdbcType=NVARCHAR}, 
+      #{readers,jdbcType=NVARCHAR}, #{remark,jdbcType=NVARCHAR}, #{status,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.product.entity.IBDSNotesReleaseTemp">
+    insert into IBDS_Notes_ReleaseTemp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fldbversion1 != null">
+        fldBversion_1,
+      </if>
+      <if test="fldbversion2 != null">
+        fldBversion_2,
+      </if>
+      <if test="fldbversion3 != null">
+        fldBversion_3,
+      </if>
+      <if test="fldbversion4 != null">
+        fldBversion_4,
+      </if>
+      <if test="fldbver1 != null">
+        fldBver_1,
+      </if>
+      <if test="fldbversion5 != null">
+        fldBversion_5,
+      </if>
+      <if test="fldbversion6 != null">
+        fldBversion_6,
+      </if>
+      <if test="fldbversion7 != null">
+        fldBversion_7,
+      </if>
+      <if test="fldbversion8 != null">
+        fldBversion_8,
+      </if>
+      <if test="fldbversion9 != null">
+        fldBversion_9,
+      </if>
+      <if test="fldbversion10 != null">
+        fldBversion_10,
+      </if>
+      <if test="fldbversion11 != null">
+        fldBversion_11,
+      </if>
+      <if test="fldbversion12 != null">
+        fldBversion_12,
+      </if>
+      <if test="fldbversion13 != null">
+        fldBversion_13,
+      </if>
+      <if test="fldbversion14 != null">
+        fldBversion_14,
+      </if>
+      <if test="fldbversion15 != null">
+        fldBversion_15,
+      </if>
+      <if test="fldbversion16 != null">
+        fldBversion_16,
+      </if>
+      <if test="fldbversion17 != null">
+        fldBversion_17,
+      </if>
+      <if test="fldbversion18 != null">
+        fldBversion_18,
+      </if>
+      <if test="fldbversion19 != null">
+        fldBversion_19,
+      </if>
+      <if test="fldbversion20 != null">
+        fldBversion_20,
+      </if>
+      <if test="releaseno != null">
+        RELEASENo,
+      </if>
+      <if test="release != null">
+        RELEASE,
+      </if>
+      <if test="p != null">
+        P,
+      </if>
+      <if test="v != null">
+        V,
+      </if>
+      <if test="r != null">
+        R,
+      </if>
+      <if test="releaseold != null">
+        RELEASEOld,
+      </if>
+      <if test="engrelease != null">
+        engRELEASE,
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo,
+      </if>
+      <if test="prodlineno != null">
+        PRODLINENo,
+      </if>
+      <if test="productno != null">
+        ProductNO,
+      </if>
+      <if test="versionno != null">
+        VersionNo,
+      </if>
+      <if test="pdtno != null">
+        PDTNo,
+      </if>
+      <if test="projectno != null">
+        PROJECTNo,
+      </if>
+      <if test="projectcoacode != null">
+        PROJECTCOACode,
+      </if>
+      <if test="project != null">
+        PROJECT,
+      </if>
+      <if test="engproject != null">
+        engPROJECT,
+      </if>
+      <if test="releasenoSoftware != null">
+        RELEASENo_Software,
+      </if>
+      <if test="projectstatus != null">
+        PROJECTStatus,
+      </if>
+      <if test="match != null">
+        Match,
+      </if>
+      <if test="releasematch != null">
+        RELEASEMatch,
+      </if>
+      <if test="proddataid != null">
+        ProdDataID,
+      </if>
+      <if test="popId != null">
+        POP_ID,
+      </if>
+      <if test="cmoId != null">
+        CMO_ID,
+      </if>
+      <if test="testingMnger != null">
+        Testing_Mnger,
+      </if>
+      <if test="techsupportMnger != null">
+        TechSupport_Mnger,
+      </if>
+      <if test="productMnger != null">
+        Product_Mnger,
+      </if>
+      <if test="markettm != null">
+        MarketTM,
+      </if>
+      <if test="softmg != null">
+        softmg,
+      </if>
+      <if test="hardmg != null">
+        hardmg,
+      </if>
+      <if test="fldpde != null">
+        fldPDE,
+      </if>
+      <if test="rndpdtId != null">
+        RNDPDT_ID,
+      </if>
+      <if test="overseaMnger != null">
+        Oversea_Mnger,
+      </if>
+      <if test="pilotproductionMnger != null">
+        PilotProduction_Mnger,
+      </if>
+      <if test="omcMnger != null">
+        OMC_Mnger,
+      </if>
+      <if test="systemMnger != null">
+        System_Mnger,
+      </if>
+      <if test="qualityMnger != null">
+        Quality_Mnger,
+      </if>
+      <if test="equipmentMnger != null">
+        Equipment_Mnger,
+      </if>
+      <if test="documentsMnger != null">
+        Documents_Mnger,
+      </if>
+      <if test="purchaseMnger != null">
+        Purchase_Mnger,
+      </if>
+      <if test="salesMnger != null">
+        Sales_Mnger,
+      </if>
+      <if test="pppdtId != null">
+        PPPDT_ID,
+      </if>
+      <if test="manufactureMnger != null">
+        Manufacture_Mnger,
+      </if>
+      <if test="ffId != null">
+        FF_ID,
+      </if>
+      <if test="difficultycoefficient != null">
+        DifficultyCoefficient,
+      </if>
+      <if test="difficultycoefficient2 != null">
+        DifficultyCoefficient_2,
+      </if>
+      <if test="difficultycoefficient3 != null">
+        DifficultyCoefficient_3,
+      </if>
+      <if test="difficultycoefficient4 != null">
+        DifficultyCoefficient_4,
+      </if>
+      <if test="difficultycoefficient5 != null">
+        DifficultyCoefficient_5,
+      </if>
+      <if test="difficultycoefficient6 != null">
+        DifficultyCoefficient_6,
+      </if>
+      <if test="difficultycoefficient7 != null">
+        DifficultyCoefficient_7,
+      </if>
+      <if test="difficultycoefficient8 != null">
+        DifficultyCoefficient_8,
+      </if>
+      <if test="difficultycoefficient9 != null">
+        DifficultyCoefficient_9,
+      </if>
+      <if test="difficultycoefficient10 != null">
+        DifficultyCoefficient_10,
+      </if>
+      <if test="difficultycoefficient11 != null">
+        DifficultyCoefficient_11,
+      </if>
+      <if test="difficultycoefficient12 != null">
+        DifficultyCoefficient_12,
+      </if>
+      <if test="difficultycoefficient13 != null">
+        DifficultyCoefficient_13,
+      </if>
+      <if test="difficultycoefficient14 != null">
+        DifficultyCoefficient_14,
+      </if>
+      <if test="difficultycoefficient15 != null">
+        DifficultyCoefficient_15,
+      </if>
+      <if test="difficultycoefficient16 != null">
+        DifficultyCoefficient_16,
+      </if>
+      <if test="difficultycoefficient17 != null">
+        DifficultyCoefficient_17,
+      </if>
+      <if test="difficultycoefficient18 != null">
+        DifficultyCoefficient_18,
+      </if>
+      <if test="difficultycoefficient19 != null">
+        DifficultyCoefficient_19,
+      </if>
+      <if test="difficultycoefficient20 != null">
+        DifficultyCoefficient_20,
+      </if>
+      <if test="difficultycoefficient1 != null">
+        DifficultyCoefficient_1,
+      </if>
+      <if test="difficultycoefficient12 != null">
+        DifficultyCoefficient_1_2,
+      </if>
+      <if test="difficultycoefficient13 != null">
+        DifficultyCoefficient_1_3,
+      </if>
+      <if test="difficultycoefficient14 != null">
+        DifficultyCoefficient_1_4,
+      </if>
+      <if test="difficultycoefficient15 != null">
+        DifficultyCoefficient_1_5,
+      </if>
+      <if test="difficultycoefficient16 != null">
+        DifficultyCoefficient_1_6,
+      </if>
+      <if test="difficultycoefficient17 != null">
+        DifficultyCoefficient_1_7,
+      </if>
+      <if test="difficultycoefficient18 != null">
+        DifficultyCoefficient_1_8,
+      </if>
+      <if test="difficultycoefficient19 != null">
+        DifficultyCoefficient_1_9,
+      </if>
+      <if test="difficultycoefficient110 != null">
+        DifficultyCoefficient_1_10,
+      </if>
+      <if test="difficultycoefficient111 != null">
+        DifficultyCoefficient_1_11,
+      </if>
+      <if test="difficultycoefficient112 != null">
+        DifficultyCoefficient_1_12,
+      </if>
+      <if test="difficultycoefficient113 != null">
+        DifficultyCoefficient_1_13,
+      </if>
+      <if test="difficultycoefficient114 != null">
+        DifficultyCoefficient_1_14,
+      </if>
+      <if test="difficultycoefficient115 != null">
+        DifficultyCoefficient_1_15,
+      </if>
+      <if test="difficultycoefficient116 != null">
+        DifficultyCoefficient_1_16,
+      </if>
+      <if test="difficultycoefficient117 != null">
+        DifficultyCoefficient_1_17,
+      </if>
+      <if test="difficultycoefficient118 != null">
+        DifficultyCoefficient_1_18,
+      </if>
+      <if test="difficultycoefficient119 != null">
+        DifficultyCoefficient_1_19,
+      </if>
+      <if test="difficultycoefficient120 != null">
+        DifficultyCoefficient_1_20,
+      </if>
+      <if test="readers != null">
+        Readers,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fldbversion1 != null">
+        #{fldbversion1,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldbversion2 != null">
+        #{fldbversion2,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldbversion3 != null">
+        #{fldbversion3,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldbversion4 != null">
+        #{fldbversion4,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldbver1 != null">
+        #{fldbver1,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldbversion5 != null">
+        #{fldbversion5,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldbversion6 != null">
+        #{fldbversion6,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldbversion7 != null">
+        #{fldbversion7,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldbversion8 != null">
+        #{fldbversion8,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldbversion9 != null">
+        #{fldbversion9,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldbversion10 != null">
+        #{fldbversion10,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldbversion11 != null">
+        #{fldbversion11,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldbversion12 != null">
+        #{fldbversion12,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldbversion13 != null">
+        #{fldbversion13,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldbversion14 != null">
+        #{fldbversion14,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldbversion15 != null">
+        #{fldbversion15,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldbversion16 != null">
+        #{fldbversion16,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldbversion17 != null">
+        #{fldbversion17,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldbversion18 != null">
+        #{fldbversion18,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldbversion19 != null">
+        #{fldbversion19,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldbversion20 != null">
+        #{fldbversion20,jdbcType=NVARCHAR},
+      </if>
+      <if test="releaseno != null">
+        #{releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="release != null">
+        #{release,jdbcType=NVARCHAR},
+      </if>
+      <if test="p != null">
+        #{p,jdbcType=NVARCHAR},
+      </if>
+      <if test="v != null">
+        #{v,jdbcType=NVARCHAR},
+      </if>
+      <if test="r != null">
+        #{r,jdbcType=NVARCHAR},
+      </if>
+      <if test="releaseold != null">
+        #{releaseold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engrelease != null">
+        #{engrelease,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmtno != null">
+        #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="productno != null">
+        #{productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionno != null">
+        #{versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtno != null">
+        #{pdtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="projectno != null">
+        #{projectno,jdbcType=NVARCHAR},
+      </if>
+      <if test="projectcoacode != null">
+        #{projectcoacode,jdbcType=NVARCHAR},
+      </if>
+      <if test="project != null">
+        #{project,jdbcType=NVARCHAR},
+      </if>
+      <if test="engproject != null">
+        #{engproject,jdbcType=NVARCHAR},
+      </if>
+      <if test="releasenoSoftware != null">
+        #{releasenoSoftware,jdbcType=NVARCHAR},
+      </if>
+      <if test="projectstatus != null">
+        #{projectstatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="match != null">
+        #{match,jdbcType=NVARCHAR},
+      </if>
+      <if test="releasematch != null">
+        #{releasematch,jdbcType=NVARCHAR},
+      </if>
+      <if test="proddataid != null">
+        #{proddataid,jdbcType=NVARCHAR},
+      </if>
+      <if test="popId != null">
+        #{popId,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmoId != null">
+        #{cmoId,jdbcType=NVARCHAR},
+      </if>
+      <if test="testingMnger != null">
+        #{testingMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="techsupportMnger != null">
+        #{techsupportMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="productMnger != null">
+        #{productMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="markettm != null">
+        #{markettm,jdbcType=NVARCHAR},
+      </if>
+      <if test="softmg != null">
+        #{softmg,jdbcType=NVARCHAR},
+      </if>
+      <if test="hardmg != null">
+        #{hardmg,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldpde != null">
+        #{fldpde,jdbcType=NVARCHAR},
+      </if>
+      <if test="rndpdtId != null">
+        #{rndpdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="overseaMnger != null">
+        #{overseaMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="pilotproductionMnger != null">
+        #{pilotproductionMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="omcMnger != null">
+        #{omcMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="systemMnger != null">
+        #{systemMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="qualityMnger != null">
+        #{qualityMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="equipmentMnger != null">
+        #{equipmentMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="documentsMnger != null">
+        #{documentsMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="purchaseMnger != null">
+        #{purchaseMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="salesMnger != null">
+        #{salesMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="pppdtId != null">
+        #{pppdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="manufactureMnger != null">
+        #{manufactureMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="ffId != null">
+        #{ffId,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient != null">
+        #{difficultycoefficient,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient2 != null">
+        #{difficultycoefficient2,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient3 != null">
+        #{difficultycoefficient3,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient4 != null">
+        #{difficultycoefficient4,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient5 != null">
+        #{difficultycoefficient5,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient6 != null">
+        #{difficultycoefficient6,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient7 != null">
+        #{difficultycoefficient7,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient8 != null">
+        #{difficultycoefficient8,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient9 != null">
+        #{difficultycoefficient9,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient10 != null">
+        #{difficultycoefficient10,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient11 != null">
+        #{difficultycoefficient11,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient12 != null">
+        #{difficultycoefficient12,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient13 != null">
+        #{difficultycoefficient13,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient14 != null">
+        #{difficultycoefficient14,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient15 != null">
+        #{difficultycoefficient15,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient16 != null">
+        #{difficultycoefficient16,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient17 != null">
+        #{difficultycoefficient17,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient18 != null">
+        #{difficultycoefficient18,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient19 != null">
+        #{difficultycoefficient19,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient20 != null">
+        #{difficultycoefficient20,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient1 != null">
+        #{difficultycoefficient1,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient12 != null">
+        #{difficultycoefficient12,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient13 != null">
+        #{difficultycoefficient13,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient14 != null">
+        #{difficultycoefficient14,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient15 != null">
+        #{difficultycoefficient15,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient16 != null">
+        #{difficultycoefficient16,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient17 != null">
+        #{difficultycoefficient17,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient18 != null">
+        #{difficultycoefficient18,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient19 != null">
+        #{difficultycoefficient19,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient110 != null">
+        #{difficultycoefficient110,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient111 != null">
+        #{difficultycoefficient111,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient112 != null">
+        #{difficultycoefficient112,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient113 != null">
+        #{difficultycoefficient113,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient114 != null">
+        #{difficultycoefficient114,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient115 != null">
+        #{difficultycoefficient115,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient116 != null">
+        #{difficultycoefficient116,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient117 != null">
+        #{difficultycoefficient117,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient118 != null">
+        #{difficultycoefficient118,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient119 != null">
+        #{difficultycoefficient119,jdbcType=NVARCHAR},
+      </if>
+      <if test="difficultycoefficient120 != null">
+        #{difficultycoefficient120,jdbcType=NVARCHAR},
+      </if>
+      <if test="readers != null">
+        #{readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.product.entity.IBDSNotesReleaseTempExample" resultType="java.lang.Long">
+    select count(*) from IBDS_Notes_ReleaseTemp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_Notes_ReleaseTemp
+    <set>
+      <if test="record.fldbversion1 != null">
+        fldBversion_1 = #{record.fldbversion1,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldbversion2 != null">
+        fldBversion_2 = #{record.fldbversion2,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldbversion3 != null">
+        fldBversion_3 = #{record.fldbversion3,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldbversion4 != null">
+        fldBversion_4 = #{record.fldbversion4,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldbver1 != null">
+        fldBver_1 = #{record.fldbver1,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldbversion5 != null">
+        fldBversion_5 = #{record.fldbversion5,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldbversion6 != null">
+        fldBversion_6 = #{record.fldbversion6,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldbversion7 != null">
+        fldBversion_7 = #{record.fldbversion7,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldbversion8 != null">
+        fldBversion_8 = #{record.fldbversion8,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldbversion9 != null">
+        fldBversion_9 = #{record.fldbversion9,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldbversion10 != null">
+        fldBversion_10 = #{record.fldbversion10,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldbversion11 != null">
+        fldBversion_11 = #{record.fldbversion11,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldbversion12 != null">
+        fldBversion_12 = #{record.fldbversion12,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldbversion13 != null">
+        fldBversion_13 = #{record.fldbversion13,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldbversion14 != null">
+        fldBversion_14 = #{record.fldbversion14,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldbversion15 != null">
+        fldBversion_15 = #{record.fldbversion15,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldbversion16 != null">
+        fldBversion_16 = #{record.fldbversion16,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldbversion17 != null">
+        fldBversion_17 = #{record.fldbversion17,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldbversion18 != null">
+        fldBversion_18 = #{record.fldbversion18,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldbversion19 != null">
+        fldBversion_19 = #{record.fldbversion19,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldbversion20 != null">
+        fldBversion_20 = #{record.fldbversion20,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releaseno != null">
+        RELEASENo = #{record.releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.release != null">
+        RELEASE = #{record.release,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.p != null">
+        P = #{record.p,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.v != null">
+        V = #{record.v,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.r != null">
+        R = #{record.r,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releaseold != null">
+        RELEASEOld = #{record.releaseold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engrelease != null">
+        engRELEASE = #{record.engrelease,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plipmtno != null">
+        PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodlineno != null">
+        PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productno != null">
+        ProductNO = #{record.productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.versionno != null">
+        VersionNo = #{record.versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdtno != null">
+        PDTNo = #{record.pdtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.projectno != null">
+        PROJECTNo = #{record.projectno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.projectcoacode != null">
+        PROJECTCOACode = #{record.projectcoacode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.project != null">
+        PROJECT = #{record.project,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engproject != null">
+        engPROJECT = #{record.engproject,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releasenoSoftware != null">
+        RELEASENo_Software = #{record.releasenoSoftware,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.projectstatus != null">
+        PROJECTStatus = #{record.projectstatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.match != null">
+        Match = #{record.match,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releasematch != null">
+        RELEASEMatch = #{record.releasematch,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.proddataid != null">
+        ProdDataID = #{record.proddataid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.popId != null">
+        POP_ID = #{record.popId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.cmoId != null">
+        CMO_ID = #{record.cmoId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.testingMnger != null">
+        Testing_Mnger = #{record.testingMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.techsupportMnger != null">
+        TechSupport_Mnger = #{record.techsupportMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productMnger != null">
+        Product_Mnger = #{record.productMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.markettm != null">
+        MarketTM = #{record.markettm,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.softmg != null">
+        softmg = #{record.softmg,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.hardmg != null">
+        hardmg = #{record.hardmg,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldpde != null">
+        fldPDE = #{record.fldpde,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.rndpdtId != null">
+        RNDPDT_ID = #{record.rndpdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.overseaMnger != null">
+        Oversea_Mnger = #{record.overseaMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pilotproductionMnger != null">
+        PilotProduction_Mnger = #{record.pilotproductionMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.omcMnger != null">
+        OMC_Mnger = #{record.omcMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.systemMnger != null">
+        System_Mnger = #{record.systemMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.qualityMnger != null">
+        Quality_Mnger = #{record.qualityMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.equipmentMnger != null">
+        Equipment_Mnger = #{record.equipmentMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.documentsMnger != null">
+        Documents_Mnger = #{record.documentsMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.purchaseMnger != null">
+        Purchase_Mnger = #{record.purchaseMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.salesMnger != null">
+        Sales_Mnger = #{record.salesMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pppdtId != null">
+        PPPDT_ID = #{record.pppdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.manufactureMnger != null">
+        Manufacture_Mnger = #{record.manufactureMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ffId != null">
+        FF_ID = #{record.ffId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient != null">
+        DifficultyCoefficient = #{record.difficultycoefficient,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient2 != null">
+        DifficultyCoefficient_2 = #{record.difficultycoefficient2,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient3 != null">
+        DifficultyCoefficient_3 = #{record.difficultycoefficient3,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient4 != null">
+        DifficultyCoefficient_4 = #{record.difficultycoefficient4,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient5 != null">
+        DifficultyCoefficient_5 = #{record.difficultycoefficient5,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient6 != null">
+        DifficultyCoefficient_6 = #{record.difficultycoefficient6,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient7 != null">
+        DifficultyCoefficient_7 = #{record.difficultycoefficient7,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient8 != null">
+        DifficultyCoefficient_8 = #{record.difficultycoefficient8,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient9 != null">
+        DifficultyCoefficient_9 = #{record.difficultycoefficient9,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient10 != null">
+        DifficultyCoefficient_10 = #{record.difficultycoefficient10,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient11 != null">
+        DifficultyCoefficient_11 = #{record.difficultycoefficient11,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient12 != null">
+        DifficultyCoefficient_12 = #{record.difficultycoefficient12,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient13 != null">
+        DifficultyCoefficient_13 = #{record.difficultycoefficient13,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient14 != null">
+        DifficultyCoefficient_14 = #{record.difficultycoefficient14,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient15 != null">
+        DifficultyCoefficient_15 = #{record.difficultycoefficient15,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient16 != null">
+        DifficultyCoefficient_16 = #{record.difficultycoefficient16,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient17 != null">
+        DifficultyCoefficient_17 = #{record.difficultycoefficient17,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient18 != null">
+        DifficultyCoefficient_18 = #{record.difficultycoefficient18,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient19 != null">
+        DifficultyCoefficient_19 = #{record.difficultycoefficient19,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient20 != null">
+        DifficultyCoefficient_20 = #{record.difficultycoefficient20,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient1 != null">
+        DifficultyCoefficient_1 = #{record.difficultycoefficient1,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient12 != null">
+        DifficultyCoefficient_1_2 = #{record.difficultycoefficient12,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient13 != null">
+        DifficultyCoefficient_1_3 = #{record.difficultycoefficient13,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient14 != null">
+        DifficultyCoefficient_1_4 = #{record.difficultycoefficient14,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient15 != null">
+        DifficultyCoefficient_1_5 = #{record.difficultycoefficient15,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient16 != null">
+        DifficultyCoefficient_1_6 = #{record.difficultycoefficient16,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient17 != null">
+        DifficultyCoefficient_1_7 = #{record.difficultycoefficient17,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient18 != null">
+        DifficultyCoefficient_1_8 = #{record.difficultycoefficient18,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient19 != null">
+        DifficultyCoefficient_1_9 = #{record.difficultycoefficient19,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient110 != null">
+        DifficultyCoefficient_1_10 = #{record.difficultycoefficient110,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient111 != null">
+        DifficultyCoefficient_1_11 = #{record.difficultycoefficient111,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient112 != null">
+        DifficultyCoefficient_1_12 = #{record.difficultycoefficient112,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient113 != null">
+        DifficultyCoefficient_1_13 = #{record.difficultycoefficient113,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient114 != null">
+        DifficultyCoefficient_1_14 = #{record.difficultycoefficient114,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient115 != null">
+        DifficultyCoefficient_1_15 = #{record.difficultycoefficient115,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient116 != null">
+        DifficultyCoefficient_1_16 = #{record.difficultycoefficient116,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient117 != null">
+        DifficultyCoefficient_1_17 = #{record.difficultycoefficient117,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient118 != null">
+        DifficultyCoefficient_1_18 = #{record.difficultycoefficient118,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient119 != null">
+        DifficultyCoefficient_1_19 = #{record.difficultycoefficient119,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.difficultycoefficient120 != null">
+        DifficultyCoefficient_1_20 = #{record.difficultycoefficient120,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.readers != null">
+        Readers = #{record.readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remark != null">
+        Remark = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null">
+        Status = #{record.status,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_Notes_ReleaseTemp
+    set fldBversion_1 = #{record.fldbversion1,jdbcType=NVARCHAR},
+      fldBversion_2 = #{record.fldbversion2,jdbcType=NVARCHAR},
+      fldBversion_3 = #{record.fldbversion3,jdbcType=NVARCHAR},
+      fldBversion_4 = #{record.fldbversion4,jdbcType=NVARCHAR},
+      fldBver_1 = #{record.fldbver1,jdbcType=NVARCHAR},
+      fldBversion_5 = #{record.fldbversion5,jdbcType=NVARCHAR},
+      fldBversion_6 = #{record.fldbversion6,jdbcType=NVARCHAR},
+      fldBversion_7 = #{record.fldbversion7,jdbcType=NVARCHAR},
+      fldBversion_8 = #{record.fldbversion8,jdbcType=NVARCHAR},
+      fldBversion_9 = #{record.fldbversion9,jdbcType=NVARCHAR},
+      fldBversion_10 = #{record.fldbversion10,jdbcType=NVARCHAR},
+      fldBversion_11 = #{record.fldbversion11,jdbcType=NVARCHAR},
+      fldBversion_12 = #{record.fldbversion12,jdbcType=NVARCHAR},
+      fldBversion_13 = #{record.fldbversion13,jdbcType=NVARCHAR},
+      fldBversion_14 = #{record.fldbversion14,jdbcType=NVARCHAR},
+      fldBversion_15 = #{record.fldbversion15,jdbcType=NVARCHAR},
+      fldBversion_16 = #{record.fldbversion16,jdbcType=NVARCHAR},
+      fldBversion_17 = #{record.fldbversion17,jdbcType=NVARCHAR},
+      fldBversion_18 = #{record.fldbversion18,jdbcType=NVARCHAR},
+      fldBversion_19 = #{record.fldbversion19,jdbcType=NVARCHAR},
+      fldBversion_20 = #{record.fldbversion20,jdbcType=NVARCHAR},
+      RELEASENo = #{record.releaseno,jdbcType=NVARCHAR},
+      RELEASE = #{record.release,jdbcType=NVARCHAR},
+      P = #{record.p,jdbcType=NVARCHAR},
+      V = #{record.v,jdbcType=NVARCHAR},
+      R = #{record.r,jdbcType=NVARCHAR},
+      RELEASEOld = #{record.releaseold,jdbcType=NVARCHAR},
+      engRELEASE = #{record.engrelease,jdbcType=NVARCHAR},
+      PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      ProductNO = #{record.productno,jdbcType=NVARCHAR},
+      VersionNo = #{record.versionno,jdbcType=NVARCHAR},
+      PDTNo = #{record.pdtno,jdbcType=NVARCHAR},
+      PROJECTNo = #{record.projectno,jdbcType=NVARCHAR},
+      PROJECTCOACode = #{record.projectcoacode,jdbcType=NVARCHAR},
+      PROJECT = #{record.project,jdbcType=NVARCHAR},
+      engPROJECT = #{record.engproject,jdbcType=NVARCHAR},
+      RELEASENo_Software = #{record.releasenoSoftware,jdbcType=NVARCHAR},
+      PROJECTStatus = #{record.projectstatus,jdbcType=NVARCHAR},
+      Match = #{record.match,jdbcType=NVARCHAR},
+      RELEASEMatch = #{record.releasematch,jdbcType=NVARCHAR},
+      ProdDataID = #{record.proddataid,jdbcType=NVARCHAR},
+      POP_ID = #{record.popId,jdbcType=NVARCHAR},
+      CMO_ID = #{record.cmoId,jdbcType=NVARCHAR},
+      Testing_Mnger = #{record.testingMnger,jdbcType=NVARCHAR},
+      TechSupport_Mnger = #{record.techsupportMnger,jdbcType=NVARCHAR},
+      Product_Mnger = #{record.productMnger,jdbcType=NVARCHAR},
+      MarketTM = #{record.markettm,jdbcType=NVARCHAR},
+      softmg = #{record.softmg,jdbcType=NVARCHAR},
+      hardmg = #{record.hardmg,jdbcType=NVARCHAR},
+      fldPDE = #{record.fldpde,jdbcType=NVARCHAR},
+      RNDPDT_ID = #{record.rndpdtId,jdbcType=NVARCHAR},
+      Oversea_Mnger = #{record.overseaMnger,jdbcType=NVARCHAR},
+      PilotProduction_Mnger = #{record.pilotproductionMnger,jdbcType=NVARCHAR},
+      OMC_Mnger = #{record.omcMnger,jdbcType=NVARCHAR},
+      System_Mnger = #{record.systemMnger,jdbcType=NVARCHAR},
+      Quality_Mnger = #{record.qualityMnger,jdbcType=NVARCHAR},
+      Equipment_Mnger = #{record.equipmentMnger,jdbcType=NVARCHAR},
+      Documents_Mnger = #{record.documentsMnger,jdbcType=NVARCHAR},
+      Purchase_Mnger = #{record.purchaseMnger,jdbcType=NVARCHAR},
+      Sales_Mnger = #{record.salesMnger,jdbcType=NVARCHAR},
+      PPPDT_ID = #{record.pppdtId,jdbcType=NVARCHAR},
+      Manufacture_Mnger = #{record.manufactureMnger,jdbcType=NVARCHAR},
+      FF_ID = #{record.ffId,jdbcType=NVARCHAR},
+      DifficultyCoefficient = #{record.difficultycoefficient,jdbcType=NVARCHAR},
+      DifficultyCoefficient_2 = #{record.difficultycoefficient2,jdbcType=NVARCHAR},
+      DifficultyCoefficient_3 = #{record.difficultycoefficient3,jdbcType=NVARCHAR},
+      DifficultyCoefficient_4 = #{record.difficultycoefficient4,jdbcType=NVARCHAR},
+      DifficultyCoefficient_5 = #{record.difficultycoefficient5,jdbcType=NVARCHAR},
+      DifficultyCoefficient_6 = #{record.difficultycoefficient6,jdbcType=NVARCHAR},
+      DifficultyCoefficient_7 = #{record.difficultycoefficient7,jdbcType=NVARCHAR},
+      DifficultyCoefficient_8 = #{record.difficultycoefficient8,jdbcType=NVARCHAR},
+      DifficultyCoefficient_9 = #{record.difficultycoefficient9,jdbcType=NVARCHAR},
+      DifficultyCoefficient_10 = #{record.difficultycoefficient10,jdbcType=NVARCHAR},
+      DifficultyCoefficient_11 = #{record.difficultycoefficient11,jdbcType=NVARCHAR},
+      DifficultyCoefficient_12 = #{record.difficultycoefficient12,jdbcType=NVARCHAR},
+      DifficultyCoefficient_13 = #{record.difficultycoefficient13,jdbcType=NVARCHAR},
+      DifficultyCoefficient_14 = #{record.difficultycoefficient14,jdbcType=NVARCHAR},
+      DifficultyCoefficient_15 = #{record.difficultycoefficient15,jdbcType=NVARCHAR},
+      DifficultyCoefficient_16 = #{record.difficultycoefficient16,jdbcType=NVARCHAR},
+      DifficultyCoefficient_17 = #{record.difficultycoefficient17,jdbcType=NVARCHAR},
+      DifficultyCoefficient_18 = #{record.difficultycoefficient18,jdbcType=NVARCHAR},
+      DifficultyCoefficient_19 = #{record.difficultycoefficient19,jdbcType=NVARCHAR},
+      DifficultyCoefficient_20 = #{record.difficultycoefficient20,jdbcType=NVARCHAR},
+      DifficultyCoefficient_1 = #{record.difficultycoefficient1,jdbcType=NVARCHAR},
+      DifficultyCoefficient_1_2 = #{record.difficultycoefficient12,jdbcType=NVARCHAR},
+      DifficultyCoefficient_1_3 = #{record.difficultycoefficient13,jdbcType=NVARCHAR},
+      DifficultyCoefficient_1_4 = #{record.difficultycoefficient14,jdbcType=NVARCHAR},
+      DifficultyCoefficient_1_5 = #{record.difficultycoefficient15,jdbcType=NVARCHAR},
+      DifficultyCoefficient_1_6 = #{record.difficultycoefficient16,jdbcType=NVARCHAR},
+      DifficultyCoefficient_1_7 = #{record.difficultycoefficient17,jdbcType=NVARCHAR},
+      DifficultyCoefficient_1_8 = #{record.difficultycoefficient18,jdbcType=NVARCHAR},
+      DifficultyCoefficient_1_9 = #{record.difficultycoefficient19,jdbcType=NVARCHAR},
+      DifficultyCoefficient_1_10 = #{record.difficultycoefficient110,jdbcType=NVARCHAR},
+      DifficultyCoefficient_1_11 = #{record.difficultycoefficient111,jdbcType=NVARCHAR},
+      DifficultyCoefficient_1_12 = #{record.difficultycoefficient112,jdbcType=NVARCHAR},
+      DifficultyCoefficient_1_13 = #{record.difficultycoefficient113,jdbcType=NVARCHAR},
+      DifficultyCoefficient_1_14 = #{record.difficultycoefficient114,jdbcType=NVARCHAR},
+      DifficultyCoefficient_1_15 = #{record.difficultycoefficient115,jdbcType=NVARCHAR},
+      DifficultyCoefficient_1_16 = #{record.difficultycoefficient116,jdbcType=NVARCHAR},
+      DifficultyCoefficient_1_17 = #{record.difficultycoefficient117,jdbcType=NVARCHAR},
+      DifficultyCoefficient_1_18 = #{record.difficultycoefficient118,jdbcType=NVARCHAR},
+      DifficultyCoefficient_1_19 = #{record.difficultycoefficient119,jdbcType=NVARCHAR},
+      DifficultyCoefficient_1_20 = #{record.difficultycoefficient120,jdbcType=NVARCHAR},
+      Readers = #{record.readers,jdbcType=NVARCHAR},
+      Remark = #{record.remark,jdbcType=NVARCHAR},
+      Status = #{record.status,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

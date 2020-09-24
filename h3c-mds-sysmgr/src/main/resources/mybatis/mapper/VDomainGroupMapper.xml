@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.sysmgr.dao.VDomainGroupMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.sysmgr.entity.VDomainGroup">
+    <result column="DGID" jdbcType="INTEGER" property="dgid" />
+    <result column="GroupName" jdbcType="NVARCHAR" property="groupname" />
+    <result column="AdminName" jdbcType="NVARCHAR" property="adminname" />
+    <result column="GroupDesc" jdbcType="NVARCHAR" property="groupdesc" />
+    <result column="SyncTime" jdbcType="TIMESTAMP" property="synctime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.h3c.mds.sysmgr.entity.VDomainGroup">
+    <result column="Member" jdbcType="LONGVARCHAR" property="member" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    DGID, GroupName, AdminName, GroupDesc, SyncTime
+  </sql>
+  <sql id="Blob_Column_List">
+    Member
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.h3c.mds.sysmgr.entity.VDomainGroupExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from V_DomainGroup
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.h3c.mds.sysmgr.entity.VDomainGroupExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from V_DomainGroup
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.sysmgr.entity.VDomainGroupExample">
+    delete from V_DomainGroup
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.sysmgr.entity.VDomainGroup">
+    insert into V_DomainGroup (DGID, GroupName, AdminName, 
+      GroupDesc, SyncTime, Member
+      )
+    values (#{dgid,jdbcType=INTEGER}, #{groupname,jdbcType=NVARCHAR}, #{adminname,jdbcType=NVARCHAR}, 
+      #{groupdesc,jdbcType=NVARCHAR}, #{synctime,jdbcType=TIMESTAMP}, #{member,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.sysmgr.entity.VDomainGroup">
+    insert into V_DomainGroup
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dgid != null">
+        DGID,
+      </if>
+      <if test="groupname != null">
+        GroupName,
+      </if>
+      <if test="adminname != null">
+        AdminName,
+      </if>
+      <if test="groupdesc != null">
+        GroupDesc,
+      </if>
+      <if test="synctime != null">
+        SyncTime,
+      </if>
+      <if test="member != null">
+        Member,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dgid != null">
+        #{dgid,jdbcType=INTEGER},
+      </if>
+      <if test="groupname != null">
+        #{groupname,jdbcType=NVARCHAR},
+      </if>
+      <if test="adminname != null">
+        #{adminname,jdbcType=NVARCHAR},
+      </if>
+      <if test="groupdesc != null">
+        #{groupdesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="synctime != null">
+        #{synctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="member != null">
+        #{member,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.sysmgr.entity.VDomainGroupExample" resultType="java.lang.Long">
+    select count(*) from V_DomainGroup
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update V_DomainGroup
+    <set>
+      <if test="record.dgid != null">
+        DGID = #{record.dgid,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupname != null">
+        GroupName = #{record.groupname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.adminname != null">
+        AdminName = #{record.adminname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.groupdesc != null">
+        GroupDesc = #{record.groupdesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.synctime != null">
+        SyncTime = #{record.synctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.member != null">
+        Member = #{record.member,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update V_DomainGroup
+    set DGID = #{record.dgid,jdbcType=INTEGER},
+      GroupName = #{record.groupname,jdbcType=NVARCHAR},
+      AdminName = #{record.adminname,jdbcType=NVARCHAR},
+      GroupDesc = #{record.groupdesc,jdbcType=NVARCHAR},
+      SyncTime = #{record.synctime,jdbcType=TIMESTAMP},
+      Member = #{record.member,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update V_DomainGroup
+    set DGID = #{record.dgid,jdbcType=INTEGER},
+      GroupName = #{record.groupname,jdbcType=NVARCHAR},
+      AdminName = #{record.adminname,jdbcType=NVARCHAR},
+      GroupDesc = #{record.groupdesc,jdbcType=NVARCHAR},
+      SyncTime = #{record.synctime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

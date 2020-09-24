@@ -1,0 +1,940 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.IBDS_VR_APPLYMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.basicinfo.entity.IBDS_VR_APPLY">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="Process_Code" jdbcType="NVARCHAR" property="processCode" />
+    <result column="PLIPMTNo" jdbcType="NVARCHAR" property="plipmtno" />
+    <result column="ProdLineNo" jdbcType="NVARCHAR" property="prodlineno" />
+    <result column="ProductNo" jdbcType="NVARCHAR" property="productno" />
+    <result column="IPMTSecretary" jdbcType="NVARCHAR" property="ipmtsecretary" />
+    <result column="NewPV" jdbcType="CHAR" property="newpv" />
+    <result column="VersionNewNo" jdbcType="NVARCHAR" property="versionnewno" />
+    <result column="VersionNew" jdbcType="NVARCHAR" property="versionnew" />
+    <result column="engVersionNew" jdbcType="NVARCHAR" property="engversionnew" />
+    <result column="ModPV" jdbcType="CHAR" property="modpv" />
+    <result column="VersionOldNo" jdbcType="NVARCHAR" property="versionoldno" />
+    <result column="VersionOld" jdbcType="NVARCHAR" property="versionold" />
+    <result column="engVersionOld" jdbcType="NVARCHAR" property="engversionold" />
+    <result column="VersionNow" jdbcType="NVARCHAR" property="versionnow" />
+    <result column="engVersionNow" jdbcType="NVARCHAR" property="engversionnow" />
+    <result column="DelPV" jdbcType="CHAR" property="delpv" />
+    <result column="VersionDelNo" jdbcType="NVARCHAR" property="versiondelno" />
+    <result column="Versiondel" jdbcType="NVARCHAR" property="versiondel" />
+    <result column="engVersionDel" jdbcType="NVARCHAR" property="engversiondel" />
+    <result column="PVIfDelBelow" jdbcType="CHAR" property="pvifdelbelow" />
+    <result column="VersionNo" jdbcType="NVARCHAR" property="versionno" />
+    <result column="NewPR" jdbcType="CHAR" property="newpr" />
+    <result column="ReleaseNewNo" jdbcType="NVARCHAR" property="releasenewno" />
+    <result column="ReleaseNew" jdbcType="NVARCHAR" property="releasenew" />
+    <result column="engReleaseNew" jdbcType="NVARCHAR" property="engreleasenew" />
+    <result column="PDTNo" jdbcType="NVARCHAR" property="pdtno" />
+    <result column="ReleaseNo_Software" jdbcType="NVARCHAR" property="releasenoSoftware" />
+    <result column="ModPR" jdbcType="CHAR" property="modpr" />
+    <result column="ReleaseOldNo" jdbcType="NVARCHAR" property="releaseoldno" />
+    <result column="ReleaseOld" jdbcType="NVARCHAR" property="releaseold" />
+    <result column="engReleaseOld" jdbcType="NVARCHAR" property="engreleaseold" />
+    <result column="ReleaseNow" jdbcType="NVARCHAR" property="releasenow" />
+    <result column="engReleaseNow" jdbcType="NVARCHAR" property="engreleasenow" />
+    <result column="ReleaseNo_SoftwareNow" jdbcType="NVARCHAR" property="releasenoSoftwarenow" />
+    <result column="DelPR" jdbcType="CHAR" property="delpr" />
+    <result column="ReleaseDelNo" jdbcType="NVARCHAR" property="releasedelno" />
+    <result column="ReleaseDel" jdbcType="NVARCHAR" property="releasedel" />
+    <result column="engReleaseDel" jdbcType="NVARCHAR" property="engreleasedel" />
+    <result column="PRIfDelBelow" jdbcType="CHAR" property="prifdelbelow" />
+    <result column="copyto" jdbcType="NVARCHAR" property="copyto" />
+    <result column="Remark" jdbcType="NVARCHAR" property="remark" />
+    <result column="Creator" jdbcType="NVARCHAR" property="creator" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="Modifier" jdbcType="NVARCHAR" property="modifier" />
+    <result column="ModifyTime" jdbcType="TIMESTAMP" property="modifytime" />
+    <result column="InheritRelease" jdbcType="NVARCHAR" property="inheritrelease" />
+    <result column="PDTOldNo" jdbcType="NVARCHAR" property="pdtoldno" />
+    <result column="PDTNowNo" jdbcType="NVARCHAR" property="pdtnowno" />
+    <result column="ReleaseNo_SoftwareOld" jdbcType="NVARCHAR" property="releasenoSoftwareold" />
+    <result column="PDTOld" jdbcType="NVARCHAR" property="pdtold" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, Process_Code, PLIPMTNo, ProdLineNo, ProductNo, IPMTSecretary, NewPV, VersionNewNo, 
+    VersionNew, engVersionNew, ModPV, VersionOldNo, VersionOld, engVersionOld, VersionNow, 
+    engVersionNow, DelPV, VersionDelNo, Versiondel, engVersionDel, PVIfDelBelow, VersionNo, 
+    NewPR, ReleaseNewNo, ReleaseNew, engReleaseNew, PDTNo, ReleaseNo_Software, ModPR, 
+    ReleaseOldNo, ReleaseOld, engReleaseOld, ReleaseNow, engReleaseNow, ReleaseNo_SoftwareNow, 
+    DelPR, ReleaseDelNo, ReleaseDel, engReleaseDel, PRIfDelBelow, copyto, Remark, Creator, 
+    CreateTime, Modifier, ModifyTime, InheritRelease, PDTOldNo, PDTNowNo, ReleaseNo_SoftwareOld, 
+    PDTOld
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_VR_APPLYExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_VR_APPLY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_VR_APPLY
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_VR_APPLY
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_VR_APPLYExample">
+    delete from IBDS_VR_APPLY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.basicinfo.entity.IBDS_VR_APPLY">
+    insert into IBDS_VR_APPLY (ID, Process_Code, PLIPMTNo, 
+      ProdLineNo, ProductNo, IPMTSecretary, 
+      NewPV, VersionNewNo, VersionNew, 
+      engVersionNew, ModPV, VersionOldNo, 
+      VersionOld, engVersionOld, VersionNow, 
+      engVersionNow, DelPV, VersionDelNo, 
+      Versiondel, engVersionDel, PVIfDelBelow, 
+      VersionNo, NewPR, ReleaseNewNo, 
+      ReleaseNew, engReleaseNew, PDTNo, 
+      ReleaseNo_Software, ModPR, ReleaseOldNo, 
+      ReleaseOld, engReleaseOld, ReleaseNow, 
+      engReleaseNow, ReleaseNo_SoftwareNow, 
+      DelPR, ReleaseDelNo, ReleaseDel, 
+      engReleaseDel, PRIfDelBelow, copyto, 
+      Remark, Creator, CreateTime, 
+      Modifier, ModifyTime, InheritRelease, 
+      PDTOldNo, PDTNowNo, ReleaseNo_SoftwareOld, 
+      PDTOld)
+    values (#{id,jdbcType=INTEGER}, #{processCode,jdbcType=NVARCHAR}, #{plipmtno,jdbcType=NVARCHAR}, 
+      #{prodlineno,jdbcType=NVARCHAR}, #{productno,jdbcType=NVARCHAR}, #{ipmtsecretary,jdbcType=NVARCHAR}, 
+      #{newpv,jdbcType=CHAR}, #{versionnewno,jdbcType=NVARCHAR}, #{versionnew,jdbcType=NVARCHAR}, 
+      #{engversionnew,jdbcType=NVARCHAR}, #{modpv,jdbcType=CHAR}, #{versionoldno,jdbcType=NVARCHAR}, 
+      #{versionold,jdbcType=NVARCHAR}, #{engversionold,jdbcType=NVARCHAR}, #{versionnow,jdbcType=NVARCHAR}, 
+      #{engversionnow,jdbcType=NVARCHAR}, #{delpv,jdbcType=CHAR}, #{versiondelno,jdbcType=NVARCHAR}, 
+      #{versiondel,jdbcType=NVARCHAR}, #{engversiondel,jdbcType=NVARCHAR}, #{pvifdelbelow,jdbcType=CHAR}, 
+      #{versionno,jdbcType=NVARCHAR}, #{newpr,jdbcType=CHAR}, #{releasenewno,jdbcType=NVARCHAR}, 
+      #{releasenew,jdbcType=NVARCHAR}, #{engreleasenew,jdbcType=NVARCHAR}, #{pdtno,jdbcType=NVARCHAR}, 
+      #{releasenoSoftware,jdbcType=NVARCHAR}, #{modpr,jdbcType=CHAR}, #{releaseoldno,jdbcType=NVARCHAR}, 
+      #{releaseold,jdbcType=NVARCHAR}, #{engreleaseold,jdbcType=NVARCHAR}, #{releasenow,jdbcType=NVARCHAR}, 
+      #{engreleasenow,jdbcType=NVARCHAR}, #{releasenoSoftwarenow,jdbcType=NVARCHAR}, 
+      #{delpr,jdbcType=CHAR}, #{releasedelno,jdbcType=NVARCHAR}, #{releasedel,jdbcType=NVARCHAR}, 
+      #{engreleasedel,jdbcType=NVARCHAR}, #{prifdelbelow,jdbcType=CHAR}, #{copyto,jdbcType=NVARCHAR}, 
+      #{remark,jdbcType=NVARCHAR}, #{creator,jdbcType=NVARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{modifier,jdbcType=NVARCHAR}, #{modifytime,jdbcType=TIMESTAMP}, #{inheritrelease,jdbcType=NVARCHAR}, 
+      #{pdtoldno,jdbcType=NVARCHAR}, #{pdtnowno,jdbcType=NVARCHAR}, #{releasenoSoftwareold,jdbcType=NVARCHAR}, 
+      #{pdtold,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.basicinfo.entity.IBDS_VR_APPLY">
+    insert into IBDS_VR_APPLY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="processCode != null">
+        Process_Code,
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo,
+      </if>
+      <if test="prodlineno != null">
+        ProdLineNo,
+      </if>
+      <if test="productno != null">
+        ProductNo,
+      </if>
+      <if test="ipmtsecretary != null">
+        IPMTSecretary,
+      </if>
+      <if test="newpv != null">
+        NewPV,
+      </if>
+      <if test="versionnewno != null">
+        VersionNewNo,
+      </if>
+      <if test="versionnew != null">
+        VersionNew,
+      </if>
+      <if test="engversionnew != null">
+        engVersionNew,
+      </if>
+      <if test="modpv != null">
+        ModPV,
+      </if>
+      <if test="versionoldno != null">
+        VersionOldNo,
+      </if>
+      <if test="versionold != null">
+        VersionOld,
+      </if>
+      <if test="engversionold != null">
+        engVersionOld,
+      </if>
+      <if test="versionnow != null">
+        VersionNow,
+      </if>
+      <if test="engversionnow != null">
+        engVersionNow,
+      </if>
+      <if test="delpv != null">
+        DelPV,
+      </if>
+      <if test="versiondelno != null">
+        VersionDelNo,
+      </if>
+      <if test="versiondel != null">
+        Versiondel,
+      </if>
+      <if test="engversiondel != null">
+        engVersionDel,
+      </if>
+      <if test="pvifdelbelow != null">
+        PVIfDelBelow,
+      </if>
+      <if test="versionno != null">
+        VersionNo,
+      </if>
+      <if test="newpr != null">
+        NewPR,
+      </if>
+      <if test="releasenewno != null">
+        ReleaseNewNo,
+      </if>
+      <if test="releasenew != null">
+        ReleaseNew,
+      </if>
+      <if test="engreleasenew != null">
+        engReleaseNew,
+      </if>
+      <if test="pdtno != null">
+        PDTNo,
+      </if>
+      <if test="releasenoSoftware != null">
+        ReleaseNo_Software,
+      </if>
+      <if test="modpr != null">
+        ModPR,
+      </if>
+      <if test="releaseoldno != null">
+        ReleaseOldNo,
+      </if>
+      <if test="releaseold != null">
+        ReleaseOld,
+      </if>
+      <if test="engreleaseold != null">
+        engReleaseOld,
+      </if>
+      <if test="releasenow != null">
+        ReleaseNow,
+      </if>
+      <if test="engreleasenow != null">
+        engReleaseNow,
+      </if>
+      <if test="releasenoSoftwarenow != null">
+        ReleaseNo_SoftwareNow,
+      </if>
+      <if test="delpr != null">
+        DelPR,
+      </if>
+      <if test="releasedelno != null">
+        ReleaseDelNo,
+      </if>
+      <if test="releasedel != null">
+        ReleaseDel,
+      </if>
+      <if test="engreleasedel != null">
+        engReleaseDel,
+      </if>
+      <if test="prifdelbelow != null">
+        PRIfDelBelow,
+      </if>
+      <if test="copyto != null">
+        copyto,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="creator != null">
+        Creator,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+      <if test="modifier != null">
+        Modifier,
+      </if>
+      <if test="modifytime != null">
+        ModifyTime,
+      </if>
+      <if test="inheritrelease != null">
+        InheritRelease,
+      </if>
+      <if test="pdtoldno != null">
+        PDTOldNo,
+      </if>
+      <if test="pdtnowno != null">
+        PDTNowNo,
+      </if>
+      <if test="releasenoSoftwareold != null">
+        ReleaseNo_SoftwareOld,
+      </if>
+      <if test="pdtold != null">
+        PDTOld,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="processCode != null">
+        #{processCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmtno != null">
+        #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="productno != null">
+        #{productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtsecretary != null">
+        #{ipmtsecretary,jdbcType=NVARCHAR},
+      </if>
+      <if test="newpv != null">
+        #{newpv,jdbcType=CHAR},
+      </if>
+      <if test="versionnewno != null">
+        #{versionnewno,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionnew != null">
+        #{versionnew,jdbcType=NVARCHAR},
+      </if>
+      <if test="engversionnew != null">
+        #{engversionnew,jdbcType=NVARCHAR},
+      </if>
+      <if test="modpv != null">
+        #{modpv,jdbcType=CHAR},
+      </if>
+      <if test="versionoldno != null">
+        #{versionoldno,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionold != null">
+        #{versionold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engversionold != null">
+        #{engversionold,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionnow != null">
+        #{versionnow,jdbcType=NVARCHAR},
+      </if>
+      <if test="engversionnow != null">
+        #{engversionnow,jdbcType=NVARCHAR},
+      </if>
+      <if test="delpv != null">
+        #{delpv,jdbcType=CHAR},
+      </if>
+      <if test="versiondelno != null">
+        #{versiondelno,jdbcType=NVARCHAR},
+      </if>
+      <if test="versiondel != null">
+        #{versiondel,jdbcType=NVARCHAR},
+      </if>
+      <if test="engversiondel != null">
+        #{engversiondel,jdbcType=NVARCHAR},
+      </if>
+      <if test="pvifdelbelow != null">
+        #{pvifdelbelow,jdbcType=CHAR},
+      </if>
+      <if test="versionno != null">
+        #{versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="newpr != null">
+        #{newpr,jdbcType=CHAR},
+      </if>
+      <if test="releasenewno != null">
+        #{releasenewno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releasenew != null">
+        #{releasenew,jdbcType=NVARCHAR},
+      </if>
+      <if test="engreleasenew != null">
+        #{engreleasenew,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtno != null">
+        #{pdtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releasenoSoftware != null">
+        #{releasenoSoftware,jdbcType=NVARCHAR},
+      </if>
+      <if test="modpr != null">
+        #{modpr,jdbcType=CHAR},
+      </if>
+      <if test="releaseoldno != null">
+        #{releaseoldno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releaseold != null">
+        #{releaseold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engreleaseold != null">
+        #{engreleaseold,jdbcType=NVARCHAR},
+      </if>
+      <if test="releasenow != null">
+        #{releasenow,jdbcType=NVARCHAR},
+      </if>
+      <if test="engreleasenow != null">
+        #{engreleasenow,jdbcType=NVARCHAR},
+      </if>
+      <if test="releasenoSoftwarenow != null">
+        #{releasenoSoftwarenow,jdbcType=NVARCHAR},
+      </if>
+      <if test="delpr != null">
+        #{delpr,jdbcType=CHAR},
+      </if>
+      <if test="releasedelno != null">
+        #{releasedelno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releasedel != null">
+        #{releasedel,jdbcType=NVARCHAR},
+      </if>
+      <if test="engreleasedel != null">
+        #{engreleasedel,jdbcType=NVARCHAR},
+      </if>
+      <if test="prifdelbelow != null">
+        #{prifdelbelow,jdbcType=CHAR},
+      </if>
+      <if test="copyto != null">
+        #{copyto,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifytime != null">
+        #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inheritrelease != null">
+        #{inheritrelease,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtoldno != null">
+        #{pdtoldno,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtnowno != null">
+        #{pdtnowno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releasenoSoftwareold != null">
+        #{releasenoSoftwareold,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtold != null">
+        #{pdtold,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_VR_APPLYExample" resultType="java.lang.Long">
+    select count(*) from IBDS_VR_APPLY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_VR_APPLY
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.processCode != null">
+        Process_Code = #{record.processCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plipmtno != null">
+        PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodlineno != null">
+        ProdLineNo = #{record.prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productno != null">
+        ProductNo = #{record.productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ipmtsecretary != null">
+        IPMTSecretary = #{record.ipmtsecretary,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.newpv != null">
+        NewPV = #{record.newpv,jdbcType=CHAR},
+      </if>
+      <if test="record.versionnewno != null">
+        VersionNewNo = #{record.versionnewno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.versionnew != null">
+        VersionNew = #{record.versionnew,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engversionnew != null">
+        engVersionNew = #{record.engversionnew,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modpv != null">
+        ModPV = #{record.modpv,jdbcType=CHAR},
+      </if>
+      <if test="record.versionoldno != null">
+        VersionOldNo = #{record.versionoldno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.versionold != null">
+        VersionOld = #{record.versionold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engversionold != null">
+        engVersionOld = #{record.engversionold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.versionnow != null">
+        VersionNow = #{record.versionnow,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engversionnow != null">
+        engVersionNow = #{record.engversionnow,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.delpv != null">
+        DelPV = #{record.delpv,jdbcType=CHAR},
+      </if>
+      <if test="record.versiondelno != null">
+        VersionDelNo = #{record.versiondelno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.versiondel != null">
+        Versiondel = #{record.versiondel,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engversiondel != null">
+        engVersionDel = #{record.engversiondel,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pvifdelbelow != null">
+        PVIfDelBelow = #{record.pvifdelbelow,jdbcType=CHAR},
+      </if>
+      <if test="record.versionno != null">
+        VersionNo = #{record.versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.newpr != null">
+        NewPR = #{record.newpr,jdbcType=CHAR},
+      </if>
+      <if test="record.releasenewno != null">
+        ReleaseNewNo = #{record.releasenewno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releasenew != null">
+        ReleaseNew = #{record.releasenew,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engreleasenew != null">
+        engReleaseNew = #{record.engreleasenew,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdtno != null">
+        PDTNo = #{record.pdtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releasenoSoftware != null">
+        ReleaseNo_Software = #{record.releasenoSoftware,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modpr != null">
+        ModPR = #{record.modpr,jdbcType=CHAR},
+      </if>
+      <if test="record.releaseoldno != null">
+        ReleaseOldNo = #{record.releaseoldno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releaseold != null">
+        ReleaseOld = #{record.releaseold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engreleaseold != null">
+        engReleaseOld = #{record.engreleaseold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releasenow != null">
+        ReleaseNow = #{record.releasenow,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engreleasenow != null">
+        engReleaseNow = #{record.engreleasenow,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releasenoSoftwarenow != null">
+        ReleaseNo_SoftwareNow = #{record.releasenoSoftwarenow,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.delpr != null">
+        DelPR = #{record.delpr,jdbcType=CHAR},
+      </if>
+      <if test="record.releasedelno != null">
+        ReleaseDelNo = #{record.releasedelno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releasedel != null">
+        ReleaseDel = #{record.releasedel,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engreleasedel != null">
+        engReleaseDel = #{record.engreleasedel,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prifdelbelow != null">
+        PRIfDelBelow = #{record.prifdelbelow,jdbcType=CHAR},
+      </if>
+      <if test="record.copyto != null">
+        copyto = #{record.copyto,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remark != null">
+        Remark = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.creator != null">
+        Creator = #{record.creator,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifier != null">
+        Modifier = #{record.modifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modifytime != null">
+        ModifyTime = #{record.modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.inheritrelease != null">
+        InheritRelease = #{record.inheritrelease,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdtoldno != null">
+        PDTOldNo = #{record.pdtoldno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdtnowno != null">
+        PDTNowNo = #{record.pdtnowno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releasenoSoftwareold != null">
+        ReleaseNo_SoftwareOld = #{record.releasenoSoftwareold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdtold != null">
+        PDTOld = #{record.pdtold,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_VR_APPLY
+    set ID = #{record.id,jdbcType=INTEGER},
+      Process_Code = #{record.processCode,jdbcType=NVARCHAR},
+      PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      ProdLineNo = #{record.prodlineno,jdbcType=NVARCHAR},
+      ProductNo = #{record.productno,jdbcType=NVARCHAR},
+      IPMTSecretary = #{record.ipmtsecretary,jdbcType=NVARCHAR},
+      NewPV = #{record.newpv,jdbcType=CHAR},
+      VersionNewNo = #{record.versionnewno,jdbcType=NVARCHAR},
+      VersionNew = #{record.versionnew,jdbcType=NVARCHAR},
+      engVersionNew = #{record.engversionnew,jdbcType=NVARCHAR},
+      ModPV = #{record.modpv,jdbcType=CHAR},
+      VersionOldNo = #{record.versionoldno,jdbcType=NVARCHAR},
+      VersionOld = #{record.versionold,jdbcType=NVARCHAR},
+      engVersionOld = #{record.engversionold,jdbcType=NVARCHAR},
+      VersionNow = #{record.versionnow,jdbcType=NVARCHAR},
+      engVersionNow = #{record.engversionnow,jdbcType=NVARCHAR},
+      DelPV = #{record.delpv,jdbcType=CHAR},
+      VersionDelNo = #{record.versiondelno,jdbcType=NVARCHAR},
+      Versiondel = #{record.versiondel,jdbcType=NVARCHAR},
+      engVersionDel = #{record.engversiondel,jdbcType=NVARCHAR},
+      PVIfDelBelow = #{record.pvifdelbelow,jdbcType=CHAR},
+      VersionNo = #{record.versionno,jdbcType=NVARCHAR},
+      NewPR = #{record.newpr,jdbcType=CHAR},
+      ReleaseNewNo = #{record.releasenewno,jdbcType=NVARCHAR},
+      ReleaseNew = #{record.releasenew,jdbcType=NVARCHAR},
+      engReleaseNew = #{record.engreleasenew,jdbcType=NVARCHAR},
+      PDTNo = #{record.pdtno,jdbcType=NVARCHAR},
+      ReleaseNo_Software = #{record.releasenoSoftware,jdbcType=NVARCHAR},
+      ModPR = #{record.modpr,jdbcType=CHAR},
+      ReleaseOldNo = #{record.releaseoldno,jdbcType=NVARCHAR},
+      ReleaseOld = #{record.releaseold,jdbcType=NVARCHAR},
+      engReleaseOld = #{record.engreleaseold,jdbcType=NVARCHAR},
+      ReleaseNow = #{record.releasenow,jdbcType=NVARCHAR},
+      engReleaseNow = #{record.engreleasenow,jdbcType=NVARCHAR},
+      ReleaseNo_SoftwareNow = #{record.releasenoSoftwarenow,jdbcType=NVARCHAR},
+      DelPR = #{record.delpr,jdbcType=CHAR},
+      ReleaseDelNo = #{record.releasedelno,jdbcType=NVARCHAR},
+      ReleaseDel = #{record.releasedel,jdbcType=NVARCHAR},
+      engReleaseDel = #{record.engreleasedel,jdbcType=NVARCHAR},
+      PRIfDelBelow = #{record.prifdelbelow,jdbcType=CHAR},
+      copyto = #{record.copyto,jdbcType=NVARCHAR},
+      Remark = #{record.remark,jdbcType=NVARCHAR},
+      Creator = #{record.creator,jdbcType=NVARCHAR},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      Modifier = #{record.modifier,jdbcType=NVARCHAR},
+      ModifyTime = #{record.modifytime,jdbcType=TIMESTAMP},
+      InheritRelease = #{record.inheritrelease,jdbcType=NVARCHAR},
+      PDTOldNo = #{record.pdtoldno,jdbcType=NVARCHAR},
+      PDTNowNo = #{record.pdtnowno,jdbcType=NVARCHAR},
+      ReleaseNo_SoftwareOld = #{record.releasenoSoftwareold,jdbcType=NVARCHAR},
+      PDTOld = #{record.pdtold,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.basicinfo.entity.IBDS_VR_APPLY">
+    update IBDS_VR_APPLY
+    <set>
+      <if test="processCode != null">
+        Process_Code = #{processCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo = #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        ProdLineNo = #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="productno != null">
+        ProductNo = #{productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtsecretary != null">
+        IPMTSecretary = #{ipmtsecretary,jdbcType=NVARCHAR},
+      </if>
+      <if test="newpv != null">
+        NewPV = #{newpv,jdbcType=CHAR},
+      </if>
+      <if test="versionnewno != null">
+        VersionNewNo = #{versionnewno,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionnew != null">
+        VersionNew = #{versionnew,jdbcType=NVARCHAR},
+      </if>
+      <if test="engversionnew != null">
+        engVersionNew = #{engversionnew,jdbcType=NVARCHAR},
+      </if>
+      <if test="modpv != null">
+        ModPV = #{modpv,jdbcType=CHAR},
+      </if>
+      <if test="versionoldno != null">
+        VersionOldNo = #{versionoldno,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionold != null">
+        VersionOld = #{versionold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engversionold != null">
+        engVersionOld = #{engversionold,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionnow != null">
+        VersionNow = #{versionnow,jdbcType=NVARCHAR},
+      </if>
+      <if test="engversionnow != null">
+        engVersionNow = #{engversionnow,jdbcType=NVARCHAR},
+      </if>
+      <if test="delpv != null">
+        DelPV = #{delpv,jdbcType=CHAR},
+      </if>
+      <if test="versiondelno != null">
+        VersionDelNo = #{versiondelno,jdbcType=NVARCHAR},
+      </if>
+      <if test="versiondel != null">
+        Versiondel = #{versiondel,jdbcType=NVARCHAR},
+      </if>
+      <if test="engversiondel != null">
+        engVersionDel = #{engversiondel,jdbcType=NVARCHAR},
+      </if>
+      <if test="pvifdelbelow != null">
+        PVIfDelBelow = #{pvifdelbelow,jdbcType=CHAR},
+      </if>
+      <if test="versionno != null">
+        VersionNo = #{versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="newpr != null">
+        NewPR = #{newpr,jdbcType=CHAR},
+      </if>
+      <if test="releasenewno != null">
+        ReleaseNewNo = #{releasenewno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releasenew != null">
+        ReleaseNew = #{releasenew,jdbcType=NVARCHAR},
+      </if>
+      <if test="engreleasenew != null">
+        engReleaseNew = #{engreleasenew,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtno != null">
+        PDTNo = #{pdtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releasenoSoftware != null">
+        ReleaseNo_Software = #{releasenoSoftware,jdbcType=NVARCHAR},
+      </if>
+      <if test="modpr != null">
+        ModPR = #{modpr,jdbcType=CHAR},
+      </if>
+      <if test="releaseoldno != null">
+        ReleaseOldNo = #{releaseoldno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releaseold != null">
+        ReleaseOld = #{releaseold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engreleaseold != null">
+        engReleaseOld = #{engreleaseold,jdbcType=NVARCHAR},
+      </if>
+      <if test="releasenow != null">
+        ReleaseNow = #{releasenow,jdbcType=NVARCHAR},
+      </if>
+      <if test="engreleasenow != null">
+        engReleaseNow = #{engreleasenow,jdbcType=NVARCHAR},
+      </if>
+      <if test="releasenoSoftwarenow != null">
+        ReleaseNo_SoftwareNow = #{releasenoSoftwarenow,jdbcType=NVARCHAR},
+      </if>
+      <if test="delpr != null">
+        DelPR = #{delpr,jdbcType=CHAR},
+      </if>
+      <if test="releasedelno != null">
+        ReleaseDelNo = #{releasedelno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releasedel != null">
+        ReleaseDel = #{releasedel,jdbcType=NVARCHAR},
+      </if>
+      <if test="engreleasedel != null">
+        engReleaseDel = #{engreleasedel,jdbcType=NVARCHAR},
+      </if>
+      <if test="prifdelbelow != null">
+        PRIfDelBelow = #{prifdelbelow,jdbcType=CHAR},
+      </if>
+      <if test="copyto != null">
+        copyto = #{copyto,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="creator != null">
+        Creator = #{creator,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null">
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        Modifier = #{modifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifytime != null">
+        ModifyTime = #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inheritrelease != null">
+        InheritRelease = #{inheritrelease,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtoldno != null">
+        PDTOldNo = #{pdtoldno,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtnowno != null">
+        PDTNowNo = #{pdtnowno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releasenoSoftwareold != null">
+        ReleaseNo_SoftwareOld = #{releasenoSoftwareold,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtold != null">
+        PDTOld = #{pdtold,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.basicinfo.entity.IBDS_VR_APPLY">
+    update IBDS_VR_APPLY
+    set Process_Code = #{processCode,jdbcType=NVARCHAR},
+      PLIPMTNo = #{plipmtno,jdbcType=NVARCHAR},
+      ProdLineNo = #{prodlineno,jdbcType=NVARCHAR},
+      ProductNo = #{productno,jdbcType=NVARCHAR},
+      IPMTSecretary = #{ipmtsecretary,jdbcType=NVARCHAR},
+      NewPV = #{newpv,jdbcType=CHAR},
+      VersionNewNo = #{versionnewno,jdbcType=NVARCHAR},
+      VersionNew = #{versionnew,jdbcType=NVARCHAR},
+      engVersionNew = #{engversionnew,jdbcType=NVARCHAR},
+      ModPV = #{modpv,jdbcType=CHAR},
+      VersionOldNo = #{versionoldno,jdbcType=NVARCHAR},
+      VersionOld = #{versionold,jdbcType=NVARCHAR},
+      engVersionOld = #{engversionold,jdbcType=NVARCHAR},
+      VersionNow = #{versionnow,jdbcType=NVARCHAR},
+      engVersionNow = #{engversionnow,jdbcType=NVARCHAR},
+      DelPV = #{delpv,jdbcType=CHAR},
+      VersionDelNo = #{versiondelno,jdbcType=NVARCHAR},
+      Versiondel = #{versiondel,jdbcType=NVARCHAR},
+      engVersionDel = #{engversiondel,jdbcType=NVARCHAR},
+      PVIfDelBelow = #{pvifdelbelow,jdbcType=CHAR},
+      VersionNo = #{versionno,jdbcType=NVARCHAR},
+      NewPR = #{newpr,jdbcType=CHAR},
+      ReleaseNewNo = #{releasenewno,jdbcType=NVARCHAR},
+      ReleaseNew = #{releasenew,jdbcType=NVARCHAR},
+      engReleaseNew = #{engreleasenew,jdbcType=NVARCHAR},
+      PDTNo = #{pdtno,jdbcType=NVARCHAR},
+      ReleaseNo_Software = #{releasenoSoftware,jdbcType=NVARCHAR},
+      ModPR = #{modpr,jdbcType=CHAR},
+      ReleaseOldNo = #{releaseoldno,jdbcType=NVARCHAR},
+      ReleaseOld = #{releaseold,jdbcType=NVARCHAR},
+      engReleaseOld = #{engreleaseold,jdbcType=NVARCHAR},
+      ReleaseNow = #{releasenow,jdbcType=NVARCHAR},
+      engReleaseNow = #{engreleasenow,jdbcType=NVARCHAR},
+      ReleaseNo_SoftwareNow = #{releasenoSoftwarenow,jdbcType=NVARCHAR},
+      DelPR = #{delpr,jdbcType=CHAR},
+      ReleaseDelNo = #{releasedelno,jdbcType=NVARCHAR},
+      ReleaseDel = #{releasedel,jdbcType=NVARCHAR},
+      engReleaseDel = #{engreleasedel,jdbcType=NVARCHAR},
+      PRIfDelBelow = #{prifdelbelow,jdbcType=CHAR},
+      copyto = #{copyto,jdbcType=NVARCHAR},
+      Remark = #{remark,jdbcType=NVARCHAR},
+      Creator = #{creator,jdbcType=NVARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      Modifier = #{modifier,jdbcType=NVARCHAR},
+      ModifyTime = #{modifytime,jdbcType=TIMESTAMP},
+      InheritRelease = #{inheritrelease,jdbcType=NVARCHAR},
+      PDTOldNo = #{pdtoldno,jdbcType=NVARCHAR},
+      PDTNowNo = #{pdtnowno,jdbcType=NVARCHAR},
+      ReleaseNo_SoftwareOld = #{releasenoSoftwareold,jdbcType=NVARCHAR},
+      PDTOld = #{pdtold,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.finance.dao.FProjectCodeHisMapper">
+  <insert id="insertAndGetId" parameterType="com.h3c.mds.finance.entity.FProjectCodeHis" useGeneratedKeys="true" keyProperty="id">
+    insert into IBDS_F_PROJECT_CODE_HIS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fObjca != null">
+        f_objca,
+      </if>
+      <if test="fPdtno != null">
+        f_pdtno,
+      </if>
+      <if test="fProjno != null">
+        f_projno,
+      </if>
+      <if test="fProjname != null">
+        f_projname,
+      </if>
+      <if test="fProjcode != null">
+        f_projcode,
+      </if>
+      <if test="fProductlineno != null">
+        f_productlineno,
+      </if>
+      <if test="fReleaseno != null">
+        f_releaseno,
+      </if>
+      <if test="fProductno != null">
+        f_productno,
+      </if>
+      <if test="fProductname != null">
+        f_productname,
+      </if>
+      <if test="fBizhong != null">
+        f_bizhong,
+      </if>
+      <if test="fFbizhong != null">
+        f_fbizhong,
+      </if>
+      <if test="begintime != null">
+        BeginTime,
+      </if>
+      <if test="fProjmng != null">
+        f_projMng,
+      </if>
+      <if test="fDept != null">
+        f_dept,
+      </if>
+      <if test="fStartProjectTime != null">
+        f_start_project_time,
+      </if>
+      <if test="fAssignPoint != null">
+        f_assign_point,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyUser != null">
+        modify_user,
+      </if>
+      <if test="modifyDate != null">
+        modify_date,
+      </if>
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="fProfile != null">
+        f_profile,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="datasource != null">
+        datasource,
+      </if>
+      <if test="fObjcaName != null">
+        f_objca_name,
+      </if>
+      <if test="fPdtName != null">
+        f_pdt_name,
+      </if>
+      <if test="fProductlineName != null">
+        f_productline_name,
+      </if>
+      <if test="fAssignPointName != null">
+        f_assign_point_name,
+      </if>
+      <if test="fBversionno != null">
+        f_bversionno,
+      </if>
+      <if test="fReleasename != null">
+        f_releasename,
+      </if>
+      <if test="fBversionname != null">
+        f_bversionname,
+      </if>
+      <if test="fRate != null">
+        f_rate,
+      </if>
+      <if test="fOldObjca != null">
+        f_old_objca,
+      </if>
+      <if test="fOldObjcaName != null">
+        f_old_objca_name,
+      </if>
+      <if test="fOldPdtno != null">
+        f_old_pdtno,
+      </if>
+      <if test="fOldPdtName != null">
+        f_old_pdt_name,
+      </if>
+      <if test="fOldProjno != null">
+        f_old_projno,
+      </if>
+      <if test="fOldProjname != null">
+        f_old_projname,
+      </if>
+      <if test="fOldProjcode != null">
+        f_old_projcode,
+      </if>
+      <if test="fOldProductlineno != null">
+        f_old_productlineno,
+      </if>
+      <if test="fOldProductlineName != null">
+        f_old_productline_name,
+      </if>
+      <if test="fOldReleaseno != null">
+        f_old_releaseno,
+      </if>
+      <if test="fOldProductno != null">
+        f_old_productno,
+      </if>
+      <if test="fOldProductname != null">
+        f_old_productname,
+      </if>
+      <if test="fOldBizhong != null">
+        f_old_bizhong,
+      </if>
+      <if test="fOldFbizhong != null">
+        f_old_fbizhong,
+      </if>
+      <if test="fOldRate != null">
+        f_old_rate,
+      </if>
+      <if test="fVersion != null">
+        f_version,
+      </if>
+      <if test="fOldVersion != null">
+        f_old_version,
+      </if>
+      <if test="mark != null">
+        mark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fObjca != null">
+        #{fObjca,jdbcType=VARCHAR},
+      </if>
+      <if test="fPdtno != null">
+        #{fPdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="fProjno != null">
+        #{fProjno,jdbcType=VARCHAR},
+      </if>
+      <if test="fProjname != null">
+        #{fProjname,jdbcType=VARCHAR},
+      </if>
+      <if test="fProjcode != null">
+        #{fProjcode,jdbcType=VARCHAR},
+      </if>
+      <if test="fProductlineno != null">
+        #{fProductlineno,jdbcType=VARCHAR},
+      </if>
+      <if test="fReleaseno != null">
+        #{fReleaseno,jdbcType=VARCHAR},
+      </if>
+      <if test="fProductno != null">
+        #{fProductno,jdbcType=VARCHAR},
+      </if>
+      <if test="fProductname != null">
+        #{fProductname,jdbcType=VARCHAR},
+      </if>
+      <if test="fBizhong != null">
+        #{fBizhong,jdbcType=VARCHAR},
+      </if>
+      <if test="fFbizhong != null">
+        #{fFbizhong,jdbcType=VARCHAR},
+      </if>
+      <if test="begintime != null">
+        #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fProjmng != null">
+        #{fProjmng,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fStartProjectTime != null">
+        #{fStartProjectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fAssignPoint != null">
+        #{fAssignPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fProfile != null">
+        #{fProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="datasource != null">
+        #{datasource,jdbcType=VARCHAR},
+      </if>
+      <if test="fObjcaName != null">
+        #{fObjcaName,jdbcType=VARCHAR},
+      </if>
+      <if test="fPdtName != null">
+        #{fPdtName,jdbcType=VARCHAR},
+      </if>
+      <if test="fProductlineName != null">
+        #{fProductlineName,jdbcType=VARCHAR},
+      </if>
+      <if test="fAssignPointName != null">
+        #{fAssignPointName,jdbcType=VARCHAR},
+      </if>
+      <if test="fBversionno != null">
+        #{fBversionno,jdbcType=VARCHAR},
+      </if>
+      <if test="fReleasename != null">
+        #{fReleasename,jdbcType=NVARCHAR},
+      </if>
+      <if test="fBversionname != null">
+        #{fBversionname,jdbcType=NVARCHAR},
+      </if>
+      <if test="fRate != null">
+        #{fRate,jdbcType=INTEGER},
+      </if>
+      <if test="fOldObjca != null">
+        #{fOldObjca,jdbcType=VARCHAR},
+      </if>
+      <if test="fOldObjcaName != null">
+        #{fOldObjcaName,jdbcType=VARCHAR},
+      </if>
+      <if test="fOldPdtno != null">
+        #{fOldPdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="fOldPdtName != null">
+        #{fOldPdtName,jdbcType=VARCHAR},
+      </if>
+      <if test="fOldProjno != null">
+        #{fOldProjno,jdbcType=VARCHAR},
+      </if>
+      <if test="fOldProjname != null">
+        #{fOldProjname,jdbcType=VARCHAR},
+      </if>
+      <if test="fOldProjcode != null">
+        #{fOldProjcode,jdbcType=VARCHAR},
+      </if>
+      <if test="fOldProductlineno != null">
+        #{fOldProductlineno,jdbcType=VARCHAR},
+      </if>
+      <if test="fOldProductlineName != null">
+        #{fOldProductlineName,jdbcType=NVARCHAR},
+      </if>
+      <if test="fOldReleaseno != null">
+        #{fOldReleaseno,jdbcType=VARCHAR},
+      </if>
+      <if test="fOldProductno != null">
+        #{fOldProductno,jdbcType=VARCHAR},
+      </if>
+      <if test="fOldProductname != null">
+        #{fOldProductname,jdbcType=VARCHAR},
+      </if>
+      <if test="fOldBizhong != null">
+        #{fOldBizhong,jdbcType=VARCHAR},
+      </if>
+      <if test="fOldFbizhong != null">
+        #{fOldFbizhong,jdbcType=VARCHAR},
+      </if>
+      <if test="fOldRate != null">
+        #{fOldRate,jdbcType=INTEGER},
+      </if>
+      <if test="fVersion != null">
+        #{fVersion,jdbcType=NVARCHAR},
+      </if>
+      <if test="fOldVersion != null">
+        #{fOldVersion,jdbcType=NVARCHAR},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="getByColumn" parameterType="map" resultMap="BaseResultMap">
+  	select * from IBDS_F_PROJECT_CODE_HIS
+  	where  
+  	f_projno = #{param.fProjno} 
+  	and f_projname=#{param.fProjname} 
+  	and status= #{param.status}  
+  	and Convert(datetime,BeginTime,120) = #{param.begintime}
+  	
+  	<if test="param.fObjcaName != null">
+  		and f_Objca_Name = #{param.fObjcaName}
+  	</if>
+  	
+  	<if test="param.fPdtName != null">
+  		and f_Pdt_Name = #{param.fPdtName}
+  	</if>
+  	
+  	<if test="param.fProjcode != null">
+  		and f_Projcode = #{param.fProjcode}
+  	</if>
+  	
+  	<if test="param.fProductlineName != null">
+  		and f_Productline_Name = #{param.fProductlineName}
+  	</if>
+  	  	
+  	<if test="param.fVersion != null">
+  		and f_Version = #{param.fVersion}
+  	</if>
+  	
+  	<!-- <if test="fVersion != null">
+  		and f_Version = #{param.fVersion}
+  	</if> -->
+  	
+  	<if test="param.fBizhong != null">
+  		and f_Bizhong = #{param.fBizhong}
+  	</if>
+  	
+  	<if test="param.fFbizhong != null">
+  		and f_Fbizhong = #{param.fFbizhong}
+  	</if>
+  	
+  	<if test="param.fProjmng != null">
+  		and f_Projmng = #{param.fProjmng}
+  	</if>
+  	
+  	<if test="param.fStartProjectTime != null">
+  		
+  		and Convert(datetime,f_Start_Project_Time,120) = #{param.fStartProjectTime}
+  	</if>
+  	
+  	<if test="param.fAssignPointName != null">
+  		and f_Assign_Point_Name = #{param.fAssignPointName}
+  	</if>
+  	
+  	<if test="param.remark != null">
+  		and remark = #{param.remark}
+  	</if>
+  	
+  	<if test="param.fOldObjcaName != null">
+  		and f_Old_Objca_Name = #{param.fOldObjcaName}
+  	</if>
+  	
+  	<if test="param.fOldPdtName != null">
+  		and f_Old_Pdt_Name = #{param.fOldPdtName}
+  	</if>
+  	
+  	<if test="param.fOldProjno != null">
+  		and f_Old_Projno = #{param.fOldProjno}
+  	</if>
+  	
+  	<if test="param.fOldProjname != null">
+  		and f_Old_Projname = #{param.fOldProjname}
+  	</if>
+  	
+  	<if test="param.fOldProjcode != null">
+  		and f_Old_Projcode = #{param.fOldProjcode}
+  	</if>
+  	
+  	<if test="param.fOldProductlineName != null">
+  		and f_Old_Productline_Name = #{param.fOldProductlineName}
+  	</if>
+  	
+  	<if test="param.fOldVersion != null">
+  		and f_Old_Version = #{param.fOldVersion}
+  	</if>
+  	
+  	<if test="param.fOldBizhong != null">
+  		and f_Old_Bizhong = #{param.fOldBizhong}
+  	</if>
+  	
+  	<if test="param.fOldVersion != null">
+  		and f_Old_Fbizhong = #{param.fOldFbizhong}
+  	</if>
+  	
+  	
+  </select>
+</mapper>

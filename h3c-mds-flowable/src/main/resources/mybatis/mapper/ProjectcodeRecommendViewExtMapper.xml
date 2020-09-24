@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.flowable.dao.ProjectcodeRecommendViewMapper">
+  
+  <select id="treeRecommendProjectCode" parameterType="map" resultType="map">
+  	<if test="param.id == '' or param.id==null">
+  		select distinct
+				prodlineno as id,
+				prodline as prodline
+			 from view_projectcode_recommend where status = '1'
+			 <include refid="query"></include>
+			 order by prodline asc
+  	</if>
+  	
+  	<if test="param.id != null and param.id!=''">
+  		select distinct
+				id as id,
+				prodline as prodline,
+				pdt_no as pdtNo,
+				pdt_name as pdtName,
+				pro_number as proNumber,
+				remark
+			 from view_projectcode_recommend where status = '1' and  prodlineno=#{param.prodlineno}
+			 <include refid="query"></include>
+			 order by pdt_name asc , pro_number desc
+  	</if>
+  </select>
+  
+  <sql id="query">
+  <if test="param.searchParams != null and param.searchParams!=''">
+  	AND CHARINDEX(
+	#{param.searchParams}, isnull(prodline, '') 
+	+ isnull(pdt_name, '') 
+	+ isnull(pro_number, '') 
+	+ isnull(remark, '')
+) > 0</if>
+  </sql>
+</mapper>

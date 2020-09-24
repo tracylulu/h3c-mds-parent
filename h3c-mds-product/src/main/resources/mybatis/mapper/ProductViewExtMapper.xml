@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.ProductViewMapper">
+	<select id="getDataList" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+
+		<!-- IPMT层 -->
+		<if test="param.id == null">
+			select distinct PLIPMT,PLIPMTNo,plipmt_order from V_PRODUCT_VIEW where status='1'
+		</if>
+
+
+		<if test="param.id != null">
+			<!-- 产品线层 -->
+			<if test="param.type =='PI'">
+
+				select distinct PRODLINENo+'_'+PLIPMTNo as PLIPMTNo ,PRODLINE,PLIPMT,PL_ORDER from
+				V_PRODUCT_VIEW
+				where PLIPMTNo=#{param.id} and status='1'
+
+			</if>
+			<!-- PDT层 -->
+			<if test="param.type =='PL'">
+
+				select distinct ProductNo+'_'+PRODLINENo+'_'+Convert(varchar,ID)+'_'+PLIPMTNo as PLIPMTNo ,PRODLINE,PLIPMT,
+				ProductNo, Product, P, ProductOld, engProduct, IfPlan, ProductType, 
+    IfOfficialNaming, PRODUCTCOACode, PM_ID, POP_ID, CME_ID, CMO_ID, PDE_ID, FPRODUCT, 
+    BOM, REMARK, Status, Match, PRODLINENo, CREATE_USER, CREATE_DATE, MODIFY_USER, MODIFY_DATE, 
+    ID, Readers, PLIPMTNo, Column01, Column02, Column03, Column04, Column05, Column06, 
+    Column07, Column08, Column09, Column10, producttypeName, ifplanName
+				from V_PRODUCT_VIEW
+				where PRODLINENo=#{param.id} and status='1'				
+								
+			</if>
+			<if test="param.PLIPMTNo!=null and param.PLIPMTNo!=''">
+					and PLIPMTNo=#{param.PLIPMTNo}
+				</if>
+			
+		</if>
+
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and
+			CHARINDEX(#{param.searchParas},isnull(Product,'')+isnull(ProductNo,'')+isnull(engProduct,'')+isnull(ProductOld,''))&gt;0
+		</if>
+		
+		 <!-- IPMT层-->
+    <if test="param.id == null">
+    order by plipmt_order,PLIPMT
+    </if>
+     <if test="param.id != null">
+     <!-- 产品线层 -->
+	 <if test="param.type =='PI'">
+     order by PL_ORDER,PRODLINE
+     </if>
+      <!-- PDT层 -->
+      <if test="param.type =='PL'">
+      order by Product
+      </if>
+      </if>
+	</select>
+
+	<select id="selectByCode" parameterType="string"
+		resultMap="BaseResultMap">
+
+		select
+		<include refid="Base_Column_List" />
+		from V_PRODUCT_VIEW where productno=#{code}
+	</select>
+	
+	<select id="selectByID" parameterType="Integer"
+		resultMap="BaseResultMap">
+
+		select
+		<include refid="Base_Column_List" />
+		from V_PRODUCT_VIEW where ID=#{code}
+	</select>
+	
+	<select id="getExportList" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from V_PRODUCT_VIEW where status='1'		
+		<if test="param.PLIPMTNo!=null and param.PLIPMTNo!=''">
+			and PLIPMTNo=#{param.PLIPMTNo}
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and
+			CHARINDEX(#{param.searchParas},isnull(Product,'')+isnull(ProductNo,'')+isnull(engProduct,'')+isnull(ProductOld,''))&gt;0
+		</if>
+		 order by plipmt_order,PLIPMT
+		 
+	</select>
+</mapper>

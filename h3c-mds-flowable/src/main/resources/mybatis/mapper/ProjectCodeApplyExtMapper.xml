@@ -1,0 +1,342 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.flowable.dao.ProjectCodeApplyMapper">
+  <insert id="insertSelectiveReturnId" parameterType="com.h3c.mds.flowable.entity.ProjectCodeApply" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+  insert into IBDS_PROJECT_CODE_APPLY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="proName != null">
+        pro_name,
+      </if>
+      <if test="bversion != null">
+        BVersion,
+      </if>
+      <if test="proNumber != null">
+        pro_number,
+      </if>
+      <if test="proCa != null">
+        pro_ca,
+      </if>
+      <if test="proProdlineNo != null">
+        pro_prodline_no,
+      </if>
+      <if test="proNo != null">
+        pro_no,
+      </if>
+      <if test="proManager != null">
+        pro_manager,
+      </if>
+      <if test="proTime != null">
+        pro_time,
+      </if>
+      <if test="proPoint != null">
+        pro_point,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="probizhong != null">
+        Probizhong,
+      </if>
+      <if test="profbizhong != null">
+        Profbizhong,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="modifyDate != null">
+        modify_date,
+      </if>
+      <if test="modifyUser != null">
+        modify_user,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="productnum != null">
+        productNum,
+      </if>
+      <if test="applyNo != null">
+        apply_no,
+      </if>
+      <if test="oldProName != null">
+        old_pro_name,
+      </if>
+      <if test="oldProNumber != null">
+        old_pro_number,
+      </if>
+      <if test="oldProCa != null">
+        old_pro_ca,
+      </if>
+      <if test="oldProProdlineNo != null">
+        old_pro_prodline_no,
+      </if>
+      <if test="oldProNo != null">
+        old_pro_no,
+      </if>
+      <if test="oldProManager != null">
+        old_pro_manager,
+      </if>
+      <if test="oldVersion != null">
+        old_version,
+      </if>
+      <if test="oldProfile != null">
+        old_ProFile,
+      </if>
+      <if test="proCaName != null">
+        pro_ca_name,
+      </if>
+      <if test="proPointName != null">
+        pro_point_name,
+      </if>
+      <if test="proProdlineName != null">
+        pro_prodline_name,
+      </if>
+      <if test="oldProbizhong != null">
+        old_probizhong,
+      </if>
+      <if test="oldProfbizhong != null">
+        old_profbizhong,
+      </if>
+      <if test="oldProProdlineName != null">
+        old_pro_prodline_name,
+      </if>
+      <if test="oldProCaName != null">
+        old_pro_ca_name,
+      </if>
+      <if test="oldProjcodeId != null">
+        old_projcode_id,
+      </if>
+      <if test="pdtName != null">
+        pdt_name,
+      </if>
+      <if test="bversionNo != null">
+        bversion_no,
+      </if>
+      <if test="oldBversionNo != null">
+        old_bversion_no,
+      </if>
+      <if test="oldBversion != null">
+        old_bversion,
+      </if>
+      <if test="pdtNo != null">
+        pdt_no,
+      </if>
+      <if test="releaseNo != null">
+        release_no,
+      </if>
+      <if test="oldProjcode != null">
+        old_projcode,
+      </if>
+      <if test="oldProjcodeName != null">
+        old_projcode_name,
+      </if>
+      <if test="oldReleaseNo != null">
+        old_release_no,
+      </if>
+      <if test="oldReleaseName != null">
+        old_release_name,
+      </if>
+      <if test="basisMaterial != null">
+        BASIS_MATERIAL,
+      </if>
+      <if test="basisMaterialId != null">
+        BASIS_MATERIAL_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="proName != null">
+        #{proName,jdbcType=NVARCHAR},
+      </if>
+      <if test="bversion != null">
+        #{bversion,jdbcType=NVARCHAR},
+      </if>
+      <if test="proNumber != null">
+        #{proNumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="proCa != null">
+        #{proCa,jdbcType=NVARCHAR},
+      </if>
+      <if test="proProdlineNo != null">
+        #{proProdlineNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="proNo != null">
+        #{proNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="proManager != null">
+        #{proManager,jdbcType=NVARCHAR},
+      </if>
+      <if test="proTime != null">
+        #{proTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proPoint != null">
+        #{proPoint,jdbcType=NVARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="probizhong != null">
+        #{probizhong,jdbcType=NVARCHAR},
+      </if>
+      <if test="profbizhong != null">
+        #{profbizhong,jdbcType=NVARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="productnum != null">
+        #{productnum,jdbcType=INTEGER},
+      </if>
+      <if test="applyNo != null">
+        #{applyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="oldProName != null">
+        #{oldProName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldProNumber != null">
+        #{oldProNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="oldProCa != null">
+        #{oldProCa,jdbcType=VARCHAR},
+      </if>
+      <if test="oldProProdlineNo != null">
+        #{oldProProdlineNo,jdbcType=VARCHAR},
+      </if>
+      <if test="oldProNo != null">
+        #{oldProNo,jdbcType=VARCHAR},
+      </if>
+      <if test="oldProManager != null">
+        #{oldProManager,jdbcType=VARCHAR},
+      </if>
+      <if test="oldVersion != null">
+        #{oldVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="oldProfile != null">
+        #{oldProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="proCaName != null">
+        #{proCaName,jdbcType=VARCHAR},
+      </if>
+      <if test="proPointName != null">
+        #{proPointName,jdbcType=VARCHAR},
+      </if>
+      <if test="proProdlineName != null">
+        #{proProdlineName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldProbizhong != null">
+        #{oldProbizhong,jdbcType=VARCHAR},
+      </if>
+      <if test="oldProfbizhong != null">
+        #{oldProfbizhong,jdbcType=VARCHAR},
+      </if>
+      <if test="oldProProdlineName != null">
+        #{oldProProdlineName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldProCaName != null">
+        #{oldProCaName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldProjcodeId != null">
+        #{oldProjcodeId,jdbcType=INTEGER},
+      </if>
+      <if test="pdtName != null">
+        #{pdtName,jdbcType=VARCHAR},
+      </if>
+      <if test="bversionNo != null">
+        #{bversionNo,jdbcType=VARCHAR},
+      </if>
+      <if test="oldBversionNo != null">
+        #{oldBversionNo,jdbcType=VARCHAR},
+      </if>
+      <if test="oldBversion != null">
+        #{oldBversion,jdbcType=VARCHAR},
+      </if>
+      <if test="pdtNo != null">
+        #{pdtNo,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseNo != null">
+        #{releaseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="oldProjcode != null">
+        #{oldProjcode,jdbcType=VARCHAR},
+      </if>
+      <if test="oldProjcodeName != null">
+        #{oldProjcodeName,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldReleaseNo != null">
+        #{oldReleaseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="oldReleaseName != null">
+        #{oldReleaseName,jdbcType=VARCHAR},
+      </if>
+      <if test="basisMaterial != null">
+        #{basisMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="basisMaterialId != null">
+        #{basisMaterialId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  
+  	<select id="getProjectCodeApplyByBversionNo" parameterType="map" resultMap="BaseResultMap">
+  		SELECT
+			*
+		FROM
+			IBDS_PROJECT_CODE_APPLY apply
+		WHERE
+			bversion_no = #{param.bversionNo}
+		AND EXISTS (
+			SELECT
+				1
+			FROM
+				IBDS_PROJECT_CODE_PROCESS process
+			WHERE
+				apply.apply_no = process.apply_no
+			AND is_edit = '-1'
+			)
+  	</select>
+  	
+  	
+  	<select id="getProjectCodeApplyByReleaseNo" parameterType="map"  resultMap="BaseResultMap">
+  		SELECT
+			*
+		FROM
+			IBDS_PROJECT_CODE_APPLY apply
+		WHERE
+			release_no = #{param.releaseNo}
+		AND EXISTS (
+			SELECT
+				1
+			FROM
+				IBDS_PROJECT_CODE_PROCESS process
+			WHERE
+				apply.apply_no = process.apply_no
+			AND is_edit = '-1'
+			)
+  	</select>
+</mapper>

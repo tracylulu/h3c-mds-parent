@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.finance.dao.FProductCodeMapper">
+    <select id="getCountByProductCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+      SELECT COUNT(1) FROM IBDS_F_PRODUCT_CODE WHERE PRODUCT_CODE = #{productCode}
+    </select>
+
+    <select id="getCountByBomCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+      SELECT COUNT(1) FROM IBDS_F_PRODUCT_CODE WHERE STATUS != '3' AND CHARINDEX(#{bomCode},BOM_CODE)>0
+    </select>
+
+    <select id="getProductCodeByBomCodeNoCode" resultType="java.lang.String" parameterType="map">
+        SELECT PRODUCT_CODE FROM IBDS_F_PRODUCT_CODE WHERE STATUS != '3' AND CHARINDEX(#{params.bomCode},BOM_CODE)>0 AND PRODUCT_CODE != #{params.productCode}
+    </select>
+
+    <select id="getMaxCode" resultType="String">
+		select max(FPROD_NO) from IBDS_F_PRODUCT_CODE WHERE  FPROD_NO LIKE 'PI%' AND LEN(FPROD_NO)=8 ;
+	</select>
+
+<!--    <select id="findByPage" resultMap="BaseResultMap" parameterType="java.util.Map">-->
+<!--        SELECT <include refid="Base_Column_List" />-->
+<!--        from IBDS_F_PRODUCT_CODE WHERE 1=1-->
+
+<!--        <if test="params.status != null and params.status != ''">-->
+<!--             AND STATUS != #{params.status}-->
+<!--        </if>-->
+<!--        <if test="params.dep != null and params.dep != ''">-->
+<!--            <if test="params.dep == 'D0001' ">-->
+<!--                AND APPLY_DEPT = #{params.dep}-->
+<!--            </if>-->
+<!--            <if test="params.dep == 'D0002' or params.dep == 'D0003' ">-->
+<!--                AND APPLY_DEPT != 'D0001'-->
+<!--            </if>-->
+
+<!--        </if>-->
+<!--        <if test="params.searchStr != null and params.searchStr != ''">-->
+<!--             AND CHARINDEX(#{params.searchStr},isnull(PRODUCT_NAME,'')+isnull(PRODLINE_NAME,'')+isnull(PRODUCT_CODE,'')+isnull(PRODUCT_NAME_CN,'')+isnull(BOM_CODE,''))>0-->
+<!--        </if>-->
+
+<!--    </select>-->
+    
+    <resultMap id="BaseResultMapExt" type="com.h3c.mds.finance.entity.FProductCodeExt" extends="BaseResultMap">
+        <result column="PRODLINE_NAME_EN" jdbcType="NVARCHAR" property="prodlineNameEn" />
+        <result column="PROD_NAME_EN" jdbcType="NVARCHAR" property="prodNameEn" />
+    </resultMap>
+
+    <select id="findByPage" resultMap="BaseResultMapExt" parameterType="java.util.Map">
+        SELECT * FROM (
+        SELECT
+        IBDS_F_PRODUCT_CODE.ID,
+        IBDS_F_PRODLINE.PRODLINE_DESC AS PRODLINE_NAME,
+        IBDS_F_PROD.PROD_NAME AS PRODUCT_NAME,
+        IBDS_PROCESS_CONFIG_ITEM.CONTENT AS PDT_NAME,
+        PDT_NO,
+        PDT_MNG,
+        IBDS_F_PRODLINE.PRODLINE_NO,
+        IBDS_F_PROD.PROD_NO AS PRODUCT_NO,
+        PRODUCT_CODE,
+        PRODUCT_NAME_CN,
+        PRODUCT_NAME_EN,
+        BASIS_MATERIAL,
+        BOM_CODE,
+        BOM_DESC,
+        PROCESS_CODE,
+        IBDS_F_PRODUCT_CODE.ORDER_BY,
+        IBDS_F_PRODUCT_CODE.CREATE_DATE,
+        IBDS_F_PRODUCT_CODE.CREATE_USER,
+        IBDS_F_PRODUCT_CODE.MODIFY_DATE,
+        IBDS_F_PRODUCT_CODE.MODIFY_USER,
+        IBDS_F_PRODUCT_CODE.NOTE,
+        OLD_PRODUCT_CODE,
+        OLD_PRODLINE_NAME,
+        OLD_PRODUCT_NAME,
+        OLD_PDT_NAME,
+        OLD_PDT_NO,
+        OLD_PDT_MNG,
+        OLD_PRODLINE_NO,
+        OLD_PRODUCT_NO,
+        OLD_PRODUCT_NAME_CN,
+        OLD_PRODUCT_NAME_EN,
+        OLD_BOM_CODE,
+        OLD_BOM_DESC,
+        IBDS_F_PRODUCT_CODE.STATUS,
+        EFFECT_DATE,
+        BASIS_MATERIAL_ID,
+        FPROD_NO,
+        APPLY_DEPT,
+        IBDS_F_PRODUCT_CODE.PRODLINE_ID,
+        PRODUCT_ID,
+        PDT_ID,
+        OLD_PRODLINE_ID,
+        OLD_PRODUCT_ID,
+        OLD_PDT_ID,
+        IBDS_F_PRODLINE.PRODLINE_DESC_EN AS PRODLINE_NAME_EN,
+        IBDS_F_PROD.PROD_NAME_EN
+        FROM
+        IBDS_F_PRODUCT_CODE
+        LEFT JOIN IBDS_F_PRODLINE ON IBDS_F_PRODUCT_CODE.PRODLINE_ID = IBDS_F_PRODLINE.ID
+        LEFT JOIN IBDS_F_PROD ON IBDS_F_PRODUCT_CODE.PRODUCT_ID = IBDS_F_PROD.ID
+        LEFT JOIN IBDS_PROCESS_CONFIG_ITEM ON IBDS_F_PRODUCT_CODE.PDT_ID=IBDS_PROCESS_CONFIG_ITEM.ID
+        ) AS F_PRODUCT_CODE
+
+        WHERE 1=1
+
+<!--        <if test="params.status != null and params.status != ''">-->
+<!--            AND STATUS != #{params.status}-->
+<!--        </if>-->
+        <if test="params.dep != null and params.dep != ''">
+            <if test="params.dep == 'D0001' ">
+                AND APPLY_DEPT = #{params.dep}
+            </if>
+            <if test="params.dep == 'D0002' or params.dep == 'D0003' ">
+                AND APPLY_DEPT != 'D0001'
+            </if>
+
+        </if>
+        <if test="params.searchStr != null and params.searchStr != ''">
+            AND CHARINDEX(#{params.searchStr},isnull(PRODUCT_NAME,'')+isnull(PRODLINE_NAME,'')+isnull(PRODUCT_CODE,'')+isnull(PRODUCT_NAME_CN,'')+isnull(BOM_CODE,''))>0
+        </if>
+        <if test="params.prodLine!=null and params.prodLine!='' ">
+            and PRODLINE_NAME=#{params.prodLine}
+        </if>
+
+        <if test="params.pdt!=null and params.pdt!='' ">
+            and PDT_ID=#{param.pdt}
+        </if>
+        <if test="params.state!=null  ">
+            and status in
+            <foreach item="item" collection="params.state"
+                     open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="params.start!=null and params.start!=''  and params.end!=null and params.end!='' ">
+            and EFFECT_DATE  between  #{params.start} and #{params.end}
+        </if>
+    </select>
+</mapper>

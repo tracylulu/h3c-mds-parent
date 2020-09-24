@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.IBDS_People_Item_APPLYMapper">
+ 
+  <select id="selectByPid" parameterType="Integer" resultMap="BaseResultMap">
+  	SELECT <include refid="Base_Column_List"></include> FROM dbo.IBDS_People_Item_APPLY WHERE Status=1 AND p_id=#{pid}
+  </select>
+  <select id="selectAllZT" resultMap="BaseResultMap">
+  	SELECT c.* FROM dbo.IBDS_People_APPLY a LEFT JOIN  IBDS_People_PROCESS b ON a.Process_Code=b.APPLY_CODE
+		LEFT JOIN dbo.IBDS_People_Item_APPLY c ON a.ID=c.P_ID WHERE b.Status=1 AND c.Status=1
+  </select>  
+</mapper>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.h3c.mds.product.dao.IBDS_ColunmConfigMapper">
+	<!-- 根据type获取右侧显示列 -->
+	<select id="getColunmConfig" parameterType="string"
+		resultType="java.util.HashMap">
+		select distinct
+		<include refid="Base_Column_List" />
+		from IBDS_ColunmConfig
+		where Flag=1 and ColumnFlag=1
+		<!-- type参数判断 -->
+		<if test="type != null">
+			and type=#{type}
+		</if>
+		order by GroupOrder,ColumnOrder
+	</select>
+	<select id="getColunmConfigCode" parameterType="string"
+		resultType="java.util.HashMap">
+		select distinct
+		<include refid="Base_Column_List" />
+		from IBDS_ColunmConfig
+		where Flag=1 
+		<!-- type参数判断 -->
+		<if test="type != null">
+			and type=#{type}
+		</if>
+		order by GroupOrder,ColumnOrder
+	</select>
+	<select id="getColunmConfigByParam" parameterType="map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from IBDS_ColunmConfig where Flag=1
+
+
+		<!-- type参数判断 -->
+		<if test="param.type != null">
+			and type=#{param.type}
+		</if>
+		<if test="param.queryStatus!=null and param.queryStatus=='query'">
+			and QueryFlag=1
+			order by GroupOrder,QueryOrder
+		</if>
+		<if test="param.queryStatus!=null and param.queryStatus=='add'">
+			and AddFlag=1
+			order by GroupOrder,AddOrder
+		</if>
+		<if test="param.queryStatus!=null and param.queryStatus=='edit'">
+			and EditFlag=1
+			order by GroupOrder,EditOrder
+		</if>
+		<if test="param.queryStatus!=null and param.queryStatus=='export'">
+			and ExportFlag=1
+			order by ExportOrder
+		</if>
+		<if test="param.columnName!=null and param.columnName!='' ">
+			and ColumnName=#{param.columnName}
+		</if>
+	</select>
+
+	<select id="findByPage" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from IBDS_ColunmConfig where Flag=1
+
+		<!-- type参数判断 -->
+		<if test="param.type != null and param.type != ''">
+			and type=#{param.type}
+		</if>
+		<if test="param.searchStr != null and param.searchStr != ''">
+			and CHARINDEX(#{param.searchStr},ColumnCode+ColumnName)&gt;0
+		</if>
+		order by QueryOrder
+	</select>
+	<select id="selectForReference" parameterType="map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from IBDS_ColunmConfig where Flag=1
+		and IsReferenceShow=1 AND Type=#{param.type}
+	</select>
+	<select id="selectProByColumn" 	resultMap="BaseResultMap">
+		<if test="param.type=='PI'">
+			SELECT PLIPMTNo as ColumnCode,${param.column} ColumnName FROM dbo.IBDS_PLIPMT where PLIPMTNo in
+		</if>
+		<if test="param.type=='PL'">
+			SELECT PRODLINENo as ColumnCode, ${param.column} ColumnName FROM dbo.IBDS_PRODLINE where PRODLINENo in
+		</if>
+		<if test="param.type=='PD'">
+			SELECT PDTNo as ColumnCode, ${param.column} ColumnName FROM dbo.IBDS_PDT where PDTNo in
+		</if>
+		<if test="param.type=='PV'">
+			SELECT VERSIONNo ColumnCode, ${param.column} ColumnName FROM dbo.IBDS_VERSION where VERSIONNo in
+		</if>
+		<if test="param.type=='PR'">
+			SELECT RELEASENo ColumnCode, ${param.column} ColumnName FROM dbo.IBDS_RELEASE where RELEASENo in
+		</if>
+		<if test="param.type=='PB'">
+			SELECT bversionno ColumnCode, ${param.column} ColumnName FROM dbo.IBDS_bversion where bversionno in
+		</if>
+		<foreach collection="codeList" item="code" index="index"
+			open="(" close=")" separator=",">
+			#{code}
+		</foreach>
+	</select>
+	<update id="updateProByColumn" parameterType="map">
+	 <if test="param.tabName!=null and param.code!=null">
+			update ${param.tabName} set ${param.column}=#{param.value}
+			<if test="param.modifyUser!=null">
+				,Modify_User=#{param.ModifyUser}
+			</if>
+
+
+			<if
+				test="param.tabName=='IBDS_Bversion' or param.tabName=='IBDS_PROJECT' or param.tabName=='IBDS_FEATRUE' or param.tabName=='IBDS_Base_Line' or param.tabName=='IBDS_SUB_FEATRUE' or param.tabName=='IBDS_Team' or param.tabName=='IBDS_SUB_SYSTEM'  or param.tabName=='IBDS_Module' or param.tabName=='IBDS_MODULE_VERSION'">
+				<if test="param.modifyTime!=null">
+					,Modify_Data=#{param.modifyTime}
+				</if>
+			</if>
+			<if test="param.tabName=='IBDS_Version' or param.tabName=='IBDS_PRODLINE' or param.tabName=='IBDS_PDT' or param.tabName=='IBDS_Product'">
+				<if test="param.modifyTime!=null">
+					,Modify_Date=#{param.modifyTime}
+				</if>
+			</if>
+
+			where ${param.codeColumn}=#{param.code}
+		</if>
+	
+	</update>
+</mapper>

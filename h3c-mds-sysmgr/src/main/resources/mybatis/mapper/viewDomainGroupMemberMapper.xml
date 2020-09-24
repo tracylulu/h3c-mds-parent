@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.sysmgr.dao.viewDomainGroupMemberMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.sysmgr.entity.viewDomainGroupMember">
+    <result column="Serial" jdbcType="INTEGER" property="serial" />
+    <result column="UserCode" jdbcType="NVARCHAR" property="usercode" />
+    <result column="GroupName" jdbcType="NVARCHAR" property="groupname" />
+    <result column="Name" jdbcType="NVARCHAR" property="name" />
+    <result column="uda_10_509" jdbcType="NVARCHAR" property="uda10509" />
+    <result column="uda_10_512" jdbcType="NVARCHAR" property="uda10512" />
+    <result column="Code" jdbcType="NVARCHAR" property="code" />
+    <result column="showName" jdbcType="NVARCHAR" property="showname" />
+    <result column="deptCode" jdbcType="NVARCHAR" property="deptcode" />
+    <result column="deptName" jdbcType="NVARCHAR" property="deptname" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Serial, UserCode, GroupName, Name, uda_10_509, uda_10_512, Code, showName, deptCode, 
+    deptName
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.sysmgr.entity.viewDomainGroupMemberExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from view_DomainGroupMember
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.sysmgr.entity.viewDomainGroupMemberExample">
+    delete from view_DomainGroupMember
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.sysmgr.entity.viewDomainGroupMember">
+    insert into view_DomainGroupMember (Serial, UserCode, GroupName, 
+      Name, uda_10_509, uda_10_512, 
+      Code, showName, deptCode, 
+      deptName)
+    values (#{serial,jdbcType=INTEGER}, #{usercode,jdbcType=NVARCHAR}, #{groupname,jdbcType=NVARCHAR}, 
+      #{name,jdbcType=NVARCHAR}, #{uda10509,jdbcType=NVARCHAR}, #{uda10512,jdbcType=NVARCHAR}, 
+      #{code,jdbcType=NVARCHAR}, #{showname,jdbcType=NVARCHAR}, #{deptcode,jdbcType=NVARCHAR}, 
+      #{deptname,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.sysmgr.entity.viewDomainGroupMember">
+    insert into view_DomainGroupMember
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="serial != null">
+        Serial,
+      </if>
+      <if test="usercode != null">
+        UserCode,
+      </if>
+      <if test="groupname != null">
+        GroupName,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="uda10509 != null">
+        uda_10_509,
+      </if>
+      <if test="uda10512 != null">
+        uda_10_512,
+      </if>
+      <if test="code != null">
+        Code,
+      </if>
+      <if test="showname != null">
+        showName,
+      </if>
+      <if test="deptcode != null">
+        deptCode,
+      </if>
+      <if test="deptname != null">
+        deptName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="serial != null">
+        #{serial,jdbcType=INTEGER},
+      </if>
+      <if test="usercode != null">
+        #{usercode,jdbcType=NVARCHAR},
+      </if>
+      <if test="groupname != null">
+        #{groupname,jdbcType=NVARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=NVARCHAR},
+      </if>
+      <if test="uda10509 != null">
+        #{uda10509,jdbcType=NVARCHAR},
+      </if>
+      <if test="uda10512 != null">
+        #{uda10512,jdbcType=NVARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=NVARCHAR},
+      </if>
+      <if test="showname != null">
+        #{showname,jdbcType=NVARCHAR},
+      </if>
+      <if test="deptcode != null">
+        #{deptcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="deptname != null">
+        #{deptname,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.sysmgr.entity.viewDomainGroupMemberExample" resultType="java.lang.Long">
+    select count(*) from view_DomainGroupMember
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update view_DomainGroupMember
+    <set>
+      <if test="record.serial != null">
+        Serial = #{record.serial,jdbcType=INTEGER},
+      </if>
+      <if test="record.usercode != null">
+        UserCode = #{record.usercode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.groupname != null">
+        GroupName = #{record.groupname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.name != null">
+        Name = #{record.name,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.uda10509 != null">
+        uda_10_509 = #{record.uda10509,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.uda10512 != null">
+        uda_10_512 = #{record.uda10512,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.code != null">
+        Code = #{record.code,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.showname != null">
+        showName = #{record.showname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.deptcode != null">
+        deptCode = #{record.deptcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.deptname != null">
+        deptName = #{record.deptname,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update view_DomainGroupMember
+    set Serial = #{record.serial,jdbcType=INTEGER},
+      UserCode = #{record.usercode,jdbcType=NVARCHAR},
+      GroupName = #{record.groupname,jdbcType=NVARCHAR},
+      Name = #{record.name,jdbcType=NVARCHAR},
+      uda_10_509 = #{record.uda10509,jdbcType=NVARCHAR},
+      uda_10_512 = #{record.uda10512,jdbcType=NVARCHAR},
+      Code = #{record.code,jdbcType=NVARCHAR},
+      showName = #{record.showname,jdbcType=NVARCHAR},
+      deptCode = #{record.deptcode,jdbcType=NVARCHAR},
+      deptName = #{record.deptname,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

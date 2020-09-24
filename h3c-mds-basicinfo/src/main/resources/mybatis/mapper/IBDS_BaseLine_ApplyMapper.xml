@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.IBDS_BaseLine_ApplyMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.basicinfo.entity.IBDS_BaseLine_Apply">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="PLIPMTNo" jdbcType="NVARCHAR" property="plipmtno" />
+    <result column="PRODLINENo" jdbcType="NVARCHAR" property="prodlineno" />
+    <result column="PRODUCTNo" jdbcType="NVARCHAR" property="productno" />
+    <result column="VERSIONNo" jdbcType="NVARCHAR" property="versionno" />
+    <result column="RELEASENo" jdbcType="NVARCHAR" property="releaseno" />
+    <result column="BVERSIONNo" jdbcType="NVARCHAR" property="bversionno" />
+    <result column="BASELINENo" jdbcType="NVARCHAR" property="baselineno" />
+    <result column="BASELINE" jdbcType="NVARCHAR" property="baseline" />
+    <result column="engBASELINE" jdbcType="NVARCHAR" property="engbaseline" />
+    <result column="BASELINEOut" jdbcType="NVARCHAR" property="baselineout" />
+    <result column="engBASELINEOut" jdbcType="NVARCHAR" property="engbaselineout" />
+    <result column="ParentItemNo" jdbcType="NVARCHAR" property="parentitemno" />
+    <result column="BASELINE_1" jdbcType="NVARCHAR" property="baseline1" />
+    <result column="BASELINEOldNo" jdbcType="NVARCHAR" property="baselineoldno" />
+    <result column="BASELINEOld" jdbcType="NVARCHAR" property="baselineold" />
+    <result column="engBASELINEOld" jdbcType="NVARCHAR" property="engbaselineold" />
+    <result column="BASELINEOutOld" jdbcType="NVARCHAR" property="baselineoutold" />
+    <result column="engBASELINEOutOld" jdbcType="NVARCHAR" property="engbaselineoutold" />
+    <result column="ParentItemNoOld" jdbcType="NVARCHAR" property="parentitemnoold" />
+    <result column="BASELINE_1_Old" jdbcType="NVARCHAR" property="baseline1Old" />
+    <result column="PROCESS_CODE" jdbcType="NVARCHAR" property="processCode" />
+    <result column="ApplyType" jdbcType="NVARCHAR" property="applytype" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="CREATE_USER" jdbcType="NVARCHAR" property="createUser" />
+    <result column="MODIFY_DATE" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="MODIFY_USER" jdbcType="NVARCHAR" property="modifyUser" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, PLIPMTNo, PRODLINENo, PRODUCTNo, VERSIONNo, RELEASENo, BVERSIONNo, BASELINENo, 
+    BASELINE, engBASELINE, BASELINEOut, engBASELINEOut, ParentItemNo, BASELINE_1, BASELINEOldNo, 
+    BASELINEOld, engBASELINEOld, BASELINEOutOld, engBASELINEOutOld, ParentItemNoOld, 
+    BASELINE_1_Old, PROCESS_CODE, ApplyType, CREATE_DATE, CREATE_USER, MODIFY_DATE, MODIFY_USER
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseLine_ApplyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_BaseLine_Apply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_BaseLine_Apply
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_BaseLine_Apply
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseLine_ApplyExample">
+    delete from IBDS_BaseLine_Apply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseLine_Apply">
+    insert into IBDS_BaseLine_Apply (ID, PLIPMTNo, PRODLINENo, 
+      PRODUCTNo, VERSIONNo, RELEASENo, 
+      BVERSIONNo, BASELINENo, BASELINE, 
+      engBASELINE, BASELINEOut, engBASELINEOut, 
+      ParentItemNo, BASELINE_1, BASELINEOldNo, 
+      BASELINEOld, engBASELINEOld, BASELINEOutOld, 
+      engBASELINEOutOld, ParentItemNoOld, BASELINE_1_Old, 
+      PROCESS_CODE, ApplyType, CREATE_DATE, 
+      CREATE_USER, MODIFY_DATE, MODIFY_USER
+      )
+    values (#{id,jdbcType=INTEGER}, #{plipmtno,jdbcType=NVARCHAR}, #{prodlineno,jdbcType=NVARCHAR}, 
+      #{productno,jdbcType=NVARCHAR}, #{versionno,jdbcType=NVARCHAR}, #{releaseno,jdbcType=NVARCHAR}, 
+      #{bversionno,jdbcType=NVARCHAR}, #{baselineno,jdbcType=NVARCHAR}, #{baseline,jdbcType=NVARCHAR}, 
+      #{engbaseline,jdbcType=NVARCHAR}, #{baselineout,jdbcType=NVARCHAR}, #{engbaselineout,jdbcType=NVARCHAR}, 
+      #{parentitemno,jdbcType=NVARCHAR}, #{baseline1,jdbcType=NVARCHAR}, #{baselineoldno,jdbcType=NVARCHAR}, 
+      #{baselineold,jdbcType=NVARCHAR}, #{engbaselineold,jdbcType=NVARCHAR}, #{baselineoutold,jdbcType=NVARCHAR}, 
+      #{engbaselineoutold,jdbcType=NVARCHAR}, #{parentitemnoold,jdbcType=NVARCHAR}, #{baseline1Old,jdbcType=NVARCHAR}, 
+      #{processCode,jdbcType=NVARCHAR}, #{applytype,jdbcType=NVARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=NVARCHAR}, #{modifyDate,jdbcType=TIMESTAMP}, #{modifyUser,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseLine_Apply">
+    insert into IBDS_BaseLine_Apply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo,
+      </if>
+      <if test="prodlineno != null">
+        PRODLINENo,
+      </if>
+      <if test="productno != null">
+        PRODUCTNo,
+      </if>
+      <if test="versionno != null">
+        VERSIONNo,
+      </if>
+      <if test="releaseno != null">
+        RELEASENo,
+      </if>
+      <if test="bversionno != null">
+        BVERSIONNo,
+      </if>
+      <if test="baselineno != null">
+        BASELINENo,
+      </if>
+      <if test="baseline != null">
+        BASELINE,
+      </if>
+      <if test="engbaseline != null">
+        engBASELINE,
+      </if>
+      <if test="baselineout != null">
+        BASELINEOut,
+      </if>
+      <if test="engbaselineout != null">
+        engBASELINEOut,
+      </if>
+      <if test="parentitemno != null">
+        ParentItemNo,
+      </if>
+      <if test="baseline1 != null">
+        BASELINE_1,
+      </if>
+      <if test="baselineoldno != null">
+        BASELINEOldNo,
+      </if>
+      <if test="baselineold != null">
+        BASELINEOld,
+      </if>
+      <if test="engbaselineold != null">
+        engBASELINEOld,
+      </if>
+      <if test="baselineoutold != null">
+        BASELINEOutOld,
+      </if>
+      <if test="engbaselineoutold != null">
+        engBASELINEOutOld,
+      </if>
+      <if test="parentitemnoold != null">
+        ParentItemNoOld,
+      </if>
+      <if test="baseline1Old != null">
+        BASELINE_1_Old,
+      </if>
+      <if test="processCode != null">
+        PROCESS_CODE,
+      </if>
+      <if test="applytype != null">
+        ApplyType,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE,
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="plipmtno != null">
+        #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="productno != null">
+        #{productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionno != null">
+        #{versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releaseno != null">
+        #{releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="bversionno != null">
+        #{bversionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselineno != null">
+        #{baselineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="baseline != null">
+        #{baseline,jdbcType=NVARCHAR},
+      </if>
+      <if test="engbaseline != null">
+        #{engbaseline,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselineout != null">
+        #{baselineout,jdbcType=NVARCHAR},
+      </if>
+      <if test="engbaselineout != null">
+        #{engbaselineout,jdbcType=NVARCHAR},
+      </if>
+      <if test="parentitemno != null">
+        #{parentitemno,jdbcType=NVARCHAR},
+      </if>
+      <if test="baseline1 != null">
+        #{baseline1,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselineoldno != null">
+        #{baselineoldno,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselineold != null">
+        #{baselineold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engbaselineold != null">
+        #{engbaselineold,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselineoutold != null">
+        #{baselineoutold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engbaselineoutold != null">
+        #{engbaselineoutold,jdbcType=NVARCHAR},
+      </if>
+      <if test="parentitemnoold != null">
+        #{parentitemnoold,jdbcType=NVARCHAR},
+      </if>
+      <if test="baseline1Old != null">
+        #{baseline1Old,jdbcType=NVARCHAR},
+      </if>
+      <if test="processCode != null">
+        #{processCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="applytype != null">
+        #{applytype,jdbcType=NVARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseLine_ApplyExample" resultType="java.lang.Long">
+    select count(*) from IBDS_BaseLine_Apply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_BaseLine_Apply
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.plipmtno != null">
+        PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodlineno != null">
+        PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productno != null">
+        PRODUCTNo = #{record.productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.versionno != null">
+        VERSIONNo = #{record.versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releaseno != null">
+        RELEASENo = #{record.releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.bversionno != null">
+        BVERSIONNo = #{record.bversionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baselineno != null">
+        BASELINENo = #{record.baselineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baseline != null">
+        BASELINE = #{record.baseline,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engbaseline != null">
+        engBASELINE = #{record.engbaseline,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baselineout != null">
+        BASELINEOut = #{record.baselineout,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engbaselineout != null">
+        engBASELINEOut = #{record.engbaselineout,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.parentitemno != null">
+        ParentItemNo = #{record.parentitemno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baseline1 != null">
+        BASELINE_1 = #{record.baseline1,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baselineoldno != null">
+        BASELINEOldNo = #{record.baselineoldno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baselineold != null">
+        BASELINEOld = #{record.baselineold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engbaselineold != null">
+        engBASELINEOld = #{record.engbaselineold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baselineoutold != null">
+        BASELINEOutOld = #{record.baselineoutold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engbaselineoutold != null">
+        engBASELINEOutOld = #{record.engbaselineoutold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.parentitemnoold != null">
+        ParentItemNoOld = #{record.parentitemnoold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baseline1Old != null">
+        BASELINE_1_Old = #{record.baseline1Old,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.processCode != null">
+        PROCESS_CODE = #{record.processCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.applytype != null">
+        ApplyType = #{record.applytype,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null">
+        CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modifyDate != null">
+        MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyUser != null">
+        MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_BaseLine_Apply
+    set ID = #{record.id,jdbcType=INTEGER},
+      PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      PRODUCTNo = #{record.productno,jdbcType=NVARCHAR},
+      VERSIONNo = #{record.versionno,jdbcType=NVARCHAR},
+      RELEASENo = #{record.releaseno,jdbcType=NVARCHAR},
+      BVERSIONNo = #{record.bversionno,jdbcType=NVARCHAR},
+      BASELINENo = #{record.baselineno,jdbcType=NVARCHAR},
+      BASELINE = #{record.baseline,jdbcType=NVARCHAR},
+      engBASELINE = #{record.engbaseline,jdbcType=NVARCHAR},
+      BASELINEOut = #{record.baselineout,jdbcType=NVARCHAR},
+      engBASELINEOut = #{record.engbaselineout,jdbcType=NVARCHAR},
+      ParentItemNo = #{record.parentitemno,jdbcType=NVARCHAR},
+      BASELINE_1 = #{record.baseline1,jdbcType=NVARCHAR},
+      BASELINEOldNo = #{record.baselineoldno,jdbcType=NVARCHAR},
+      BASELINEOld = #{record.baselineold,jdbcType=NVARCHAR},
+      engBASELINEOld = #{record.engbaselineold,jdbcType=NVARCHAR},
+      BASELINEOutOld = #{record.baselineoutold,jdbcType=NVARCHAR},
+      engBASELINEOutOld = #{record.engbaselineoutold,jdbcType=NVARCHAR},
+      ParentItemNoOld = #{record.parentitemnoold,jdbcType=NVARCHAR},
+      BASELINE_1_Old = #{record.baseline1Old,jdbcType=NVARCHAR},
+      PROCESS_CODE = #{record.processCode,jdbcType=NVARCHAR},
+      ApplyType = #{record.applytype,jdbcType=NVARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseLine_Apply">
+    update IBDS_BaseLine_Apply
+    <set>
+      <if test="plipmtno != null">
+        PLIPMTNo = #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        PRODLINENo = #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="productno != null">
+        PRODUCTNo = #{productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionno != null">
+        VERSIONNo = #{versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releaseno != null">
+        RELEASENo = #{releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="bversionno != null">
+        BVERSIONNo = #{bversionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselineno != null">
+        BASELINENo = #{baselineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="baseline != null">
+        BASELINE = #{baseline,jdbcType=NVARCHAR},
+      </if>
+      <if test="engbaseline != null">
+        engBASELINE = #{engbaseline,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselineout != null">
+        BASELINEOut = #{baselineout,jdbcType=NVARCHAR},
+      </if>
+      <if test="engbaselineout != null">
+        engBASELINEOut = #{engbaselineout,jdbcType=NVARCHAR},
+      </if>
+      <if test="parentitemno != null">
+        ParentItemNo = #{parentitemno,jdbcType=NVARCHAR},
+      </if>
+      <if test="baseline1 != null">
+        BASELINE_1 = #{baseline1,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselineoldno != null">
+        BASELINEOldNo = #{baselineoldno,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselineold != null">
+        BASELINEOld = #{baselineold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engbaselineold != null">
+        engBASELINEOld = #{engbaselineold,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselineoutold != null">
+        BASELINEOutOld = #{baselineoutold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engbaselineoutold != null">
+        engBASELINEOutOld = #{engbaselineoutold,jdbcType=NVARCHAR},
+      </if>
+      <if test="parentitemnoold != null">
+        ParentItemNoOld = #{parentitemnoold,jdbcType=NVARCHAR},
+      </if>
+      <if test="baseline1Old != null">
+        BASELINE_1_Old = #{baseline1Old,jdbcType=NVARCHAR},
+      </if>
+      <if test="processCode != null">
+        PROCESS_CODE = #{processCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="applytype != null">
+        ApplyType = #{applytype,jdbcType=NVARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        CREATE_USER = #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseLine_Apply">
+    update IBDS_BaseLine_Apply
+    set PLIPMTNo = #{plipmtno,jdbcType=NVARCHAR},
+      PRODLINENo = #{prodlineno,jdbcType=NVARCHAR},
+      PRODUCTNo = #{productno,jdbcType=NVARCHAR},
+      VERSIONNo = #{versionno,jdbcType=NVARCHAR},
+      RELEASENo = #{releaseno,jdbcType=NVARCHAR},
+      BVERSIONNo = #{bversionno,jdbcType=NVARCHAR},
+      BASELINENo = #{baselineno,jdbcType=NVARCHAR},
+      BASELINE = #{baseline,jdbcType=NVARCHAR},
+      engBASELINE = #{engbaseline,jdbcType=NVARCHAR},
+      BASELINEOut = #{baselineout,jdbcType=NVARCHAR},
+      engBASELINEOut = #{engbaselineout,jdbcType=NVARCHAR},
+      ParentItemNo = #{parentitemno,jdbcType=NVARCHAR},
+      BASELINE_1 = #{baseline1,jdbcType=NVARCHAR},
+      BASELINEOldNo = #{baselineoldno,jdbcType=NVARCHAR},
+      BASELINEOld = #{baselineold,jdbcType=NVARCHAR},
+      engBASELINEOld = #{engbaselineold,jdbcType=NVARCHAR},
+      BASELINEOutOld = #{baselineoutold,jdbcType=NVARCHAR},
+      engBASELINEOutOld = #{engbaselineoutold,jdbcType=NVARCHAR},
+      ParentItemNoOld = #{parentitemnoold,jdbcType=NVARCHAR},
+      BASELINE_1_Old = #{baseline1Old,jdbcType=NVARCHAR},
+      PROCESS_CODE = #{processCode,jdbcType=NVARCHAR},
+      ApplyType = #{applytype,jdbcType=NVARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      CREATE_USER = #{createUser,jdbcType=NVARCHAR},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

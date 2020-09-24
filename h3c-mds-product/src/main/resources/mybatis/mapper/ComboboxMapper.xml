@@ -1,0 +1,1168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.ComboboxMapper">
+	<resultMap id="BaseResultMap"
+		type="com.h3c.mds.utils.combobox.ComboBoxData">
+		<result column="text" jdbcType="NVARCHAR" property="text" />
+		<result column="value" jdbcType="NVARCHAR" property="value" />
+
+	</resultMap>
+	<select id="getCombobox" parameterType="map"
+		resultMap="BaseResultMap">
+		<!-- IPMT层 -->
+		<if test="param.type =='PI' and param.typeCode==null">
+			select distinct PLIPMT as text,PLIPMTNo as value,readers from IBDS_PLIPMT
+			where status=1
+			<!-- IPMT执行秘书只显示配置自己为IPMT执行秘书的数据 -->
+			<if test="param.sub_user!=null">
+				and CHARINDEX(#{param.sub_user},isnull(PLIMPT_Secretary,''))>0
+			</if>
+		</if>
+		<!-- 产品线层 -->
+		<if test="param.type =='PL' and param.code !=null">
+			select distinct PRODLINE as text,PRODLINENo as value,readers from
+			IBDS_PRODLINE where status=1 and PLIPMTNo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (PRODLINENo = #{param.sub_code} and status=1)
+			</if>
+		</if>
+
+		<!--产品线层 PLIPMT只显示配置自己为PLIPMT执行秘书的数据 -->
+		<if test="param.type =='PL' and param.sub_user!=null">
+			select distinct PRODLINE as text,PRODLINENo as value,pl.readers from IBDS_PRODLINE pl
+			left join IBDS_PLIPMT pm on pl.PLIPMTNo=pm.PLIPMTNo where pl.status=1
+			and CHARINDEX(#{param.sub_user},isnull(pm.PLIMPT_Secretary,''))>0
+		</if>
+
+		<!--PDT层 -->
+		<if test="param.type =='PT' and param.code !=null ">
+
+			select distinct PDT as text,PDTNo as value,readers from IBDS_PDT where
+			status=1
+			and PRODLINENo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (PDTNo = #{param.sub_code} and status=1)
+
+			</if>
+
+
+		</if>
+		<!--PDT POP只显示配置自己为POP的数据 -->
+		<if test="param.type =='PT' and param.sub_user!=null">
+			select distinct PDT as text,PDTNo as value,readers from IBDS_PDT where status=1 and
+			CHARINDEX(#{param.sub_user},isnull(POP_ID,'')+isnull(CMO_ID,''))>0
+		</if>
+
+		<!--产品层 -->
+		<if test="param.type =='PP' and param.code !=null">
+			select distinct product as text,productno as value,readers from IBDS_PRODUCT
+			where status=1 and prodlineno=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (productno = #{param.sub_code} and status=1)
+			</if>
+		</if>
+		<!--V版本层 -->
+		<if test="param.type =='PV' and param.code !=null">
+			select distinct VERSION as text,VERSIONNo as value,readers from IBDS_VERSION
+			where status=1 and productno=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (VERSIONNo = #{param.sub_code} and status=1)
+			</if>
+
+		</if>
+		<!--产品 POP\CMO只显示配置自己为POP\CMO的数据 -->
+		<if test="param.type =='PP' and param.sub_user !=null">
+			select distinct product as text,productno as value,readers from IBDS_PRODUCT where
+			status=1 and
+			CHARINDEX(#{param.sub_user},isnull(POP_ID,'')+isnull(CMO_ID,''))>0
+		</if>
+
+		<!--V版本 POP\CMO只显示配置自己为POP\CMO的数据 -->
+		<if test="param.type =='PV' and param.sub_user !=null">
+			select distinct VERSION as text,VERSIONNo as value,v.readers from IBDS_VERSION v
+			left join IBDS_Product pt on v.PRODUCTNo=pt.ProductNo where v.status=1
+			and
+			CHARINDEX(#{param.sub_user},isnull(v.POP_ID,'')+isnull(pt.POP_ID,'')+isnull(v.CMO_ID,'')+isnull(pt.CMO_ID,''))>0
+
+		</if>
+		<!--R版本 POP\CMO只显示配置自己为POP\CMO的数据 -->
+		<if test="param.type =='PR' and param.sub_user !=null">
+			select distinct Release as text,ReleaseNo as value,r.readers from IBDS_Release
+			r left join IBDS_VERSION v on r.versionNo=v.VERSIONNo
+			left join IBDS_PDT p on r.pdtno=p.PDTNo
+			left join IBDS_Product pt on r.productno=pt.productno
+			where r.status=1 and
+			CHARINDEX(#{param.sub_user},isnull(r.POP_ID,'')+isnull(v.POP_ID,'')+isnull(p.POP_ID,'')+isnull(pt.POP_ID,'')+isnull(r.CMO_ID,'')+isnull(v.CMO_ID,'')+isnull(p.CMO_ID,'')+isnull(pt.CMO_ID,''))>0
+			<!-- POP只显示配置自己为POP的数据 -->
+		</if>
+
+		<!--R版本层 -->
+		<if test="param.type =='PR' and param.code !=null">
+			select distinct Release as text,ReleaseNo as value,readers from IBDS_Release
+			where status=1 and versionno=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (releaseNo = #{param.sub_code} and status=1)
+			</if>
+				<if test="param.searchParas!=null and param.searchParas!=''">
+				and charindex(#{param.searchParas},Release)>0
+				</if>
+		</if>
+		
+		<!--B版本层 -->
+		<if test="param.type =='PB' and param.code !=null">
+			select distinct bversioncname as text,bversionno as value,readers from IBDS_bversion
+			where status=1 and RELEASENo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (bversionno = #{param.sub_code} and status=1)
+			</if>
+		</if>
+
+		<!--特性 -->
+		<if test="param.type =='FT' and param.code !=null">
+			select distinct feature as text,featureno as value,readers from ibds_featrue
+			where status=1 and releaseNo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (featureno= #{param.sub_code} and status=1)
+			</if>
+		</if>
+
+
+		<!--子系统 -->
+		<if test="param.type =='SS' and param.code !=null">
+			select distinct subsystem as text,subsystemno as value,readers from
+			IBDS_SUB_SYSTEM where status=1 and releaseNo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (subsystemno = #{param.sub_code} and status=1)
+			</if>
+		</if>
+
+		<!--模块 -->
+		<if test="param.type =='MD' and param.code !=null">
+			select distinct MODULE as text,MODULENo as value,readers from IBDS_MODULE
+			where status=1 and subsystemno=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (MODULENo = #{param.sub_code} and status=1)
+			</if>
+		</if>
+
+
+		<!-- 字典层 -->
+		<if
+			test="param.typeCode =='dic' and param.typeCode !=null and param.type!=null">
+			select distinct DIC_NAME as text,DIC_VALUE as value,'' as readers from IBDS_Dic where
+			flag=1 and dic_typeCode=#{param.type} order by dic_value
+		</if>
+		<!-- 新增按钮/编辑权限 -->
+		<if
+			test="param.typeCode !=null and param.type!=null and param.roleCode!=null">
+			SELECT distinct d2.DIC_NAME as text,d2.dic_value as value,'' as readers FROM
+			[dbo].[IBDS_Dic] d1 JOIN [dbo].[IBDS_Dic] d2 ON d1.DIC_VALUE =
+			d2.DIC_TypeCode
+			WHERE d1.DIC_TypeCode = #{param.typeCode} and
+			CHARINDEX(#{param.type},isnull(d1.DIC_NAME,''))>0 and CHARINDEX(
+			isnull(d2.dic_value,''),#{param.roleCode}) >0 ORDER BY d2.dic_value
+		</if>
+
+		<!-- 基线版本 父版本显示 -->
+		<!--路标版本 根据V -->
+		<!--基线版本 根据R -->
+		<if test="param.type =='BL' and param.code !=null">
+			select distinct BASELINE as text,BASELINENo as value,readers from IBDS_BASE_LINE
+			where status=1 and ReleaseNo=#{param.code}
+		<if test="param.searchParas!=null and param.searchParas!=''">
+		and charindex(#{param.searchParas},BASELINE)>0
+		</if>
+
+		</if>
+	  <!-- 财务产品 -->
+	  <if test="param.type =='FP' and param.code !=null">
+	  <!-- select distinct FPRODUCT as text,FPRODUCTNo as value,'' as readers from IBDS_FPRODUCT where status=1 and PRODLINENo=#{param.code} -->
+	  select distinct PROD_NAME as text,PROD_NO as value,'' as readers from IBDS_F_PRODLINE a inner join IBDS_F_PROD b on a.ID=b.PRODLINE_ID where PRODLINE_CODE=#{param.code}
+	  </if>
+
+
+
+	</select>
+<!-- 提供给产品R级以下和难度系数  产品R级以下和难度系数中下拉框的数据应该从产品R级获取 -->
+<select id="getReleaseCombobox" parameterType="map"
+		resultMap="BaseResultMap">
+		<!-- IPMT层 -->
+		<if test="param.type =='PI' and param.typeCode==null">
+			select distinct PLIPMT as text,a.PLIPMTNo as value,b.readers from IBDS_Release a left join IBDS_PLIPMT b on a.PLIPMTNo=b.PLIPMTNo
+			where a.status=1
+			<!-- IPMT执行秘书只显示配置自己为IPMT执行秘书的数据 -->
+			<if test="param.sub_user!=null">
+				and CHARINDEX(#{param.sub_user},isnull(PLIMPT_Secretary,''))>0
+			</if>
+		</if>
+		<!-- 产品线层 -->
+		<if test="param.type =='PL' and param.code !=null">
+			select distinct PRODLINE as text,a.PRODLINENo as value,b.readers from
+			IBDS_Release a left join IBDS_PRODLINE b on a.PRODLINENo=b.PRODLINENo 
+			left join ibds_plipmt c on a.plipmtno=c.plipmtno
+			where a.status=1 and a.PLIPMTNo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (a.PRODLINENo = #{param.sub_code} and a.status=1)
+			</if>
+		</if>
+
+		<!--产品线层 PLIPMT只显示配置自己为PLIPMT执行秘书的数据 -->
+		<if test="param.type =='PL' and param.sub_user!=null and param.sub_user!=''">
+			select distinct PRODLINE as text,a.PRODLINENo as value,b.readers from IBDS_Release a left join IBDS_PRODLINE pl
+			on a.PRODLINENo=pl.PRODLINENo
+			left join IBDS_PLIPMT pm on a.PLIPMTNo=pm.PLIPMTNo where a.status=1
+			and CHARINDEX(#{param.sub_user},isnull(pm.PLIMPT_Secretary,''))>0
+			
+		</if>
+
+		<!--PDT层 -->
+		<if test="param.type =='PT' and param.code !=null ">
+
+			select distinct PDT as text,a.PDTNo as value,b.readers from IBDS_Release a left join IBDS_PDT b on a.PDTNo=b.PDTNo 
+			left join ibds_prodline c on a.prodlineno=c.prodlineno
+			where
+			a.status=1
+			and a.PRODLINENo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (a.PDTNo = #{param.sub_code} and a.status=1)
+
+			</if>
+			
+			
+
+		</if>
+		<!--PDT POP只显示配置自己为POP的数据 -->
+		<if test="param.type =='PT' and param.sub_user!=null">
+			select distinct PDT as text,a.PDTNo as value,b.readers from IBDS_Release a left join IBDS_PDT b on a.PDTNo=b.PDTNo where a.status=1 and
+			CHARINDEX(#{param.sub_user},isnull(b.POP_ID,'')+isnull(b.CMO_ID,''))>0
+		</if>
+
+		<!--产品层 -->
+		<if test="param.type =='PP' and param.code !=null">
+			select distinct product as text,a.productno as value,b.readers from IBDS_Release a left join IBDS_PRODUCT b on a.ProductNO=b.ProductNo
+			left join ibds_prodline c on a.prodlineno=c.prodlineno
+			where a.status=1 and a.prodlineno=#{param.code}
+			<if test="param.plipmtNo!=null and param.plipmtNo!=''">
+			and a.PLIPMTNo=#{param.plipmtNo}
+			</if>
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (a.productno = #{param.sub_code} and a.status=1)
+			</if>
+			
+		</if>
+		<!--V版本层 -->
+		<if test="param.type =='PV' and param.code !=null">
+			select distinct VERSION as text,a.VERSIONNo as value,b.readers from IBDS_Release a left join IBDS_VERSION b on a.VersionNo=b.VERSIONNo
+			left join IBDS_Product c on a.ProductNo=c.ProductNo
+			where a.status=1 and a.productno=#{param.code}
+			<if test="param.plipmtNo!=null and param.plipmtNo!=''">
+			and a.PLIPMTNo=#{param.plipmtNo}
+			</if>
+			<if test="param.prodlineNo!=null and param.prodlineNo!=''">
+			and a.prodlineno=#{param.prodlineNo}
+			</if>
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (b.VERSIONNo = #{param.sub_code} and b.status=1)
+			</if>
+
+		</if>
+		<!--产品 POP\CMO只显示配置自己为POP\CMO的数据 -->
+		<if test="param.type =='PP' and param.sub_user !=null">
+			select distinct product as text,a.productno as value,b.readers from IBDS_Release a left join IBDS_PRODUCT b on a.ProductNO=b.ProductNo where
+			a.status=1 and
+			CHARINDEX(#{param.sub_user},isnull(b.POP_ID,'')+isnull(b.CMO_ID,''))>0
+		</if>
+
+		<!--V版本 POP\CMO只显示配置自己为POP\CMO的数据 -->
+		<if test="param.type =='PV' and param.sub_user !=null">
+			select distinct VERSION as text,a.VERSIONNo as value,v.readers from IBDS_Release a left join IBDS_VERSION v
+on a.VersionNo=v.VERSIONNo
+			left join IBDS_Product pt on a.PRODUCTNo=pt.ProductNo where a.status=1 and
+			CHARINDEX(#{param.sub_user},isnull(v.POP_ID,'')+isnull(pt.POP_ID,'')+isnull(v.CMO_ID,'')+isnull(pt.CMO_ID,''))>0
+
+		</if>
+		<!--R版本 POP\CMO只显示配置自己为POP\CMO的数据 -->
+		<if test="param.type =='PR' and param.sub_user !=null">
+			select distinct Release as text,ReleaseNo as value,r.readers from IBDS_Release
+			r left join IBDS_VERSION v on r.versionNo=v.VERSIONNo
+			left join IBDS_PDT p on r.pdtno=p.PDTNo
+			left join IBDS_Product pt on r.productno=pt.productno
+			where r.status=1 and
+			CHARINDEX(#{param.sub_user},isnull(r.POP_ID,'')+isnull(v.POP_ID,'')+isnull(p.POP_ID,'')+isnull(pt.POP_ID,'')+isnull(r.CMO_ID,'')+isnull(v.CMO_ID,'')+isnull(p.CMO_ID,'')+isnull(pt.CMO_ID,''))>0
+			<!-- POP只显示配置自己为POP的数据 -->
+		</if>
+
+		<!--R版本层 -->
+		<if test="param.type =='PR' and param.code !=null">
+			select distinct Release as text,ReleaseNo as value,readers from IBDS_Release
+			where status=1 and versionno=#{param.code}
+			<if test="param.plipmtNo!=null and param.plipmtNo!=''">
+			and PLIPMTNo=#{param.plipmtNo}
+			</if>
+			<if test="param.prodlineNo!=null and param.prodlineNo!=''">
+			and prodlineno=#{param.prodlineNo}
+			</if>
+			<if test="param.productNo!=null and param.productNo!=''">
+			and productno=#{param.productNo}
+			</if>
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (releaseNo = #{param.sub_code} and status=1)
+			</if>
+				<if test="param.searchParas!=null and param.searchParas!=''">
+				and charindex(#{param.searchParas},Release)>0
+				</if>
+		</if>
+	</select>
+
+
+
+	<select id="getComboboxWithEng" parameterType="map"
+		resultMap="BaseResultMap">
+		<!-- IPMT层 -->
+		<if test="param.type =='PI' and param.typeCode==null">
+			select distinct PLIPMT+' | '+isnull(engPLIPMT,'') as text,PLIPMTNo as value,readers from
+			IBDS_PLIPMT where status=1
+			<!-- IPMT执行秘书只显示配置自己为IPMT执行秘书的数据 -->
+			<if test="param.sub_user!=null">
+				and CHARINDEX(#{param.sub_user},isnull(PLIMPT_Secretary,''))>0
+			</if>
+		</if>
+		<!-- 产品线层 -->
+		<if test="param.type =='PL' and param.code !=null">
+			select distinct PRODLINE+' | '+isnull(engPRODLINE,'') as text,PRODLINENo as value,readers
+			from IBDS_PRODLINE where status=1 and PLIPMTNo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or PRODLINENo = #{param.sub_code}
+			</if>
+		</if>
+
+		<!--产品线层 PLIPMT只显示配置自己为PLIPMT执行秘书的数据 -->
+		<if test="param.type =='PL' and param.sub_user!=null">
+			select distinct PRODLINE+' | '+isnull(engPRODLINE,'') as text,PRODLINENo as value,pl.readers from
+			IBDS_PRODLINE pl left join IBDS_PLIPMT pm on pl.PLIPMTNo=pm.PLIPMTNo
+			where pl.status=1
+			and CHARINDEX(#{param.sub_user},isnull(pm.PLIMPT_Secretary,''))>0
+		</if>
+
+		<!--PDT层 -->
+		<if test="param.type =='PT' and param.code !=null ">
+
+			select distinct PDT+' | '+isnull(engPDT,'') as text,PDTNo as value,readers from IBDS_PDT
+			where status=1
+			and PRODLINENo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (PDTNo = #{param.sub_code} and status=1)
+
+			</if>
+
+
+		</if>
+		<!--PDT POP只显示配置自己为POP的数据 -->
+		<if test="param.type =='PT' and param.sub_user!=null">
+			select distinct PDT+' | '+isnull(engPDT,'') as text,PDTNo as value,readers from IBDS_PDT where
+			status=1 and
+			CHARINDEX(#{param.sub_user},isnull(POP_ID,'')+isnull(CMO_ID,''))>0
+		</if>
+
+		<!--产品层 -->
+		<if test="param.type =='PP' and param.code !=null">
+			select distinct product+' | '+isnull(engProduct,'') as text,productno as value,readers
+			from IBDS_PRODUCT where status=1 and Prodlineno=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or productno = #{param.sub_code}
+			</if>
+		</if>
+		<!--V版本层 -->
+		<if test="param.type =='PV' and param.code !=null">
+			select distinct VERSION+' | '+isnull(engVERSION,'') as text,VERSIONNo as value,readers
+			from IBDS_VERSION where status=1 and productno=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (VERSIONNo = #{param.sub_code} and status=1)
+			</if>
+
+		</if>
+		<!--产品 POP\CMO只显示配置自己为POP\CMO的数据 -->
+		<if test="param.type =='PP' and param.sub_user !=null">
+			select distinct product+' | '+isnull(engProduct,'') as text,productno as value,readers from
+			IBDS_PRODUCT where status=1 and
+			CHARINDEX(#{param.sub_user},isnull(POP_ID,'')+isnull(CMO_ID,''))>0
+		</if>
+
+		<!--V版本 POP\CMO只显示配置自己为POP\CMO的数据 -->
+		<if test="param.type =='PV' and param.sub_user !=null">
+			select distinct VERSION+' | '+isnull(engVERSION,'') as text,VERSIONNo as value,v.readers from
+			IBDS_VERSION v
+			left join IBDS_Product pt on v.PRODUCTNo=pt.ProductNo where v.status=1
+			and
+			CHARINDEX(#{param.sub_user},isnull(v.POP_ID,'')+isnull(pt.POP_ID,'')+isnull(v.CMO_ID,'')+isnull(pt.CMO_ID,''))>0
+
+		</if>
+		<!--R版本 POP\CMO只显示配置自己为POP\CMO的数据 -->
+		<if test="param.type =='PR' and param.sub_user !=null">
+			select distinct Release+' | '+isnull(engRELEASE,'') as text,ReleaseNo as value,r.readers
+			from IBDS_Release r left join IBDS_VERSION v on
+			r.versionNo=v.VERSIONNo
+			left join IBDS_PDT p on r.pdtno=p.PDTNo
+			left join IBDS_Product pt on r.productno=pt.productno
+			where r.status=1 and
+			CHARINDEX(#{param.sub_user},isnull(r.POP_ID,'')+isnull(v.POP_ID,'')+isnull(p.POP_ID,'')+isnull(pt.POP_ID,'')+isnull(r.CMO_ID,'')+isnull(v.CMO_ID,'')+isnull(p.CMO_ID,'')+isnull(pt.CMO_ID,''))>0
+			<!-- POP只显示配置自己为POP的数据 -->
+		</if>
+
+		<!--R版本层 -->
+		<if test="param.type =='PR' and param.code !=null">
+			select distinct Release+' | '+isnull(engRELEASE,'') as text,ReleaseNo as value,readers
+			from IBDS_Release where status=1 and versionno=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (releaseNo = #{param.sub_code} and status=1)
+			</if>
+		</if>
+
+		<!--特性 -->
+		<if test="param.type =='FT' and param.code !=null">
+			select distinct feature+' | '+isnull(engFEATURE,'') as text,featureno as value,readers
+			from ibds_featrue where status=1 and releaseNo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (featureno= #{param.sub_code} and status=1)
+			</if>
+		</if>
+		
+		<!--子特性 -->
+		<if test="param.type =='SF'">
+			select distinct SUBFEATURE+' | '+isnull(engSUBFEATURE,'') as text,SUBFEATURENo as value,readers
+			from IBDS_SUB_FEATRUE where status=1 
+			<if test="param.code !=null">
+			and FEATURENo=#{param.code}
+			</if>
+			<if test="param.codes !=null and param.codes.length!=0">
+			and FEATURENo in
+			<foreach collection="param.codes" item="item" index="index" open="(" separator="," close=")">
+              #{item}
+              </foreach>
+			</if>
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (SUBFEATURENo= #{param.sub_code} and status=1)
+			</if>
+		</if>
+		
+		<!--项目组 -->
+		<if test="param.type =='TM' and param.code !=null">
+			select distinct TEAM+' | '+isnull(engTEAM,'') as text,TEAMNo as value,readers from IBDS_TEAM where status=1 and releaseNo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (TEAMNo= #{param.sub_code} and status=1)
+			</if>
+			
+		</if>
+
+
+		<!--子系统 -->
+		<if test="param.type =='SS' and param.code !=null">
+			select distinct subsystem+' | '+isnull(engSUBSYSTEM,'') as text,subsystemno as
+			value,readers from IBDS_SUB_SYSTEM where status=1 and releaseNo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (subsystemno = #{param.sub_code} and status=1)
+			</if>
+		</if>
+
+		<!--模块 -->
+		<if test="param.type =='MD'">
+			select distinct MODULE+' | '+isnull(engMODULE,'') as text,MODULENo as value,readers from
+			IBDS_MODULE where status=1 
+			<if test="param.code !=null">
+			and subsystemno=#{param.code}
+			</if>
+			<if test="param.codes !=null and param.codes.length!=0">
+			and subsystemno in
+			<foreach collection="param.codes" item="item" index="index" open="(" separator="," close=")">
+              #{item}
+              </foreach>
+			</if>
+			
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (MODULENo = #{param.sub_code} and status=1)
+			</if>
+		</if>
+		
+		<!--模块版本 -->
+		<if test="param.type =='MV' and param.code !=null">
+			select distinct MDLVSN+' | '+isnull(engMDLVSN,'') as text,MDLVSNNo as value,readers from IBDS_MODULE_VERSION where status=1
+			<if test="param.code !=null">
+			and MODULENo=#{param.code}
+			</if>
+			<if test="param.codes !=null and param.codes.length!=0">
+			and MODULENo in 
+			<foreach collection="param.codes" item="item" index="index" open="(" separator="," close=")">
+              #{item}
+              </foreach>
+			</if>
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (MDLVSNNo = #{param.sub_code} and status=1)
+			</if>
+		</if>
+		
+
+
+
+		<!-- 基线版本 父版本显示 -->
+		<!--路标版本 根据V -->
+		<!--基线版本 根据R -->
+		<if test="param.type =='BL' and param.code !=null">
+			select distinct BASELINE+' | '+isnull(engBASELINE,'') as text,BASELINENo as value,readers from
+			IBDS_BASE_LINE where status=1 and ReleaseNo=#{param.code}
+
+		</if>
+
+
+
+
+	</select>
+
+	<select id="getdataList" parameterType="map" resultMap="BaseResultMap">
+	<!-- IPMT层 -->
+		<if test="param.type =='PI' and param.typeCode==null">
+			select distinct PLIPMT+' | '+engPLIPMT as text,PLIPMTNo as value,readers from
+			IBDS_PLIPMT where status=1
+			<!-- IPMT执行秘书只显示配置自己为IPMT执行秘书的数据 -->
+			<if test="param.sub_user!=null">
+				and CHARINDEX(#{param.sub_user},isnull(PLIMPT_Secretary,''))>0
+			</if>
+		</if>
+		<!-- 产品线层 -->
+		<if test="param.type =='PL' and param.code !=null">
+			select distinct PRODLINE+' | '+engPRODLINE as text,PRODLINENo as value
+			from IBDS_PRODLINE where status=1 and PLIPMTNo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (PRODLINENo = #{param.sub_code} and status=1)
+			</if>
+		</if>
+
+		<!--产品线层 PLIPMT只显示配置自己为PLIPMT执行秘书的数据 -->
+		<if test="param.type =='PL' and param.sub_user!=null">
+			select distinct PRODLINE+' | '+engPRODLINE as text,PRODLINENo as value,pl.readers from
+			IBDS_PRODLINE pl left join IBDS_PLIPMT pm on pl.PLIPMTNo=pm.PLIPMTNo
+			where pl.status=1
+			and CHARINDEX(#{param.sub_user},isnull(pm.PLIMPT_Secretary,''))>0
+			<if test="param.code !=null">
+				and pl.PLIPMTNo=#{param.code}
+			</if>
+		</if>
+
+		<!--PDT层 -->
+		<if test="param.type =='PT' and param.code !=null ">
+
+			select distinct PDT+' | '+engPDT as text,PDTNo as value,readers from IBDS_PDT
+			where status=1
+			and PLIPMTno=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (PDTNo = #{param.sub_code} and status=1)
+
+			</if>
+
+
+		</if>
+		<!--PDT POP只显示配置自己为POP的数据 -->
+		<if test="param.type =='PT' and param.sub_user!=null">
+			select distinct PDT+' | '+engPDT as text,PDTNo as value,readers from IBDS_PDT where
+			status=1 and
+			CHARINDEX(#{param.sub_user},isnull(POP_ID,'')+isnull(CMO_ID,''))>0
+			<if test="param.code !=null">
+				and PLIPMTno=#{param.code}
+			</if>
+		</if>
+
+		<!--V版本层 -->
+		<if test="param.type =='PV' and param.code !=null">
+			select distinct VERSION+' | '+engVERSION as text,VERSIONNo as value,readers
+			from IBDS_VERSION where status=1 and plipmtno=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or VERSIONNo = #{param.sub_code}
+			</if>
+
+		</if>
+
+		<!--V版本 POP\CMO只显示配置自己为POP\CMO的数据 -->
+		<if test="param.type =='PV' and param.sub_user !=null">
+			select distinct VERSION+' | '+engVERSION as text,VERSIONNo as value,v.readers from
+			IBDS_VERSION v
+			left join IBDS_Product pt on v.PRODUCTNo=pt.ProductNo where v.status=1
+			and
+			CHARINDEX(#{param.sub_user},isnull(v.POP_ID,'')+isnull(pt.POP_ID,'')+isnull(v.CMO_ID,'')+isnull(pt.CMO_ID,''))>0
+			<if test="param.code !=null">
+				and v.plipmtno=#{param.code}
+			</if>
+
+		</if>
+		<!--R版本 POP\CMO只显示配置自己为POP\CMO的数据 -->
+		<!-- <if test="param.type =='PR' and param.sub_user !=null">
+			select distinct Release+' | '+engRELEASE as text,ReleaseNo as value
+			from IBDS_Release r left join IBDS_VERSION v on
+			r.versionNo=v.VERSIONNo
+			left join IBDS_PDT p on r.pdtno=p.PDTNo
+			left join IBDS_Product pt on r.productno=pt.productno
+			where r.status=1 and
+			CHARINDEX(#{param.sub_user},isnull(r.POP_ID,'')+isnull(v.POP_ID,'')+isnull(p.POP_ID,'')+isnull(pt.POP_ID,'')+isnull(r.CMO_ID,'')+isnull(v.CMO_ID,'')+isnull(p.CMO_ID,'')+isnull(pt.CMO_ID,''))>0
+			POP只显示配置自己为POP的数据
+			<if test="param.code !=null">
+				and r.pdtno=#{param.code}
+			</if>
+		</if> -->
+
+		<!-- R版本层
+		<if test="param.type =='PR' and param.code !=null">
+			select distinct Release+' | '+engRELEASE as text,ReleaseNo as value
+			from IBDS_Release where status=1 and pdtno=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or releaseNo = #{param.sub_code}
+			</if>
+		</if>
+		
+		B版本层
+		<if test="param.type =='PB' and param.code !=null">
+			select distinct bversioncname+' | '+bversionename as text,bversionno as value from IBDS_bversion
+			where status=1 and RELEASENo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or bversionno = #{param.sub_code}
+			</if>
+		</if> -->
+	</select>
+
+
+	<select id="getComboboxWithId" parameterType="map"
+		resultMap="BaseResultMap">
+		<!-- IPMT层 -->
+		<if test="param.type =='PI' and param.typeCode==null">
+			select distinct PLIPMT+' | '+isnull(engPLIPMT,'') as text,PLIPMTNo+'_'+Convert(varchar,ID) as value,readers from
+			IBDS_PLIPMT where status=1
+			<!-- IPMT执行秘书只显示配置自己为IPMT执行秘书的数据 -->
+			<if test="param.sub_user!=null">
+				and CHARINDEX(#{param.sub_user},isnull(PLIMPT_Secretary,''))>0
+			</if>
+		</if>
+		<!-- 产品线层 -->
+		<if test="param.type =='PL' and param.code !=null">
+			select distinct PRODLINE+' | '+isnull(engPRODLINE,'') as text,PRODLINENo+'_'+Convert(varchar,ID) as value,readers
+			from IBDS_PRODLINE where status=1 and PLIPMTNo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (PRODLINENo = #{param.sub_code} and status=1)
+			</if>
+		</if>
+
+		<!--产品线层 PLIPMT只显示配置自己为PLIPMT执行秘书的数据 -->
+		<if test="param.type =='PL' and param.sub_user!=null">
+			select distinct PRODLINE+' | '+isnull(engPRODLINE,'') as text,PRODLINENo+'_'+Convert(varchar,ID) as value,pl.readers from
+			IBDS_PRODLINE pl left join IBDS_PLIPMT pm on pl.PLIPMTNo=pm.PLIPMTNo
+			where pl.status=1
+			and CHARINDEX(#{param.sub_user},isnull(pm.PLIMPT_Secretary,''))>0
+		</if>
+
+		<!--PDT层 -->
+		<if test="param.type =='PT' and param.code !=null ">
+
+			select distinct PDT+' | '+isnull(engPDT,'') as text,PDTNo+'_'+Convert(varchar,ID) as value,readers from IBDS_PDT
+			where status=1
+			and PRODLINENo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (PDTNo = #{param.sub_code} and status=1)
+
+			</if>
+
+
+		</if>
+		<!--PDT POP只显示配置自己为POP的数据 -->
+		<if test="param.type =='PT' and param.sub_user!=null">
+			select distinct PDT+' | '+isnull(engPDT,'') as text,PDTNo+'_'+Convert(varchar,ID) as value,readers from IBDS_PDT where
+			status=1 and
+			CHARINDEX(#{param.sub_user},isnull(POP_ID,'')+isnull(CMO_ID,''))>0
+		</if>
+
+		<!--产品层 -->
+		<if test="param.type =='PP' and param.code !=null">
+			select distinct product+' | '+isnull(engProduct,'') as text,productno+'_'+Convert(varchar,ID) as value,readers
+			from IBDS_PRODUCT where status=1 and Prodlineno=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (productno = #{param.sub_code} and status=1)
+			</if>
+		</if>
+		<!--V版本层 -->
+		<if test="param.type =='PV' and param.code !=null">
+			select distinct VERSION+' | '+engVERSION as text,VERSIONNo+'_'+Convert(varchar,ID) as value,readers
+			from IBDS_VERSION where status=1 and productno=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (VERSIONNo = #{param.sub_code} and status=1)
+			</if>
+
+		</if>
+		<!--产品 POP\CMO只显示配置自己为POP\CMO的数据 -->
+		<if test="param.type =='PP' and param.sub_user !=null">
+			select distinct product+' | '+isnull(engProduct,'') as text,productno+'_'+Convert(varchar,ID) as value,readers from
+			IBDS_PRODUCT where status=1 and
+			CHARINDEX(#{param.sub_user},isnull(POP_ID,'')+isnull(CMO_ID,''))>0
+		</if>
+
+		<!--V版本 POP\CMO只显示配置自己为POP\CMO的数据 -->
+		<if test="param.type =='PV' and param.sub_user !=null">
+			select distinct VERSION+' | '+engVERSION as text,VERSIONNo+'_'+Convert(varchar,ID) as value,v.readers from
+			IBDS_VERSION v
+			left join IBDS_Product pt on v.PRODUCTNo=pt.ProductNo where v.status=1
+			and
+			CHARINDEX(#{param.sub_user},isnull(v.POP_ID,'')+isnull(pt.POP_ID,'')+isnull(v.CMO_ID,'')+isnull(pt.CMO_ID,''))>0
+
+		</if>
+		<!--R版本 POP\CMO只显示配置自己为POP\CMO的数据 -->
+		<if test="param.type =='PR' and param.sub_user !=null">
+			select distinct Release+' | '+isnull(engRELEASE,'') as text,ReleaseNo+'_'+Convert(varchar,ID) as value,r.readers
+			from IBDS_Release r left join IBDS_VERSION v on
+			r.versionNo=v.VERSIONNo
+			left join IBDS_PDT p on r.pdtno=p.PDTNo
+			left join IBDS_Product pt on r.productno=pt.productno
+			where r.status=1 and
+			CHARINDEX(#{param.sub_user},isnull(r.POP_ID,'')+isnull(v.POP_ID,'')+isnull(p.POP_ID,'')+isnull(pt.POP_ID,'')+isnull(r.CMO_ID,'')+isnull(v.CMO_ID,'')+isnull(p.CMO_ID,'')+isnull(pt.CMO_ID,''))>0
+			<!-- POP只显示配置自己为POP的数据 -->
+		</if>
+
+		<!--R版本层 -->
+		<if test="param.type =='PR' and param.code !=null">
+			select distinct Release+' | '+isnull(engRELEASE,'') as text,ReleaseNo+'_'+Convert(varchar,ID) as value,readers
+			from IBDS_Release where status=1 and versionno=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (releaseNo = #{param.sub_code} and status=1)
+			</if>
+		</if>
+
+		<!--特性 -->
+		<if test="param.type =='FT' and param.code !=null">
+			select distinct feature+' | '+isnull(engFEATURE,'') as text,featureno+'_'+Convert(varchar,ID) as value,readers
+			from ibds_featrue where status=1 and releaseNo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (featureno= #{param.sub_code} and status=1)
+			</if>
+			<if test="param.current_id !=null and  param.current_id.length!=0">
+			 and id in
+			<foreach collection="param.current_id" item="items" index="index" open="(" separator="," close=")">
+              #{items,jdbcType=INTEGER}
+              </foreach>
+				
+			</if>
+		</if>
+		
+		<!--子特性 -->
+		<if test="param.type =='SF'">
+			select distinct SUBFEATURE+' | '+isnull(engSUBFEATURE,'') as text,SUBFEATURENo+'_'+Convert(varchar,ID) as value,readers
+			from IBDS_SUB_FEATRUE where status=1 
+			<if test="param.code !=null">
+			and FEATURENo=#{param.code}
+			</if>
+			<if test="param.codes !=null and param.codes.length!=0">
+			and FEATURENo in
+			<foreach collection="param.codes" item="item" index="index" open="(" separator="," close=")">
+              #{item}
+              </foreach>
+			</if>
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (SUBFEATURENo= #{param.sub_code} and status=1)
+			</if>
+			<if test="param.current_id !=null and  param.current_id.length!=0">
+			 and id in
+			<foreach collection="param.current_id" item="items" index="index" open="(" separator="," close=")">
+              #{items,jdbcType=INTEGER}
+              </foreach>
+				
+			</if>
+		</if>
+		
+		<!--项目组 -->
+		<if test="param.type =='TM' and param.code !=null">
+			select distinct TEAM+' | '+isnull(engTEAM,'') as text,TEAMNo+'_'+Convert(varchar,ID) as value,readers from IBDS_TEAM where status=1 and releaseNo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (TEAMNo= #{param.sub_code} and status=1)
+			</if>
+			
+			<if test="param.current_id !=null and  param.current_id.length!=0">
+			 and id in
+			<foreach collection="param.current_id" item="items" index="index" open="(" separator="," close=")">
+              #{items,jdbcType=INTEGER}
+              </foreach>
+				
+			</if>
+		</if>
+
+
+		<!--子系统 -->
+		<if test="param.type =='SS' and param.code !=null">
+			select distinct subsystem+' | '+isnull(engSUBSYSTEM,'') as text,subsystemno+'_'+Convert(varchar,ID) as
+			value,readers from IBDS_SUB_SYSTEM where status=1 and releaseNo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (subsystemno = #{param.sub_code} and status=1)
+			</if>
+			<if test="param.current_id !=null and  param.current_id.length!=0">
+			 and id in
+			<foreach collection="param.current_id" item="items" index="index" open="(" separator="," close=")">
+              #{items,jdbcType=INTEGER}
+              </foreach>
+				
+			</if>
+		</if>
+
+		<!--模块 -->
+		<if test="param.type =='MD'">
+			select distinct MODULE+' | '+isnull(engMODULE,'') as text,MODULENo+'_'+Convert(varchar,ID) as value,readers from
+			IBDS_MODULE where status=1 
+			<if test="param.code !=null">
+			and subsystemno=#{param.code}
+			</if>
+			<if test="param.codes !=null and param.codes.length!=0">
+			and subsystemno in
+			<foreach collection="param.codes" item="item" index="index" open="(" separator="," close=")">
+              #{item}
+              </foreach>
+			</if>
+			
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (MODULENo = #{param.sub_code} and status=1)
+			</if>
+			<if test="param.current_id !=null and  param.current_id.length!=0">
+			 and id in
+			<foreach collection="param.current_id" item="items" index="index" open="(" separator="," close=")">
+              #{items,jdbcType=INTEGER}
+              </foreach>
+				
+			</if>
+		</if>
+		
+		<!--模块版本 -->
+		<if test="param.type =='MV'">
+			select distinct MDLVSN+' | '+isnull(engMDLVSN,'') as text,MDLVSNNo+'_'+Convert(varchar,ID) as value,readers from IBDS_MODULE_VERSION where status=1
+			<if test="param.code !=null">
+			and MODULENo=#{param.code}
+			</if>
+			<if test="param.codes !=null and param.codes.length!=0">
+			and MODULENo in 
+			<foreach collection="param.codes" item="item" index="index" open="(" separator="," close=")">
+              #{item}
+              </foreach>
+			</if>
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (MDLVSNNo = #{param.sub_code} and status=1)
+			</if>
+			<if test="param.current_id !=null and  param.current_id.length!=0">
+			 and id in
+			<foreach collection="param.current_id" item="items" index="index" open="(" separator="," close=")">
+              #{items,jdbcType=INTEGER}
+              </foreach>
+				
+			</if>
+		</if>
+		
+
+
+
+		<!-- 基线版本 父版本显示 -->
+		<!--路标版本 根据V -->
+		<!--基线版本 根据R -->
+		<if test="param.type =='BL' and param.code !=null">
+			select distinct BASELINE+' | '+isnull(engBASELINE,'') as text,BASELINENo+'_'+Convert(varchar,ID) as value,readers from
+			IBDS_BASE_LINE where status=1 and ReleaseNo=#{param.code}
+
+		</if>
+
+
+
+
+	</select>
+
+<select id="getDatagridWithId" parameterType="map"
+		resultMap="BaseResultMap">
+		<!-- IPMT层 -->
+		<if test="param.type =='PI' and param.typeCode==null">
+			select distinct isnull(PLIPMT,'') as value,isnull(engPLIPMT,'') as text,PLIPMTNo+'_'+Convert(varchar,ID) as id,readers from
+			IBDS_PLIPMT where status=1
+			<!-- IPMT执行秘书只显示配置自己为IPMT执行秘书的数据 -->
+			<if test="param.sub_user!=null">
+				and CHARINDEX(#{param.sub_user},isnull(PLIMPT_Secretary,''))>0
+			</if>
+			<if test="param.searchStr!=null and param.searchStr!=''">
+			and CHARINDEX(#{param.searchStr},isnull(PLIPMT,'')+' '+isnull(engPLIPMT,'')+' '+isnull(PLIPMTNo,''))>0
+			</if>
+		</if>
+		<!-- 产品线层 -->
+		<if test="param.type =='PL' and param.code !=null">
+			select distinct isnull(PRODLINE,'')  as value, isnull(engPRODLINE,'') as text,PRODLINENo+'_'+Convert(varchar,ID) as id,readers
+			from IBDS_PRODLINE where status=1 and PLIPMTNo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (PRODLINENo = #{param.sub_code} and status=1)
+			</if>
+			<if test="param.searchStr!=null and param.searchStr!=''">
+			and CHARINDEX(#{param.searchStr},isnull(PRODLINE,'')+' '+isnull(engPRODLINE,'')+' '+isnull(PRODLINENo,''))>0
+			</if>
+		</if>
+
+		<!--产品线层 PLIPMT只显示配置自己为PLIPMT执行秘书的数据 -->
+		<if test="param.type =='PL' and param.sub_user!=null">
+			select distinct isnull(PRODLINE,'')  as value, isnull(engPRODLINE,'') as text,PRODLINENo+'_'+Convert(varchar,ID) as id,pl.readers from
+			IBDS_PRODLINE pl left join IBDS_PLIPMT pm on pl.PLIPMTNo=pm.PLIPMTNo
+			where pl.status=1
+			and CHARINDEX(#{param.sub_user},isnull(pm.PLIMPT_Secretary,''))>0
+			<if test="param.searchStr!=null and param.searchStr!=''">
+			and CHARINDEX(#{param.searchStr},isnull(PRODLINE,'')+' '+isnull(engPRODLINE,'')+' '+isnull(PRODLINENo,''))>0
+			</if>
+		</if>
+
+		<!--PDT层 -->
+		<if test="param.type =='PT' and param.code !=null ">
+
+			select distinct isnull(PDT,'')  as value, isnull(engPDT,'') as text,PDTNo+'_'+Convert(varchar,ID) as id,readers from IBDS_PDT
+			where status=1
+			and PRODLINENo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (PDTNo = #{param.sub_code} and status=1)
+
+			</if>
+			<if test="param.searchStr!=null and param.searchStr!=''">
+			and CHARINDEX(#{param.searchStr},isnull(PDT,'')+' '+isnull(engPDT,'')+' '+isnull(PDTNo,''))>0
+			</if>
+
+
+		</if>
+		<!--PDT POP只显示配置自己为POP的数据 -->
+		<if test="param.type =='PT' and param.sub_user!=null">
+			select distinct isnull(PDT,'')  as value, isnull(engPDT,'') as text,PDTNo+'_'+Convert(varchar,ID) as id,readers from IBDS_PDT where
+			status=1 and
+			CHARINDEX(#{param.sub_user},isnull(POP_ID,'')+isnull(CMO_ID,''))>0
+			<if test="param.searchStr!=null and param.searchStr!=''">
+			and CHARINDEX(#{param.searchStr},isnull(PDT,'')+' '+isnull(engPDT,'')+' '+isnull(PDTNo,''))>0
+			</if>
+		</if>
+
+		<!--产品层 -->
+		<if test="param.type =='PP' and param.code !=null">
+			select distinct isnull(product,'')  as value, isnull(engProduct,'') as text,productno+'_'+Convert(varchar,ID) as id,readers
+			from IBDS_PRODUCT where status=1 and Prodlineno=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (productno = #{param.sub_code} and status=1)
+			</if>
+			<if test="param.searchStr!=null and param.searchStr!=''">
+			and CHARINDEX(#{param.searchStr},isnull(product,'')+' '+isnull(engProduct,'')+' '+isnull(productno,''))>0
+			</if>
+		</if>
+		<!--V版本层 -->
+		<if test="param.type =='PV' and param.code !=null">
+			select distinct isnull(VERSION,'')  as value, engVERSION as text,VERSIONNo+'_'+Convert(varchar,ID) as id,readers
+			from IBDS_VERSION where status=1 and productno=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (VERSIONNo = #{param.sub_code} and status=1)
+			</if>
+			<if test="param.searchStr!=null and param.searchStr!=''">
+			and CHARINDEX(#{param.searchStr},isnull(VERSION,'')+' '+isnull(engVERSION,'')+' '+isnull(VERSIONNo,''))>0
+			</if>
+
+		</if>
+		<!--产品 POP\CMO只显示配置自己为POP\CMO的数据 -->
+		<if test="param.type =='PP' and param.sub_user !=null">
+			select distinct isnull(product,'')  as value, isnull(engProduct,'') as text,productno+'_'+Convert(varchar,ID) as id,readers from
+			IBDS_PRODUCT where status=1 and
+			CHARINDEX(#{param.sub_user},isnull(POP_ID,'')+isnull(CMO_ID,''))>0
+			<if test="param.searchStr!=null and param.searchStr!=''">
+			and CHARINDEX(#{param.searchStr},isnull(product,'')+' '+isnull(engProduct,'')+' '+isnull(productno,''))>0
+			</if>
+		</if>
+
+		<!--V版本 POP\CMO只显示配置自己为POP\CMO的数据 -->
+		<if test="param.type =='PV' and param.sub_user !=null">
+			select distinct isnull(VERSION,'')  as value, engVERSION as text,VERSIONNo+'_'+Convert(varchar,ID) as id,v.readers from
+			IBDS_VERSION v
+			left join IBDS_Product pt on v.PRODUCTNo=pt.ProductNo where v.status=1
+			and
+			CHARINDEX(#{param.sub_user},isnull(v.POP_ID,'')+isnull(pt.POP_ID,'')+isnull(v.CMO_ID,'')+isnull(pt.CMO_ID,''))>0
+		<if test="param.searchStr!=null and param.searchStr!=''">
+			and CHARINDEX(#{param.searchStr},isnull(VERSION,'')+' '+isnull(engVERSION,'')+' '+isnull(VERSIONNo,''))>0
+			</if>
+		</if>
+		<!--R版本 POP\CMO只显示配置自己为POP\CMO的数据 -->
+		<if test="param.type =='PR' and param.sub_user !=null">
+			select distinct isnull(Release,'')  as value,isnull(engRELEASE,'') as text,ReleaseNo+'_'+Convert(varchar,ID) as id,r.readers
+			from IBDS_Release r left join IBDS_VERSION v on
+			r.versionNo=v.VERSIONNo
+			left join IBDS_PDT p on r.pdtno=p.PDTNo
+			left join IBDS_Product pt on r.productno=pt.productno
+			where r.status=1 and
+			CHARINDEX(#{param.sub_user},isnull(r.POP_ID,'')+isnull(v.POP_ID,'')+isnull(p.POP_ID,'')+isnull(pt.POP_ID,'')+isnull(r.CMO_ID,'')+isnull(v.CMO_ID,'')+isnull(p.CMO_ID,'')+isnull(pt.CMO_ID,''))>0
+			<!-- POP只显示配置自己为POP的数据 -->
+			<if test="param.searchStr!=null and param.searchStr!=''">
+			and CHARINDEX(#{param.searchStr},isnull(Release,'')+' '+isnull(engRELEASE,'')+' '+isnull(ReleaseNo,''))>0
+			</if>
+		</if>
+
+		<!--R版本层 -->
+		<if test="param.type =='PR' and param.code !=null">
+			select distinct isnull(Release,'')  as value,isnull(engRELEASE,'') as text,ReleaseNo+'_'+Convert(varchar,ID) as id,readers
+			from IBDS_Release where status=1 and versionno=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (releaseNo = #{param.sub_code} and status=1)
+			</if>
+			<if test="param.searchStr!=null and param.searchStr!=''">
+			and CHARINDEX(#{param.searchStr},isnull(Release,'')+' '+isnull(engRELEASE,'')+' '+isnull(ReleaseNo,''))>0
+			</if>
+		</if>
+
+		<!--特性 -->
+		<if test="param.type =='FT' and param.code !=null">
+			select distinct isnull(feature,'')  as value,isnull(engFEATURE,'') as text,featureno+'_'+Convert(varchar,ID) as id,readers
+			from ibds_featrue where status=1 and releaseNo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (featureno= #{param.sub_code} and status=1)
+			</if>
+			<if test="param.current_id !=null and  param.current_id.length!=0">
+			 and id in
+			<foreach collection="param.current_id" item="items" index="index" open="(" separator="," close=")">
+              #{items,jdbcType=INTEGER}
+              </foreach>
+				
+			</if>
+			<if test="param.searchStr!=null and param.searchStr!=''">
+			and CHARINDEX(#{param.searchStr},isnull(feature,'')+' '+isnull(engFEATURE,'')+' '+isnull(featureno,''))>0
+			</if>
+		</if>
+		
+		<!--子特性 -->
+		<if test="param.type =='SF'">
+			select distinct isnull(SUBFEATURE,'')  as value,isnull(engSUBFEATURE,'') as text,SUBFEATURENo+'_'+Convert(varchar,ID) as id,readers
+			from IBDS_SUB_FEATRUE where status=1 
+			<if test="param.code !=null">
+			and FEATURENo=#{param.code}
+			</if>
+			<if test="param.codes !=null and param.codes.length!=0">
+			and FEATURENo in
+			<foreach collection="param.codes" item="item" index="index" open="(" separator="," close=")">
+              #{item}
+              </foreach>
+			</if>
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (SUBFEATURENo= #{param.sub_code} and status=1)
+			</if>
+			<if test="param.current_id !=null and  param.current_id.length!=0">
+			 and id in
+			<foreach collection="param.current_id" item="items" index="index" open="(" separator="," close=")">
+              #{items,jdbcType=INTEGER}
+              </foreach>
+				
+			</if>
+			<if test="param.searchStr!=null and param.searchStr!=''">
+			and CHARINDEX(#{param.searchStr},isnull(SUBFEATURE,'')+' '+isnull(engSUBFEATURE,'')+' '+isnull(SUBFEATURENo,''))>0
+			</if>
+		</if>
+		
+		<!--项目组 -->
+		<if test="param.type =='TM' and param.code !=null">
+			select distinct isnull(TEAM,'')  as value,isnull(engTEAM,'') as text,TEAMNo+'_'+Convert(varchar,ID) as id,readers from IBDS_TEAM where status=1 and releaseNo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (TEAMNo= #{param.sub_code} and status=1)
+			</if>
+			
+			<if test="param.current_id !=null and  param.current_id.length!=0">
+			 and id in
+			<foreach collection="param.current_id" item="items" index="index" open="(" separator="," close=")">
+              #{items,jdbcType=INTEGER}
+              </foreach>
+				
+			</if>
+			<if test="param.searchStr!=null and param.searchStr!=''">
+			and CHARINDEX(#{param.searchStr},isnull(TEAM,'')+' '+isnull(engTEAM,'')+' '+isnull(TEAMNo,''))>0
+			</if>
+		</if>
+
+
+		<!--子系统 -->
+		<if test="param.type =='SS' and param.code !=null">
+			select distinct isnull(subsystem,'')  as value,isnull(engSUBSYSTEM,'') as text,subsystemno+'_'+Convert(varchar,ID) as
+			id,readers from IBDS_SUB_SYSTEM where status=1 and releaseNo=#{param.code}
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (subsystemno = #{param.sub_code} and status=1)
+			</if>
+			<if test="param.current_id !=null and  param.current_id.length!=0">
+			 and id in
+			<foreach collection="param.current_id" item="items" index="index" open="(" separator="," close=")">
+              #{items,jdbcType=INTEGER}
+              </foreach>
+				
+			</if>
+			<if test="param.searchStr!=null and param.searchStr!=''">
+			and CHARINDEX(#{param.searchStr},isnull(subsystem,'')+' '+isnull(engSUBSYSTEM,'')+' '+isnull(subsystemno,''))>0
+			</if>
+		</if>
+
+		<!--模块 -->
+		<if test="param.type =='MD'">
+			select distinct isnull(MODULE,'')  as value,isnull(engMODULE,'') as text,MODULENo+'_'+Convert(varchar,ID) as id,readers from
+			IBDS_MODULE where status=1 
+			<if test="param.code !=null">
+			and subsystemno=#{param.code}
+			</if>
+			<if test="param.codes !=null and param.codes.length!=0">
+			and subsystemno in
+			<foreach collection="param.codes" item="item" index="index" open="(" separator="," close=")">
+              #{item}
+              </foreach>
+			</if>
+			
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (MODULENo = #{param.sub_code} and status=1)
+			</if>
+			<if test="param.current_id !=null and  param.current_id.length!=0">
+			 and id in
+			<foreach collection="param.current_id" item="items" index="index" open="(" separator="," close=")">
+              #{items,jdbcType=INTEGER}
+              </foreach>
+				
+			</if>
+			<if test="param.searchStr!=null and param.searchStr!=''">
+			and CHARINDEX(#{param.searchStr},isnull(MODULE,'')+' '+isnull(engMODULE,'')+' '+isnull(MODULENo,''))>0
+			</if>
+		</if>
+		
+		<!--模块版本 -->
+		<if test="param.type =='MV'">
+			select distinct isnull(MDLVSN,'')  as value,isnull(engMDLVSN,'') as text,MDLVSNNo+'_'+Convert(varchar,ID) as id,readers from IBDS_MODULE_VERSION where status=1
+			<if test="param.code !=null">
+			and MODULENo=#{param.code}
+			</if>
+			<if test="param.codes !=null and param.codes.length!=0">
+			and MODULENo in 
+			<foreach collection="param.codes" item="item" index="index" open="(" separator="," close=")">
+              #{item}
+              </foreach>
+			</if>
+			<if test="param.sub_code !=null and param.sub_code !=''">
+				or (MDLVSNNo = #{param.sub_code} and status=1)
+			</if>
+			<if test="param.current_id !=null and  param.current_id.length!=0">
+			 and id in
+			<foreach collection="param.current_id" item="items" index="index" open="(" separator="," close=")">
+              #{items,jdbcType=INTEGER}
+              </foreach>
+				
+			</if>
+			<if test="param.searchStr!=null and param.searchStr!=''">
+			and CHARINDEX(#{param.searchStr},isnull(MDLVSN,'')+' '+isnull(engMDLVSN,'')+' '+isnull(MDLVSNNo,''))>0
+			</if>
+		</if>
+		
+
+
+
+		<!-- 基线版本 父版本显示 -->
+		<!--路标版本 根据V -->
+		<!--基线版本 根据R -->
+		<if test="param.type =='BL' and param.code !=null">
+			select distinct isnull(BASELINE,'')  as value,isnull(engBASELINE,'') as text,BASELINENo+'_'+Convert(varchar,ID) as id,readers from
+			IBDS_BASE_LINE where status=1 and ReleaseNo=#{param.code}
+<if test="param.searchStr!=null and param.searchStr!=''">
+			and CHARINDEX(#{param.searchStr},isnull(BASELINE,'')+' '+isnull(engBASELINE,'')+' '+isnull(BASELINENo,''))>0
+			</if>
+		</if>
+
+
+
+
+	</select>
+
+</mapper>

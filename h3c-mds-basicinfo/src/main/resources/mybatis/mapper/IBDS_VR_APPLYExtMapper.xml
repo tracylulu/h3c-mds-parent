@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.IBDS_VR_APPLYMapper">
+
+	<select id="getVZTCountBymap" parameterType="map"
+		resultType="Integer">
+		SELECT count(1) FROM dbo.IBDS_VR_APPLY a LEFT JOIN
+		dbo.IBDS_VR_PROCESS b ON
+		a.Process_Code=b.APPLY_CODE WHERE b.Status=1
+		AND ( ${param.newColumn}
+		= #{param.newColumnValue} or
+		${param.nowColumn}=#{param.nowColumnValue})
+	</select>
+	<select id="getZTCountByCode" parameterType="map"
+		resultType="Integer">
+		SELECT count(1) FROM dbo.IBDS_VR_APPLY a LEFT JOIN
+		dbo.IBDS_VR_PROCESS b ON
+		a.Process_Code=b.APPLY_CODE WHERE b.Status=1
+		AND ${param.column}=
+		#{param.value}
+	</select>
+	<select id="validateVRIntransit" parameterType="map"
+		resultType="Integer">
+		SELECT count(1) FROM dbo.IBDS_VR_APPLY a LEFT JOIN dbo.IBDS_VR_PROCESS
+		b ON a.Process_Code=b.APPLY_CODE WHERE b.Status=1
+		<if test='param.type=="r"'>
+			AND (a.ReleaseOldNo=#{param.value} OR
+			a.ReleaseDelNo=#{param.value})
+		</if>
+		<if test='param.type=="v"'>
+			AND (a.VersionOldNo=#{param.value} OR
+			a.VersionDelNo=#{param.value})
+		</if>
+	</select>
+	<insert id="insertSelectiveBackID"
+		parameterType="com.h3c.mds.basicinfo.entity.IBDS_VR_APPLY"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into IBDS_VR_APPLY
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="processCode != null">
+				Process_Code,
+			</if>
+			<if test="plipmtno != null">
+				PLIPMTNo,
+			</if>
+			<if test="prodlineno != null">
+				ProdLineNo,
+			</if>
+			<if test="productno != null">
+				ProductNo,
+			</if>
+			<if test="ipmtsecretary != null">
+				IPMTSecretary,
+			</if>
+			<if test="newpv != null">
+				NewPV,
+			</if>
+			<if test="versionnewno != null">
+				VersionNewNo,
+			</if>
+			<if test="versionnew != null">
+				VersionNew,
+			</if>
+			<if test="engversionnew != null">
+				engVersionNew,
+			</if>
+			<if test="modpv != null">
+				ModPV,
+			</if>
+			<if test="versionoldno != null">
+				VersionOldNo,
+			</if>
+			<if test="versionold != null">
+				VersionOld,
+			</if>
+			<if test="engversionold != null">
+				engVersionOld,
+			</if>
+			<if test="versionnow != null">
+				VersionNow,
+			</if>
+			<if test="engversionnow != null">
+				engVersionNow,
+			</if>
+			<if test="delpv != null">
+				DelPV,
+			</if>
+			<if test="versiondelno != null">
+				VersionDelNo,
+			</if>
+			<if test="versiondel != null">
+				Versiondel,
+			</if>
+			<if test="engversiondel != null">
+				engVersionDel,
+			</if>
+			<if test="pvifdelbelow != null">
+				PVIfDelBelow,
+			</if>
+			<if test="versionno != null">
+				VersionNo,
+			</if>
+			<if test="newpr != null">
+				NewPR,
+			</if>
+			<if test="releasenewno != null">
+				ReleaseNewNo,
+			</if>
+			<if test="releasenew != null">
+				ReleaseNew,
+			</if>
+			<if test="engreleasenew != null">
+				engReleaseNew,
+			</if>
+			<if test="pdtno != null">
+				PDTNo,
+			</if>
+			<if test="releasenoSoftware != null">
+				ReleaseNo_Software,
+			</if>
+			<if test="modpr != null">
+				ModPR,
+			</if>
+			<if test="releaseoldno != null">
+				ReleaseOldNo,
+			</if>
+			<if test="releaseold != null">
+				ReleaseOld,
+			</if>
+			<if test="engreleaseold != null">
+				engReleaseOld,
+			</if>
+			<if test="releasenow != null">
+				ReleaseNow,
+			</if>
+			<if test="engreleasenow != null">
+				engReleaseNow,
+			</if>
+			<if test="releasenoSoftwarenow != null">
+				ReleaseNo_SoftwareNow,
+			</if>
+			<if test="delpr != null">
+				DelPR,
+			</if>
+			<if test="releasedelno != null">
+				ReleaseDelNo,
+			</if>
+			<if test="releasedel != null">
+				ReleaseDel,
+			</if>
+			<if test="engreleasedel != null">
+				engReleaseDel,
+			</if>
+			<if test="prifdelbelow != null">
+				PRIfDelBelow,
+			</if>
+			<if test="copyto != null">
+				copyto,
+			</if>
+			<if test="remark != null">
+				Remark,
+			</if>
+			<if test="creator != null">
+				Creator,
+			</if>
+			<if test="createtime != null">
+				CreateTime,
+			</if>
+			<if test="modifier != null">
+				Modifier,
+			</if>
+			<if test="modifytime != null">
+				ModifyTime,
+			</if>
+			<if test="inheritrelease != null">
+				InheritRelease,
+			</if>
+			<if test="pdtoldno != null">
+				PDTOldNo,
+			</if>
+			<if test="pdtnowno != null">
+				PDTNowNo,
+			</if>
+			<if test="releasenoSoftwareold != null">
+				ReleaseNo_SoftwareOld,
+			</if>
+			<if test="pdtold != null">
+				PDTOld,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="processCode != null">
+				#{processCode,jdbcType=NVARCHAR},
+			</if>
+			<if test="plipmtno != null">
+				#{plipmtno,jdbcType=NVARCHAR},
+			</if>
+			<if test="prodlineno != null">
+				#{prodlineno,jdbcType=NVARCHAR},
+			</if>
+			<if test="productno != null">
+				#{productno,jdbcType=NVARCHAR},
+			</if>
+			<if test="ipmtsecretary != null">
+				#{ipmtsecretary,jdbcType=NVARCHAR},
+			</if>
+			<if test="newpv != null">
+				#{newpv,jdbcType=CHAR},
+			</if>
+			<if test="versionnewno != null">
+				#{versionnewno,jdbcType=NVARCHAR},
+			</if>
+			<if test="versionnew != null">
+				#{versionnew,jdbcType=NVARCHAR},
+			</if>
+			<if test="engversionnew != null">
+				#{engversionnew,jdbcType=NVARCHAR},
+			</if>
+			<if test="modpv != null">
+				#{modpv,jdbcType=CHAR},
+			</if>
+			<if test="versionoldno != null">
+				#{versionoldno,jdbcType=NVARCHAR},
+			</if>
+			<if test="versionold != null">
+				#{versionold,jdbcType=NVARCHAR},
+			</if>
+			<if test="engversionold != null">
+				#{engversionold,jdbcType=NVARCHAR},
+			</if>
+			<if test="versionnow != null">
+				#{versionnow,jdbcType=NVARCHAR},
+			</if>
+			<if test="engversionnow != null">
+				#{engversionnow,jdbcType=NVARCHAR},
+			</if>
+			<if test="delpv != null">
+				#{delpv,jdbcType=CHAR},
+			</if>
+			<if test="versiondelno != null">
+				#{versiondelno,jdbcType=NVARCHAR},
+			</if>
+			<if test="versiondel != null">
+				#{versiondel,jdbcType=NVARCHAR},
+			</if>
+			<if test="engversiondel != null">
+				#{engversiondel,jdbcType=NVARCHAR},
+			</if>
+			<if test="pvifdelbelow != null">
+				#{pvifdelbelow,jdbcType=CHAR},
+			</if>
+			<if test="versionno != null">
+				#{versionno,jdbcType=NVARCHAR},
+			</if>
+			<if test="newpr != null">
+				#{newpr,jdbcType=CHAR},
+			</if>
+			<if test="releasenewno != null">
+				#{releasenewno,jdbcType=NVARCHAR},
+			</if>
+			<if test="releasenew != null">
+				#{releasenew,jdbcType=NVARCHAR},
+			</if>
+			<if test="engreleasenew != null">
+				#{engreleasenew,jdbcType=NVARCHAR},
+			</if>
+			<if test="pdtno != null">
+				#{pdtno,jdbcType=NVARCHAR},
+			</if>
+			<if test="releasenoSoftware != null">
+				#{releasenoSoftware,jdbcType=NVARCHAR},
+			</if>
+			<if test="modpr != null">
+				#{modpr,jdbcType=CHAR},
+			</if>
+			<if test="releaseoldno != null">
+				#{releaseoldno,jdbcType=NVARCHAR},
+			</if>
+			<if test="releaseold != null">
+				#{releaseold,jdbcType=NVARCHAR},
+			</if>
+			<if test="engreleaseold != null">
+				#{engreleaseold,jdbcType=NVARCHAR},
+			</if>
+			<if test="releasenow != null">
+				#{releasenow,jdbcType=NVARCHAR},
+			</if>
+			<if test="engreleasenow != null">
+				#{engreleasenow,jdbcType=NVARCHAR},
+			</if>
+			<if test="releasenoSoftwarenow != null">
+				#{releasenoSoftwarenow,jdbcType=NVARCHAR},
+			</if>
+			<if test="delpr != null">
+				#{delpr,jdbcType=CHAR},
+			</if>
+			<if test="releasedelno != null">
+				#{releasedelno,jdbcType=NVARCHAR},
+			</if>
+			<if test="releasedel != null">
+				#{releasedel,jdbcType=NVARCHAR},
+			</if>
+			<if test="engreleasedel != null">
+				#{engreleasedel,jdbcType=NVARCHAR},
+			</if>
+			<if test="prifdelbelow != null">
+				#{prifdelbelow,jdbcType=CHAR},
+			</if>
+			<if test="copyto != null">
+				#{copyto,jdbcType=NVARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=NVARCHAR},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=NVARCHAR},
+			</if>
+			<if test="createtime != null">
+				#{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifier != null">
+				#{modifier,jdbcType=NVARCHAR},
+			</if>
+			<if test="modifytime != null">
+				#{modifytime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="inheritrelease != null">
+				#{inheritrelease,jdbcType=NVARCHAR},
+			</if>
+			<if test="pdtoldno != null">
+				#{pdtoldno,jdbcType=NVARCHAR},
+			</if>
+			<if test="pdtnowno != null">
+				#{pdtnowno,jdbcType=NVARCHAR},
+			</if>
+			<if test="releasenoSoftwareold != null">
+				#{releasenoSoftwareold,jdbcType=NVARCHAR},
+			</if>
+			<if test="pdtold != null">
+				#{pdtold,jdbcType=NVARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

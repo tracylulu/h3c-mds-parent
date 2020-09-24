@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.IBDS_PRODLINEMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.product.entity.IBDS_PRODLINE">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="PRODLINENo" jdbcType="NVARCHAR" property="prodlineno" />
+    <result column="PRODLINE" jdbcType="NVARCHAR" property="prodline" />
+    <result column="engPRODLINE" jdbcType="NVARCHAR" property="engprodline" />
+    <result column="PRODLINEOld" jdbcType="NVARCHAR" property="prodlineold" />
+    <result column="Status" jdbcType="NVARCHAR" property="status" />
+    <result column="PLIPMTNo" jdbcType="NVARCHAR" property="plipmtno" />
+    <result column="fldcpxzj" jdbcType="NVARCHAR" property="fldcpxzj" />
+    <result column="Quality_Director_ID" jdbcType="NVARCHAR" property="qualityDirectorId" />
+    <result column="PL_CCB_GROUP" jdbcType="NVARCHAR" property="plCcbGroup" />
+    <result column="Remark" jdbcType="NVARCHAR" property="remark" />
+    <result column="Quality_Mnger_ID" jdbcType="NVARCHAR" property="qualityMngerId" />
+    <result column="Test_Mnger_ID" jdbcType="NVARCHAR" property="testMngerId" />
+    <result column="CMOLeader_ID" jdbcType="NVARCHAR" property="cmoleaderId" />
+    <result column="PrjMarketP" jdbcType="NVARCHAR" property="prjmarketp" />
+    <result column="PL_CCB_SECRETARY" jdbcType="NVARCHAR" property="plCcbSecretary" />
+    <result column="CREATE_USER" jdbcType="NVARCHAR" property="createUser" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="MODIFY_USER" jdbcType="NVARCHAR" property="modifyUser" />
+    <result column="MODIFY_DATE" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="Readers" jdbcType="NVARCHAR" property="readers" />
+    <result column="Column01" jdbcType="NVARCHAR" property="column01" />
+    <result column="Column02" jdbcType="NVARCHAR" property="column02" />
+    <result column="Column03" jdbcType="NVARCHAR" property="column03" />
+    <result column="Column04" jdbcType="NVARCHAR" property="column04" />
+    <result column="Column05" jdbcType="NVARCHAR" property="column05" />
+    <result column="Column06" jdbcType="NVARCHAR" property="column06" />
+    <result column="Column07" jdbcType="NVARCHAR" property="column07" />
+    <result column="Column08" jdbcType="NVARCHAR" property="column08" />
+    <result column="Column09" jdbcType="NVARCHAR" property="column09" />
+    <result column="Column10" jdbcType="NVARCHAR" property="column10" />
+    <result column="PL_ORDER" jdbcType="INTEGER" property="plOrder" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, PRODLINENo, PRODLINE, engPRODLINE, PRODLINEOld, Status, PLIPMTNo, fldcpxzj, Quality_Director_ID, 
+    PL_CCB_GROUP, Remark, Quality_Mnger_ID, Test_Mnger_ID, CMOLeader_ID, PrjMarketP, 
+    PL_CCB_SECRETARY, CREATE_USER, CREATE_DATE, MODIFY_USER, MODIFY_DATE, Readers, Column01, 
+    Column02, Column03, Column04, Column05, Column06, Column07, Column08, Column09, Column10, 
+    PL_ORDER
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.product.entity.IBDS_PRODLINEExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_PRODLINE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_PRODLINE
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_PRODLINE
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.product.entity.IBDS_PRODLINEExample">
+    delete from IBDS_PRODLINE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.product.entity.IBDS_PRODLINE">
+    insert into IBDS_PRODLINE (id, PRODLINENo, PRODLINE, 
+      engPRODLINE, PRODLINEOld, Status, 
+      PLIPMTNo, fldcpxzj, Quality_Director_ID, 
+      PL_CCB_GROUP, Remark, Quality_Mnger_ID, 
+      Test_Mnger_ID, CMOLeader_ID, PrjMarketP, 
+      PL_CCB_SECRETARY, CREATE_USER, CREATE_DATE, 
+      MODIFY_USER, MODIFY_DATE, Readers, 
+      Column01, Column02, Column03, 
+      Column04, Column05, Column06, 
+      Column07, Column08, Column09, 
+      Column10, PL_ORDER)
+    values (#{id,jdbcType=INTEGER}, #{prodlineno,jdbcType=NVARCHAR}, #{prodline,jdbcType=NVARCHAR}, 
+      #{engprodline,jdbcType=NVARCHAR}, #{prodlineold,jdbcType=NVARCHAR}, #{status,jdbcType=NVARCHAR}, 
+      #{plipmtno,jdbcType=NVARCHAR}, #{fldcpxzj,jdbcType=NVARCHAR}, #{qualityDirectorId,jdbcType=NVARCHAR}, 
+      #{plCcbGroup,jdbcType=NVARCHAR}, #{remark,jdbcType=NVARCHAR}, #{qualityMngerId,jdbcType=NVARCHAR}, 
+      #{testMngerId,jdbcType=NVARCHAR}, #{cmoleaderId,jdbcType=NVARCHAR}, #{prjmarketp,jdbcType=NVARCHAR}, 
+      #{plCcbSecretary,jdbcType=NVARCHAR}, #{createUser,jdbcType=NVARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{modifyUser,jdbcType=NVARCHAR}, #{modifyDate,jdbcType=TIMESTAMP}, #{readers,jdbcType=NVARCHAR}, 
+      #{column01,jdbcType=NVARCHAR}, #{column02,jdbcType=NVARCHAR}, #{column03,jdbcType=NVARCHAR}, 
+      #{column04,jdbcType=NVARCHAR}, #{column05,jdbcType=NVARCHAR}, #{column06,jdbcType=NVARCHAR}, 
+      #{column07,jdbcType=NVARCHAR}, #{column08,jdbcType=NVARCHAR}, #{column09,jdbcType=NVARCHAR}, 
+      #{column10,jdbcType=NVARCHAR}, #{plOrder,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.product.entity.IBDS_PRODLINE">
+    insert into IBDS_PRODLINE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="prodlineno != null">
+        PRODLINENo,
+      </if>
+      <if test="prodline != null">
+        PRODLINE,
+      </if>
+      <if test="engprodline != null">
+        engPRODLINE,
+      </if>
+      <if test="prodlineold != null">
+        PRODLINEOld,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo,
+      </if>
+      <if test="fldcpxzj != null">
+        fldcpxzj,
+      </if>
+      <if test="qualityDirectorId != null">
+        Quality_Director_ID,
+      </if>
+      <if test="plCcbGroup != null">
+        PL_CCB_GROUP,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="qualityMngerId != null">
+        Quality_Mnger_ID,
+      </if>
+      <if test="testMngerId != null">
+        Test_Mnger_ID,
+      </if>
+      <if test="cmoleaderId != null">
+        CMOLeader_ID,
+      </if>
+      <if test="prjmarketp != null">
+        PrjMarketP,
+      </if>
+      <if test="plCcbSecretary != null">
+        PL_CCB_SECRETARY,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER,
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE,
+      </if>
+      <if test="readers != null">
+        Readers,
+      </if>
+      <if test="column01 != null">
+        Column01,
+      </if>
+      <if test="column02 != null">
+        Column02,
+      </if>
+      <if test="column03 != null">
+        Column03,
+      </if>
+      <if test="column04 != null">
+        Column04,
+      </if>
+      <if test="column05 != null">
+        Column05,
+      </if>
+      <if test="column06 != null">
+        Column06,
+      </if>
+      <if test="column07 != null">
+        Column07,
+      </if>
+      <if test="column08 != null">
+        Column08,
+      </if>
+      <if test="column09 != null">
+        Column09,
+      </if>
+      <if test="column10 != null">
+        Column10,
+      </if>
+      <if test="plOrder != null">
+        PL_ORDER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="prodlineno != null">
+        #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodline != null">
+        #{prodline,jdbcType=NVARCHAR},
+      </if>
+      <if test="engprodline != null">
+        #{engprodline,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineold != null">
+        #{prodlineold,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmtno != null">
+        #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldcpxzj != null">
+        #{fldcpxzj,jdbcType=NVARCHAR},
+      </if>
+      <if test="qualityDirectorId != null">
+        #{qualityDirectorId,jdbcType=NVARCHAR},
+      </if>
+      <if test="plCcbGroup != null">
+        #{plCcbGroup,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="qualityMngerId != null">
+        #{qualityMngerId,jdbcType=NVARCHAR},
+      </if>
+      <if test="testMngerId != null">
+        #{testMngerId,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmoleaderId != null">
+        #{cmoleaderId,jdbcType=NVARCHAR},
+      </if>
+      <if test="prjmarketp != null">
+        #{prjmarketp,jdbcType=NVARCHAR},
+      </if>
+      <if test="plCcbSecretary != null">
+        #{plCcbSecretary,jdbcType=NVARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readers != null">
+        #{readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="column01 != null">
+        #{column01,jdbcType=NVARCHAR},
+      </if>
+      <if test="column02 != null">
+        #{column02,jdbcType=NVARCHAR},
+      </if>
+      <if test="column03 != null">
+        #{column03,jdbcType=NVARCHAR},
+      </if>
+      <if test="column04 != null">
+        #{column04,jdbcType=NVARCHAR},
+      </if>
+      <if test="column05 != null">
+        #{column05,jdbcType=NVARCHAR},
+      </if>
+      <if test="column06 != null">
+        #{column06,jdbcType=NVARCHAR},
+      </if>
+      <if test="column07 != null">
+        #{column07,jdbcType=NVARCHAR},
+      </if>
+      <if test="column08 != null">
+        #{column08,jdbcType=NVARCHAR},
+      </if>
+      <if test="column09 != null">
+        #{column09,jdbcType=NVARCHAR},
+      </if>
+      <if test="column10 != null">
+        #{column10,jdbcType=NVARCHAR},
+      </if>
+      <if test="plOrder != null">
+        #{plOrder,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.product.entity.IBDS_PRODLINEExample" resultType="java.lang.Long">
+    select count(*) from IBDS_PRODLINE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_PRODLINE
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.prodlineno != null">
+        PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodline != null">
+        PRODLINE = #{record.prodline,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engprodline != null">
+        engPRODLINE = #{record.engprodline,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodlineold != null">
+        PRODLINEOld = #{record.prodlineold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null">
+        Status = #{record.status,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plipmtno != null">
+        PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldcpxzj != null">
+        fldcpxzj = #{record.fldcpxzj,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.qualityDirectorId != null">
+        Quality_Director_ID = #{record.qualityDirectorId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plCcbGroup != null">
+        PL_CCB_GROUP = #{record.plCcbGroup,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remark != null">
+        Remark = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.qualityMngerId != null">
+        Quality_Mnger_ID = #{record.qualityMngerId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.testMngerId != null">
+        Test_Mnger_ID = #{record.testMngerId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.cmoleaderId != null">
+        CMOLeader_ID = #{record.cmoleaderId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prjmarketp != null">
+        PrjMarketP = #{record.prjmarketp,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plCcbSecretary != null">
+        PL_CCB_SECRETARY = #{record.plCcbSecretary,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createUser != null">
+        CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyUser != null">
+        MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modifyDate != null">
+        MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.readers != null">
+        Readers = #{record.readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column01 != null">
+        Column01 = #{record.column01,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column02 != null">
+        Column02 = #{record.column02,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column03 != null">
+        Column03 = #{record.column03,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column04 != null">
+        Column04 = #{record.column04,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column05 != null">
+        Column05 = #{record.column05,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column06 != null">
+        Column06 = #{record.column06,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column07 != null">
+        Column07 = #{record.column07,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column08 != null">
+        Column08 = #{record.column08,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column09 != null">
+        Column09 = #{record.column09,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column10 != null">
+        Column10 = #{record.column10,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plOrder != null">
+        PL_ORDER = #{record.plOrder,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_PRODLINE
+    set id = #{record.id,jdbcType=INTEGER},
+      PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      PRODLINE = #{record.prodline,jdbcType=NVARCHAR},
+      engPRODLINE = #{record.engprodline,jdbcType=NVARCHAR},
+      PRODLINEOld = #{record.prodlineold,jdbcType=NVARCHAR},
+      Status = #{record.status,jdbcType=NVARCHAR},
+      PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      fldcpxzj = #{record.fldcpxzj,jdbcType=NVARCHAR},
+      Quality_Director_ID = #{record.qualityDirectorId,jdbcType=NVARCHAR},
+      PL_CCB_GROUP = #{record.plCcbGroup,jdbcType=NVARCHAR},
+      Remark = #{record.remark,jdbcType=NVARCHAR},
+      Quality_Mnger_ID = #{record.qualityMngerId,jdbcType=NVARCHAR},
+      Test_Mnger_ID = #{record.testMngerId,jdbcType=NVARCHAR},
+      CMOLeader_ID = #{record.cmoleaderId,jdbcType=NVARCHAR},
+      PrjMarketP = #{record.prjmarketp,jdbcType=NVARCHAR},
+      PL_CCB_SECRETARY = #{record.plCcbSecretary,jdbcType=NVARCHAR},
+      CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      Readers = #{record.readers,jdbcType=NVARCHAR},
+      Column01 = #{record.column01,jdbcType=NVARCHAR},
+      Column02 = #{record.column02,jdbcType=NVARCHAR},
+      Column03 = #{record.column03,jdbcType=NVARCHAR},
+      Column04 = #{record.column04,jdbcType=NVARCHAR},
+      Column05 = #{record.column05,jdbcType=NVARCHAR},
+      Column06 = #{record.column06,jdbcType=NVARCHAR},
+      Column07 = #{record.column07,jdbcType=NVARCHAR},
+      Column08 = #{record.column08,jdbcType=NVARCHAR},
+      Column09 = #{record.column09,jdbcType=NVARCHAR},
+      Column10 = #{record.column10,jdbcType=NVARCHAR},
+      PL_ORDER = #{record.plOrder,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.product.entity.IBDS_PRODLINE">
+    update IBDS_PRODLINE
+    <set>
+      <if test="prodlineno != null">
+        PRODLINENo = #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodline != null">
+        PRODLINE = #{prodline,jdbcType=NVARCHAR},
+      </if>
+      <if test="engprodline != null">
+        engPRODLINE = #{engprodline,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineold != null">
+        PRODLINEOld = #{prodlineold,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        Status = #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo = #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldcpxzj != null">
+        fldcpxzj = #{fldcpxzj,jdbcType=NVARCHAR},
+      </if>
+      <if test="qualityDirectorId != null">
+        Quality_Director_ID = #{qualityDirectorId,jdbcType=NVARCHAR},
+      </if>
+      <if test="plCcbGroup != null">
+        PL_CCB_GROUP = #{plCcbGroup,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="qualityMngerId != null">
+        Quality_Mnger_ID = #{qualityMngerId,jdbcType=NVARCHAR},
+      </if>
+      <if test="testMngerId != null">
+        Test_Mnger_ID = #{testMngerId,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmoleaderId != null">
+        CMOLeader_ID = #{cmoleaderId,jdbcType=NVARCHAR},
+      </if>
+      <if test="prjmarketp != null">
+        PrjMarketP = #{prjmarketp,jdbcType=NVARCHAR},
+      </if>
+      <if test="plCcbSecretary != null">
+        PL_CCB_SECRETARY = #{plCcbSecretary,jdbcType=NVARCHAR},
+      </if>
+      <if test="createUser != null">
+        CREATE_USER = #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readers != null">
+        Readers = #{readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="column01 != null">
+        Column01 = #{column01,jdbcType=NVARCHAR},
+      </if>
+      <if test="column02 != null">
+        Column02 = #{column02,jdbcType=NVARCHAR},
+      </if>
+      <if test="column03 != null">
+        Column03 = #{column03,jdbcType=NVARCHAR},
+      </if>
+      <if test="column04 != null">
+        Column04 = #{column04,jdbcType=NVARCHAR},
+      </if>
+      <if test="column05 != null">
+        Column05 = #{column05,jdbcType=NVARCHAR},
+      </if>
+      <if test="column06 != null">
+        Column06 = #{column06,jdbcType=NVARCHAR},
+      </if>
+      <if test="column07 != null">
+        Column07 = #{column07,jdbcType=NVARCHAR},
+      </if>
+      <if test="column08 != null">
+        Column08 = #{column08,jdbcType=NVARCHAR},
+      </if>
+      <if test="column09 != null">
+        Column09 = #{column09,jdbcType=NVARCHAR},
+      </if>
+      <if test="column10 != null">
+        Column10 = #{column10,jdbcType=NVARCHAR},
+      </if>
+      <if test="plOrder != null">
+        PL_ORDER = #{plOrder,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.product.entity.IBDS_PRODLINE">
+    update IBDS_PRODLINE
+    set PRODLINENo = #{prodlineno,jdbcType=NVARCHAR},
+      PRODLINE = #{prodline,jdbcType=NVARCHAR},
+      engPRODLINE = #{engprodline,jdbcType=NVARCHAR},
+      PRODLINEOld = #{prodlineold,jdbcType=NVARCHAR},
+      Status = #{status,jdbcType=NVARCHAR},
+      PLIPMTNo = #{plipmtno,jdbcType=NVARCHAR},
+      fldcpxzj = #{fldcpxzj,jdbcType=NVARCHAR},
+      Quality_Director_ID = #{qualityDirectorId,jdbcType=NVARCHAR},
+      PL_CCB_GROUP = #{plCcbGroup,jdbcType=NVARCHAR},
+      Remark = #{remark,jdbcType=NVARCHAR},
+      Quality_Mnger_ID = #{qualityMngerId,jdbcType=NVARCHAR},
+      Test_Mnger_ID = #{testMngerId,jdbcType=NVARCHAR},
+      CMOLeader_ID = #{cmoleaderId,jdbcType=NVARCHAR},
+      PrjMarketP = #{prjmarketp,jdbcType=NVARCHAR},
+      PL_CCB_SECRETARY = #{plCcbSecretary,jdbcType=NVARCHAR},
+      CREATE_USER = #{createUser,jdbcType=NVARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      Readers = #{readers,jdbcType=NVARCHAR},
+      Column01 = #{column01,jdbcType=NVARCHAR},
+      Column02 = #{column02,jdbcType=NVARCHAR},
+      Column03 = #{column03,jdbcType=NVARCHAR},
+      Column04 = #{column04,jdbcType=NVARCHAR},
+      Column05 = #{column05,jdbcType=NVARCHAR},
+      Column06 = #{column06,jdbcType=NVARCHAR},
+      Column07 = #{column07,jdbcType=NVARCHAR},
+      Column08 = #{column08,jdbcType=NVARCHAR},
+      Column09 = #{column09,jdbcType=NVARCHAR},
+      Column10 = #{column10,jdbcType=NVARCHAR},
+      PL_ORDER = #{plOrder,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+</mapper>

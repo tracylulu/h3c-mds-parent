@@ -1,0 +1,221 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.h3c.mds</groupId>
+    <artifactId>h3c-mds-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>h3c-mds-web-client</artifactId>
+  <packaging>war</packaging>
+    <dependencies>
+  	<dependency>
+  		<groupId>org.springframework.boot</groupId>
+  		<artifactId>spring-boot-starter-web</artifactId>
+  	</dependency>
+  	
+  	<dependency>
+  		<groupId>com.h3c.mds</groupId>
+  		<artifactId>h3c-mds-sysmgr</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  		<dependency>
+  		<groupId>com.h3c.mds</groupId>
+  		<artifactId>h3c-mds-product</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  		<dependency>
+  		<groupId>com.h3c.mds</groupId>
+  		<artifactId>h3c-mds-commons</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+
+	<dependency>
+  		<groupId>com.h3c.mds</groupId>
+  		<artifactId>h3c-mds-flowable</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.h3c.mds</groupId>
+  		<artifactId>h3c-mds-basicinfo</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.h3c.mds</groupId>
+  		<artifactId>h3c-mds-task</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+		<dependency>
+			<groupId>com.h3c.mds</groupId>
+			<artifactId>h3c-mds-dataauth</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+  	<!-- servlet 依赖 -->
+	 <dependency>
+         <groupId>javax.servlet</groupId>
+         <artifactId>javax.servlet-api</artifactId>
+         <scope>provided</scope>
+	 </dependency>
+	<dependency>
+         <groupId>javax.servlet</groupId>
+          <artifactId>jstl</artifactId>
+	</dependency>
+	<!--用于编译jsp -->
+	<dependency>
+		<groupId>org.apache.tomcat.embed</groupId>
+		<artifactId>tomcat-embed-jasper</artifactId>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+       <groupId>org.apache.shiro</groupId>
+       <artifactId>shiro-spring</artifactId>
+       <version>1.3.2</version>
+    </dependency>
+    <!-- 该依赖需要自己配到本地仓库中 -->
+    <dependency>
+	  <groupId>com.h3c</groupId>
+	  <artifactId>ssoModule</artifactId>
+	  <version>0.0.6</version>
+	</dependency>
+	<!-- 该依赖需要自己配到本地仓库中 -->
+	<dependency>
+		<groupId>com.h3c</groupId>
+		<artifactId>ADLogin</artifactId>
+		<version>0.0.1</version>
+	</dependency>
+	<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional><!-- optional=true,依赖不会传递，该项目依赖devtools；之后依赖myboot项目的项目如果想要使用devtools，需要重新引入 -->
+            <scope>runtime</scope>
+   </dependency>
+   <!--开启 cache 缓存-->
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-cache</artifactId>
+	</dependency>
+	<!-- ehcache 缓存 -->
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-aop</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>net.sf.ehcache</groupId>
+		<artifactId>ehcache</artifactId>
+	</dependency>
+		<!-- shiro ehcache -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-ehcache</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+	<dependency>
+		<groupId>com.h3c.mds</groupId>
+		<artifactId>h3c-mds-dept</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
+  </dependencies>
+  
+  
+  <!-- woff等文件显示 -->
+  <build>
+    <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>static/easyui/themes/icon/**/**</exclude>
+                    <exclude>static/fonts/**</exclude>
+                    <exclude>static/excel/*.xls</exclude>
+                    <exclude>static/excel/*.xlsx</exclude>
+                    <exclude>static/help/*.docx</exclude>
+                    <exclude>static/help/*.doc</exclude>
+                    <exclude>static/help/*.pdf</exclude>
+                   <!--  <exclude>**/*.ttf</exclude>
+                    <exclude>**/*.eot</exclude>
+                    <exclude>**/*.svg</exclude> -->
+                </excludes>
+ 
+            </resource>
+ 
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                 <include>static/easyui/themes/icon/**/**</include>
+                 <include>static/fonts/**</include>
+                 <include>static/excel/*.xls</include>
+                 <include>static/excel/*.xlsx</include>
+                    <!-- <include>**/*.woff</include>
+                    <include>**/*.ttf</include>
+                    <include>**/*.eot</include>
+                    <include>**/*.svg</include> -->
+                </includes>
+            </resource>
+            </resources> 
+  	<plugins>
+  		<plugin>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-maven-plugin</artifactId>
+           
+        </plugin>
+         <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>woff</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>eot</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>svg</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                </configuration>
+            </plugin>
+<plugin>
+	  <groupId>org.jacoco</groupId>
+	  <artifactId>jacoco-maven-plugin</artifactId>
+	<version>0.8.5</version>
+	<executions>
+	<execution>
+	<id>pre-unit-test</id>
+	<goals>
+	 <goal>prepare-agent</goal>
+	</goals>
+	<configuration>
+		 <propertyName>jacocoArgLine</propertyName>
+		</configuration>
+		</execution>
+		<execution>
+		  <id>post-unit-test</id>
+			<phase>package</phase>
+		   <goals>
+		   <goal>report</goal>
+		   </goals>
+		  <configuration>
+           <!--这里可以设置单测覆盖率检测的一些文件，不设置默认检测所有-->
+           <includes>
+                  <include>./h3c-mds-dept/src/main/java/com/h3c/mds/dept/service/**/*.*</include>
+             </includes>
+         </configuration>
+	      </execution>
+	  </executions>
+	</plugin>
+	<plugin>
+		 <groupId>org.apache.maven.plugins</groupId>
+		<!-- maven-surefire-plugin是maven里执行测试用例的插件-->
+		<artifactId>maven-surefire-plugin</artifactId>
+		<version>2.9</version>
+		<configuration>
+		 <argLine>-Xmx256M ${jacocoArgLine}</argLine>
+		 <skip>false</skip>
+		 <testFailureIgnore>true</testFailureIgnore>
+	      <!--这里可以设置单测文件--> 
+		 <includes> 
+			    <include>src/test/java/**</include>
+		 </includes>
+	   </configuration>
+</plugin>   
+
+  	</plugins>
+  </build>
+</project>

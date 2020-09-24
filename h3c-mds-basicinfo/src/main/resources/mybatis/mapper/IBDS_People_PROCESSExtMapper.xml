@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.IBDS_People_PROCESSMapper">
+  <!-- 获取最大单号 -->
+  <select id="getMaxCode" resultType="string">
+		SELECT MAX(APPLY_CODE) FROM IBDS_People_PROCESS WHERE   SUBSTRING(APPLY_CODE,2,8)=REPLACE(CONVERT(NVARCHAR(200),GETDATE(),23),'-','')
+	</select>
+  <insert id="insertSelectiveBackID" parameterType="com.h3c.mds.basicinfo.entity.IBDS_People_PROCESS" useGeneratedKeys="true" keyProperty="id">
+    insert into IBDS_People_PROCESS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="applyCode != null">
+        APPLY_CODE,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="handler != null">
+        Handler,
+      </if>
+      <if test="instanseId != null">
+        Instanse_ID,
+      </if>
+      <if test="currentnode != null">
+        CurrentNode,
+      </if>
+      <if test="statusDesc != null">
+        STATUS_DESC,
+      </if>
+      <if test="firstSign != null">
+        First_Sign,
+      </if>
+      <if test="firstDate != null">
+        First_Date,
+      </if>
+      <if test="ipmtSign != null">
+        IPMT_Sign,
+      </if>
+      <if test="ipmtDate != null">
+        IPMT_Date,
+      </if>
+      <if test="ipmtOpinion != null">
+        IPMT_Opinion,
+      </if>
+      <if test="ipmtResult != null">
+        IPMT_Result,
+      </if>
+      <if test="creator != null">
+        Creator,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+      <if test="modifier != null">
+        Modifier,
+      </if>
+      <if test="modifytime != null">
+        ModifyTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="applyCode != null">
+        #{applyCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="handler != null">
+        #{handler,jdbcType=NVARCHAR},
+      </if>
+      <if test="instanseId != null">
+        #{instanseId,jdbcType=NVARCHAR},
+      </if>
+      <if test="currentnode != null">
+        #{currentnode,jdbcType=NVARCHAR},
+      </if>
+      <if test="statusDesc != null">
+        #{statusDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="firstSign != null">
+        #{firstSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="firstDate != null">
+        #{firstDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipmtSign != null">
+        #{ipmtSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtDate != null">
+        #{ipmtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipmtOpinion != null">
+        #{ipmtOpinion,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtResult != null">
+        #{ipmtResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifytime != null">
+        #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

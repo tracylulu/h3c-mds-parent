@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.finance.dao.FProjectProductRelMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.finance.entity.FProjectProductRel">
+    <result column="f_projno" jdbcType="VARCHAR" property="fProjno" />
+    <result column="f_product_code" jdbcType="VARCHAR" property="fProductCode" />
+    <result column="rate" jdbcType="VARCHAR" property="rate" />
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="f_old_product_code" jdbcType="VARCHAR" property="fOldProductCode" />
+    <result column="f_old_rate" jdbcType="VARCHAR" property="fOldRate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    f_projno, f_product_code, rate, ID, f_old_product_code, f_old_rate
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.finance.entity.FProjectProductRelExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_F_PROJECT_PRODUCT_REL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.finance.entity.FProjectProductRelExample">
+    delete from IBDS_F_PROJECT_PRODUCT_REL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.finance.entity.FProjectProductRel">
+    insert into IBDS_F_PROJECT_PRODUCT_REL (f_projno, f_product_code, rate, 
+      ID, f_old_product_code, f_old_rate
+      )
+    values (#{fProjno,jdbcType=VARCHAR}, #{fProductCode,jdbcType=VARCHAR}, #{rate,jdbcType=VARCHAR}, 
+      #{id,jdbcType=INTEGER}, #{fOldProductCode,jdbcType=VARCHAR}, #{fOldRate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.finance.entity.FProjectProductRel">
+    insert into IBDS_F_PROJECT_PRODUCT_REL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fProjno != null">
+        f_projno,
+      </if>
+      <if test="fProductCode != null">
+        f_product_code,
+      </if>
+      <if test="rate != null">
+        rate,
+      </if>
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="fOldProductCode != null">
+        f_old_product_code,
+      </if>
+      <if test="fOldRate != null">
+        f_old_rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fProjno != null">
+        #{fProjno,jdbcType=VARCHAR},
+      </if>
+      <if test="fProductCode != null">
+        #{fProductCode,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fOldProductCode != null">
+        #{fOldProductCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fOldRate != null">
+        #{fOldRate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.finance.entity.FProjectProductRelExample" resultType="java.lang.Long">
+    select count(*) from IBDS_F_PROJECT_PRODUCT_REL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_F_PROJECT_PRODUCT_REL
+    <set>
+      <if test="record.fProjno != null">
+        f_projno = #{record.fProjno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fProductCode != null">
+        f_product_code = #{record.fProductCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rate != null">
+        rate = #{record.rate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.fOldProductCode != null">
+        f_old_product_code = #{record.fOldProductCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fOldRate != null">
+        f_old_rate = #{record.fOldRate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_F_PROJECT_PRODUCT_REL
+    set f_projno = #{record.fProjno,jdbcType=VARCHAR},
+      f_product_code = #{record.fProductCode,jdbcType=VARCHAR},
+      rate = #{record.rate,jdbcType=VARCHAR},
+      ID = #{record.id,jdbcType=INTEGER},
+      f_old_product_code = #{record.fOldProductCode,jdbcType=VARCHAR},
+      f_old_rate = #{record.fOldRate,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

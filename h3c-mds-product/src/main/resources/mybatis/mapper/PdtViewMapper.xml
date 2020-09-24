@@ -1,0 +1,897 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.PdtViewMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.product.entity.PdtView">
+    <result column="PLIPMT" jdbcType="NVARCHAR" property="plipmt" />
+    <result column="PRODLINE" jdbcType="NVARCHAR" property="prodline" />
+    <result column="PDTNo" jdbcType="NVARCHAR" property="pdtno" />
+    <result column="PDT" jdbcType="NVARCHAR" property="pdt" />
+    <result column="engPDT" jdbcType="NVARCHAR" property="engpdt" />
+    <result column="PDTOld" jdbcType="NVARCHAR" property="pdtold" />
+    <result column="Status" jdbcType="NVARCHAR" property="status" />
+    <result column="PRODLINENo" jdbcType="NVARCHAR" property="prodlineno" />
+    <result column="PDT_Manager" jdbcType="NVARCHAR" property="pdtManager" />
+    <result column="CMJKR_ID" jdbcType="NVARCHAR" property="cmjkrId" />
+    <result column="SCJKR_ID" jdbcType="NVARCHAR" property="scjkrId" />
+    <result column="HCJKR_ID" jdbcType="NVARCHAR" property="hcjkrId" />
+    <result column="AbroadJKR_ID" jdbcType="NVARCHAR" property="abroadjkrId" />
+    <result column="OrderDecom" jdbcType="NVARCHAR" property="orderdecom" />
+    <result column="Quality_Mnger_ID" jdbcType="NVARCHAR" property="qualityMngerId" />
+    <result column="PDT_GROUP" jdbcType="NVARCHAR" property="pdtGroup" />
+    <result column="RND_GROUP" jdbcType="NVARCHAR" property="rndGroup" />
+    <result column="Readers" jdbcType="NVARCHAR" property="readers" />
+    <result column="Remark" jdbcType="NVARCHAR" property="remark" />
+    <result column="POP_ID" jdbcType="NVARCHAR" property="popId" />
+    <result column="LPDT_ID" jdbcType="NVARCHAR" property="lpdtId" />
+    <result column="RNDPDT_ID" jdbcType="NVARCHAR" property="rndpdtId" />
+    <result column="MKTPDT_ID" jdbcType="NVARCHAR" property="mktpdtId" />
+    <result column="FINPDT_ID" jdbcType="NVARCHAR" property="finpdtId" />
+    <result column="PROPDT_ID" jdbcType="NVARCHAR" property="propdtId" />
+    <result column="PPPDT_ID" jdbcType="NVARCHAR" property="pppdtId" />
+    <result column="MFGPDT_ID" jdbcType="NVARCHAR" property="mfgpdtId" />
+    <result column="TSPDT_ID" jdbcType="NVARCHAR" property="tspdtId" />
+    <result column="PQA_ID" jdbcType="NVARCHAR" property="pqaId" />
+    <result column="TE_ID" jdbcType="NVARCHAR" property="teId" />
+    <result column="TD_ID" jdbcType="NVARCHAR" property="tdId" />
+    <result column="FA_ID" jdbcType="NVARCHAR" property="faId" />
+    <result column="SE_ID" jdbcType="NVARCHAR" property="seId" />
+    <result column="CMO_ID" jdbcType="NVARCHAR" property="cmoId" />
+    <result column="NMJKR_ID" jdbcType="NVARCHAR" property="nmjkrId" />
+    <result column="SOFTWARE_MANAGER" jdbcType="NVARCHAR" property="softwareManager" />
+    <result column="HARDWARE_MANAGER" jdbcType="NVARCHAR" property="hardwareManager" />
+    <result column="EQUIPMENT_MANAGER" jdbcType="NVARCHAR" property="equipmentManager" />
+    <result column="SQA_ID" jdbcType="NVARCHAR" property="sqaId" />
+    <result column="HQA_ID" jdbcType="NVARCHAR" property="hqaId" />
+    <result column="TQA_ID" jdbcType="NVARCHAR" property="tqaId" />
+    <result column="PDE_ID" jdbcType="NVARCHAR" property="pdeId" />
+    <result column="SOFTWARE_TEST_MANAGER" jdbcType="NVARCHAR" property="softwareTestManager" />
+    <result column="HARDWARE_TEST_MANAGER" jdbcType="NVARCHAR" property="hardwareTestManager" />
+    <result column="MARKET_TECHNICAL_MANAGER" jdbcType="NVARCHAR" property="marketTechnicalManager" />
+    <result column="NETWORK_SE" jdbcType="NVARCHAR" property="networkSe" />
+    <result column="SOFTWARE_INTERFATE_PERSON" jdbcType="NVARCHAR" property="softwareInterfatePerson" />
+    <result column="TECHNICAL_INTERFACE_PERSON" jdbcType="NVARCHAR" property="technicalInterfacePerson" />
+    <result column="CREATE_USER" jdbcType="NVARCHAR" property="createUser" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="MODIFY_USER" jdbcType="NVARCHAR" property="modifyUser" />
+    <result column="MODIFY_DATE" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="PLIPMTNo" jdbcType="NVARCHAR" property="plipmtno" />
+    <result column="Column01" jdbcType="NVARCHAR" property="column01" />
+    <result column="Column02" jdbcType="NVARCHAR" property="column02" />
+    <result column="Column03" jdbcType="NVARCHAR" property="column03" />
+    <result column="Column04" jdbcType="NVARCHAR" property="column04" />
+    <result column="Column05" jdbcType="NVARCHAR" property="column05" />
+    <result column="Column06" jdbcType="NVARCHAR" property="column06" />
+    <result column="Column07" jdbcType="NVARCHAR" property="column07" />
+    <result column="Column08" jdbcType="NVARCHAR" property="column08" />
+    <result column="Column09" jdbcType="NVARCHAR" property="column09" />
+    <result column="Column10" jdbcType="NVARCHAR" property="column10" />
+    <result column="plipmt_order" jdbcType="INTEGER" property="plipmtOrder" />
+    <result column="pl_order" jdbcType="INTEGER" property="plOrder" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PLIPMT, PRODLINE, PDTNo, PDT, engPDT, PDTOld, Status, PRODLINENo, PDT_Manager, CMJKR_ID, 
+    SCJKR_ID, HCJKR_ID, AbroadJKR_ID, OrderDecom, Quality_Mnger_ID, PDT_GROUP, RND_GROUP, 
+    Readers, Remark, POP_ID, LPDT_ID, RNDPDT_ID, MKTPDT_ID, FINPDT_ID, PROPDT_ID, PPPDT_ID, 
+    MFGPDT_ID, TSPDT_ID, PQA_ID, TE_ID, TD_ID, FA_ID, SE_ID, CMO_ID, NMJKR_ID, SOFTWARE_MANAGER, 
+    HARDWARE_MANAGER, EQUIPMENT_MANAGER, SQA_ID, HQA_ID, TQA_ID, PDE_ID, SOFTWARE_TEST_MANAGER, 
+    HARDWARE_TEST_MANAGER, MARKET_TECHNICAL_MANAGER, NETWORK_SE, SOFTWARE_INTERFATE_PERSON, 
+    TECHNICAL_INTERFACE_PERSON, CREATE_USER, CREATE_DATE, MODIFY_USER, MODIFY_DATE, id, 
+    PLIPMTNo, Column01, Column02, Column03, Column04, Column05, Column06, Column07, Column08, 
+    Column09, Column10, plipmt_order, pl_order
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.product.entity.PdtViewExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from V_PDT_VIEW
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.product.entity.PdtViewExample">
+    delete from V_PDT_VIEW
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.product.entity.PdtView">
+    insert into V_PDT_VIEW (PLIPMT, PRODLINE, PDTNo, 
+      PDT, engPDT, PDTOld, 
+      Status, PRODLINENo, PDT_Manager, 
+      CMJKR_ID, SCJKR_ID, HCJKR_ID, 
+      AbroadJKR_ID, OrderDecom, Quality_Mnger_ID, 
+      PDT_GROUP, RND_GROUP, Readers, 
+      Remark, POP_ID, LPDT_ID, 
+      RNDPDT_ID, MKTPDT_ID, FINPDT_ID, 
+      PROPDT_ID, PPPDT_ID, MFGPDT_ID, 
+      TSPDT_ID, PQA_ID, TE_ID, 
+      TD_ID, FA_ID, SE_ID, 
+      CMO_ID, NMJKR_ID, SOFTWARE_MANAGER, 
+      HARDWARE_MANAGER, EQUIPMENT_MANAGER, SQA_ID, 
+      HQA_ID, TQA_ID, PDE_ID, 
+      SOFTWARE_TEST_MANAGER, HARDWARE_TEST_MANAGER, 
+      MARKET_TECHNICAL_MANAGER, NETWORK_SE, SOFTWARE_INTERFATE_PERSON, 
+      TECHNICAL_INTERFACE_PERSON, CREATE_USER, 
+      CREATE_DATE, MODIFY_USER, MODIFY_DATE, 
+      id, PLIPMTNo, Column01, 
+      Column02, Column03, Column04, 
+      Column05, Column06, Column07, 
+      Column08, Column09, Column10, 
+      plipmt_order, pl_order)
+    values (#{plipmt,jdbcType=NVARCHAR}, #{prodline,jdbcType=NVARCHAR}, #{pdtno,jdbcType=NVARCHAR}, 
+      #{pdt,jdbcType=NVARCHAR}, #{engpdt,jdbcType=NVARCHAR}, #{pdtold,jdbcType=NVARCHAR}, 
+      #{status,jdbcType=NVARCHAR}, #{prodlineno,jdbcType=NVARCHAR}, #{pdtManager,jdbcType=NVARCHAR}, 
+      #{cmjkrId,jdbcType=NVARCHAR}, #{scjkrId,jdbcType=NVARCHAR}, #{hcjkrId,jdbcType=NVARCHAR}, 
+      #{abroadjkrId,jdbcType=NVARCHAR}, #{orderdecom,jdbcType=NVARCHAR}, #{qualityMngerId,jdbcType=NVARCHAR}, 
+      #{pdtGroup,jdbcType=NVARCHAR}, #{rndGroup,jdbcType=NVARCHAR}, #{readers,jdbcType=NVARCHAR}, 
+      #{remark,jdbcType=NVARCHAR}, #{popId,jdbcType=NVARCHAR}, #{lpdtId,jdbcType=NVARCHAR}, 
+      #{rndpdtId,jdbcType=NVARCHAR}, #{mktpdtId,jdbcType=NVARCHAR}, #{finpdtId,jdbcType=NVARCHAR}, 
+      #{propdtId,jdbcType=NVARCHAR}, #{pppdtId,jdbcType=NVARCHAR}, #{mfgpdtId,jdbcType=NVARCHAR}, 
+      #{tspdtId,jdbcType=NVARCHAR}, #{pqaId,jdbcType=NVARCHAR}, #{teId,jdbcType=NVARCHAR}, 
+      #{tdId,jdbcType=NVARCHAR}, #{faId,jdbcType=NVARCHAR}, #{seId,jdbcType=NVARCHAR}, 
+      #{cmoId,jdbcType=NVARCHAR}, #{nmjkrId,jdbcType=NVARCHAR}, #{softwareManager,jdbcType=NVARCHAR}, 
+      #{hardwareManager,jdbcType=NVARCHAR}, #{equipmentManager,jdbcType=NVARCHAR}, #{sqaId,jdbcType=NVARCHAR}, 
+      #{hqaId,jdbcType=NVARCHAR}, #{tqaId,jdbcType=NVARCHAR}, #{pdeId,jdbcType=NVARCHAR}, 
+      #{softwareTestManager,jdbcType=NVARCHAR}, #{hardwareTestManager,jdbcType=NVARCHAR}, 
+      #{marketTechnicalManager,jdbcType=NVARCHAR}, #{networkSe,jdbcType=NVARCHAR}, #{softwareInterfatePerson,jdbcType=NVARCHAR}, 
+      #{technicalInterfacePerson,jdbcType=NVARCHAR}, #{createUser,jdbcType=NVARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{modifyUser,jdbcType=NVARCHAR}, #{modifyDate,jdbcType=TIMESTAMP}, 
+      #{id,jdbcType=INTEGER}, #{plipmtno,jdbcType=NVARCHAR}, #{column01,jdbcType=NVARCHAR}, 
+      #{column02,jdbcType=NVARCHAR}, #{column03,jdbcType=NVARCHAR}, #{column04,jdbcType=NVARCHAR}, 
+      #{column05,jdbcType=NVARCHAR}, #{column06,jdbcType=NVARCHAR}, #{column07,jdbcType=NVARCHAR}, 
+      #{column08,jdbcType=NVARCHAR}, #{column09,jdbcType=NVARCHAR}, #{column10,jdbcType=NVARCHAR}, 
+      #{plipmtOrder,jdbcType=INTEGER}, #{plOrder,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.product.entity.PdtView">
+    insert into V_PDT_VIEW
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="plipmt != null">
+        PLIPMT,
+      </if>
+      <if test="prodline != null">
+        PRODLINE,
+      </if>
+      <if test="pdtno != null">
+        PDTNo,
+      </if>
+      <if test="pdt != null">
+        PDT,
+      </if>
+      <if test="engpdt != null">
+        engPDT,
+      </if>
+      <if test="pdtold != null">
+        PDTOld,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="prodlineno != null">
+        PRODLINENo,
+      </if>
+      <if test="pdtManager != null">
+        PDT_Manager,
+      </if>
+      <if test="cmjkrId != null">
+        CMJKR_ID,
+      </if>
+      <if test="scjkrId != null">
+        SCJKR_ID,
+      </if>
+      <if test="hcjkrId != null">
+        HCJKR_ID,
+      </if>
+      <if test="abroadjkrId != null">
+        AbroadJKR_ID,
+      </if>
+      <if test="orderdecom != null">
+        OrderDecom,
+      </if>
+      <if test="qualityMngerId != null">
+        Quality_Mnger_ID,
+      </if>
+      <if test="pdtGroup != null">
+        PDT_GROUP,
+      </if>
+      <if test="rndGroup != null">
+        RND_GROUP,
+      </if>
+      <if test="readers != null">
+        Readers,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="popId != null">
+        POP_ID,
+      </if>
+      <if test="lpdtId != null">
+        LPDT_ID,
+      </if>
+      <if test="rndpdtId != null">
+        RNDPDT_ID,
+      </if>
+      <if test="mktpdtId != null">
+        MKTPDT_ID,
+      </if>
+      <if test="finpdtId != null">
+        FINPDT_ID,
+      </if>
+      <if test="propdtId != null">
+        PROPDT_ID,
+      </if>
+      <if test="pppdtId != null">
+        PPPDT_ID,
+      </if>
+      <if test="mfgpdtId != null">
+        MFGPDT_ID,
+      </if>
+      <if test="tspdtId != null">
+        TSPDT_ID,
+      </if>
+      <if test="pqaId != null">
+        PQA_ID,
+      </if>
+      <if test="teId != null">
+        TE_ID,
+      </if>
+      <if test="tdId != null">
+        TD_ID,
+      </if>
+      <if test="faId != null">
+        FA_ID,
+      </if>
+      <if test="seId != null">
+        SE_ID,
+      </if>
+      <if test="cmoId != null">
+        CMO_ID,
+      </if>
+      <if test="nmjkrId != null">
+        NMJKR_ID,
+      </if>
+      <if test="softwareManager != null">
+        SOFTWARE_MANAGER,
+      </if>
+      <if test="hardwareManager != null">
+        HARDWARE_MANAGER,
+      </if>
+      <if test="equipmentManager != null">
+        EQUIPMENT_MANAGER,
+      </if>
+      <if test="sqaId != null">
+        SQA_ID,
+      </if>
+      <if test="hqaId != null">
+        HQA_ID,
+      </if>
+      <if test="tqaId != null">
+        TQA_ID,
+      </if>
+      <if test="pdeId != null">
+        PDE_ID,
+      </if>
+      <if test="softwareTestManager != null">
+        SOFTWARE_TEST_MANAGER,
+      </if>
+      <if test="hardwareTestManager != null">
+        HARDWARE_TEST_MANAGER,
+      </if>
+      <if test="marketTechnicalManager != null">
+        MARKET_TECHNICAL_MANAGER,
+      </if>
+      <if test="networkSe != null">
+        NETWORK_SE,
+      </if>
+      <if test="softwareInterfatePerson != null">
+        SOFTWARE_INTERFATE_PERSON,
+      </if>
+      <if test="technicalInterfacePerson != null">
+        TECHNICAL_INTERFACE_PERSON,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER,
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE,
+      </if>
+      <if test="id != null">
+        id,
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo,
+      </if>
+      <if test="column01 != null">
+        Column01,
+      </if>
+      <if test="column02 != null">
+        Column02,
+      </if>
+      <if test="column03 != null">
+        Column03,
+      </if>
+      <if test="column04 != null">
+        Column04,
+      </if>
+      <if test="column05 != null">
+        Column05,
+      </if>
+      <if test="column06 != null">
+        Column06,
+      </if>
+      <if test="column07 != null">
+        Column07,
+      </if>
+      <if test="column08 != null">
+        Column08,
+      </if>
+      <if test="column09 != null">
+        Column09,
+      </if>
+      <if test="column10 != null">
+        Column10,
+      </if>
+      <if test="plipmtOrder != null">
+        plipmt_order,
+      </if>
+      <if test="plOrder != null">
+        pl_order,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="plipmt != null">
+        #{plipmt,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodline != null">
+        #{prodline,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtno != null">
+        #{pdtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdt != null">
+        #{pdt,jdbcType=NVARCHAR},
+      </if>
+      <if test="engpdt != null">
+        #{engpdt,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtold != null">
+        #{pdtold,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtManager != null">
+        #{pdtManager,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmjkrId != null">
+        #{cmjkrId,jdbcType=NVARCHAR},
+      </if>
+      <if test="scjkrId != null">
+        #{scjkrId,jdbcType=NVARCHAR},
+      </if>
+      <if test="hcjkrId != null">
+        #{hcjkrId,jdbcType=NVARCHAR},
+      </if>
+      <if test="abroadjkrId != null">
+        #{abroadjkrId,jdbcType=NVARCHAR},
+      </if>
+      <if test="orderdecom != null">
+        #{orderdecom,jdbcType=NVARCHAR},
+      </if>
+      <if test="qualityMngerId != null">
+        #{qualityMngerId,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtGroup != null">
+        #{pdtGroup,jdbcType=NVARCHAR},
+      </if>
+      <if test="rndGroup != null">
+        #{rndGroup,jdbcType=NVARCHAR},
+      </if>
+      <if test="readers != null">
+        #{readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="popId != null">
+        #{popId,jdbcType=NVARCHAR},
+      </if>
+      <if test="lpdtId != null">
+        #{lpdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="rndpdtId != null">
+        #{rndpdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="mktpdtId != null">
+        #{mktpdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="finpdtId != null">
+        #{finpdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="propdtId != null">
+        #{propdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="pppdtId != null">
+        #{pppdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="mfgpdtId != null">
+        #{mfgpdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="tspdtId != null">
+        #{tspdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="pqaId != null">
+        #{pqaId,jdbcType=NVARCHAR},
+      </if>
+      <if test="teId != null">
+        #{teId,jdbcType=NVARCHAR},
+      </if>
+      <if test="tdId != null">
+        #{tdId,jdbcType=NVARCHAR},
+      </if>
+      <if test="faId != null">
+        #{faId,jdbcType=NVARCHAR},
+      </if>
+      <if test="seId != null">
+        #{seId,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmoId != null">
+        #{cmoId,jdbcType=NVARCHAR},
+      </if>
+      <if test="nmjkrId != null">
+        #{nmjkrId,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareManager != null">
+        #{softwareManager,jdbcType=NVARCHAR},
+      </if>
+      <if test="hardwareManager != null">
+        #{hardwareManager,jdbcType=NVARCHAR},
+      </if>
+      <if test="equipmentManager != null">
+        #{equipmentManager,jdbcType=NVARCHAR},
+      </if>
+      <if test="sqaId != null">
+        #{sqaId,jdbcType=NVARCHAR},
+      </if>
+      <if test="hqaId != null">
+        #{hqaId,jdbcType=NVARCHAR},
+      </if>
+      <if test="tqaId != null">
+        #{tqaId,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdeId != null">
+        #{pdeId,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareTestManager != null">
+        #{softwareTestManager,jdbcType=NVARCHAR},
+      </if>
+      <if test="hardwareTestManager != null">
+        #{hardwareTestManager,jdbcType=NVARCHAR},
+      </if>
+      <if test="marketTechnicalManager != null">
+        #{marketTechnicalManager,jdbcType=NVARCHAR},
+      </if>
+      <if test="networkSe != null">
+        #{networkSe,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareInterfatePerson != null">
+        #{softwareInterfatePerson,jdbcType=NVARCHAR},
+      </if>
+      <if test="technicalInterfacePerson != null">
+        #{technicalInterfacePerson,jdbcType=NVARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="plipmtno != null">
+        #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="column01 != null">
+        #{column01,jdbcType=NVARCHAR},
+      </if>
+      <if test="column02 != null">
+        #{column02,jdbcType=NVARCHAR},
+      </if>
+      <if test="column03 != null">
+        #{column03,jdbcType=NVARCHAR},
+      </if>
+      <if test="column04 != null">
+        #{column04,jdbcType=NVARCHAR},
+      </if>
+      <if test="column05 != null">
+        #{column05,jdbcType=NVARCHAR},
+      </if>
+      <if test="column06 != null">
+        #{column06,jdbcType=NVARCHAR},
+      </if>
+      <if test="column07 != null">
+        #{column07,jdbcType=NVARCHAR},
+      </if>
+      <if test="column08 != null">
+        #{column08,jdbcType=NVARCHAR},
+      </if>
+      <if test="column09 != null">
+        #{column09,jdbcType=NVARCHAR},
+      </if>
+      <if test="column10 != null">
+        #{column10,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmtOrder != null">
+        #{plipmtOrder,jdbcType=INTEGER},
+      </if>
+      <if test="plOrder != null">
+        #{plOrder,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.product.entity.PdtViewExample" resultType="java.lang.Long">
+    select count(*) from V_PDT_VIEW
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update V_PDT_VIEW
+    <set>
+      <if test="record.plipmt != null">
+        PLIPMT = #{record.plipmt,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodline != null">
+        PRODLINE = #{record.prodline,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdtno != null">
+        PDTNo = #{record.pdtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdt != null">
+        PDT = #{record.pdt,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engpdt != null">
+        engPDT = #{record.engpdt,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdtold != null">
+        PDTOld = #{record.pdtold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null">
+        Status = #{record.status,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodlineno != null">
+        PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdtManager != null">
+        PDT_Manager = #{record.pdtManager,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.cmjkrId != null">
+        CMJKR_ID = #{record.cmjkrId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.scjkrId != null">
+        SCJKR_ID = #{record.scjkrId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.hcjkrId != null">
+        HCJKR_ID = #{record.hcjkrId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.abroadjkrId != null">
+        AbroadJKR_ID = #{record.abroadjkrId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.orderdecom != null">
+        OrderDecom = #{record.orderdecom,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.qualityMngerId != null">
+        Quality_Mnger_ID = #{record.qualityMngerId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdtGroup != null">
+        PDT_GROUP = #{record.pdtGroup,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.rndGroup != null">
+        RND_GROUP = #{record.rndGroup,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.readers != null">
+        Readers = #{record.readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remark != null">
+        Remark = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.popId != null">
+        POP_ID = #{record.popId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lpdtId != null">
+        LPDT_ID = #{record.lpdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.rndpdtId != null">
+        RNDPDT_ID = #{record.rndpdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.mktpdtId != null">
+        MKTPDT_ID = #{record.mktpdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.finpdtId != null">
+        FINPDT_ID = #{record.finpdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.propdtId != null">
+        PROPDT_ID = #{record.propdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pppdtId != null">
+        PPPDT_ID = #{record.pppdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.mfgpdtId != null">
+        MFGPDT_ID = #{record.mfgpdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tspdtId != null">
+        TSPDT_ID = #{record.tspdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pqaId != null">
+        PQA_ID = #{record.pqaId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.teId != null">
+        TE_ID = #{record.teId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tdId != null">
+        TD_ID = #{record.tdId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.faId != null">
+        FA_ID = #{record.faId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.seId != null">
+        SE_ID = #{record.seId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.cmoId != null">
+        CMO_ID = #{record.cmoId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.nmjkrId != null">
+        NMJKR_ID = #{record.nmjkrId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.softwareManager != null">
+        SOFTWARE_MANAGER = #{record.softwareManager,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.hardwareManager != null">
+        HARDWARE_MANAGER = #{record.hardwareManager,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.equipmentManager != null">
+        EQUIPMENT_MANAGER = #{record.equipmentManager,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sqaId != null">
+        SQA_ID = #{record.sqaId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.hqaId != null">
+        HQA_ID = #{record.hqaId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tqaId != null">
+        TQA_ID = #{record.tqaId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdeId != null">
+        PDE_ID = #{record.pdeId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.softwareTestManager != null">
+        SOFTWARE_TEST_MANAGER = #{record.softwareTestManager,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.hardwareTestManager != null">
+        HARDWARE_TEST_MANAGER = #{record.hardwareTestManager,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.marketTechnicalManager != null">
+        MARKET_TECHNICAL_MANAGER = #{record.marketTechnicalManager,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.networkSe != null">
+        NETWORK_SE = #{record.networkSe,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.softwareInterfatePerson != null">
+        SOFTWARE_INTERFATE_PERSON = #{record.softwareInterfatePerson,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.technicalInterfacePerson != null">
+        TECHNICAL_INTERFACE_PERSON = #{record.technicalInterfacePerson,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createUser != null">
+        CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyUser != null">
+        MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modifyDate != null">
+        MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.plipmtno != null">
+        PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column01 != null">
+        Column01 = #{record.column01,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column02 != null">
+        Column02 = #{record.column02,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column03 != null">
+        Column03 = #{record.column03,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column04 != null">
+        Column04 = #{record.column04,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column05 != null">
+        Column05 = #{record.column05,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column06 != null">
+        Column06 = #{record.column06,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column07 != null">
+        Column07 = #{record.column07,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column08 != null">
+        Column08 = #{record.column08,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column09 != null">
+        Column09 = #{record.column09,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column10 != null">
+        Column10 = #{record.column10,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plipmtOrder != null">
+        plipmt_order = #{record.plipmtOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.plOrder != null">
+        pl_order = #{record.plOrder,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update V_PDT_VIEW
+    set PLIPMT = #{record.plipmt,jdbcType=NVARCHAR},
+      PRODLINE = #{record.prodline,jdbcType=NVARCHAR},
+      PDTNo = #{record.pdtno,jdbcType=NVARCHAR},
+      PDT = #{record.pdt,jdbcType=NVARCHAR},
+      engPDT = #{record.engpdt,jdbcType=NVARCHAR},
+      PDTOld = #{record.pdtold,jdbcType=NVARCHAR},
+      Status = #{record.status,jdbcType=NVARCHAR},
+      PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      PDT_Manager = #{record.pdtManager,jdbcType=NVARCHAR},
+      CMJKR_ID = #{record.cmjkrId,jdbcType=NVARCHAR},
+      SCJKR_ID = #{record.scjkrId,jdbcType=NVARCHAR},
+      HCJKR_ID = #{record.hcjkrId,jdbcType=NVARCHAR},
+      AbroadJKR_ID = #{record.abroadjkrId,jdbcType=NVARCHAR},
+      OrderDecom = #{record.orderdecom,jdbcType=NVARCHAR},
+      Quality_Mnger_ID = #{record.qualityMngerId,jdbcType=NVARCHAR},
+      PDT_GROUP = #{record.pdtGroup,jdbcType=NVARCHAR},
+      RND_GROUP = #{record.rndGroup,jdbcType=NVARCHAR},
+      Readers = #{record.readers,jdbcType=NVARCHAR},
+      Remark = #{record.remark,jdbcType=NVARCHAR},
+      POP_ID = #{record.popId,jdbcType=NVARCHAR},
+      LPDT_ID = #{record.lpdtId,jdbcType=NVARCHAR},
+      RNDPDT_ID = #{record.rndpdtId,jdbcType=NVARCHAR},
+      MKTPDT_ID = #{record.mktpdtId,jdbcType=NVARCHAR},
+      FINPDT_ID = #{record.finpdtId,jdbcType=NVARCHAR},
+      PROPDT_ID = #{record.propdtId,jdbcType=NVARCHAR},
+      PPPDT_ID = #{record.pppdtId,jdbcType=NVARCHAR},
+      MFGPDT_ID = #{record.mfgpdtId,jdbcType=NVARCHAR},
+      TSPDT_ID = #{record.tspdtId,jdbcType=NVARCHAR},
+      PQA_ID = #{record.pqaId,jdbcType=NVARCHAR},
+      TE_ID = #{record.teId,jdbcType=NVARCHAR},
+      TD_ID = #{record.tdId,jdbcType=NVARCHAR},
+      FA_ID = #{record.faId,jdbcType=NVARCHAR},
+      SE_ID = #{record.seId,jdbcType=NVARCHAR},
+      CMO_ID = #{record.cmoId,jdbcType=NVARCHAR},
+      NMJKR_ID = #{record.nmjkrId,jdbcType=NVARCHAR},
+      SOFTWARE_MANAGER = #{record.softwareManager,jdbcType=NVARCHAR},
+      HARDWARE_MANAGER = #{record.hardwareManager,jdbcType=NVARCHAR},
+      EQUIPMENT_MANAGER = #{record.equipmentManager,jdbcType=NVARCHAR},
+      SQA_ID = #{record.sqaId,jdbcType=NVARCHAR},
+      HQA_ID = #{record.hqaId,jdbcType=NVARCHAR},
+      TQA_ID = #{record.tqaId,jdbcType=NVARCHAR},
+      PDE_ID = #{record.pdeId,jdbcType=NVARCHAR},
+      SOFTWARE_TEST_MANAGER = #{record.softwareTestManager,jdbcType=NVARCHAR},
+      HARDWARE_TEST_MANAGER = #{record.hardwareTestManager,jdbcType=NVARCHAR},
+      MARKET_TECHNICAL_MANAGER = #{record.marketTechnicalManager,jdbcType=NVARCHAR},
+      NETWORK_SE = #{record.networkSe,jdbcType=NVARCHAR},
+      SOFTWARE_INTERFATE_PERSON = #{record.softwareInterfatePerson,jdbcType=NVARCHAR},
+      TECHNICAL_INTERFACE_PERSON = #{record.technicalInterfacePerson,jdbcType=NVARCHAR},
+      CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      id = #{record.id,jdbcType=INTEGER},
+      PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      Column01 = #{record.column01,jdbcType=NVARCHAR},
+      Column02 = #{record.column02,jdbcType=NVARCHAR},
+      Column03 = #{record.column03,jdbcType=NVARCHAR},
+      Column04 = #{record.column04,jdbcType=NVARCHAR},
+      Column05 = #{record.column05,jdbcType=NVARCHAR},
+      Column06 = #{record.column06,jdbcType=NVARCHAR},
+      Column07 = #{record.column07,jdbcType=NVARCHAR},
+      Column08 = #{record.column08,jdbcType=NVARCHAR},
+      Column09 = #{record.column09,jdbcType=NVARCHAR},
+      Column10 = #{record.column10,jdbcType=NVARCHAR},
+      plipmt_order = #{record.plipmtOrder,jdbcType=INTEGER},
+      pl_order = #{record.plOrder,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+</mapper>

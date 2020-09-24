@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.sysmgr.dao.RoleMapper">
+  
+  <select id="getRolesByUserAccount" parameterType="String" resultMap="BaseResultMap">
+  	select distinct R.* from IBDS_ROLE R JOIN IBDS_USER_ROLE UR ON R.HRL_CODE=UR.HURR_HRL_CODE AND UR.HURR_HUL_CODE=#{account} 
+  </select>
+  
+  <select id="getRolesExceptSelf" parameterType="String" resultMap="BaseResultMap">
+   <!-- select distinct R.* from IBDS_ROLE R JOIN IBDS_USER_ROLE UR ON R.HRL_CODE=UR.HURR_HRL_CODE AND UR.HURR_HUL_CODE != #{account}  -->
+		   SELECT
+			* 
+		FROM
+			IBDS_ROLE t 
+		WHERE
+			t.HRL_CODE NOT IN (
+			SELECT DISTINCT
+				R.hrl_code 
+			FROM
+				IBDS_ROLE R
+			JOIN IBDS_USER_ROLE UR ON R.HRL_CODE= UR.HURR_HRL_CODE 
+			AND UR.HURR_HUL_CODE = #{account})
+  </select>
+  
+  <select id="getMaxCode" resultType="String">
+  		select max(hrl_code) from IBDS_Role WHERE hrl_code LIKE 'R_%';
+  </select>
+  <select id="getAllRoles" resultMap="BaseResultMap">
+  		select * from IBDS_Role;
+  </select>
+</mapper>

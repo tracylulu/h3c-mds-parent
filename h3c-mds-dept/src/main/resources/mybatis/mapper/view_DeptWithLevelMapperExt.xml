@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.dept.dao.view_DeptWithLevelMapper">
+	<select id="getExportList" parameterType="map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from view_DeptWithLevel
+		where level=#{param.level}
+
+		<if test="param.searchParam!=null and param.searchParam!=''">
+			and <include refid="query"></include>
+		</if>
+		order by firstCode
+		<if test="param.level==2 ">
+			,secondCode
+		</if>
+		<if test="param.level==3 ">
+			,secondCode,thirdCode
+		</if>
+		<if test="param.level==4 ">
+			,secondCode,thirdCode,fourthCode
+		</if>
+	</select>
+	<select id="getList" parameterType="map" resultMap="BaseResultMap">
+		<if test="param.id==null or param.id=='' ">			
+			SELECT distinct firstcode,firstname FROM view_DeptWithLevel 
+			where firstcode!='50040000'
+				
+			<if test="param.searchParam!=null and param.searchParam!=''">
+				and <include refid="query"></include>
+				and level=#{param.level}
+			</if>
+			
+			order by firstcode		
+		</if>
+		<if test="param.id!=null and param.id!='' ">
+			<if test="param.isEnd==1 and param.level==2">
+				SELECT distinct secondcode as firstcode,secondname as firstname,COACode,
+				nature, NameEng, Manager, Secretary, DeptPlanner, Approver,
+				Abbreviation,
+				PlanApprover, PR, parentCode, Consignor, level, ManagerName, SecretaryName,
+				ManagerName,SecretaryName ,DeptPlannerName,ApproverName,AbbreviationName ,
+				PlanApproverName,PRName,ConsignorName
+				FROM view_DeptWithLevel WHERE parentcode=#{param.id}
+			</if>
+			<if test="param.isEnd==0 and param.level==3">
+				SELECT distinct secondcode as firstcode,secondname as firstname FROM
+				view_DeptWithLevel WHERE firstcode=#{param.id} and level=3
+			</if>
+			<if test="param.isEnd==1 and param.level==3">
+				SELECT distinct thirdcode as firstcode,thirdname as firstname,COACode,
+				nature, NameEng, Manager, Secretary, DeptPlanner, Approver,
+				Abbreviation,
+				PlanApprover, PR, parentCode, Consignor, level, ManagerName, SecretaryName,
+				ManagerName,SecretaryName ,DeptPlannerName,ApproverName,AbbreviationName ,
+				PlanApproverName,PRName,ConsignorName				
+				FROM view_DeptWithLevel WHERE parentcode=#{param.id}
+			</if>
+			
+			<if test="param.searchParam!=null and param.searchParam!=''">
+				and
+				<include refid="query"></include>
+			</if>
+			<if test="param.isEnd==1 and param.level==2">
+				order by secondcode
+			</if>
+			<if test="param.isEnd==0 and param.level==3">
+				order by secondcode
+			</if>
+			<if test="param.isEnd==1 and param.level==3">
+				order by thirdcode
+			</if>
+		</if>
+	</select>
+	<sql id="query">
+		CHARINDEX(#{param.searchParam},isnull(firstcode,'')+ isnull(firstname,'')+isnull(secondcode,'')
+		+isnull(secondname,'')+isnull(thirdcode,'')+ isnull(thirdname,'')+
+		+isnull(fourthcode,'')+ isnull(fourthname,'')+
+		+isnull(nameeng,'')+ isnull(coacode,'')+ isnull(abbreviation,'')+isnull(deptplanner,'')
+		+isnull(ManagerName,'')+isnull(Manager,'')+isnull(Manager,'SecretaryName')
+		+isnull(Secretary,''))&gt;0
+	</sql>
+	
+	<!--一级部门展示列表信息  -->
+	<select id="getyijiDeptList" parameterType="map" resultMap="BaseResultMap">
+				
+			SELECT * FROM view_DeptWithLevel where level=1
+			<if test="param.searchParam!=null and param.searchParam!=''">
+				and
+				<include refid="query"></include>
+			</if>			
+			order by firstcode
+	</select>
+	
+	
+	<select id="get4DeptList" parameterType="map" resultMap="BaseResultMap">
+		<if test="param.id==null or param.id=='' ">			
+			SELECT distinct firstcode,firstname FROM view_DeptWithLevel
+			where fourthcode is not null and fourthcode!=''
+				<if test="param.searchParam!=null and param.searchParam!=''">
+				and
+					<include refid="query"></include>
+				</if>
+				order by firstcode
+		</if>
+		<if test="param.id!=null and param.id!='' ">
+			<if test="param.isEnd==1 and param.level==2">
+				SELECT distinct secondcode as firstcode,secondname as firstname,COACode,
+				nature, NameEng, Manager, Secretary, DeptPlanner, Approver,
+				Abbreviation,
+				PlanApprover, PR, parentCode, Consignor, level, ManagerName, SecretaryName,
+				ManagerName,SecretaryName ,DeptPlannerName,ApproverName,AbbreviationName ,
+				PlanApproverName,PRName,ConsignorName
+				FROM view_DeptWithLevel WHERE parentcode=#{param.id}
+			</if>
+			<if test="param.isEnd==0 and param.level==3">
+				SELECT distinct secondcode as firstcode,secondname as firstname FROM
+				view_DeptWithLevel WHERE firstcode=#{param.id} and level=3
+			</if>
+			<if test="param.isEnd==1 and param.level==3">
+				SELECT distinct thirdcode as firstcode,thirdname as firstname,COACode,
+				nature, NameEng, Manager, Secretary, DeptPlanner, Approver,
+				Abbreviation,
+				PlanApprover, PR, parentCode, Consignor, level, ManagerName, SecretaryName,
+				ManagerName,SecretaryName ,DeptPlannerName,ApproverName,AbbreviationName ,
+				PlanApproverName,PRName,ConsignorName
+				FROM view_DeptWithLevel WHERE parentcode=#{param.id}
+			</if>
+			<if test="param.isEnd==0 and param.level==4 and param.currentlevel==1">
+				SELECT distinct secondcode as firstcode,secondname as firstname FROM
+				view_DeptWithLevel WHERE firstcode=#{param.id} and level=4
+			</if>
+			<if test="param.isEnd==0 and param.level==4 and param.currentlevel==2">
+				SELECT distinct thirdcode as firstcode,thirdname as firstname FROM
+				view_DeptWithLevel WHERE secondcode=#{param.id} and level=4
+			</if>
+			<if test="param.isEnd==1 and param.level==4 and param.currentlevel==3">
+				SELECT distinct fourthcode as firstcode,fourthname as firstname,COACode,
+				nature, NameEng, Manager, Secretary, DeptPlanner, Approver,
+				Abbreviation,
+				PlanApprover, PR, parentCode, Consignor, level, ManagerName, SecretaryName,
+				ManagerName,SecretaryName ,DeptPlannerName,ApproverName,AbbreviationName ,
+				PlanApproverName,PRName,ConsignorName
+				FROM view_DeptWithLevel WHERE parentcode=#{param.id}
+			</if>
+	
+			<if test="param.searchParam!=null and param.searchParam!=''">
+				and
+				<include refid="query"></include>
+			</if>
+			
+			
+			<if test="param.isEnd==0 and param.level==4 and param.currentlevel==1">
+				order by secondcode
+			</if>
+			<if test="param.isEnd==0 and param.level==4 and param.currentlevel==2">
+				order by thirdcode
+			</if>
+			<if test="param.isEnd==1 and param.level==4 and param.currentlevel==3">
+				order by fourthcode
+			</if>
+		</if>
+	</select>
+	
+	 
+	
+</mapper>

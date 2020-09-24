@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.finance.dao.FProdViewMapper">
+
+  <resultMap id="BaseResultMap1" type="com.h3c.mds.finance.entity.FProdViewExt" extends="BaseResultMap">
+    <result column="CODE"  property="code" />
+    <result column="TYPE"  property="type" />
+  </resultMap>
+
+  <select id="getDataList" parameterType="java.util.Map" resultMap="BaseResultMap1">
+
+    <!-- IPMT层 -->
+    <if test="param.id == null">
+      select distinct 'line_'+ISNULL(PRODLINE_NO,'') as CODE,ISNULL(PRODLINE_NO,'') AS PRODLINE_NO,'1' AS TYPE  from VIEW_F_PROD WHERE 1=1
+        <if test="param.searchParas != null and param.searchParas != ''">
+            and CHARINDEX(#{param.searchParas},isnull(PRODLINE_NO,'')+isnull(PRODLINE_DESC,'')+isnull(PROD_NO,'')+isnull(PROD_NAME,''))&gt;0
+        </if>
+        ORDER BY PRODLINE_NO
+    </if>
+
+
+    <if test="param.id != null">
+        <if test="param.type == 1">
+            <if test="param.id == 'null'">
+              SELECT DISTINCT 'line2_'+CONVERT(nvarchar,PRODLINE_ID) AS CODE,PRODLINE_DESC,'2' AS TYPE FROM VIEW_F_PROD WHERE PRODLINE_NO='' OR PRODLINE_NO is null
+                <if test="param.searchParas != null and param.searchParas != ''">
+                    and CHARINDEX(#{param.searchParas},isnull(PRODLINE_NO,'')+isnull(PRODLINE_DESC,'')+isnull(PROD_NO,'')+isnull(PROD_NAME,''))&gt;0
+                </if>
+
+            </if>
+            <if test="param.id != 'null'">
+              SELECT DISTINCT 'line2_'+CONVERT(nvarchar,PRODLINE_ID) AS CODE,PRODLINE_DESC,'2' AS TYPE FROM VIEW_F_PROD WHERE PRODLINE_NO=#{param.id}
+                <if test="param.searchParas != null and param.searchParas != ''">
+                    and CHARINDEX(#{param.searchParas},isnull(PRODLINE_NO,'')+isnull(PRODLINE_DESC,'')+isnull(PROD_NO,'')+isnull(PROD_NAME,''))&gt;0
+                </if>
+
+            </if>
+
+        </if>
+
+        <if test="param.type == 2">
+          select distinct ID AS CODE,PROD_NO,PROD_NAME,'3' AS TYPE from VIEW_F_PROD
+          where PRODLINE_ID=#{param.id} AND ID IS NOT NULL
+            <if test="param.searchParas != null and param.searchParas != ''">
+                and CHARINDEX(#{param.searchParas},isnull(PRODLINE_NO,'')+isnull(PRODLINE_DESC,'')+isnull(PROD_NO,'')+isnull(PROD_NAME,''))&gt;0
+            </if>
+            ORDER BY PROD_NO
+        </if>
+
+
+    </if>
+
+
+  </select>
+
+  <select id="selectByCode" parameterType="String" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from VIEW_F_PROD WHERE PROD_NO=#{code}
+  </select>
+</mapper>

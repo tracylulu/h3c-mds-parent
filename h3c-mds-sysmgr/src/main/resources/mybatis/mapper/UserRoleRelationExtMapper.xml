@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.sysmgr.dao.UserRoleRelationMapper">
+	<delete id="delUserRoleByUserCode" parameterType="String">
+  		delete from  IBDS_User_Role where  HURR_HUL_CODE = #{userCode}
+  </delete>
+  
+  <insert id="addUserRoleBatch" parameterType="map">
+  insert into IBDS_User_Role (HURR_HUL_CODE,HURR_HRL_CODE)  values 
+      <foreach collection="list" item="record" index="index" separator=",">
+      (#{record.hurrHulCode,jdbcType=NVARCHAR}, #{record.hurrHrlCode,jdbcType=NVARCHAR})
+    </foreach>
+  </insert>
+  <delete id="delUserRole" parameterType="map">
+  		delete from  IBDS_User_Role where  HURR_HUL_CODE = #{params.userCode} and HURR_HRL_CODE=#{params.roleCode}
+  </delete>
+</mapper>

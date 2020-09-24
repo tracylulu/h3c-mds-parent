@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.IBDS_Product_PROCESSMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.basicinfo.entity.IBDS_Product_PROCESS">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="ApplyCode" jdbcType="NVARCHAR" property="applycode" />
+    <result column="Status" jdbcType="NVARCHAR" property="status" />
+    <result column="Responsible" jdbcType="NVARCHAR" property="responsible" />
+    <result column="StatusName" jdbcType="NVARCHAR" property="statusname" />
+    <result column="APPLY_TYPE" jdbcType="NVARCHAR" property="applyType" />
+    <result column="Remark" jdbcType="NVARCHAR" property="remark" />
+    <result column="Readers" jdbcType="NVARCHAR" property="readers" />
+    <result column="copyto" jdbcType="NVARCHAR" property="copyto" />
+    <result column="POP_FillName" jdbcType="NVARCHAR" property="popFillname" />
+    <result column="POP_FillTime" jdbcType="TIMESTAMP" property="popFilltime" />
+    <result column="IPMT_Suggestion" jdbcType="NVARCHAR" property="ipmtSuggestion" />
+    <result column="IPMT_FillName" jdbcType="NVARCHAR" property="ipmtFillname" />
+    <result column="IPMT_FillTime" jdbcType="TIMESTAMP" property="ipmtFilltime" />
+    <result column="CheckResult" jdbcType="NVARCHAR" property="checkresult" />
+    <result column="EditCurrentUser" jdbcType="NVARCHAR" property="editcurrentuser" />
+    <result column="AssignSign" jdbcType="NVARCHAR" property="assignsign" />
+    <result column="AssignDate" jdbcType="TIMESTAMP" property="assigndate" />
+    <result column="INSTANSE_ID" jdbcType="NVARCHAR" property="instanseId" />
+    <result column="CURRENT_NODE" jdbcType="NVARCHAR" property="currentNode" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="CREATE_USER" jdbcType="NVARCHAR" property="createUser" />
+    <result column="MODIFY_DATE" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="MODIFY_USER" jdbcType="NVARCHAR" property="modifyUser" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, ApplyCode, Status, Responsible, StatusName, APPLY_TYPE, Remark, Readers, copyto, 
+    POP_FillName, POP_FillTime, IPMT_Suggestion, IPMT_FillName, IPMT_FillTime, CheckResult, 
+    EditCurrentUser, AssignSign, AssignDate, INSTANSE_ID, CURRENT_NODE, CREATE_DATE, 
+    CREATE_USER, MODIFY_DATE, MODIFY_USER
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_Product_PROCESSExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_Product_PROCESS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_Product_PROCESS
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_Product_PROCESS
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_Product_PROCESSExample">
+    delete from IBDS_Product_PROCESS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.basicinfo.entity.IBDS_Product_PROCESS">
+    insert into IBDS_Product_PROCESS (ID, ApplyCode, Status, 
+      Responsible, StatusName, APPLY_TYPE, 
+      Remark, Readers, copyto, 
+      POP_FillName, POP_FillTime, IPMT_Suggestion, 
+      IPMT_FillName, IPMT_FillTime, CheckResult, 
+      EditCurrentUser, AssignSign, AssignDate, 
+      INSTANSE_ID, CURRENT_NODE, CREATE_DATE, 
+      CREATE_USER, MODIFY_DATE, MODIFY_USER
+      )
+    values (#{id,jdbcType=INTEGER}, #{applycode,jdbcType=NVARCHAR}, #{status,jdbcType=NVARCHAR}, 
+      #{responsible,jdbcType=NVARCHAR}, #{statusname,jdbcType=NVARCHAR}, #{applyType,jdbcType=NVARCHAR}, 
+      #{remark,jdbcType=NVARCHAR}, #{readers,jdbcType=NVARCHAR}, #{copyto,jdbcType=NVARCHAR}, 
+      #{popFillname,jdbcType=NVARCHAR}, #{popFilltime,jdbcType=TIMESTAMP}, #{ipmtSuggestion,jdbcType=NVARCHAR}, 
+      #{ipmtFillname,jdbcType=NVARCHAR}, #{ipmtFilltime,jdbcType=TIMESTAMP}, #{checkresult,jdbcType=NVARCHAR}, 
+      #{editcurrentuser,jdbcType=NVARCHAR}, #{assignsign,jdbcType=NVARCHAR}, #{assigndate,jdbcType=TIMESTAMP}, 
+      #{instanseId,jdbcType=NVARCHAR}, #{currentNode,jdbcType=NVARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=NVARCHAR}, #{modifyDate,jdbcType=TIMESTAMP}, #{modifyUser,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.basicinfo.entity.IBDS_Product_PROCESS">
+    insert into IBDS_Product_PROCESS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="applycode != null">
+        ApplyCode,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="responsible != null">
+        Responsible,
+      </if>
+      <if test="statusname != null">
+        StatusName,
+      </if>
+      <if test="applyType != null">
+        APPLY_TYPE,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="readers != null">
+        Readers,
+      </if>
+      <if test="copyto != null">
+        copyto,
+      </if>
+      <if test="popFillname != null">
+        POP_FillName,
+      </if>
+      <if test="popFilltime != null">
+        POP_FillTime,
+      </if>
+      <if test="ipmtSuggestion != null">
+        IPMT_Suggestion,
+      </if>
+      <if test="ipmtFillname != null">
+        IPMT_FillName,
+      </if>
+      <if test="ipmtFilltime != null">
+        IPMT_FillTime,
+      </if>
+      <if test="checkresult != null">
+        CheckResult,
+      </if>
+      <if test="editcurrentuser != null">
+        EditCurrentUser,
+      </if>
+      <if test="assignsign != null">
+        AssignSign,
+      </if>
+      <if test="assigndate != null">
+        AssignDate,
+      </if>
+      <if test="instanseId != null">
+        INSTANSE_ID,
+      </if>
+      <if test="currentNode != null">
+        CURRENT_NODE,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE,
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="applycode != null">
+        #{applycode,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="responsible != null">
+        #{responsible,jdbcType=NVARCHAR},
+      </if>
+      <if test="statusname != null">
+        #{statusname,jdbcType=NVARCHAR},
+      </if>
+      <if test="applyType != null">
+        #{applyType,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="readers != null">
+        #{readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="copyto != null">
+        #{copyto,jdbcType=NVARCHAR},
+      </if>
+      <if test="popFillname != null">
+        #{popFillname,jdbcType=NVARCHAR},
+      </if>
+      <if test="popFilltime != null">
+        #{popFilltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipmtSuggestion != null">
+        #{ipmtSuggestion,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtFillname != null">
+        #{ipmtFillname,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtFilltime != null">
+        #{ipmtFilltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkresult != null">
+        #{checkresult,jdbcType=NVARCHAR},
+      </if>
+      <if test="editcurrentuser != null">
+        #{editcurrentuser,jdbcType=NVARCHAR},
+      </if>
+      <if test="assignsign != null">
+        #{assignsign,jdbcType=NVARCHAR},
+      </if>
+      <if test="assigndate != null">
+        #{assigndate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="instanseId != null">
+        #{instanseId,jdbcType=NVARCHAR},
+      </if>
+      <if test="currentNode != null">
+        #{currentNode,jdbcType=NVARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_Product_PROCESSExample" resultType="java.lang.Long">
+    select count(*) from IBDS_Product_PROCESS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_Product_PROCESS
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.applycode != null">
+        ApplyCode = #{record.applycode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null">
+        Status = #{record.status,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.responsible != null">
+        Responsible = #{record.responsible,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.statusname != null">
+        StatusName = #{record.statusname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.applyType != null">
+        APPLY_TYPE = #{record.applyType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remark != null">
+        Remark = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.readers != null">
+        Readers = #{record.readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.copyto != null">
+        copyto = #{record.copyto,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.popFillname != null">
+        POP_FillName = #{record.popFillname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.popFilltime != null">
+        POP_FillTime = #{record.popFilltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ipmtSuggestion != null">
+        IPMT_Suggestion = #{record.ipmtSuggestion,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ipmtFillname != null">
+        IPMT_FillName = #{record.ipmtFillname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ipmtFilltime != null">
+        IPMT_FillTime = #{record.ipmtFilltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.checkresult != null">
+        CheckResult = #{record.checkresult,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.editcurrentuser != null">
+        EditCurrentUser = #{record.editcurrentuser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.assignsign != null">
+        AssignSign = #{record.assignsign,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.assigndate != null">
+        AssignDate = #{record.assigndate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.instanseId != null">
+        INSTANSE_ID = #{record.instanseId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.currentNode != null">
+        CURRENT_NODE = #{record.currentNode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null">
+        CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modifyDate != null">
+        MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyUser != null">
+        MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_Product_PROCESS
+    set ID = #{record.id,jdbcType=INTEGER},
+      ApplyCode = #{record.applycode,jdbcType=NVARCHAR},
+      Status = #{record.status,jdbcType=NVARCHAR},
+      Responsible = #{record.responsible,jdbcType=NVARCHAR},
+      StatusName = #{record.statusname,jdbcType=NVARCHAR},
+      APPLY_TYPE = #{record.applyType,jdbcType=NVARCHAR},
+      Remark = #{record.remark,jdbcType=NVARCHAR},
+      Readers = #{record.readers,jdbcType=NVARCHAR},
+      copyto = #{record.copyto,jdbcType=NVARCHAR},
+      POP_FillName = #{record.popFillname,jdbcType=NVARCHAR},
+      POP_FillTime = #{record.popFilltime,jdbcType=TIMESTAMP},
+      IPMT_Suggestion = #{record.ipmtSuggestion,jdbcType=NVARCHAR},
+      IPMT_FillName = #{record.ipmtFillname,jdbcType=NVARCHAR},
+      IPMT_FillTime = #{record.ipmtFilltime,jdbcType=TIMESTAMP},
+      CheckResult = #{record.checkresult,jdbcType=NVARCHAR},
+      EditCurrentUser = #{record.editcurrentuser,jdbcType=NVARCHAR},
+      AssignSign = #{record.assignsign,jdbcType=NVARCHAR},
+      AssignDate = #{record.assigndate,jdbcType=TIMESTAMP},
+      INSTANSE_ID = #{record.instanseId,jdbcType=NVARCHAR},
+      CURRENT_NODE = #{record.currentNode,jdbcType=NVARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.basicinfo.entity.IBDS_Product_PROCESS">
+    update IBDS_Product_PROCESS
+    <set>
+      <if test="applycode != null">
+        ApplyCode = #{applycode,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        Status = #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="responsible != null">
+        Responsible = #{responsible,jdbcType=NVARCHAR},
+      </if>
+      <if test="statusname != null">
+        StatusName = #{statusname,jdbcType=NVARCHAR},
+      </if>
+      <if test="applyType != null">
+        APPLY_TYPE = #{applyType,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="readers != null">
+        Readers = #{readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="copyto != null">
+        copyto = #{copyto,jdbcType=NVARCHAR},
+      </if>
+      <if test="popFillname != null">
+        POP_FillName = #{popFillname,jdbcType=NVARCHAR},
+      </if>
+      <if test="popFilltime != null">
+        POP_FillTime = #{popFilltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipmtSuggestion != null">
+        IPMT_Suggestion = #{ipmtSuggestion,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtFillname != null">
+        IPMT_FillName = #{ipmtFillname,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtFilltime != null">
+        IPMT_FillTime = #{ipmtFilltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkresult != null">
+        CheckResult = #{checkresult,jdbcType=NVARCHAR},
+      </if>
+      <if test="editcurrentuser != null">
+        EditCurrentUser = #{editcurrentuser,jdbcType=NVARCHAR},
+      </if>
+      <if test="assignsign != null">
+        AssignSign = #{assignsign,jdbcType=NVARCHAR},
+      </if>
+      <if test="assigndate != null">
+        AssignDate = #{assigndate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="instanseId != null">
+        INSTANSE_ID = #{instanseId,jdbcType=NVARCHAR},
+      </if>
+      <if test="currentNode != null">
+        CURRENT_NODE = #{currentNode,jdbcType=NVARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        CREATE_USER = #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.basicinfo.entity.IBDS_Product_PROCESS">
+    update IBDS_Product_PROCESS
+    set ApplyCode = #{applycode,jdbcType=NVARCHAR},
+      Status = #{status,jdbcType=NVARCHAR},
+      Responsible = #{responsible,jdbcType=NVARCHAR},
+      StatusName = #{statusname,jdbcType=NVARCHAR},
+      APPLY_TYPE = #{applyType,jdbcType=NVARCHAR},
+      Remark = #{remark,jdbcType=NVARCHAR},
+      Readers = #{readers,jdbcType=NVARCHAR},
+      copyto = #{copyto,jdbcType=NVARCHAR},
+      POP_FillName = #{popFillname,jdbcType=NVARCHAR},
+      POP_FillTime = #{popFilltime,jdbcType=TIMESTAMP},
+      IPMT_Suggestion = #{ipmtSuggestion,jdbcType=NVARCHAR},
+      IPMT_FillName = #{ipmtFillname,jdbcType=NVARCHAR},
+      IPMT_FillTime = #{ipmtFilltime,jdbcType=TIMESTAMP},
+      CheckResult = #{checkresult,jdbcType=NVARCHAR},
+      EditCurrentUser = #{editcurrentuser,jdbcType=NVARCHAR},
+      AssignSign = #{assignsign,jdbcType=NVARCHAR},
+      AssignDate = #{assigndate,jdbcType=TIMESTAMP},
+      INSTANSE_ID = #{instanseId,jdbcType=NVARCHAR},
+      CURRENT_NODE = #{currentNode,jdbcType=NVARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      CREATE_USER = #{createUser,jdbcType=NVARCHAR},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

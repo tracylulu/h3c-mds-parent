@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.view_StopUsingProductsMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.product.entity.view_StopUsingProducts">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="ProdLineNo" jdbcType="NVARCHAR" property="prodlineno" />
+    <result column="ProdLine" jdbcType="NVARCHAR" property="prodline" />
+    <result column="ProductNo" jdbcType="NVARCHAR" property="productno" />
+    <result column="Product" jdbcType="NVARCHAR" property="product" />
+    <result column="ReleaseNo" jdbcType="NVARCHAR" property="releaseno" />
+    <result column="Release" jdbcType="NVARCHAR" property="release" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="Code" jdbcType="NVARCHAR" property="code" />
+    <result column="Name" jdbcType="NVARCHAR" property="name" />
+    <result column="EngName" jdbcType="NVARCHAR" property="engname" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, ProdLineNo, ProdLine, ProductNo, Product, ReleaseNo, Release, type, Code, Name, 
+    EngName
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.product.entity.view_StopUsingProductsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from view_StopUsingProducts
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.product.entity.view_StopUsingProductsExample">
+    delete from view_StopUsingProducts
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.product.entity.view_StopUsingProducts">
+    insert into view_StopUsingProducts (ID, ProdLineNo, ProdLine, 
+      ProductNo, Product, ReleaseNo, 
+      Release, type, Code, 
+      Name, EngName)
+    values (#{id,jdbcType=INTEGER}, #{prodlineno,jdbcType=NVARCHAR}, #{prodline,jdbcType=NVARCHAR}, 
+      #{productno,jdbcType=NVARCHAR}, #{product,jdbcType=NVARCHAR}, #{releaseno,jdbcType=NVARCHAR}, 
+      #{release,jdbcType=NVARCHAR}, #{type,jdbcType=VARCHAR}, #{code,jdbcType=NVARCHAR}, 
+      #{name,jdbcType=NVARCHAR}, #{engname,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.product.entity.view_StopUsingProducts">
+    insert into view_StopUsingProducts
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="prodlineno != null">
+        ProdLineNo,
+      </if>
+      <if test="prodline != null">
+        ProdLine,
+      </if>
+      <if test="productno != null">
+        ProductNo,
+      </if>
+      <if test="product != null">
+        Product,
+      </if>
+      <if test="releaseno != null">
+        ReleaseNo,
+      </if>
+      <if test="release != null">
+        Release,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="code != null">
+        Code,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="engname != null">
+        EngName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="prodlineno != null">
+        #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodline != null">
+        #{prodline,jdbcType=NVARCHAR},
+      </if>
+      <if test="productno != null">
+        #{productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="product != null">
+        #{product,jdbcType=NVARCHAR},
+      </if>
+      <if test="releaseno != null">
+        #{releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="release != null">
+        #{release,jdbcType=NVARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=NVARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=NVARCHAR},
+      </if>
+      <if test="engname != null">
+        #{engname,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.product.entity.view_StopUsingProductsExample" resultType="java.lang.Long">
+    select count(*) from view_StopUsingProducts
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update view_StopUsingProducts
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.prodlineno != null">
+        ProdLineNo = #{record.prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodline != null">
+        ProdLine = #{record.prodline,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productno != null">
+        ProductNo = #{record.productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.product != null">
+        Product = #{record.product,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releaseno != null">
+        ReleaseNo = #{record.releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.release != null">
+        Release = #{record.release,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null">
+        Code = #{record.code,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.name != null">
+        Name = #{record.name,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engname != null">
+        EngName = #{record.engname,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update view_StopUsingProducts
+    set ID = #{record.id,jdbcType=INTEGER},
+      ProdLineNo = #{record.prodlineno,jdbcType=NVARCHAR},
+      ProdLine = #{record.prodline,jdbcType=NVARCHAR},
+      ProductNo = #{record.productno,jdbcType=NVARCHAR},
+      Product = #{record.product,jdbcType=NVARCHAR},
+      ReleaseNo = #{record.releaseno,jdbcType=NVARCHAR},
+      Release = #{record.release,jdbcType=NVARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      Code = #{record.code,jdbcType=NVARCHAR},
+      Name = #{record.name,jdbcType=NVARCHAR},
+      EngName = #{record.engname,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

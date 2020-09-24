@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.finance.dao.FProductMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.finance.entity.FProduct">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="FPRODUCTNo" jdbcType="NVARCHAR" property="fproductno" />
+    <result column="FPRODUCT" jdbcType="NVARCHAR" property="fproduct" />
+    <result column="FPRODUCTOld" jdbcType="NVARCHAR" property="fproductold" />
+    <result column="engFPRODUCT" jdbcType="NVARCHAR" property="engfproduct" />
+    <result column="IfPlan" jdbcType="NVARCHAR" property="ifplan" />
+    <result column="FPRODUCTCOACode" jdbcType="NVARCHAR" property="fproductcoacode" />
+    <result column="PLIPMTNo" jdbcType="NVARCHAR" property="plipmtno" />
+    <result column="PRODLINENo" jdbcType="NVARCHAR" property="prodlineno" />
+    <result column="BOM" jdbcType="NVARCHAR" property="bom" />
+    <result column="Readers" jdbcType="NVARCHAR" property="readers" />
+    <result column="Remark" jdbcType="NVARCHAR" property="remark" />
+    <result column="Match" jdbcType="NVARCHAR" property="match" />
+    <result column="FPRODUCTMatch" jdbcType="NVARCHAR" property="fproductmatch" />
+    <result column="Status" jdbcType="NVARCHAR" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, FPRODUCTNo, FPRODUCT, FPRODUCTOld, engFPRODUCT, IfPlan, FPRODUCTCOACode, PLIPMTNo, 
+    PRODLINENo, BOM, Readers, Remark, Match, FPRODUCTMatch, Status
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.finance.entity.FProductExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_FPRODUCT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_FPRODUCT
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_FPRODUCT
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.finance.entity.FProductExample">
+    delete from IBDS_FPRODUCT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.finance.entity.FProduct">
+    insert into IBDS_FPRODUCT (id, FPRODUCTNo, FPRODUCT, 
+      FPRODUCTOld, engFPRODUCT, IfPlan, 
+      FPRODUCTCOACode, PLIPMTNo, PRODLINENo, 
+      BOM, Readers, Remark, 
+      Match, FPRODUCTMatch, Status
+      )
+    values (#{id,jdbcType=INTEGER}, #{fproductno,jdbcType=NVARCHAR}, #{fproduct,jdbcType=NVARCHAR}, 
+      #{fproductold,jdbcType=NVARCHAR}, #{engfproduct,jdbcType=NVARCHAR}, #{ifplan,jdbcType=NVARCHAR}, 
+      #{fproductcoacode,jdbcType=NVARCHAR}, #{plipmtno,jdbcType=NVARCHAR}, #{prodlineno,jdbcType=NVARCHAR}, 
+      #{bom,jdbcType=NVARCHAR}, #{readers,jdbcType=NVARCHAR}, #{remark,jdbcType=NVARCHAR}, 
+      #{match,jdbcType=NVARCHAR}, #{fproductmatch,jdbcType=NVARCHAR}, #{status,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.finance.entity.FProduct">
+    insert into IBDS_FPRODUCT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="fproductno != null">
+        FPRODUCTNo,
+      </if>
+      <if test="fproduct != null">
+        FPRODUCT,
+      </if>
+      <if test="fproductold != null">
+        FPRODUCTOld,
+      </if>
+      <if test="engfproduct != null">
+        engFPRODUCT,
+      </if>
+      <if test="ifplan != null">
+        IfPlan,
+      </if>
+      <if test="fproductcoacode != null">
+        FPRODUCTCOACode,
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo,
+      </if>
+      <if test="prodlineno != null">
+        PRODLINENo,
+      </if>
+      <if test="bom != null">
+        BOM,
+      </if>
+      <if test="readers != null">
+        Readers,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="match != null">
+        Match,
+      </if>
+      <if test="fproductmatch != null">
+        FPRODUCTMatch,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fproductno != null">
+        #{fproductno,jdbcType=NVARCHAR},
+      </if>
+      <if test="fproduct != null">
+        #{fproduct,jdbcType=NVARCHAR},
+      </if>
+      <if test="fproductold != null">
+        #{fproductold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engfproduct != null">
+        #{engfproduct,jdbcType=NVARCHAR},
+      </if>
+      <if test="ifplan != null">
+        #{ifplan,jdbcType=NVARCHAR},
+      </if>
+      <if test="fproductcoacode != null">
+        #{fproductcoacode,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmtno != null">
+        #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="bom != null">
+        #{bom,jdbcType=NVARCHAR},
+      </if>
+      <if test="readers != null">
+        #{readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="match != null">
+        #{match,jdbcType=NVARCHAR},
+      </if>
+      <if test="fproductmatch != null">
+        #{fproductmatch,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.finance.entity.FProductExample" resultType="java.lang.Long">
+    select count(*) from IBDS_FPRODUCT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_FPRODUCT
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.fproductno != null">
+        FPRODUCTNo = #{record.fproductno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fproduct != null">
+        FPRODUCT = #{record.fproduct,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fproductold != null">
+        FPRODUCTOld = #{record.fproductold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engfproduct != null">
+        engFPRODUCT = #{record.engfproduct,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ifplan != null">
+        IfPlan = #{record.ifplan,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fproductcoacode != null">
+        FPRODUCTCOACode = #{record.fproductcoacode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plipmtno != null">
+        PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodlineno != null">
+        PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.bom != null">
+        BOM = #{record.bom,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.readers != null">
+        Readers = #{record.readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remark != null">
+        Remark = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.match != null">
+        Match = #{record.match,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fproductmatch != null">
+        FPRODUCTMatch = #{record.fproductmatch,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null">
+        Status = #{record.status,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_FPRODUCT
+    set id = #{record.id,jdbcType=INTEGER},
+      FPRODUCTNo = #{record.fproductno,jdbcType=NVARCHAR},
+      FPRODUCT = #{record.fproduct,jdbcType=NVARCHAR},
+      FPRODUCTOld = #{record.fproductold,jdbcType=NVARCHAR},
+      engFPRODUCT = #{record.engfproduct,jdbcType=NVARCHAR},
+      IfPlan = #{record.ifplan,jdbcType=NVARCHAR},
+      FPRODUCTCOACode = #{record.fproductcoacode,jdbcType=NVARCHAR},
+      PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      BOM = #{record.bom,jdbcType=NVARCHAR},
+      Readers = #{record.readers,jdbcType=NVARCHAR},
+      Remark = #{record.remark,jdbcType=NVARCHAR},
+      Match = #{record.match,jdbcType=NVARCHAR},
+      FPRODUCTMatch = #{record.fproductmatch,jdbcType=NVARCHAR},
+      Status = #{record.status,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.finance.entity.FProduct">
+    update IBDS_FPRODUCT
+    <set>
+      <if test="fproductno != null">
+        FPRODUCTNo = #{fproductno,jdbcType=NVARCHAR},
+      </if>
+      <if test="fproduct != null">
+        FPRODUCT = #{fproduct,jdbcType=NVARCHAR},
+      </if>
+      <if test="fproductold != null">
+        FPRODUCTOld = #{fproductold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engfproduct != null">
+        engFPRODUCT = #{engfproduct,jdbcType=NVARCHAR},
+      </if>
+      <if test="ifplan != null">
+        IfPlan = #{ifplan,jdbcType=NVARCHAR},
+      </if>
+      <if test="fproductcoacode != null">
+        FPRODUCTCOACode = #{fproductcoacode,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo = #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        PRODLINENo = #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="bom != null">
+        BOM = #{bom,jdbcType=NVARCHAR},
+      </if>
+      <if test="readers != null">
+        Readers = #{readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="match != null">
+        Match = #{match,jdbcType=NVARCHAR},
+      </if>
+      <if test="fproductmatch != null">
+        FPRODUCTMatch = #{fproductmatch,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        Status = #{status,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.finance.entity.FProduct">
+    update IBDS_FPRODUCT
+    set FPRODUCTNo = #{fproductno,jdbcType=NVARCHAR},
+      FPRODUCT = #{fproduct,jdbcType=NVARCHAR},
+      FPRODUCTOld = #{fproductold,jdbcType=NVARCHAR},
+      engFPRODUCT = #{engfproduct,jdbcType=NVARCHAR},
+      IfPlan = #{ifplan,jdbcType=NVARCHAR},
+      FPRODUCTCOACode = #{fproductcoacode,jdbcType=NVARCHAR},
+      PLIPMTNo = #{plipmtno,jdbcType=NVARCHAR},
+      PRODLINENo = #{prodlineno,jdbcType=NVARCHAR},
+      BOM = #{bom,jdbcType=NVARCHAR},
+      Readers = #{readers,jdbcType=NVARCHAR},
+      Remark = #{remark,jdbcType=NVARCHAR},
+      Match = #{match,jdbcType=NVARCHAR},
+      FPRODUCTMatch = #{fproductmatch,jdbcType=NVARCHAR},
+      Status = #{status,jdbcType=NVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

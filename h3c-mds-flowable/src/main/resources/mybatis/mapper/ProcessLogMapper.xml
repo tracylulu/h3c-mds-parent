@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.flowable.dao.ProcessLogMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.flowable.entity.ProcessLog">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="CHECK_DATE" jdbcType="TIMESTAMP" property="checkDate" />
+    <result column="CHECK_PERSON" jdbcType="NVARCHAR" property="checkPerson" />
+    <result column="CHECK_ACCOUNT" jdbcType="NVARCHAR" property="checkAccount" />
+    <result column="CHECK_RESULT" jdbcType="NVARCHAR" property="checkResult" />
+    <result column="CHECK_OPION" jdbcType="NVARCHAR" property="checkOpion" />
+    <result column="CHECK_STATUS" jdbcType="NVARCHAR" property="checkStatus" />
+    <result column="PROCESS_CODE" jdbcType="NVARCHAR" property="processCode" />
+    <result column="CREATE_USER" jdbcType="VARCHAR" property="createUser" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="MODIFY_USER" jdbcType="VARCHAR" property="modifyUser" />
+    <result column="MODIFY_DATE" jdbcType="TIMESTAMP" property="modifyDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, CHECK_DATE, CHECK_PERSON, CHECK_ACCOUNT, CHECK_RESULT, CHECK_OPION, CHECK_STATUS, 
+    PROCESS_CODE, CREATE_USER, CREATE_DATE, MODIFY_USER, MODIFY_DATE
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.flowable.entity.ProcessLogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_PROCESS_LOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_PROCESS_LOG
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_PROCESS_LOG
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.flowable.entity.ProcessLogExample">
+    delete from IBDS_PROCESS_LOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.flowable.entity.ProcessLog">
+    insert into IBDS_PROCESS_LOG (ID, CHECK_DATE, CHECK_PERSON, 
+      CHECK_ACCOUNT, CHECK_RESULT, CHECK_OPION, 
+      CHECK_STATUS, PROCESS_CODE, CREATE_USER, 
+      CREATE_DATE, MODIFY_USER, MODIFY_DATE
+      )
+    values (#{id,jdbcType=INTEGER}, #{checkDate,jdbcType=TIMESTAMP}, #{checkPerson,jdbcType=NVARCHAR}, 
+      #{checkAccount,jdbcType=NVARCHAR}, #{checkResult,jdbcType=NVARCHAR}, #{checkOpion,jdbcType=NVARCHAR}, 
+      #{checkStatus,jdbcType=NVARCHAR}, #{processCode,jdbcType=NVARCHAR}, #{createUser,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{modifyUser,jdbcType=VARCHAR}, #{modifyDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.flowable.entity.ProcessLog">
+    insert into IBDS_PROCESS_LOG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="checkDate != null">
+        CHECK_DATE,
+      </if>
+      <if test="checkPerson != null">
+        CHECK_PERSON,
+      </if>
+      <if test="checkAccount != null">
+        CHECK_ACCOUNT,
+      </if>
+      <if test="checkResult != null">
+        CHECK_RESULT,
+      </if>
+      <if test="checkOpion != null">
+        CHECK_OPION,
+      </if>
+      <if test="checkStatus != null">
+        CHECK_STATUS,
+      </if>
+      <if test="processCode != null">
+        PROCESS_CODE,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER,
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="checkDate != null">
+        #{checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkPerson != null">
+        #{checkPerson,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkAccount != null">
+        #{checkAccount,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkResult != null">
+        #{checkResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkOpion != null">
+        #{checkOpion,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkStatus != null">
+        #{checkStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="processCode != null">
+        #{processCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.flowable.entity.ProcessLogExample" resultType="java.lang.Long">
+    select count(*) from IBDS_PROCESS_LOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_PROCESS_LOG
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.checkDate != null">
+        CHECK_DATE = #{record.checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.checkPerson != null">
+        CHECK_PERSON = #{record.checkPerson,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.checkAccount != null">
+        CHECK_ACCOUNT = #{record.checkAccount,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.checkResult != null">
+        CHECK_RESULT = #{record.checkResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.checkOpion != null">
+        CHECK_OPION = #{record.checkOpion,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.checkStatus != null">
+        CHECK_STATUS = #{record.checkStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.processCode != null">
+        PROCESS_CODE = #{record.processCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createUser != null">
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyUser != null">
+        MODIFY_USER = #{record.modifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyDate != null">
+        MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_PROCESS_LOG
+    set ID = #{record.id,jdbcType=INTEGER},
+      CHECK_DATE = #{record.checkDate,jdbcType=TIMESTAMP},
+      CHECK_PERSON = #{record.checkPerson,jdbcType=NVARCHAR},
+      CHECK_ACCOUNT = #{record.checkAccount,jdbcType=NVARCHAR},
+      CHECK_RESULT = #{record.checkResult,jdbcType=NVARCHAR},
+      CHECK_OPION = #{record.checkOpion,jdbcType=NVARCHAR},
+      CHECK_STATUS = #{record.checkStatus,jdbcType=NVARCHAR},
+      PROCESS_CODE = #{record.processCode,jdbcType=NVARCHAR},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{record.modifyUser,jdbcType=VARCHAR},
+      MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.flowable.entity.ProcessLog">
+    update IBDS_PROCESS_LOG
+    <set>
+      <if test="checkDate != null">
+        CHECK_DATE = #{checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkPerson != null">
+        CHECK_PERSON = #{checkPerson,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkAccount != null">
+        CHECK_ACCOUNT = #{checkAccount,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkResult != null">
+        CHECK_RESULT = #{checkResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkOpion != null">
+        CHECK_OPION = #{checkOpion,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkStatus != null">
+        CHECK_STATUS = #{checkStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="processCode != null">
+        PROCESS_CODE = #{processCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="createUser != null">
+        CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER = #{modifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.flowable.entity.ProcessLog">
+    update IBDS_PROCESS_LOG
+    set CHECK_DATE = #{checkDate,jdbcType=TIMESTAMP},
+      CHECK_PERSON = #{checkPerson,jdbcType=NVARCHAR},
+      CHECK_ACCOUNT = #{checkAccount,jdbcType=NVARCHAR},
+      CHECK_RESULT = #{checkResult,jdbcType=NVARCHAR},
+      CHECK_OPION = #{checkOpion,jdbcType=NVARCHAR},
+      CHECK_STATUS = #{checkStatus,jdbcType=NVARCHAR},
+      PROCESS_CODE = #{processCode,jdbcType=NVARCHAR},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{modifyUser,jdbcType=VARCHAR},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

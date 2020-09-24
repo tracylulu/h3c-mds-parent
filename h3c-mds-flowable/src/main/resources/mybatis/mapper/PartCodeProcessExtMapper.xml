@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.h3c.mds.flowable.dao.PartCodeProcessMapper" >
+
+	<resultMap id="BaseResultMapExt"
+		type="com.h3c.mds.flowable.entity.PartCodeProcessExt"
+		extends="BaseResultMap">
+
+	</resultMap>
+
+
+<insert id="insertSelectiveAndGetId" parameterType="com.h3c.mds.flowable.entity.PartCodeProcess"  useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+    insert into IBDS_PART_CODE_PROCESS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="applyCode != null">
+        APPLY_CODE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="handler != null">
+        HANDLER,
+      </if>
+      <if test="applyDept != null">
+        APPLY_DEPT,
+      </if>
+      <if test="deptType != null">
+        DEPT_TYPE,
+      </if>
+      <if test="applyPerson != null">
+        APPLY_PERSON,
+      </if>
+      <if test="subSign != null">
+        SUB_SIGN,
+      </if>
+      <if test="checkOpinion != null">
+        CHECK_OPINION,
+      </if>
+      <if test="checkSign != null">
+        CHECK_SIGN,
+      </if>
+      <if test="checkResult != null">
+        CHECK_RESULT,
+      </if>
+      <if test="pdtSign != null">
+        PDT_SIGN,
+      </if>
+      <if test="pdtOpinion != null">
+        PDT_OPINION,
+      </if>
+      <if test="pdtResult != null">
+        PDT_RESULT,
+      </if>
+      <if test="fprodSign != null">
+        FPROD_SIGN,
+      </if>
+      <if test="fprodOpinion != null">
+        FPROD_OPINION,
+      </if>
+      <if test="fprodResult != null">
+        FPROD_RESULT,
+      </if>
+      <if test="cwSign != null">
+        CW_SIGN,
+      </if>
+      <if test="cwOpinion != null">
+        CW_OPINION,
+      </if>
+      <if test="cwResult != null">
+        CW_RESULT,
+      </if>
+      <if test="processmgnSign != null">
+        PROCESSMGN_SIGN,
+      </if>
+      <if test="processmgnResult != null">
+        PROCESSMGN_RESULT,
+      </if>
+      <if test="orderBy != null">
+        ORDER_BY,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE,
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER,
+      </if>
+      <if test="submitDate != null">
+        SUBMIT_DATE,
+      </if>
+      <if test="checkDate != null">
+        CHECK_DATE,
+      </if>
+      <if test="pdtDate != null">
+        PDT_DATE,
+      </if>
+      <if test="fprodDate != null">
+        FPROD_DATE,
+      </if>
+      <if test="cwDate != null">
+        CW_DATE,
+      </if>
+      <if test="processmgnDate != null">
+        PROCESSMGN_DATE,
+      </if>
+      <if test="instanseId != null">
+        INSTANSE_ID,
+      </if>
+      <if test="currentNode != null">
+        CURRENT_NODE,
+      </if>
+      <if test="assignSign != null">
+        ASSIGN_SIGN,
+      </if>
+      <if test="assignDate != null">
+        ASSIGN_DATE,
+      </if>
+      <if test="statusDesc != null">
+        STATUS_DESC,
+      </if>
+      <if test="pdtMgn != null">
+        PDT_MGN,
+      </if>
+      <if test="tel != null">
+        TEL,
+      </if>
+      <if test="pdtNo != null">
+        PDT_NO,
+      </if>
+      <if test="pdmApplyCode != null">
+        PDM_APPLY_CODE,
+      </if>
+      <if test="pdtId != null">
+        PDT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="applyCode != null">
+        #{applyCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="handler != null">
+        #{handler,jdbcType=NVARCHAR},
+      </if>
+      <if test="applyDept != null">
+        #{applyDept,jdbcType=NVARCHAR},
+      </if>
+      <if test="deptType != null">
+        #{deptType,jdbcType=NVARCHAR},
+      </if>
+      <if test="applyPerson != null">
+        #{applyPerson,jdbcType=NVARCHAR},
+      </if>
+      <if test="subSign != null">
+        #{subSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkOpinion != null">
+        #{checkOpinion,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkSign != null">
+        #{checkSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkResult != null">
+        #{checkResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtSign != null">
+        #{pdtSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtOpinion != null">
+        #{pdtOpinion,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtResult != null">
+        #{pdtResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="fprodSign != null">
+        #{fprodSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="fprodOpinion != null">
+        #{fprodOpinion,jdbcType=NVARCHAR},
+      </if>
+      <if test="fprodResult != null">
+        #{fprodResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="cwSign != null">
+        #{cwSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="cwOpinion != null">
+        #{cwOpinion,jdbcType=NVARCHAR},
+      </if>
+      <if test="cwResult != null">
+        #{cwResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="processmgnSign != null">
+        #{processmgnSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="processmgnResult != null">
+        #{processmgnResult,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null">
+        #{orderBy,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="submitDate != null">
+        #{submitDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkDate != null">
+        #{checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pdtDate != null">
+        #{pdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fprodDate != null">
+        #{fprodDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cwDate != null">
+        #{cwDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processmgnDate != null">
+        #{processmgnDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="instanseId != null">
+        #{instanseId,jdbcType=NVARCHAR},
+      </if>
+      <if test="currentNode != null">
+        #{currentNode,jdbcType=NVARCHAR},
+      </if>
+      <if test="assignSign != null">
+        #{assignSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="assignDate != null">
+        #{assignDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusDesc != null">
+        #{statusDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtMgn != null">
+        #{pdtMgn,jdbcType=NVARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtNo != null">
+        #{pdtNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdmApplyCode != null">
+        #{pdmApplyCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtId != null">
+        #{pdtId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+	<select id="getMaxApplyCode" resultType="string">
+		SELECT MAX(apply_CODE)
+		FROM IBDS_PART_CODE_PROCESS WHERE APPLY_CODE LIKE
+		'FN%' AND
+		LEN(apply_CODE)=12
+	</select>
+
+	<select id="findByPage" resultMap="BaseResultMap"
+		parameterType="map">
+
+		SELECT
+		<if test="param.prodLine!=null and param.prodLine!='' ">
+			DISTINCT
+		</if>
+		a.ID ,a.APPLY_CODE ,a.STATUS ,a.HANDLER ,a.APPLY_DEPT ,a.DEPT_TYPE
+		,a.APPLY_PERSON ,a.SUB_SIGN
+		,a.CHECK_OPINION ,a.CHECK_SIGN
+		,a.CHECK_RESULT ,a.PDT_SIGN ,a.PDT_OPINION
+		,a.PDT_RESULT ,a.FPROD_SIGN
+		,a.FPROD_OPINION ,a.FPROD_RESULT ,a.CW_SIGN ,a.CW_OPINION ,a.CW_RESULT
+		,a.PROCESSMGN_SIGN ,a.PROCESSMGN_RESULT
+		,a.ORDER_BY ,a.CREATE_DATE
+		,a.CREATE_USER ,a.MODIFY_DATE ,a.MODIFY_USER
+		,a.SUBMIT_DATE
+		,a.CHECK_DATE
+		,a.PDT_DATE ,a.FPROD_DATE ,a.CW_DATE ,a.PROCESSMGN_DATE
+		,a.INSTANSE_ID
+		,a.CURRENT_NODE ,a.ASSIGN_SIGN
+		,a.ASSIGN_DATE
+		,a.STATUS_DESC ,a.PDT_MGN ,a.TEL ,a.PDT_NO ,a.PDM_APPLY_CODE
+		,a.PDT_ID
+		from IBDS_PART_CODE_PROCESS a
+		<if test="param.prodLine!=null and param.prodLine!='' ">
+			LEFT JOIN dbo.IBDS_PART_CODE_APPLY b ON
+			a.APPLY_CODE=b.PROCESS_CODE
+		</if>
+
+		<where>
+			<if test="param.prodLine!=null and param.prodLine!='' ">
+				and b.PRODLINE_ID=#{param.prodLine}
+			</if>
+
+			<if test="param.pdt!=null and param.pdt!='' ">
+				and pdt_id=#{param.pdt}
+			</if>
+			<if
+				test="param.start!=null and param.start!=''  and param.end!=null and param.end!='' ">
+				and PROCESSMGN_DATE between #{param.start} and #{param.end}
+			</if>
+			<if test="param.searchStr != null and param.searchStr != ''">
+				and
+				(CHARINDEX(#{param.searchStr},isnull(APPLY_CODE,'')+isnull(HANDLER,'')+isnull(SUB_SIGN,'') +isnull(PDM_APPLY_CODE,''))>0
+				or EXISTS (SELECT 1 FROM IBDS_PART_CODE_APPLY WHERE
+				IBDS_PART_CODE_APPLY.PROCESS_CODE=a.APPLY_CODE AND
+				CHARINDEX(#{param.searchStr},PROJECT_NO)>0))
+			</if>
+		</where>
+	</select>
+
+	<select id="getExtById" resultMap="BaseResultMapExt"
+		parameterType="java.lang.Integer">
+		SELECT
+		<include refid="Base_Column_List" />
+		from IBDS_PART_CODE_PROCESS
+		WHERE ID=#{id}
+	</select>
+
+	<select id="findPartCodeByCurHandler" parameterType="map"
+		resultType="map">
+		<if test="param.curHandler==null or param.curHandler==''">
+			select distinct handler,
+			handler as treeId
+
+			from
+			<include refid="partProcessView"></include>
+			<!-- <if test="param.prodLine!=null and param.prodLine!='' ">
+				LEFT JOIN dbo.IBDS_PART_CODE_APPLY b ON
+				a.APPLY_CODE=b.PROCESS_CODE
+			</if> -->
+			where handler is not null and handler !=''
+		</if>
+
+		<if test="param.curHandler!=null and param.curHandler!=''">
+			SELECT
+				distinct
+			<!-- <if test="param.prodLine!=null and param.prodLine!='' ">
+			</if> -->
+			CAST( id AS NVARCHAR(200)) + '_' + HANDLER as
+			treeId,
+			id,
+			handler,
+			applyCode,
+			applyPerson,
+			applyDept,
+			tel,
+			pdmApplyCode,
+			statusDesc
+
+			from
+			<include refid="partProcessView"></include>
+			where handler=#{param.curHandler}
+		</if>
+		<if test="param.prodLine!=null and param.prodLine!='' ">
+			and PRODLINE_ID=#{param.prodLine}
+		</if>
+
+		<if test="param.pdt!=null and param.pdt!='' ">
+			and pdt_id=#{param.pdt}
+		</if>
+		<if
+			test="param.start!=null and param.start!=''  and param.end!=null and param.end!='' ">
+			and PROCESSMGN_DATE between #{param.start} and #{param.end}
+		</if>
+		<if test="param.searchStr!='' and param.searchStr !=null">
+			<include refid="search"></include>
+		</if>
+	</select>
+	<select id="findPartCodeByApplyer" parameterType="map"
+		resultType="map">
+		<if test="param.applyPerson==null or param.applyPerson==''">
+			select distinct  applyPerson,
+			applyPerson as treeId
+
+			from <include refid="partProcessView"></include>
+			
+			where applyPerson is not null
+		</if>
+
+		<if test="param.applyPerson!=null and param.applyPerson!=''">
+			SELECT distinct
+			CAST( id AS NVARCHAR(200)) + '_' + applyPerson as treeId,
+			id,
+			applyPerson,
+			applyCode,
+			applyDept,
+			tel,
+			pdmApplyCode,
+			statusDesc
+
+			from <include refid="partProcessView"></include>
+			
+			where applyPerson=#{param.applyPerson}
+		</if>
+		<if test="param.prodLine!=null and param.prodLine!='' ">
+			and PRODLINE_ID=#{param.prodLine}
+		</if>
+
+		<if test="param.pdt!=null and param.pdt!='' ">
+			and pdt_id=#{param.pdt}
+		</if>
+		<if
+			test="param.start!=null and param.start!=''  and param.end!=null and param.end!='' ">
+			and PROCESSMGN_DATE between #{param.start} and #{param.end}
+		</if>
+		<if test="param.searchStr!='' and param.searchStr !=null">
+			<include refid="search"></include>
+		</if>
+	</select>
+
+	<select id="findPartCodeByStatus" parameterType="map"
+		resultType="map">
+		<if test="param.statusDesc==null or param.statusDesc==''">
+			select distinct statusDesc,
+			curStatusType,
+			statusDesc as treeId
+
+			from
+			<include refid="partProcessView"></include>
+			
+			where statusDesc is not null
+			
+		</if>
+
+		<if test="param.statusDesc!=null and param.statusDesc!=''">
+			SELECT distinct 
+			CAST( id AS NVARCHAR(200)) + '_' + statusDesc as	treeId,
+			id,
+			applyPerson,
+			applyCode,
+			applyDept,
+			tel,
+			pdmApplyCode,
+			curStatusType,
+			statusDesc
+
+			from <include refid="partProcessView"></include>
+			
+			where
+			statusDesc=#{param.statusDesc}
+		</if>
+
+		<if test="param.prodLine!=null and param.prodLine!='' ">
+			and PRODLINE_ID=#{param.prodLine}
+		</if>
+
+		<if test="param.pdt!=null and param.pdt!='' ">
+			and pdt_id=#{param.pdt}
+		</if>
+		<if
+			test="param.start!=null and param.start!=''  and param.end!=null and param.end!='' ">
+			and PROCESSMGN_DATE between #{param.start} and #{param.end}
+		</if>
+
+		<if test="param.searchStr!='' and param.searchStr !=null">
+			<include refid="search"></include>
+		</if>
+		order by curStatusType asc
+	</select>
+
+	<select id="findPartCodeByCloseProcess" parameterType="map"
+		resultType="map">
+		<!-- <if test="param.applyCode==null or param.applyCode==''">
+		</if> -->
+			select distinct  applyCode,
+			productCode,
+			statusDesc,
+			id
+
+			from <include refid="partProcessView"></include>
+
+		<!-- <if test="param.applyCode!=null and param.applyCode!=''">
+			SELECT distinct 
+				CAST (id AS NVARCHAR(200)) + '_' + CAST	(applyId AS NVARCHAR(200)) AS treeId,
+				id,
+				applyCode,
+				applyCode treeId,
+				productCode,
+				statusDesc
+			FROM
+			<include refid="partProcessView"></include>
+			AND applyCode
+			=#{param.applyCode}
+		</if> -->
+		<where>
+			<if test="param.applyCode==null or param.applyCode==''">
+				and statusDesc ='流程结束'
+			</if>
+			<if test="param.searchStr!='' and param.searchStr !=null">
+			
+				and
+				( CHARINDEX(#{param.searchStr},
+				isnull(applyCode,'')
+				+isnull(statusDesc,'')
+				+isnull(handler,'')
+				+isnull(applyPerson,'')
+				+isnull(pdmApplyCode,'')
+				+isnull(productCode,'')
+				+isnull(projectNo,'')
+				)&gt;0)
+				<!-- or EXISTS (SELECT 1 FROM
+				IBDS_PART_CODE_APPLY WHERE IBDS_PART_CODE_APPLY.PROCESS_CODE=
+				process.APPLY_CODE AND CHARINDEX(#{param.searchStr},PROJECT_NO)>0)) -->
+			
+			</if>
+		</where>
+		order by applyCode
+		offset #{param.page} rows fetch next #{param.rows} rows only
+	</select>
+
+	<select id="countPartCodeByCloseProcess" parameterType="map"
+		resultType="Integer">
+		select count(*) from (
+			select distinct  applyCode,
+			productCode,
+			statusDesc,
+			applyCode as	treeId
+
+			from <include refid="partProcessView"></include>
+
+		
+		<where>
+			<if test="param.applyCode==null or param.applyCode==''">
+				and statusDesc ='流程结束'
+			</if>
+			<if test="param.searchStr!='' and param.searchStr !=null">
+			
+				and
+				( CHARINDEX(#{param.searchStr},
+				isnull(applyCode,'')
+				+isnull(statusDesc,'')
+				+isnull(handler,'')
+				+isnull(applyPerson,'')
+				+isnull(pdmApplyCode,'')
+				+isnull(productCode,'')
+				+isnull(projectNo,'')
+				)&gt;0)
+				<!-- or EXISTS (SELECT 1 FROM
+				IBDS_PART_CODE_APPLY WHERE IBDS_PART_CODE_APPLY.PROCESS_CODE=
+				process.APPLY_CODE AND CHARINDEX(#{param.searchStr},PROJECT_NO)>0)) -->
+			
+			</if>
+		</where>) aa
+	</select>
+
+	<sql id="search">
+		and
+		( CHARINDEX(#{param.searchStr},
+		isnull(applyCode,'')
+		+isnull(statusDesc,'')
+		+isnull(HANDLER,'')
+		+isnull(applyPerson,'')
+		+isnull(pdmApplyCode,'')
+		+isnull(projectNo,'')
+		+isnull(productCode,'')
+		)&gt;0)
+		<!-- or EXISTS (SELECT 1 FROM
+		IBDS_PART_CODE_APPLY WHERE IBDS_PART_CODE_APPLY.PROCESS_CODE=
+		APPLY_CODE AND CHARINDEX(#{param.searchStr},PROJECT_NO)>0)) -->
+	</sql>
+	
+	
+	
+	<sql id="partProcessView">
+		
+			 partProcessView
+	</sql>
+</mapper>

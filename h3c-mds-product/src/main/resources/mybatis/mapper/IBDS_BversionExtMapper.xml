@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.IBDS_BversionMapper">
+	<select id="selectByCodeList" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM dbo.IBDS_bversion WHERE Status=1 AND bversionno IN
+		<foreach collection="codeList" item="code" index="index"
+			open="(" close=")" separator=",">
+			#{code}
+		</foreach>
+	</select>
+	<select id="selectByMap" parameterType="map"
+		resultMap="BaseResultMap">
+		<if test="param.type =='PB' and param.sub_user !=null">
+			<if test="param.proStatus ==null">
+				select distinct isnull(b.PROJECTStatus,'') PROJECTStatus from
+				IBDS_bversion b
+				left join IBDS_Release r on b.releaseno=b.releaseno
+				left join IBDS_VERSION v on b.versionNo=v.VERSIONNo
+				left join
+				IBDS_PDT p on b.pdtno=p.PDTNo
+				left join IBDS_Product pt on
+				b.productno=pt.productno
+				where r.status=1 and
+				b.projectstatus=#{param.proStatus} and
+				CHARINDEX(#{param.sub_user},isnull(b.POP_ID,'')+isnull(r.POP_ID,'')+isnull(v.POP_ID,'')+isnull(p.POP_ID,'')+isnull(pt.POP_ID,'')+isnull(b.CMO_ID,'')+isnull(r.CMO_ID,'')+isnull(v.CMO_ID,'')+isnull(p.CMO_ID,'')+isnull(pt.CMO_ID,''))>0
+				<!-- POP只显示配置自己为POP的数据 -->
+				<if test="param.code !=null">
+					and r.releaseno=#{param.code}
+				</if>
+			</if>
+			<if test="param.proStatus !=null ">
+				select distinct b.bversionno,b.bversioncname,b.bversionename from
+				IBDS_bversion b
+				left join IBDS_Release r on b.releaseno=b.releaseno
+				left join IBDS_VERSION v on b.versionNo=v.VERSIONNo
+				left join
+				IBDS_PDT p on b.pdtno=p.PDTNo
+				left join IBDS_Product pt on
+				b.productno=pt.productno
+				where r.status=1 and
+				r.projectstatus=#{param.proStatus}
+				<if test="param.proStatus==''">
+					and (r.projectstatus=#{param.proStatus} or r.projectstatus is null)
+				</if>
+				<if test="param.proStatus!=''">
+					and r.projectstatus=#{param.proStatus}
+				</if>
+				and
+				CHARINDEX(#{param.sub_user},isnull(b.POP_ID,'')+isnull(r.POP_ID,'')+isnull(v.POP_ID,'')+isnull(p.POP_ID,'')+isnull(pt.POP_ID,'')+isnull(b.CMO_ID,'')+isnull(r.CMO_ID,'')+isnull(v.CMO_ID,'')+isnull(p.CMO_ID,'')+isnull(pt.CMO_ID,''))>0
+				<!-- POP只显示配置自己为POP的数据 -->
+				<if test="param.code !=null">
+					and r.releaseno=#{param.code}
+				</if>
+				order by b.bversioncname
+			</if>
+
+		</if>
+
+		<!--B版本层 -->
+		<if test="param.type =='PB' and param.code !=null">
+			<if test="param.proStatus ==null">
+				select distinct isnull(PROJECTStatus,'')PROJECTStatus from
+				IBDS_bversion
+				where status=1 and releaseno=#{param.code}
+				<if test="param.sub_code !=null">
+					or releaseNo = #{param.sub_code}
+				</if>
+				
+			</if>
+			<if test="param.proStatus !=null ">
+				SELECT bversionno,bversioncname,bversionename FROM
+				dbo.IBDS_bversion
+				where status=1 and releaseno=#{param.code}
+				<if test="param.proStatus==''">
+					and (projectstatus=#{param.proStatus} or projectstatus is null)
+				</if>
+				<if test="param.proStatus!=''">
+					and projectstatus=#{param.proStatus}
+				</if>
+				<if test="param.sub_code !=null">
+					or releaseNo = #{param.sub_code}
+				</if>
+				order by bversioncname
+			</if>
+
+		</if>
+	</select>
+	
+	 <update id="updateByProjectStatusBatch" parameterType="map">
+	 update IBDS_bversion set 
+	 <if test="param.projectStatus!=null and param.projectStatus!=''">
+	 ProjectStatus=#{param.projectStatus},MODIFY_DATA=GETDATE()
+	 </if>
+	 <if test="param.modifyUser!=null and param.modifyUser!=''">
+	 ,MODIFY_USER=#{param.modifyUser}
+	 </if>
+	 <where>
+	  <if test="param.releaseno!=null and param.releaseno!=''">
+	  releaseNo=#{param.releaseno}
+	 </if>
+	 <if test="param.bversion!=null and param.bversion!=''">
+	  and bversioncname in 
+	 <foreach collection="param.bversion.split(',')" item="record" index="index"
+			open="(" separator="," close=")">
+			#{record}
+		</foreach>
+	 </if>
+	 </where>
+	 </update>
+	 
+	 <select id="getBversionByReleaseCodeAndBversion" parameterType="String" resultMap="BaseResultMap">
+	 select * from ibds_bversion <where>
+	 <if test="releaseCode!=null and releaseCode!=''">
+	 releaseno in (#{releaseCode})
+	 </if>
+	  <if test="bversion!=null and bversion!=''">
+	  and bversioncname in 
+	   <foreach collection="bversion.split(',')" item="record" index="index"
+			open="(" separator="," close=")">
+			#{record}
+		</foreach>
+	 </if>
+	 </where>
+	  
+	 </select>
+</mapper>

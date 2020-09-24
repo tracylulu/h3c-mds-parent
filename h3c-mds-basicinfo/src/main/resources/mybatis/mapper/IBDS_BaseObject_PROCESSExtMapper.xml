@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.IBDS_BaseObject_PROCESSMapper">
+  <!-- 获取最大单号 -->
+  <select id="getMaxCode" resultType="string">
+		SELECT MAX(APPLYCODE) FROM IBDS_BaseObject_PROCESS WHERE   SUBSTRING(APPLYCODE,2,8)=REPLACE(CONVERT(NVARCHAR(200),GETDATE(),23),'-','')
+	</select>
+   <!-- 插入数据并返回主键 -->
+  <insert id="insertAndGetId" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseObject_PROCESS" useGeneratedKeys="true" keyProperty="id">
+
+     insert into IBDS_BaseObject_PROCESS
+   <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="applycode != null">
+        ApplyCode,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="responsible != null">
+        Responsible,
+      </if>
+      <if test="statusname != null">
+        StatusName,
+      </if>
+      <if test="applyType != null">
+        APPLY_TYPE,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="readers != null">
+        Readers,
+      </if>
+      <if test="copyto != null">
+        copyto,
+      </if>
+      <if test="sendto1 != null">
+        sendto_1,
+      </if>
+      <if test="cmoFillname != null">
+        CMO_FillName,
+      </if>
+      <if test="cmoFilltime != null">
+        CMO_FillTime,
+      </if>
+      <if test="pdtSuggestion != null">
+        PDT_Suggestion,
+      </if>
+      <if test="pdtFillname != null">
+        PDT_FillName,
+      </if>
+      <if test="pdtFilltime != null">
+        PDT_FillTime,
+      </if>
+      <if test="cmoleaderSuggestion != null">
+        CMOLeader_Suggestion,
+      </if>
+      <if test="cmoleaderFillname != null">
+        CMOLeader_FillName,
+      </if>
+      <if test="cmoleaderFilltime != null">
+        CMOLeader_FillTime,
+      </if>
+      <if test="instanseId != null">
+        INSTANSE_ID,
+      </if>
+      <if test="checkresult != null">
+        CheckResult,
+      </if>
+      <if test="editcurrentuser != null">
+        EditCurrentUser,
+      </if>
+      <if test="assignsign != null">
+        AssignSign,
+      </if>
+      <if test="assigndate != null">
+        AssignDate,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE,
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="applycode != null">
+        #{applycode,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="responsible != null">
+        #{responsible,jdbcType=NVARCHAR},
+      </if>
+      <if test="statusname != null">
+        #{statusname,jdbcType=NVARCHAR},
+      </if>
+      <if test="applyType != null">
+        #{applyType,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="readers != null">
+        #{readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="copyto != null">
+        #{copyto,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendto1 != null">
+        #{sendto1,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmoFillname != null">
+        #{cmoFillname,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmoFilltime != null">
+        #{cmoFilltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pdtSuggestion != null">
+        #{pdtSuggestion,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtFillname != null">
+        #{pdtFillname,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtFilltime != null">
+        #{pdtFilltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cmoleaderSuggestion != null">
+        #{cmoleaderSuggestion,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmoleaderFillname != null">
+        #{cmoleaderFillname,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmoleaderFilltime != null">
+        #{cmoleaderFilltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="instanseId != null">
+        #{instanseId,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkresult != null">
+        #{checkresult,jdbcType=NVARCHAR},
+      </if>
+      <if test="editcurrentuser != null">
+        #{editcurrentuser,jdbcType=NVARCHAR},
+      </if>
+      <if test="assignsign != null">
+        #{assignsign,jdbcType=NVARCHAR},
+      </if>
+      <if test="assigndate != null">
+        #{assigndate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <resultMap id="BaseResultMapExt" type="com.h3c.mds.basicinfo.entity.IBDS_BaseObject_PROCESSExt" extends="BaseResultMap">
+
+  </resultMap>
+  <!-- 根据ID查询产品流程数据 -->
+   <select id="getExtById" resultMap="BaseResultMapExt" parameterType="java.lang.Integer">
+    SELECT <include refid="Base_Column_List" />
+    from IBDS_BaseObject_PROCESS
+    WHERE ID=#{id}
+  </select>
+</mapper>

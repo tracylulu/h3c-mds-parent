@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.flowable.dao.HzPartViewMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.flowable.entity.HzPartView">
+    <result column="OBID" jdbcType="NVARCHAR" property="obid" />
+    <result column="S1PARTNUMBER" jdbcType="NVARCHAR" property="s1partnumber" />
+    <result column="S1PARTREVISION" jdbcType="NVARCHAR" property="s1partrevision" />
+    <result column="S1PARTTEMPLATE" jdbcType="NVARCHAR" property="s1parttemplate" />
+    <result column="THHXH" jdbcType="NVARCHAR" property="thhxh" />
+    <result column="S1PARTDESCELEMENTS" jdbcType="NVARCHAR" property="s1partdescelements" />
+    <result column="S1EXTCHINESEDESC" jdbcType="NVARCHAR" property="s1extchinesedesc" />
+    <result column="S1INTENGLISHDESC" jdbcType="NVARCHAR" property="s1intenglishdesc" />
+    <result column="S1EXTENGLISHDESC" jdbcType="NVARCHAR" property="s1extenglishdesc" />
+    <result column="S1INTERNALMODEL" jdbcType="NVARCHAR" property="s1internalmodel" />
+    <result column="S1EXTERNALMODEL" jdbcType="NVARCHAR" property="s1externalmodel" />
+    <result column="DEFAULTUNITOFMEASURE" jdbcType="NCHAR" property="defaultunitofmeasure" />
+    <result column="S1PARTSTATUS" jdbcType="NVARCHAR" property="s1partstatus" />
+    <result column="H3PRODUCTLINE" jdbcType="NVARCHAR" property="h3productline" />
+    <result column="S2PRODUCTPDT" jdbcType="NCHAR" property="s2productpdt" />
+    <result column="H3PRODUCT" jdbcType="NVARCHAR" property="h3product" />
+    <result column="PROJECTNAME" jdbcType="NVARCHAR" property="projectname" />
+    <result column="H3PRODUCTRREVISION" jdbcType="NVARCHAR" property="h3productrrevision" />
+    <result column="H3PRODUCTBREVISION" jdbcType="NVARCHAR" property="h3productbrevision" />
+    <result column="S2ISALLOWSEND" jdbcType="NVARCHAR" property="s2isallowsend" />
+    <result column="TZ_ACTUALRELDATE" jdbcType="NVARCHAR" property="tzActualreldate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    OBID, S1PARTNUMBER, S1PARTREVISION, S1PARTTEMPLATE, THHXH, S1PARTDESCELEMENTS, S1EXTCHINESEDESC, 
+    S1INTENGLISHDESC, S1EXTENGLISHDESC, S1INTERNALMODEL, S1EXTERNALMODEL, DEFAULTUNITOFMEASURE, 
+    S1PARTSTATUS, H3PRODUCTLINE, S2PRODUCTPDT, H3PRODUCT, PROJECTNAME, H3PRODUCTRREVISION, 
+    H3PRODUCTBREVISION, S2ISALLOWSEND, TZ_ACTUALRELDATE
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.flowable.entity.HzPartViewExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from view_hz_part
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.flowable.entity.HzPartViewExample">
+    delete from view_hz_part
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.flowable.entity.HzPartView">
+    insert into view_hz_part (OBID, S1PARTNUMBER, S1PARTREVISION, 
+      S1PARTTEMPLATE, THHXH, S1PARTDESCELEMENTS, 
+      S1EXTCHINESEDESC, S1INTENGLISHDESC, S1EXTENGLISHDESC, 
+      S1INTERNALMODEL, S1EXTERNALMODEL, DEFAULTUNITOFMEASURE, 
+      S1PARTSTATUS, H3PRODUCTLINE, S2PRODUCTPDT, 
+      H3PRODUCT, PROJECTNAME, H3PRODUCTRREVISION, 
+      H3PRODUCTBREVISION, S2ISALLOWSEND, TZ_ACTUALRELDATE
+      )
+    values (#{obid,jdbcType=NVARCHAR}, #{s1partnumber,jdbcType=NVARCHAR}, #{s1partrevision,jdbcType=NVARCHAR}, 
+      #{s1parttemplate,jdbcType=NVARCHAR}, #{thhxh,jdbcType=NVARCHAR}, #{s1partdescelements,jdbcType=NVARCHAR}, 
+      #{s1extchinesedesc,jdbcType=NVARCHAR}, #{s1intenglishdesc,jdbcType=NVARCHAR}, #{s1extenglishdesc,jdbcType=NVARCHAR}, 
+      #{s1internalmodel,jdbcType=NVARCHAR}, #{s1externalmodel,jdbcType=NVARCHAR}, #{defaultunitofmeasure,jdbcType=NCHAR}, 
+      #{s1partstatus,jdbcType=NVARCHAR}, #{h3productline,jdbcType=NVARCHAR}, #{s2productpdt,jdbcType=NCHAR}, 
+      #{h3product,jdbcType=NVARCHAR}, #{projectname,jdbcType=NVARCHAR}, #{h3productrrevision,jdbcType=NVARCHAR}, 
+      #{h3productbrevision,jdbcType=NVARCHAR}, #{s2isallowsend,jdbcType=NVARCHAR}, #{tzActualreldate,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.flowable.entity.HzPartView">
+    insert into view_hz_part
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="obid != null">
+        OBID,
+      </if>
+      <if test="s1partnumber != null">
+        S1PARTNUMBER,
+      </if>
+      <if test="s1partrevision != null">
+        S1PARTREVISION,
+      </if>
+      <if test="s1parttemplate != null">
+        S1PARTTEMPLATE,
+      </if>
+      <if test="thhxh != null">
+        THHXH,
+      </if>
+      <if test="s1partdescelements != null">
+        S1PARTDESCELEMENTS,
+      </if>
+      <if test="s1extchinesedesc != null">
+        S1EXTCHINESEDESC,
+      </if>
+      <if test="s1intenglishdesc != null">
+        S1INTENGLISHDESC,
+      </if>
+      <if test="s1extenglishdesc != null">
+        S1EXTENGLISHDESC,
+      </if>
+      <if test="s1internalmodel != null">
+        S1INTERNALMODEL,
+      </if>
+      <if test="s1externalmodel != null">
+        S1EXTERNALMODEL,
+      </if>
+      <if test="defaultunitofmeasure != null">
+        DEFAULTUNITOFMEASURE,
+      </if>
+      <if test="s1partstatus != null">
+        S1PARTSTATUS,
+      </if>
+      <if test="h3productline != null">
+        H3PRODUCTLINE,
+      </if>
+      <if test="s2productpdt != null">
+        S2PRODUCTPDT,
+      </if>
+      <if test="h3product != null">
+        H3PRODUCT,
+      </if>
+      <if test="projectname != null">
+        PROJECTNAME,
+      </if>
+      <if test="h3productrrevision != null">
+        H3PRODUCTRREVISION,
+      </if>
+      <if test="h3productbrevision != null">
+        H3PRODUCTBREVISION,
+      </if>
+      <if test="s2isallowsend != null">
+        S2ISALLOWSEND,
+      </if>
+      <if test="tzActualreldate != null">
+        TZ_ACTUALRELDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="obid != null">
+        #{obid,jdbcType=NVARCHAR},
+      </if>
+      <if test="s1partnumber != null">
+        #{s1partnumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="s1partrevision != null">
+        #{s1partrevision,jdbcType=NVARCHAR},
+      </if>
+      <if test="s1parttemplate != null">
+        #{s1parttemplate,jdbcType=NVARCHAR},
+      </if>
+      <if test="thhxh != null">
+        #{thhxh,jdbcType=NVARCHAR},
+      </if>
+      <if test="s1partdescelements != null">
+        #{s1partdescelements,jdbcType=NVARCHAR},
+      </if>
+      <if test="s1extchinesedesc != null">
+        #{s1extchinesedesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="s1intenglishdesc != null">
+        #{s1intenglishdesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="s1extenglishdesc != null">
+        #{s1extenglishdesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="s1internalmodel != null">
+        #{s1internalmodel,jdbcType=NVARCHAR},
+      </if>
+      <if test="s1externalmodel != null">
+        #{s1externalmodel,jdbcType=NVARCHAR},
+      </if>
+      <if test="defaultunitofmeasure != null">
+        #{defaultunitofmeasure,jdbcType=NCHAR},
+      </if>
+      <if test="s1partstatus != null">
+        #{s1partstatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="h3productline != null">
+        #{h3productline,jdbcType=NVARCHAR},
+      </if>
+      <if test="s2productpdt != null">
+        #{s2productpdt,jdbcType=NCHAR},
+      </if>
+      <if test="h3product != null">
+        #{h3product,jdbcType=NVARCHAR},
+      </if>
+      <if test="projectname != null">
+        #{projectname,jdbcType=NVARCHAR},
+      </if>
+      <if test="h3productrrevision != null">
+        #{h3productrrevision,jdbcType=NVARCHAR},
+      </if>
+      <if test="h3productbrevision != null">
+        #{h3productbrevision,jdbcType=NVARCHAR},
+      </if>
+      <if test="s2isallowsend != null">
+        #{s2isallowsend,jdbcType=NVARCHAR},
+      </if>
+      <if test="tzActualreldate != null">
+        #{tzActualreldate,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.flowable.entity.HzPartViewExample" resultType="java.lang.Long">
+    select count(*) from view_hz_part
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update view_hz_part
+    <set>
+      <if test="record.obid != null">
+        OBID = #{record.obid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.s1partnumber != null">
+        S1PARTNUMBER = #{record.s1partnumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.s1partrevision != null">
+        S1PARTREVISION = #{record.s1partrevision,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.s1parttemplate != null">
+        S1PARTTEMPLATE = #{record.s1parttemplate,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.thhxh != null">
+        THHXH = #{record.thhxh,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.s1partdescelements != null">
+        S1PARTDESCELEMENTS = #{record.s1partdescelements,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.s1extchinesedesc != null">
+        S1EXTCHINESEDESC = #{record.s1extchinesedesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.s1intenglishdesc != null">
+        S1INTENGLISHDESC = #{record.s1intenglishdesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.s1extenglishdesc != null">
+        S1EXTENGLISHDESC = #{record.s1extenglishdesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.s1internalmodel != null">
+        S1INTERNALMODEL = #{record.s1internalmodel,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.s1externalmodel != null">
+        S1EXTERNALMODEL = #{record.s1externalmodel,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.defaultunitofmeasure != null">
+        DEFAULTUNITOFMEASURE = #{record.defaultunitofmeasure,jdbcType=NCHAR},
+      </if>
+      <if test="record.s1partstatus != null">
+        S1PARTSTATUS = #{record.s1partstatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.h3productline != null">
+        H3PRODUCTLINE = #{record.h3productline,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.s2productpdt != null">
+        S2PRODUCTPDT = #{record.s2productpdt,jdbcType=NCHAR},
+      </if>
+      <if test="record.h3product != null">
+        H3PRODUCT = #{record.h3product,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.projectname != null">
+        PROJECTNAME = #{record.projectname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.h3productrrevision != null">
+        H3PRODUCTRREVISION = #{record.h3productrrevision,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.h3productbrevision != null">
+        H3PRODUCTBREVISION = #{record.h3productbrevision,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.s2isallowsend != null">
+        S2ISALLOWSEND = #{record.s2isallowsend,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tzActualreldate != null">
+        TZ_ACTUALRELDATE = #{record.tzActualreldate,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update view_hz_part
+    set OBID = #{record.obid,jdbcType=NVARCHAR},
+      S1PARTNUMBER = #{record.s1partnumber,jdbcType=NVARCHAR},
+      S1PARTREVISION = #{record.s1partrevision,jdbcType=NVARCHAR},
+      S1PARTTEMPLATE = #{record.s1parttemplate,jdbcType=NVARCHAR},
+      THHXH = #{record.thhxh,jdbcType=NVARCHAR},
+      S1PARTDESCELEMENTS = #{record.s1partdescelements,jdbcType=NVARCHAR},
+      S1EXTCHINESEDESC = #{record.s1extchinesedesc,jdbcType=NVARCHAR},
+      S1INTENGLISHDESC = #{record.s1intenglishdesc,jdbcType=NVARCHAR},
+      S1EXTENGLISHDESC = #{record.s1extenglishdesc,jdbcType=NVARCHAR},
+      S1INTERNALMODEL = #{record.s1internalmodel,jdbcType=NVARCHAR},
+      S1EXTERNALMODEL = #{record.s1externalmodel,jdbcType=NVARCHAR},
+      DEFAULTUNITOFMEASURE = #{record.defaultunitofmeasure,jdbcType=NCHAR},
+      S1PARTSTATUS = #{record.s1partstatus,jdbcType=NVARCHAR},
+      H3PRODUCTLINE = #{record.h3productline,jdbcType=NVARCHAR},
+      S2PRODUCTPDT = #{record.s2productpdt,jdbcType=NCHAR},
+      H3PRODUCT = #{record.h3product,jdbcType=NVARCHAR},
+      PROJECTNAME = #{record.projectname,jdbcType=NVARCHAR},
+      H3PRODUCTRREVISION = #{record.h3productrrevision,jdbcType=NVARCHAR},
+      H3PRODUCTBREVISION = #{record.h3productbrevision,jdbcType=NVARCHAR},
+      S2ISALLOWSEND = #{record.s2isallowsend,jdbcType=NVARCHAR},
+      TZ_ACTUALRELDATE = #{record.tzActualreldate,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!--去掉注释-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--需要配置数据库连接-->
+        <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+                        connectionURL="jdbc:sqlserver://H3CMDS02-VS\SQL2014;DatabaseName=IBDSDB"
+                        userId=  "sa"  
+                        password= "Hello123"   >
+                        
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!--指定javaBean生成的位置 javaBean生成的位置-->
+        <javaModelGenerator targetPackage="com.h3c.mds.product.entity" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!--sql映射文件生成的位置-->
+        <sqlMapGenerator targetPackage="mapper"  targetProject="./src/main/resources/mybatis">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!--指定dao接口生成的位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.h3c.mds.product.dao"  targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!--table是指定每个表的生成策略-->
+       <!--  <table tableName="IBDS_Release" domainObjectName="IBDS_Release"></table>
+        <table tableName="ReleaseView" domainObjectName="ReleaseView"></table>  -->
+       <!-- <table tableName="IBDS_ColunmConfig" domainObjectName="IBDS_ColunmConfig"></table> -->
+
+        <!--<table tableName="V_MODULE_VERSION_VIEW" domainObjectName="ModuleVersionView"></table>-->
+        <!--<table tableName="IBDS_PLIPMT" domainObjectName="IBDS_PLIPMT"></table>-->
+        <!--<table tableName="IBDS_PRODLINE" domainObjectName="IBDS_PRODLINE"></table>-->
+        
+        
+        <!-- <table tableName="bversion_view" domainObjectName="Bversion_view"></table> -->
+        <!-- <table tableName="IBDS_version" domainObjectName="IBDS_Version"></table> -->
+        <table tableName="IBDS_bversion" domainObjectName="IBDS_Bversion"></table>
+        <!-- 研发项目 -->
+        
+        <!-- <table tableName="IBDS_PROJECT" domainObjectName="IBDSProject"></table> -->
+        <!-- <table tableName="projectView" domainObjectName="ProjectView"></table> -->
+        
+        <!-- 基线版本 -->
+        <!-- <table tableName="BaseLineView" domainObjectName="BaseLineView"></table> -->
+        <!-- <table tableName="IBDS_BASE_LINE" domainObjectName="IBDS_BaseLine"></table> -->
+        <!-- 特性 -->
+        <!-- <table tableName="IBDS_FEATRUE" domainObjectName="IBDS_Feature"></table>
+        <table tableName="FeatureView" domainObjectName="FeatureView"></table> -->
+        <!-- 子特性 -->
+        
+        <!-- <table tableName="SubFeatureView" domainObjectName="SubFeatureView"></table>
+        <table tableName="IBDS_SUB_FEATRUE" domainObjectName="IBDS_SubFeature"></table> -->
+        <!-- 项目组 -->
+        <!-- <table tableName="TeamView" domainObjectName="TeamView"></table>
+        <table tableName="IBDS_TEAM" domainObjectName="IBDS_Team"></table> -->
+        <!--研发产品-->
+        <!--<table tableName="IBDS_Product" domainObjectName="IBDS_Product"></table>-->
+        <!--产品线视图-->
+        <!--<table tableName="V_PRODLINE_VIEW" domainObjectName="ProdLineVew"></table>-->
+        <!--PDT-->
+        <!--<table tableName="IBDS_PDT" domainObjectName="IBDS_PDT"></table>-->
+        <!--子系统视图-->
+        <!--<table tableName="V_SUB_SYSTEM_VIEW" domainObjectName="SubSystemView"></table>-->
+        <!--模块视图-->
+        <!--<table tableName="V_MODULE_VIEW" domainObjectName="ModuleView"></table>-->
+        <!--<table tableName="V_MODULE_VERSION_VIEW" domainObjectName="ModuleVersionView"></table>-->
+        <!--研发产品视图-->
+        <!--<table tableName="V_PRODUCT_VIEW" domainObjectName="ProductView"></table> -->
+        <!--操作日志 -->
+        <!--<table tableName="IBDS_OperationLog" domainObjectName="IBDS_OperationLog"></table>-->
+         <!-- <table tableName="view_StopUsingProducts" domainObjectName="view_StopUsingProducts"></table> -->
+         <!-- <table tableName="IBDS_PROJECT_CODE_RECOMMEND" domainObjectName="IbdsProjectCodeRecommend"></table> -->
+         <!-- <table tableName="IBDS_MAXCODE" domainObjectName="IbdsMaxCode"></table> -->
+        <!--  <table tableName="IBDS_ERROR_CODE" domainObjectName="IbdsErrorCode"></table> -->
+         
+         <!-- <table tableName="IBDS_Notes_ReleaseTemp" domainObjectName="IBDSNotesReleaseTemp"></table> -->
+         
+    </context>
+</generatorConfiguration>

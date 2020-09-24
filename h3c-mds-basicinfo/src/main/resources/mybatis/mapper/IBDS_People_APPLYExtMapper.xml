@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.IBDS_People_APPLYMapper">
+  
+   <insert id="insertBackID" parameterType="com.h3c.mds.basicinfo.entity.IBDS_People_APPLY" useGeneratedKeys="true" keyProperty="id">
+    insert into IBDS_People_APPLY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="processCode != null">
+        Process_Code,
+      </if>
+      <if test="pinfotype != null">
+        PInfoType,
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo,
+      </if>
+      <if test="plipmt != null">
+        PLIPMT,
+      </if>
+      <if test="engplipmt != null">
+        EngPLIPMT,
+      </if>
+      <if test="prodlineno != null">
+        PRODLINENo,
+      </if>
+      <if test="prodline != null">
+        PRODLINE,
+      </if>
+      <if test="engprodline != null">
+        EngPRODLINE,
+      </if>
+      <if test="pdtno != null">
+        PDTNo,
+      </if>
+      <if test="pdt != null">
+        PDT,
+      </if>
+      <if test="engpdt != null">
+        EngPDT,
+      </if>
+      <if test="versionno != null">
+        VersionNo,
+      </if>
+      <if test="version != null">
+        Version,
+      </if>
+      <if test="engversion != null">
+        EngVersion,
+      </if>
+      <if test="releaseno != null">
+        ReleaseNo,
+      </if>
+      <if test="release != null">
+        Release,
+      </if>
+      <if test="engrelease != null">
+        EngRelease,
+      </if>
+      <if test="ipmtsecretary != null">
+        IPMTSecretary,
+      </if>
+      <if test="isipmtcheck != null">
+        IsIPMTCheck,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="creator != null">
+        Creator,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+      <if test="modifier != null">
+        Modifier,
+      </if>
+      <if test="modifytime != null">
+        ModifyTime,
+      </if>
+      <if test="bversionno != null">
+        BVersionno,
+      </if>
+      <if test="bversion != null">
+        BVersion,
+      </if>
+      <if test="engbversion != null">
+        EngBVersion,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="processCode != null">
+        #{processCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="pinfotype != null">
+        #{pinfotype,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmtno != null">
+        #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmt != null">
+        #{plipmt,jdbcType=NVARCHAR},
+      </if>
+      <if test="engplipmt != null">
+        #{engplipmt,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodline != null">
+        #{prodline,jdbcType=NVARCHAR},
+      </if>
+      <if test="engprodline != null">
+        #{engprodline,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtno != null">
+        #{pdtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdt != null">
+        #{pdt,jdbcType=NVARCHAR},
+      </if>
+      <if test="engpdt != null">
+        #{engpdt,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionno != null">
+        #{versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=NVARCHAR},
+      </if>
+      <if test="engversion != null">
+        #{engversion,jdbcType=NVARCHAR},
+      </if>
+      <if test="releaseno != null">
+        #{releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="release != null">
+        #{release,jdbcType=NVARCHAR},
+      </if>
+      <if test="engrelease != null">
+        #{engrelease,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtsecretary != null">
+        #{ipmtsecretary,jdbcType=NVARCHAR},
+      </if>
+      <if test="isipmtcheck != null">
+        #{isipmtcheck,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifytime != null">
+        #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bversionno != null">
+        #{bversionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="bversion != null">
+        #{bversion,jdbcType=NVARCHAR},
+      </if>
+      <if test="engbversion != null">
+        #{engbversion,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>  
+</mapper>

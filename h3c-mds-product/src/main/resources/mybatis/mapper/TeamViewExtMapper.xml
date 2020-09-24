@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.TeamViewMapper">
+
+
+	<!-- 获取V版本树 -->
+	<select id="getTreeData" parameterType="map"
+		resultMap="BaseResultMap">
+
+		<!-- 产品线层 -->
+		<if test="param.id == null">
+			select distinct PRODLINENo , PRODLINE,PL_ORDER from TeamView where status = '1'
+		</if>
+
+
+		<if test="param.id != null">
+			<!-- 产品层 -->
+			<if test="param.type =='PL'">
+
+				select distinct productno+'_'+PRODLINENo as PRODLINENo ,product, PRODLINE from
+				TeamView
+				where PRODLINENo=#{param.id} and status = '1'
+
+			</if>
+
+			<!-- R级版本层 -->
+			<if test="param.type =='PP'">
+
+				select distinct releaseno+'_'+productno+'_'+PRODLINENo as PRODLINENo,product, PRODLINE
+				,release from TeamView
+				where PRODUCTNo=#{param.id} and status = '1'
+
+			</if>
+			<!--项目组层 -->
+			<if test="param.type =='PR'">
+
+				select TEAMNo+'_'+releaseno+'_'+productno+'_'+Convert(varchar,ID)+'_'+PRODLINENo as PRODLINENo,product, PRODLINE
+				,release,
+				TEAMNo,
+				TEAM,
+				TEAMOld,
+				engTEAM,
+				PLIPMTNo,
+				PRODLINENo,
+				PRODUCTNo,
+				VERSIONNo,
+				RELEASENo,
+				Readers,
+				Remark,
+				Status,ID
+				from TeamView
+				where RELEASENo=#{param.id} and status = '1'
+
+			</if>
+
+			<if
+				test="param.PRODLINENo!=null and param.PRODLINENo!='' and param.type !='TM'">
+				and PRODLINENo=#{param.PRODLINENo}
+			</if>
+			<if
+				test="param.PRODUCTNo!=null and param.PRODUCTNo!='' and param.type !='TM'">
+				and PRODUCTNo=#{param.PRODUCTNo}
+			</if>
+			
+
+		</if>
+		<!--全文检索 -->
+		<if
+			test="param.projectStatus != null and param.projectStatus != ''">
+			and PROJECTSTATUS=#{param.projectStatus}
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and CHARINDEX(#{param.searchParas}, isnull(TEAMNo,'')
+			+ isnull(TEAM,'')
+			+ isnull(TEAMOld,'')
+			+ isnull(engTEAM,'')
+			+ isnull(PLIPMTNo,'')
+			+ isnull(PRODLINENo,'')
+			+ isnull(PRODUCTNo,'')
+			+ isnull(VERSIONNo,'')
+			+ isnull(RELEASENo,'')
+			+ isnull(Readers,'')
+			+ isnull(Remark,''))&gt;0
+		</if>
+		
+		 <!-- 产品线层-->
+    <if test="param.id == null">
+    order by PL_ORDER,PRODLINE
+    </if>
+     <if test="param.id != null">
+      <!-- 产品层 -->
+      <if test="param.type =='PL'">
+      order by Product
+      </if>
+      <!--R版本层 -->
+	  <if test="param.type =='PP'">
+	  order by release
+	  </if>
+	  	<!--项目组层 -->
+	  <if test="param.type =='PR'">
+	  order by TEAM
+	  </if>
+      </if>
+	</select>
+
+
+
+
+	<!--根据内码查询属性 -->
+	<select id="selectByCode" parameterType="string"
+		resultMap="BaseResultMap">
+		select top 1
+		<include refid="Base_Column_List" />
+		from TeamView
+		where TEAMNo=#{code}
+
+	</select>
+	
+	
+	<!--根据内码查询属性 -->
+	<select id="selectByID" parameterType="Integer"
+		resultMap="BaseResultMap">
+		select top 1
+		<include refid="Base_Column_List" />
+		from TeamView
+		where ID=#{code}
+
+	</select>
+
+	<select id="getMaxCode" resultType="String">
+		select max(teamno) from IBDS_TEAM WHERE teamno LIKE 'TM%';
+	</select>
+	
+	<select id="getExportList" parameterType="map"
+		resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from TeamView where status = '1'
+		
+		<!--全文检索 -->
+		<if
+			test="param.projectStatus != null and param.projectStatus != ''">
+			and PROJECTSTATUS=#{param.projectStatus}
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and CHARINDEX(#{param.searchParas}, isnull(TEAMNo,'')
+			+ isnull(TEAM,'')
+			+ isnull(TEAMOld,'')
+			+ isnull(engTEAM,'')
+			+ isnull(PLIPMTNo,'')
+			+ isnull(PRODLINENo,'')
+			+ isnull(PRODUCTNo,'')
+			+ isnull(VERSIONNo,'')
+			+ isnull(RELEASENo,'')
+			+ isnull(Readers,'')
+			+ isnull(Remark,''))&gt;0
+		</if>
+		
+		 order by PL_ORDER,PRODLINE
+	</select>
+</mapper>

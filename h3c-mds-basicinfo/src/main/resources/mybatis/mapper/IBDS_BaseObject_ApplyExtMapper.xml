@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.IBDS_BaseObject_ApplyMapper">
+   <select id="getIdsByProcessCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT ID FROM IBDS_BaseObject_Apply WHERE PROCESS_CODE = #{processCode}
+  </select>
+  
+  <select id="getByProcessCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT <include refid="Base_Column_List" /> FROM IBDS_BaseObject_Apply WHERE PROCESS_CODE = #{applyCode}
+  </select>
+  
+  <select id="getZTByProductCode" resultMap="BaseResultMap" parameterType="map">
+    SELECT a.* FROM IBDS_BaseObject_Apply a JOIN IBDS_BaseObject_PROCESS b  ON a.PROCESS_CODE = b.ApplyCode where b.status='1' 
+    
+    <if test="param.productCode!=null">
+    and a.ObjectNo=#{param.productCode}
+    </if>
+    <if test="param.product!=null">
+    and a.ObjectName=#{param.product}
+    </if>
+     <if test="param.parentCode!=null and param.parentCode!=''">
+     and CHARINDEX(ISNULL(PLIPMTNo,'')+'_'+ISNULL(PRODLINENo,'')+'_'+ISNULL(PRODUCTNo,'')+'_'+ISNULL(VERSIONNo,'')+'_'+ISNULL(RELEASENo,''),#{param.parentCode})>0
+    </if>
+    <if test="param.names!=null and param.names!=''">
+		and a.ObjectName in
+	<foreach collection="param.names.split(',')" item="record" index="index" open="(" separator="," close=")">
+		#{record,jdbcType=NVARCHAR}
+	</foreach>
+		</if>
+    
+  </select>
+
+  <select id="getZTCountByProductCode" resultType="java.lang.Integer" parameterType="map">
+    SELECT count(1) FROM IBDS_BaseObject_Apply a JOIN IBDS_BaseObject_PROCESS b  ON a.PROCESS_CODE = b.ApplyCode where b.status='1' 
+  <if test="param.productCode!=null">
+    and CHARINDEX(#{param.productCode},a.ObjectNo)>0
+    </if>
+    <if test="param.product!=null">
+    <if test="param.type==null or param.type==''">
+    and a.ObjectName=#{param.product}
+    </if>
+    <if test="param.type!=null and param.type!=''">
+    <if test='param.type=="SF"'>
+    and a.featureno+'_'+a.ObjectName in (#{param.product})
+    </if>
+      <if test='param.type=="MD"'>
+    and a.featureno+'_'+a.ObjectName in (#{param.product})
+    </if>
+      <if test='param.type=="MV"'>
+    and a.subsystemno+'_'+a.moduleno+'_'+a.ObjectName in (#{param.product})
+    </if>
+    </if>
+    </if>
+    
+     <if test="param.parentCode!=null and param.parentCode!=''">
+     and CHARINDEX(ISNULL(PLIPMTNo,'')+'_'+ISNULL(PRODLINENo,'')+'_'+ISNULL(PRODUCTNo,'')+'_'+ISNULL(VERSIONNo,'')+'_'+ISNULL(RELEASENo,''),#{param.parentCode})>0
+    </if>
+    <if test="param.names!=null and param.names!=''">
+     <if test="param.type==null or param.type==''">
+		and a.ObjectName in
+	<foreach collection="param.names.split(',')" item="record" index="index" open="(" separator="," close=")">
+		#{record,jdbcType=NVARCHAR}
+	</foreach>
+	</if>
+	<if test="param.type!=null and param.type!=''">
+        <if test='param.type=="SF"'>
+         and a.featureno+'_'+a.ObjectName in 
+		</if>
+		<if test='param.type=="MD"'>
+		and a.featureno+'_'+a.ObjectName in
+		</if>
+		<if test='param.type=="MV"'>
+		and a.subsystemno+'_'+a.moduleno+'_'+a.ObjectName in
+		</if>
+		<foreach collection="param.names.split(',')" item="record" index="index" open="(" separator="," close=")">
+		#{record,jdbcType=NVARCHAR}
+	</foreach>
+	</if>
+	</if>
+  </select>
+  <!-- 停用产品库 -->
+  <update id="updateBaseinfo" parameterType="map" >
+  <if test="param.tabName!=null and param.code!=null">
+  update ${param.tabName} set status='0'
+  <if test="param.modifyUser!=null">
+  ,Modify_User=#{param.ModifyUser}
+  </if>
+  
+
+  <if test="param.tabName=='IBDS_Bversion' or param.tabName=='IBDS_FEATRUE' or param.tabName=='IBDS_Base_Line' or param.tabName=='IBDS_SUB_FEATRUE' or param.tabName=='IBDS_Team' or param.tabName=='IBDS_SUB_SYSTEM'  or param.tabName=='IBDS_Module' or param.tabName=='IBDS_MODULE_VERSION'"> 
+  <if test="param.modifyTime!=null">
+  ,Modify_Data=#{param.modifyTime}
+  </if>
+  </if>
+  <if test="param.tabName=='IBDS_Version'">
+  <if test="param.modifyTime!=null">
+  ,Modify_Date=#{param.modifyTime}
+  </if>
+  </if>
+
+   where productno=#{param.code}
+  </if>
+  
+  </update>
+  <!-- 根据V R查看在途 -->
+  <select id="validateVRIntransit" parameterType="map"
+		resultType="Integer">
+		select count(1) from (
+ SELECT a.RELEASENo,a.VERSIONNo FROM IBDS_BaseObject_Apply a JOIN IBDS_BaseObject_PROCESS b  ON a.PROCESS_CODE = b.ApplyCode where b.status='1' 
+ union all
+ SELECT a.RELEASENo,a.VERSIONNo FROM IBDS_BaseLine_Apply a JOIN IBDS_BaseObject_PROCESS b  ON a.PROCESS_CODE = b.ApplyCode where b.status='1'
+ ) vr 
+		<if test='param.type=="r"'>
+			where vr.RELEASENo=#{param.value}
+		</if>
+		<if test='param.type=="v"'>
+			where vr.VERSIONNo=#{param.value}
+		</if>
+	</select>
+  
+</mapper>

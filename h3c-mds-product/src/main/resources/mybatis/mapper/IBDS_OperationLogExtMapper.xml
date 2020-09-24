@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.IBDS_OperationLogMapper">
+  <insert id="insertSelectiveBatch" useGeneratedKeys="true"  parameterType="com.h3c.mds.product.entity.IBDS_OperationLogExample">
+   insert into IBDS_OperationLog (Code, OptType, 
+      OldValue, NewValue, Operator, 
+      OptTime)
+    values 
+  <foreach collection="list" item="record" index="index" separator=",">
+  (#{record.code,jdbcType=NVARCHAR}, #{record.opttype,jdbcType=NVARCHAR}, 
+      #{record.oldvalue,jdbcType=NVARCHAR}, #{record.newvalue,jdbcType=NVARCHAR}, #{record.operator,jdbcType=NVARCHAR}, 
+      #{record.opttime,jdbcType=TIMESTAMP})
+  </foreach>
+  </insert>
+  <insert id="insertModPBName" parameterType="map">
+  insert into IBDS_OperationLog (Code, OptType,OldValue, NewValue, Operator,OptTime)
+   <if test="param.isCN!=null and param.isENG==null  ">
+    SELECT bversionno,'MODIFY','{"bversioncname":"'+#{param.old}+isnull(bversioncname,'')+'"}','{"bversioncname":"'+#{param.new}+isnull(bversioncname,'') +'"}',#{param.createUser},GETDATE() FROM dbo.IBDS_bversion 
+    WHERE RELEASENo=#{param.releaseNo}
+   </if>
+   <if test="param.isCN!=null  and param.isENG!=null ">
+   	SELECT bversionno,'MODIFY','{"bversioncname":"'+#{param.old}+isnull(bversioncname,'')+'","bversionename":"'+#{param.engOld}+isnull(bversionename,'')+'"}','{"bversioncname":"'+#{param.new}+isnull(bversioncname,'')+'","bversionename":"'+#{param.engNew}+isnull(bversionename,'')+'"}',#{param.createUser},GETDATE() FROM dbo.IBDS_bversion 
+    WHERE RELEASENo=#{param.releaseNo}
+   </if>
+  <if test="param.isENG!=null and param.isCN==null ">
+    SELECT bversionno,'MODIFY','{"bversionename":"'+#{param.engOld}+isnull(bversionename,'')+'"}','{"bversionename":"'+#{param.engNew}+isnull(bversionename,'')+'"}',#{param.createUser},GETDATE() FROM dbo.IBDS_bversion 
+    WHERE RELEASENo=#{param.releaseNo}
+   </if>
+  			
+  </insert>
+</mapper>

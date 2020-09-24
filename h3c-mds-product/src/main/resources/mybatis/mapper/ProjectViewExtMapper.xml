@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.ProjectViewMapper">
+
+	<!-- 获取V版本树 -->
+	<select id="getTreeData" parameterType="map"
+		resultMap="BaseResultMap">
+
+		<!-- IPMT层 -->
+		<if test="param.id == null">
+			select distinct PLIPMT,PLIPMTNo,plipmt_order from projectView where status = '1'
+		</if>
+
+
+		<if test="param.id != null">
+			<!-- PDT层 这里直接取ipmt下所有的pdt，跨过了产品线 -->
+			<if test="param.type =='PI'">
+
+				select distinct PDTNo+'_'+PLIPMTNo as PLIPMTNo ,PDT,PLIPMT from projectView
+				where PLIPMTNo=#{param.id} and status = '1'
+
+			</if>
+			<!--研发项目层 -->
+			<if test="param.type =='PT'">
+
+				select PROJECTNo+'_'+PDTNo+'_'+Convert(varchar,ID)+'_'+PLIPMTNo as PLIPMTNo,PDT,PLIPMT,
+				PROJECTNo,
+				PROJECT,
+				PROJECTOld,
+				engPROJECT,
+				PROJECTAlias,
+				IfPlan,
+				PROJECTCOACode,
+				PROJECTTypeNo,
+				PLIPMTNo,
+				PRODLINENo,
+				PDTNo,
+				Remark,
+				Match,
+				PROJECTMatch,
+				Status,ID
+
+				from projectView
+				where pdtno=#{param.id} and status = '1'
+
+			</if>
+
+			<if test="param.PLIPMTNo!=null and param.PLIPMTNo!='' ">
+				and PLIPMTNo=#{param.PLIPMTNo}
+			</if>
+		</if>
+		<!--全文检索 -->
+		<if
+			test="param.projectStatus != null and param.projectStatus != ''">
+			and PROJECTSTATUS=#{param.projectStatus}
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and CHARINDEX(#{param.searchParas},isnull(PROJECTNo,'') +
+			isnull(PROJECT,'') + isnull(PROJECTOld,'') + isnull(engPROJECT,'')
+			+ isnull(PROJECTAlias,'') + isnull(PROJECTCOACode,'') +
+			isnull(PROJECTTypeNo,'') + isnull(PLIPMTNo,'')
+			+ isnull(PRODLINENo,'') + isnull(PDTNo,'') + isnull(Remark,'') +
+			isnull(Match,'') + isnull(PROJECTMatch,'') )&gt;0
+		</if>
+		
+				<!-- ipmt层-->
+    <if test="param.id == null">
+    order by plipmt_order,PLIPMT
+    </if>
+     <if test="param.id != null">
+      <!-- PDT层 -->
+      <if test="param.type =='PI'">
+      order by PDT
+      </if>
+       <!-- 项目层 -->
+      <if test="param.type =='PT'">
+      order by PROJECT
+      </if>
+	  </if>
+	</select>
+
+
+
+
+	<!--根据内码查询属性 -->
+	<select id="selectByCode" parameterType="string"
+		resultMap="BaseResultMap">
+		select top 1
+		<include refid="Base_Column_List" />
+		from projectView
+		where PROJECTNo=#{code}
+
+	</select>
+	
+	<!--根据ID查询属性 -->
+	<select id="selectByID" parameterType="Integer"
+		resultMap="BaseResultMap">
+		select top 1
+		<include refid="Base_Column_List" />
+		from projectView
+		where ID=#{code}
+
+	</select>
+
+	<select id="getMaxCode" resultType="String">
+		select max(projectno) from IBDS_PROJECT WHERE projectno LIKE 'PJ%';
+	</select>
+	<select id="getExportList" parameterType="map"
+		resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from projectView where status = '1'
+		
+		<if test="param.PLIPMTNo!=null and param.PLIPMTNo!='' ">
+			and PLIPMTNo=#{param.PLIPMTNo}
+		</if>
+		
+		<!--全文检索 -->
+		<if
+			test="param.projectStatus != null and param.projectStatus != ''">
+			and PROJECTSTATUS=#{param.projectStatus}
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and CHARINDEX(#{param.searchParas},isnull(PROJECTNo,'') +
+			isnull(PROJECT,'') + isnull(PROJECTOld,'') + isnull(engPROJECT,'')
+			+ isnull(PROJECTAlias,'') + isnull(PROJECTCOACode,'') +
+			isnull(PROJECTTypeNo,'') + isnull(PLIPMTNo,'')
+			+ isnull(PRODLINENo,'') + isnull(PDTNo,'') + isnull(Remark,'') +
+			isnull(Match,'') + isnull(PROJECTMatch,'') )&gt;0
+		</if>
+		
+		 order by plipmt_order,PLIPMT
+	</select>
+
+</mapper>

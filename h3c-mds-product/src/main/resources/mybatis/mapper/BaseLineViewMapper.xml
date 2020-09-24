@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.BaseLineViewMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.product.entity.BaseLineView">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="P" jdbcType="NVARCHAR" property="p" />
+    <result column="V" jdbcType="NVARCHAR" property="v" />
+    <result column="R" jdbcType="NVARCHAR" property="r" />
+    <result column="L" jdbcType="NVARCHAR" property="l" />
+    <result column="C" jdbcType="NVARCHAR" property="c" />
+    <result column="B" jdbcType="NVARCHAR" property="b" />
+    <result column="D" jdbcType="NVARCHAR" property="d" />
+    <result column="SP" jdbcType="NVARCHAR" property="sp" />
+    <result column="BASELINENo" jdbcType="NVARCHAR" property="baselineno" />
+    <result column="BASELINE" jdbcType="NVARCHAR" property="baseline" />
+    <result column="BASELINEOld" jdbcType="NVARCHAR" property="baselineold" />
+    <result column="engBASELINE" jdbcType="NVARCHAR" property="engbaseline" />
+    <result column="BASELINE_1" jdbcType="NVARCHAR" property="baseline1" />
+    <result column="BASELINEOut" jdbcType="NVARCHAR" property="baselineout" />
+    <result column="engBASELINEOut" jdbcType="NVARCHAR" property="engbaselineout" />
+    <result column="PLIPMTNo" jdbcType="NVARCHAR" property="plipmtno" />
+    <result column="PRODLINENo" jdbcType="NVARCHAR" property="prodlineno" />
+    <result column="PRODUCTNo" jdbcType="NVARCHAR" property="productno" />
+    <result column="VERSIONNo" jdbcType="NVARCHAR" property="versionno" />
+    <result column="RELEASENo" jdbcType="NVARCHAR" property="releaseno" />
+    <result column="ParentItemNo" jdbcType="NVARCHAR" property="parentitemno" />
+    <result column="BASELINEStatus" jdbcType="NVARCHAR" property="baselinestatus" />
+    <result column="BASELINEType" jdbcType="NVARCHAR" property="baselinetype" />
+    <result column="BASELINE_IssueTime" jdbcType="TIMESTAMP" property="baselineIssuetime" />
+    <result column="BASELINE_DisableTime" jdbcType="TIMESTAMP" property="baselineDisabletime" />
+    <result column="BASELINE_usingLimitWhether" jdbcType="NVARCHAR" property="baselineUsinglimitwhether" />
+    <result column="BASELINE_UrgencyIssue" jdbcType="NVARCHAR" property="baselineUrgencyissue" />
+    <result column="BASELINE_UsingRange" jdbcType="NVARCHAR" property="baselineUsingrange" />
+    <result column="BASELINE_IssueRange" jdbcType="NVARCHAR" property="baselineIssuerange" />
+    <result column="BASELINE_IssueStyle" jdbcType="NVARCHAR" property="baselineIssuestyle" />
+    <result column="Readers" jdbcType="NVARCHAR" property="readers" />
+    <result column="ProdDataID" jdbcType="NVARCHAR" property="proddataid" />
+    <result column="Remark" jdbcType="NVARCHAR" property="remark" />
+    <result column="Status" jdbcType="NVARCHAR" property="status" />
+    <result column="CREATED_USER" jdbcType="NVARCHAR" property="createdUser" />
+    <result column="CREATED_DATE" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="MODIFY_USER" jdbcType="NVARCHAR" property="modifyUser" />
+    <result column="MODIFY_DATA" jdbcType="TIMESTAMP" property="modifyData" />
+    <result column="STANDBY1" jdbcType="NVARCHAR" property="standby1" />
+    <result column="STANDBY2" jdbcType="NVARCHAR" property="standby2" />
+    <result column="STANDBY3" jdbcType="NVARCHAR" property="standby3" />
+    <result column="STANDBY4" jdbcType="NVARCHAR" property="standby4" />
+    <result column="STANDBY5" jdbcType="NVARCHAR" property="standby5" />
+    <result column="STANDBY6" jdbcType="NVARCHAR" property="standby6" />
+    <result column="STANDBY7" jdbcType="NVARCHAR" property="standby7" />
+    <result column="STANDBY8" jdbcType="NVARCHAR" property="standby8" />
+    <result column="STANDBY9" jdbcType="NVARCHAR" property="standby9" />
+    <result column="STANDBY10" jdbcType="NVARCHAR" property="standby10" />
+    <result column="PRODLINE" jdbcType="NVARCHAR" property="prodline" />
+    <result column="product" jdbcType="NVARCHAR" property="product" />
+    <result column="release" jdbcType="NVARCHAR" property="release" />
+    <result column="version" jdbcType="NVARCHAR" property="version" />
+    <result column="ParentItem" jdbcType="NVARCHAR" property="parentitem" />
+    <result column="BASELINE_1Name" jdbcType="NVARCHAR" property="baseline1name" />
+    <result column="plipmt_order" jdbcType="VARCHAR" property="plipmtOrder" />
+    <result column="pl_order" jdbcType="INTEGER" property="plOrder" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, P, V, R, L, C, B, D, SP, BASELINENo, BASELINE, BASELINEOld, engBASELINE, BASELINE_1, 
+    BASELINEOut, engBASELINEOut, PLIPMTNo, PRODLINENo, PRODUCTNo, VERSIONNo, RELEASENo, 
+    ParentItemNo, BASELINEStatus, BASELINEType, BASELINE_IssueTime, BASELINE_DisableTime, 
+    BASELINE_usingLimitWhether, BASELINE_UrgencyIssue, BASELINE_UsingRange, BASELINE_IssueRange, 
+    BASELINE_IssueStyle, Readers, ProdDataID, Remark, Status, CREATED_USER, CREATED_DATE, 
+    MODIFY_USER, MODIFY_DATA, STANDBY1, STANDBY2, STANDBY3, STANDBY4, STANDBY5, STANDBY6, 
+    STANDBY7, STANDBY8, STANDBY9, STANDBY10, PRODLINE, product, release, version, ParentItem, 
+    BASELINE_1Name, plipmt_order, pl_order
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.product.entity.BaseLineViewExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from BaseLineView
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.product.entity.BaseLineViewExample">
+    delete from BaseLineView
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.product.entity.BaseLineView">
+    insert into BaseLineView (ID, P, V, R, 
+      L, C, B, D, 
+      SP, BASELINENo, BASELINE, 
+      BASELINEOld, engBASELINE, BASELINE_1, 
+      BASELINEOut, engBASELINEOut, PLIPMTNo, 
+      PRODLINENo, PRODUCTNo, VERSIONNo, 
+      RELEASENo, ParentItemNo, BASELINEStatus, 
+      BASELINEType, BASELINE_IssueTime, BASELINE_DisableTime, 
+      BASELINE_usingLimitWhether, BASELINE_UrgencyIssue, 
+      BASELINE_UsingRange, BASELINE_IssueRange, 
+      BASELINE_IssueStyle, Readers, ProdDataID, 
+      Remark, Status, CREATED_USER, 
+      CREATED_DATE, MODIFY_USER, MODIFY_DATA, 
+      STANDBY1, STANDBY2, STANDBY3, 
+      STANDBY4, STANDBY5, STANDBY6, 
+      STANDBY7, STANDBY8, STANDBY9, 
+      STANDBY10, PRODLINE, product, 
+      release, version, ParentItem, 
+      BASELINE_1Name, plipmt_order, pl_order
+      )
+    values (#{id,jdbcType=INTEGER}, #{p,jdbcType=NVARCHAR}, #{v,jdbcType=NVARCHAR}, #{r,jdbcType=NVARCHAR}, 
+      #{l,jdbcType=NVARCHAR}, #{c,jdbcType=NVARCHAR}, #{b,jdbcType=NVARCHAR}, #{d,jdbcType=NVARCHAR}, 
+      #{sp,jdbcType=NVARCHAR}, #{baselineno,jdbcType=NVARCHAR}, #{baseline,jdbcType=NVARCHAR}, 
+      #{baselineold,jdbcType=NVARCHAR}, #{engbaseline,jdbcType=NVARCHAR}, #{baseline1,jdbcType=NVARCHAR}, 
+      #{baselineout,jdbcType=NVARCHAR}, #{engbaselineout,jdbcType=NVARCHAR}, #{plipmtno,jdbcType=NVARCHAR}, 
+      #{prodlineno,jdbcType=NVARCHAR}, #{productno,jdbcType=NVARCHAR}, #{versionno,jdbcType=NVARCHAR}, 
+      #{releaseno,jdbcType=NVARCHAR}, #{parentitemno,jdbcType=NVARCHAR}, #{baselinestatus,jdbcType=NVARCHAR}, 
+      #{baselinetype,jdbcType=NVARCHAR}, #{baselineIssuetime,jdbcType=TIMESTAMP}, #{baselineDisabletime,jdbcType=TIMESTAMP}, 
+      #{baselineUsinglimitwhether,jdbcType=NVARCHAR}, #{baselineUrgencyissue,jdbcType=NVARCHAR}, 
+      #{baselineUsingrange,jdbcType=NVARCHAR}, #{baselineIssuerange,jdbcType=NVARCHAR}, 
+      #{baselineIssuestyle,jdbcType=NVARCHAR}, #{readers,jdbcType=NVARCHAR}, #{proddataid,jdbcType=NVARCHAR}, 
+      #{remark,jdbcType=NVARCHAR}, #{status,jdbcType=NVARCHAR}, #{createdUser,jdbcType=NVARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{modifyUser,jdbcType=NVARCHAR}, #{modifyData,jdbcType=TIMESTAMP}, 
+      #{standby1,jdbcType=NVARCHAR}, #{standby2,jdbcType=NVARCHAR}, #{standby3,jdbcType=NVARCHAR}, 
+      #{standby4,jdbcType=NVARCHAR}, #{standby5,jdbcType=NVARCHAR}, #{standby6,jdbcType=NVARCHAR}, 
+      #{standby7,jdbcType=NVARCHAR}, #{standby8,jdbcType=NVARCHAR}, #{standby9,jdbcType=NVARCHAR}, 
+      #{standby10,jdbcType=NVARCHAR}, #{prodline,jdbcType=NVARCHAR}, #{product,jdbcType=NVARCHAR}, 
+      #{release,jdbcType=NVARCHAR}, #{version,jdbcType=NVARCHAR}, #{parentitem,jdbcType=NVARCHAR}, 
+      #{baseline1name,jdbcType=NVARCHAR}, #{plipmtOrder,jdbcType=VARCHAR}, #{plOrder,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.product.entity.BaseLineView">
+    insert into BaseLineView
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="p != null">
+        P,
+      </if>
+      <if test="v != null">
+        V,
+      </if>
+      <if test="r != null">
+        R,
+      </if>
+      <if test="l != null">
+        L,
+      </if>
+      <if test="c != null">
+        C,
+      </if>
+      <if test="b != null">
+        B,
+      </if>
+      <if test="d != null">
+        D,
+      </if>
+      <if test="sp != null">
+        SP,
+      </if>
+      <if test="baselineno != null">
+        BASELINENo,
+      </if>
+      <if test="baseline != null">
+        BASELINE,
+      </if>
+      <if test="baselineold != null">
+        BASELINEOld,
+      </if>
+      <if test="engbaseline != null">
+        engBASELINE,
+      </if>
+      <if test="baseline1 != null">
+        BASELINE_1,
+      </if>
+      <if test="baselineout != null">
+        BASELINEOut,
+      </if>
+      <if test="engbaselineout != null">
+        engBASELINEOut,
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo,
+      </if>
+      <if test="prodlineno != null">
+        PRODLINENo,
+      </if>
+      <if test="productno != null">
+        PRODUCTNo,
+      </if>
+      <if test="versionno != null">
+        VERSIONNo,
+      </if>
+      <if test="releaseno != null">
+        RELEASENo,
+      </if>
+      <if test="parentitemno != null">
+        ParentItemNo,
+      </if>
+      <if test="baselinestatus != null">
+        BASELINEStatus,
+      </if>
+      <if test="baselinetype != null">
+        BASELINEType,
+      </if>
+      <if test="baselineIssuetime != null">
+        BASELINE_IssueTime,
+      </if>
+      <if test="baselineDisabletime != null">
+        BASELINE_DisableTime,
+      </if>
+      <if test="baselineUsinglimitwhether != null">
+        BASELINE_usingLimitWhether,
+      </if>
+      <if test="baselineUrgencyissue != null">
+        BASELINE_UrgencyIssue,
+      </if>
+      <if test="baselineUsingrange != null">
+        BASELINE_UsingRange,
+      </if>
+      <if test="baselineIssuerange != null">
+        BASELINE_IssueRange,
+      </if>
+      <if test="baselineIssuestyle != null">
+        BASELINE_IssueStyle,
+      </if>
+      <if test="readers != null">
+        Readers,
+      </if>
+      <if test="proddataid != null">
+        ProdDataID,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="createdUser != null">
+        CREATED_USER,
+      </if>
+      <if test="createdDate != null">
+        CREATED_DATE,
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER,
+      </if>
+      <if test="modifyData != null">
+        MODIFY_DATA,
+      </if>
+      <if test="standby1 != null">
+        STANDBY1,
+      </if>
+      <if test="standby2 != null">
+        STANDBY2,
+      </if>
+      <if test="standby3 != null">
+        STANDBY3,
+      </if>
+      <if test="standby4 != null">
+        STANDBY4,
+      </if>
+      <if test="standby5 != null">
+        STANDBY5,
+      </if>
+      <if test="standby6 != null">
+        STANDBY6,
+      </if>
+      <if test="standby7 != null">
+        STANDBY7,
+      </if>
+      <if test="standby8 != null">
+        STANDBY8,
+      </if>
+      <if test="standby9 != null">
+        STANDBY9,
+      </if>
+      <if test="standby10 != null">
+        STANDBY10,
+      </if>
+      <if test="prodline != null">
+        PRODLINE,
+      </if>
+      <if test="product != null">
+        product,
+      </if>
+      <if test="release != null">
+        release,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="parentitem != null">
+        ParentItem,
+      </if>
+      <if test="baseline1name != null">
+        BASELINE_1Name,
+      </if>
+      <if test="plipmtOrder != null">
+        plipmt_order,
+      </if>
+      <if test="plOrder != null">
+        pl_order,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="p != null">
+        #{p,jdbcType=NVARCHAR},
+      </if>
+      <if test="v != null">
+        #{v,jdbcType=NVARCHAR},
+      </if>
+      <if test="r != null">
+        #{r,jdbcType=NVARCHAR},
+      </if>
+      <if test="l != null">
+        #{l,jdbcType=NVARCHAR},
+      </if>
+      <if test="c != null">
+        #{c,jdbcType=NVARCHAR},
+      </if>
+      <if test="b != null">
+        #{b,jdbcType=NVARCHAR},
+      </if>
+      <if test="d != null">
+        #{d,jdbcType=NVARCHAR},
+      </if>
+      <if test="sp != null">
+        #{sp,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselineno != null">
+        #{baselineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="baseline != null">
+        #{baseline,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselineold != null">
+        #{baselineold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engbaseline != null">
+        #{engbaseline,jdbcType=NVARCHAR},
+      </if>
+      <if test="baseline1 != null">
+        #{baseline1,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselineout != null">
+        #{baselineout,jdbcType=NVARCHAR},
+      </if>
+      <if test="engbaselineout != null">
+        #{engbaselineout,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmtno != null">
+        #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="productno != null">
+        #{productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionno != null">
+        #{versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releaseno != null">
+        #{releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="parentitemno != null">
+        #{parentitemno,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselinestatus != null">
+        #{baselinestatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselinetype != null">
+        #{baselinetype,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselineIssuetime != null">
+        #{baselineIssuetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="baselineDisabletime != null">
+        #{baselineDisabletime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="baselineUsinglimitwhether != null">
+        #{baselineUsinglimitwhether,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselineUrgencyissue != null">
+        #{baselineUrgencyissue,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselineUsingrange != null">
+        #{baselineUsingrange,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselineIssuerange != null">
+        #{baselineIssuerange,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselineIssuestyle != null">
+        #{baselineIssuestyle,jdbcType=NVARCHAR},
+      </if>
+      <if test="readers != null">
+        #{readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="proddataid != null">
+        #{proddataid,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="createdUser != null">
+        #{createdUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyData != null">
+        #{modifyData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="standby1 != null">
+        #{standby1,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby2 != null">
+        #{standby2,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby3 != null">
+        #{standby3,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby4 != null">
+        #{standby4,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby5 != null">
+        #{standby5,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby6 != null">
+        #{standby6,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby7 != null">
+        #{standby7,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby8 != null">
+        #{standby8,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby9 != null">
+        #{standby9,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby10 != null">
+        #{standby10,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodline != null">
+        #{prodline,jdbcType=NVARCHAR},
+      </if>
+      <if test="product != null">
+        #{product,jdbcType=NVARCHAR},
+      </if>
+      <if test="release != null">
+        #{release,jdbcType=NVARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=NVARCHAR},
+      </if>
+      <if test="parentitem != null">
+        #{parentitem,jdbcType=NVARCHAR},
+      </if>
+      <if test="baseline1name != null">
+        #{baseline1name,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmtOrder != null">
+        #{plipmtOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="plOrder != null">
+        #{plOrder,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.product.entity.BaseLineViewExample" resultType="java.lang.Long">
+    select count(*) from BaseLineView
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update BaseLineView
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.p != null">
+        P = #{record.p,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.v != null">
+        V = #{record.v,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.r != null">
+        R = #{record.r,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.l != null">
+        L = #{record.l,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.c != null">
+        C = #{record.c,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.b != null">
+        B = #{record.b,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.d != null">
+        D = #{record.d,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sp != null">
+        SP = #{record.sp,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baselineno != null">
+        BASELINENo = #{record.baselineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baseline != null">
+        BASELINE = #{record.baseline,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baselineold != null">
+        BASELINEOld = #{record.baselineold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engbaseline != null">
+        engBASELINE = #{record.engbaseline,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baseline1 != null">
+        BASELINE_1 = #{record.baseline1,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baselineout != null">
+        BASELINEOut = #{record.baselineout,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engbaselineout != null">
+        engBASELINEOut = #{record.engbaselineout,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plipmtno != null">
+        PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodlineno != null">
+        PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productno != null">
+        PRODUCTNo = #{record.productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.versionno != null">
+        VERSIONNo = #{record.versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releaseno != null">
+        RELEASENo = #{record.releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.parentitemno != null">
+        ParentItemNo = #{record.parentitemno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baselinestatus != null">
+        BASELINEStatus = #{record.baselinestatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baselinetype != null">
+        BASELINEType = #{record.baselinetype,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baselineIssuetime != null">
+        BASELINE_IssueTime = #{record.baselineIssuetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.baselineDisabletime != null">
+        BASELINE_DisableTime = #{record.baselineDisabletime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.baselineUsinglimitwhether != null">
+        BASELINE_usingLimitWhether = #{record.baselineUsinglimitwhether,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baselineUrgencyissue != null">
+        BASELINE_UrgencyIssue = #{record.baselineUrgencyissue,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baselineUsingrange != null">
+        BASELINE_UsingRange = #{record.baselineUsingrange,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baselineIssuerange != null">
+        BASELINE_IssueRange = #{record.baselineIssuerange,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baselineIssuestyle != null">
+        BASELINE_IssueStyle = #{record.baselineIssuestyle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.readers != null">
+        Readers = #{record.readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.proddataid != null">
+        ProdDataID = #{record.proddataid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remark != null">
+        Remark = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null">
+        Status = #{record.status,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createdUser != null">
+        CREATED_USER = #{record.createdUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createdDate != null">
+        CREATED_DATE = #{record.createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyUser != null">
+        MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modifyData != null">
+        MODIFY_DATA = #{record.modifyData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.standby1 != null">
+        STANDBY1 = #{record.standby1,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby2 != null">
+        STANDBY2 = #{record.standby2,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby3 != null">
+        STANDBY3 = #{record.standby3,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby4 != null">
+        STANDBY4 = #{record.standby4,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby5 != null">
+        STANDBY5 = #{record.standby5,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby6 != null">
+        STANDBY6 = #{record.standby6,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby7 != null">
+        STANDBY7 = #{record.standby7,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby8 != null">
+        STANDBY8 = #{record.standby8,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby9 != null">
+        STANDBY9 = #{record.standby9,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby10 != null">
+        STANDBY10 = #{record.standby10,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodline != null">
+        PRODLINE = #{record.prodline,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.product != null">
+        product = #{record.product,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.release != null">
+        release = #{record.release,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.version != null">
+        version = #{record.version,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.parentitem != null">
+        ParentItem = #{record.parentitem,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baseline1name != null">
+        BASELINE_1Name = #{record.baseline1name,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plipmtOrder != null">
+        plipmt_order = #{record.plipmtOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plOrder != null">
+        pl_order = #{record.plOrder,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update BaseLineView
+    set ID = #{record.id,jdbcType=INTEGER},
+      P = #{record.p,jdbcType=NVARCHAR},
+      V = #{record.v,jdbcType=NVARCHAR},
+      R = #{record.r,jdbcType=NVARCHAR},
+      L = #{record.l,jdbcType=NVARCHAR},
+      C = #{record.c,jdbcType=NVARCHAR},
+      B = #{record.b,jdbcType=NVARCHAR},
+      D = #{record.d,jdbcType=NVARCHAR},
+      SP = #{record.sp,jdbcType=NVARCHAR},
+      BASELINENo = #{record.baselineno,jdbcType=NVARCHAR},
+      BASELINE = #{record.baseline,jdbcType=NVARCHAR},
+      BASELINEOld = #{record.baselineold,jdbcType=NVARCHAR},
+      engBASELINE = #{record.engbaseline,jdbcType=NVARCHAR},
+      BASELINE_1 = #{record.baseline1,jdbcType=NVARCHAR},
+      BASELINEOut = #{record.baselineout,jdbcType=NVARCHAR},
+      engBASELINEOut = #{record.engbaselineout,jdbcType=NVARCHAR},
+      PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      PRODUCTNo = #{record.productno,jdbcType=NVARCHAR},
+      VERSIONNo = #{record.versionno,jdbcType=NVARCHAR},
+      RELEASENo = #{record.releaseno,jdbcType=NVARCHAR},
+      ParentItemNo = #{record.parentitemno,jdbcType=NVARCHAR},
+      BASELINEStatus = #{record.baselinestatus,jdbcType=NVARCHAR},
+      BASELINEType = #{record.baselinetype,jdbcType=NVARCHAR},
+      BASELINE_IssueTime = #{record.baselineIssuetime,jdbcType=TIMESTAMP},
+      BASELINE_DisableTime = #{record.baselineDisabletime,jdbcType=TIMESTAMP},
+      BASELINE_usingLimitWhether = #{record.baselineUsinglimitwhether,jdbcType=NVARCHAR},
+      BASELINE_UrgencyIssue = #{record.baselineUrgencyissue,jdbcType=NVARCHAR},
+      BASELINE_UsingRange = #{record.baselineUsingrange,jdbcType=NVARCHAR},
+      BASELINE_IssueRange = #{record.baselineIssuerange,jdbcType=NVARCHAR},
+      BASELINE_IssueStyle = #{record.baselineIssuestyle,jdbcType=NVARCHAR},
+      Readers = #{record.readers,jdbcType=NVARCHAR},
+      ProdDataID = #{record.proddataid,jdbcType=NVARCHAR},
+      Remark = #{record.remark,jdbcType=NVARCHAR},
+      Status = #{record.status,jdbcType=NVARCHAR},
+      CREATED_USER = #{record.createdUser,jdbcType=NVARCHAR},
+      CREATED_DATE = #{record.createdDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      MODIFY_DATA = #{record.modifyData,jdbcType=TIMESTAMP},
+      STANDBY1 = #{record.standby1,jdbcType=NVARCHAR},
+      STANDBY2 = #{record.standby2,jdbcType=NVARCHAR},
+      STANDBY3 = #{record.standby3,jdbcType=NVARCHAR},
+      STANDBY4 = #{record.standby4,jdbcType=NVARCHAR},
+      STANDBY5 = #{record.standby5,jdbcType=NVARCHAR},
+      STANDBY6 = #{record.standby6,jdbcType=NVARCHAR},
+      STANDBY7 = #{record.standby7,jdbcType=NVARCHAR},
+      STANDBY8 = #{record.standby8,jdbcType=NVARCHAR},
+      STANDBY9 = #{record.standby9,jdbcType=NVARCHAR},
+      STANDBY10 = #{record.standby10,jdbcType=NVARCHAR},
+      PRODLINE = #{record.prodline,jdbcType=NVARCHAR},
+      product = #{record.product,jdbcType=NVARCHAR},
+      release = #{record.release,jdbcType=NVARCHAR},
+      version = #{record.version,jdbcType=NVARCHAR},
+      ParentItem = #{record.parentitem,jdbcType=NVARCHAR},
+      BASELINE_1Name = #{record.baseline1name,jdbcType=NVARCHAR},
+      plipmt_order = #{record.plipmtOrder,jdbcType=VARCHAR},
+      pl_order = #{record.plOrder,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+</mapper>

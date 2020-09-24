@@ -1,0 +1,28 @@
+PDM数据库:
+PDM = 
+(DESCRIPTION =
+    (ADDRESS_LIST =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = h3cpdm01-or.h3c.com)(PORT = 1531))
+    )
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = plmdb)
+    )
+  ) 
+ERP数据库
+
+ERP = 
+ (DESCRIPTION =
+                (ADDRESS=(PROTOCOL=tcp)(HOST=h3cmrdb06-vip.h3c.com)(PORT=1521))
+                (ADDRESS=(PROTOCOL=tcp)(HOST=h3cmrdb05-vip.h3c.com)(PORT=1521))
+                (ADDRESS=(PROTOCOL=tcp)(HOST=h3cmrdb07-vip.h3c.com)(PORT=1521))
+   (LOAD_BALANCE = yes)
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = HW3C)
+      (FAILOVER_MODE =
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 180)
+        (DELAY = 5)
+      )

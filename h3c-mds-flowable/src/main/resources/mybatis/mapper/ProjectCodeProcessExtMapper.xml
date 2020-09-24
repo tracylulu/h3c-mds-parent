@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.flowable.dao.ProjectCodeProcessMapper">
+
+
+	<select id="findProjectCodeByApplyNo" parameterType="map" resultType="map">
+
+	<if test="param != null and param.applyNo==null">
+		select distinct 
+				applyNo as id,
+				applyNo,
+				curStatus,
+				curDeal,
+				approver,
+
+				processInsId,
+				
+				applyer,
+				dept,
+				 optType,
+				proName,
+				proNumber,
+				createTime
+		 from <include refid="projectCodeProcessView"></include> where isEdit!='0'
+		 <include refid="query"></include>
+		 <include refid="order"></include>
+		 offset #{param.page} rows fetch next #{param.rows} rows only
+		 </if>
+	</select>
+	
+	<select id="findProjectCodeByApplyNoCount" parameterType="map" resultType="Integer">
+
+	<if test="param != null and param.applyNo==null">
+		select count(*) from (select distinct 
+				applyNo as id,
+				applyNo,
+				curStatus,
+				curDeal,
+				approver,
+
+				processInsId,
+				
+				applyer,
+				dept,
+				 optType,
+				proName,
+				proNumber,
+				createTime
+		 from <include refid="projectCodeProcessView"></include> where isEdit!='0'
+		 <include refid="query"></include>
+		 ) tmpCount
+		 </if>
+	</select>
+		
+	<select id="findProjectCodeByApplyer" parameterType="map" resultType="map">
+		
+		<if test="param.id == null">
+			select distinct applyer,
+			applyer as id
+		 from  <include refid="projectCodeProcessView"></include>  where isEdit!='0'
+		 <include refid="query"></include>
+		</if>
+		
+		<if test="param.id != null and param.id !=''">
+		<if test="param != null and param.applyer!=null">
+			SELECT  distinct
+					applyNo AS id,
+					<!-- process.applyer as applyer, -->
+					applyNo,
+					curStatus,
+					curDeal,
+					approver,
+					proName,
+					proNumber,
+					dept,
+					optType,
+					applyTime,
+					
+					createTime
+					FROM
+						 <include refid="projectCodeProcessView"></include> 
+					
+					where projectcodeview.applyer = #{param.applyer} and isEdit!='0'
+					<include refid="query"></include>
+					<include refid="order"></include>
+		</if>
+		</if>
+		
+	</select>
+	
+	
+	<select id="findProjectCodeByStatus" parameterType="map" resultType="map">
+		
+		<if test="param.id == null">
+			select distinct  curStatus,
+			curStatus as id,
+			curStatusType
+		 from <include refid="projectCodeProcessView"></include> where isEdit!='0'
+		 <include refid="query"></include>
+		 order by curStatusType asc
+		</if>
+		
+		<if test="param.id != null and param.id !=''">
+		<if test="param != null and param.curStatus!=null">
+			SELECT  distinct
+					curStatus + '_' + applyNo AS id,
+					applyer,
+					applyNo,
+					<!-- process.cur_status AS curStatus, -->
+					curDeal,
+					approver,
+					proName,
+					proNumber,
+					dept,
+					optType,
+					<!-- process.pro_name AS proName, -->
+
+					applyTime,
+					
+					createTime
+					FROM
+						 <include refid="projectCodeProcessView"></include> 
+					
+					where projectcodeview.curStatus = #{param.curStatus} and isEdit!='0'
+					<include refid="query"></include>
+					
+					<include refid="order"></include>
+		</if>
+		</if>
+		
+	</select>
+	
+	
+	<select id="findProjectCodeByProcess" parameterType="map" resultType="map">
+		
+		<if test="param.id == null">
+			select distinct  curStatus,
+			curStatus as id
+		 from <include refid="projectCodeProcessView"></include>  where isEdit!='0'
+		 <include refid="query"></include>
+		</if>
+		
+		<if test="param.id != null and param.id !=''">
+		<if test="param != null and param.curStatus!=null">
+			SELECT  distinct
+					process.cur_status + '_' + process.apply_no AS id,
+					applyer,
+					applyNo,
+					<!-- process.cur_status AS curStatus, -->
+					curDeal,
+					approver,
+					proName,
+					proNumber,
+					dept,
+					optType,
+					<!-- process.pro_name AS proName, -->
+					
+					applyTime,
+				
+					createTime
+					FROM
+						 <include refid="projectCodeProcessView"></include>  
+					
+					where projectcodeview.curStatus = #{param.curStatus} and isEdit!='0'
+					<include refid="query"></include>
+					<include refid="order"></include>
+		</if>
+		</if>
+		
+	</select>
+	
+	
+	
+	
+	<select id="findProjectCodeByCurHandler" parameterType="map" resultType="map">
+		
+		<if test="param.id == null">
+			select distinct  curDeal,
+			curDeal as id
+		 from <include refid="projectCodeProcessView"></include> where curdeal !='' and curdeal is not null and isEdit!='0'
+		 <include refid="query"></include>
+		</if>
+		
+		<if test="param.id != null and param.id !=''">
+		<if test="param != null and param.curDeal!=null">
+			SELECT  distinct
+					curdeal + '_' + applyno AS id,
+					processInsId,
+					applyer,
+					applyNo,
+					curStatus,
+					<!-- process.cur_deal AS curDeal, -->
+					approver,
+					proName,
+					proNumber,
+					
+					dept,
+					optType,
+					<!-- process.pro_name AS proName, -->
+					applyTime,
+					
+					createTime
+					FROM
+						 <include refid="projectCodeProcessView"></include> 
+					
+					where curDeal = #{param.curDeal} and isEdit!='0'
+					<include refid="query"></include>
+					<include refid="order"></include>
+		</if>
+		</if>
+		
+	</select>
+	
+	<sql id="projectCodeProcessView">
+				(SELECT 
+			
+			process.apply_no AS applyNo,
+			process.cur_status AS curStatus,
+			process.cur_deal AS curDeal,
+			process.approver AS approver,
+			process.process_ins_id AS processInsId,
+			process.applyer AS applyer,
+			process.dept AS dept,
+			process.opt_type AS optType,
+			process.apply_time AS applyTime,
+			process.is_edit	   AS isEdit,
+			(case cur_status
+				WHEN '草稿' THEN
+					0
+				WHEN '返回修改' THEN
+					1
+				WHEN '审核者审核' THEN
+					2
+				WHEN '项目经理审核' THEN
+					3
+				WHEN '财务接口人审核' THEN
+					4
+				WHEN '财务审核' THEN
+					5
+				WHEN '项目管理处审核' THEN
+					6
+					
+				WHEN '等待ERP处理--预计明天生效' THEN
+					7
+				WHEN 'ERP同步失败' THEN
+					9
+				WHEN '流程结束' THEN
+					8
+				ELSE
+					10
+			end)curStatusType,
+			(SELECT LEFT(projcodes,LEN(projcodes)-1) as projCodes FROM (
+						select  apply_no, 
+								(select pro_number+',' from  IBDS_PROJECT_CODE_apply where apply_no = a.apply_no for xml path('')) as projcodes
+						from IBDS_PROJECT_CODE_apply a where a.apply_no = process.apply_no and a.pro_number is not null group by apply_no
+						) B )   proNumber,
+
+
+			(SELECT LEFT(projcodes,LEN(projcodes)-1) as projCodes FROM (
+						select  apply_no, 
+								(select pro_name+',' from  IBDS_PROJECT_CODE_apply where apply_no = a.apply_no for xml path('')) as projcodes
+						from IBDS_PROJECT_CODE_apply a where a.apply_no = process.apply_no and a.pro_name is not null group by apply_no
+						) B )   proName,
+
+			process.create_time as createTime
+		FROM
+			IBDS_PROJECT_CODE_PROCESS process  
+			LEFT JOIN IBDS_PROJECT_CODE_APPLY apply  on process.apply_no = apply.apply_no) projectcodeview
+	</sql>
+	
+	<sql id="query">
+		<if test="param.searchParams!=null and param.searchParams!='' ">
+			and 
+			CHARINDEX(#{param.searchParams},
+			isnull(projectcodeview.curDeal,'')
+			+isnull(projectcodeview.applyer,'')
+			+isnull(projectcodeview.applyNo,'')
+			+isnull(projectcodeview.proname,'')
+			+isnull(projectcodeview.pronumber,'')
+			)&gt;0
+		</if>
+	</sql>
+	
+	<sql id="order">
+		order by projectcodeview.createTime desc
+	</sql>
+	
+	 <select id="getMaxCode" resultType="string" >
+   	 	SELECT MAX(apply_no) FROM IBDS_PROJECT_CODE_PROCESS WHERE apply_no LIKE 'OBC%' AND LEN(apply_no)=10
+  	 </select>
+	
+	
+	
+	
+	
+	
+	<select id="getZTProjectCodeProcessByProjNumber" parameterType="map" resultMap="BaseResultMap">
+		
+			SELECT
+				process.*
+			FROM
+				IBDS_PROJECT_CODE_APPLY apply
+			INNER JOIN IBDS_PROJECT_CODE_PROCESS process ON apply.apply_no = process.apply_no
+			WHERE
+				apply.pro_number = #{param.proNumber}
+			AND process.is_edit = #{param.status}
+			AND process.apply_no != #{param.applyNo}
+	
+	</select>
+</mapper>

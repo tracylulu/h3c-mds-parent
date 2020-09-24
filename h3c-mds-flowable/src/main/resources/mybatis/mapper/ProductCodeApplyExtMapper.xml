@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.flowable.dao.ProductCodeApplyMapper">
+
+
+  <select id="getIdsByProcessCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT ID FROM IBDS_PRDOUCT_CODE_APPLY WHERE PROCESS_CODE = #{processCode}
+  </select>
+
+  <select id="getByProcessCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT <include refid="Base_Column_List" /> FROM IBDS_PRDOUCT_CODE_APPLY WHERE PROCESS_CODE = #{applyCode}
+  </select>
+
+  <select id="getZTByProductCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT a.* FROM IBDS_PRDOUCT_CODE_APPLY a JOIN IBDS_PRODUCT_CODE_PROCESS b  ON a.PROCESS_CODE = b.APPLY_CODE AND b.status='1' WHERE a.PRODUCT_CODE=#{productCode}
+  </select>
+
+  <select id="getZTCountByProductCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT count(1) FROM IBDS_PRDOUCT_CODE_APPLY a JOIN IBDS_PRODUCT_CODE_PROCESS b  ON a.PROCESS_CODE = b.APPLY_CODE AND b.status='1' WHERE a.PRODUCT_CODE=#{productCode}
+  </select>
+
+  <select id="getZTCountByBomCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT count(1) FROM IBDS_PRDOUCT_CODE_APPLY a JOIN IBDS_PRODUCT_CODE_PROCESS b  ON a.PROCESS_CODE = b.APPLY_CODE AND b.status='1' WHERE CHARINDEX(#{bomCode},BOM_CODE)>0;
+  </select>
+
+  <select id="getZTByBomCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT a.* FROM IBDS_PRDOUCT_CODE_APPLY a JOIN IBDS_PRODUCT_CODE_PROCESS b  ON a.PROCESS_CODE = b.APPLY_CODE AND b.status='1' WHERE CHARINDEX(#{bomCode},BOM_CODE)>0;
+  </select>
+
+  <select id="getZTCountByOldProductCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT count(1) FROM IBDS_PRDOUCT_CODE_APPLY a JOIN IBDS_PRODUCT_CODE_PROCESS b  ON a.PROCESS_CODE = b.APPLY_CODE AND b.status='1' WHERE a.OLD_PRODUCT_CODE=#{oldProductCode}
+  </select>
+
+  <select id="getZTByOldProductCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT a.* FROM IBDS_PRDOUCT_CODE_APPLY a JOIN IBDS_PRODUCT_CODE_PROCESS b  ON a.PROCESS_CODE = b.APPLY_CODE AND b.status='1' WHERE a.OLD_PRODUCT_CODE=#{oldProductCode}
+  </select>
+
+
+  <!--根据原产品编码获取在途流程编号-->
+  <select id="getZTProcessCodeByOldProductCode" resultType="string" parameterType="java.lang.String">
+    SELECT DISTINCT a.PROCESS_CODE FROM IBDS_PRDOUCT_CODE_APPLY a JOIN IBDS_PRODUCT_CODE_PROCESS b  ON a.PROCESS_CODE = b.APPLY_CODE AND b.status='1' WHERE a.OLD_PRODUCT_CODE=#{oldProductCode}
+  </select>
+
+  <!--根据Bom编码获取在途流程编号-->
+  <select id="getZTProcessCodeByBomCode" resultType="string" parameterType="java.lang.String">
+    SELECT DISTINCT a.PROCESS_CODE FROM IBDS_PRDOUCT_CODE_APPLY a JOIN IBDS_PRODUCT_CODE_PROCESS b  ON a.PROCESS_CODE = b.APPLY_CODE AND b.status='1' WHERE CHARINDEX(#{bomCode},BOM_CODE)>0;
+  </select>
+
+  <!--根据产品编码获取在途流程编号-->
+  <select id="getZTProcessCodeByProductCode" resultType="string" parameterType="java.lang.String">
+    SELECT DISTINCT a.PROCESS_CODE FROM IBDS_PRDOUCT_CODE_APPLY a JOIN IBDS_PRODUCT_CODE_PROCESS b  ON a.PROCESS_CODE = b.APPLY_CODE AND b.status='1' WHERE a.PRODUCT_CODE=#{productCode}
+  </select>
+
+  <!--根据产品族编码获取在途流程编号-->
+  <select id="getZTProcessCodeByProductNo" resultType="string" parameterType="java.lang.String">
+    SELECT DISTINCT a.PROCESS_CODE FROM IBDS_PRDOUCT_CODE_APPLY a JOIN IBDS_PRODUCT_CODE_PROCESS b  ON a.PROCESS_CODE = b.APPLY_CODE AND b.status='1' WHERE a.PRODUCT_NO=#{productNo}
+  </select>
+
+  <!--根据产品线编码产品线名称获取在途流程编号-->
+  <select id="getZTProcessCodeByProdlineNoAndProdlineName" resultType="string" parameterType="map">
+    SELECT DISTINCT a.PROCESS_CODE FROM IBDS_PRDOUCT_CODE_APPLY a JOIN IBDS_PRODUCT_CODE_PROCESS b  ON a.PROCESS_CODE = b.APPLY_CODE AND b.status='1' WHERE a.PRODLINE_NO=#{param.prodlineNo} AND a.PRODLINE_NAME=#{param.prodlineName}
+  </select>
+</mapper>

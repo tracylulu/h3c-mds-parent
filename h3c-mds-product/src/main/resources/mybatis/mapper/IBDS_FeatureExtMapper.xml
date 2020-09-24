@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.IBDS_FeatureMapper">
+  
+  <insert id="insertSelectiveBatch" useGeneratedKeys="true"  parameterType="com.h3c.mds.product.entity.IBDS_FeatureExample">
+   insert into IBDS_FEATRUE (FEATURENo, FEATURE, 
+      FEATUREOld, engFEATURE, PLIPMTNo, 
+      PRODLINENo, PRODUCTNo, VERSIONNo, 
+      RELEASENo, Readers, Remark, 
+      Status, CREATED_USER, CREATED_DATE, 
+      MODIFY_USER, MODIFY_DATA, STANDBY1, 
+      STANDBY2, STANDBY3, STANDBY4, 
+      STANDBY5, STANDBY6, STANDBY7, 
+      STANDBY8, STANDBY9, STANDBY10
+      )
+    values 
+      <foreach collection="list" item="record" index="index" separator=",">
+       (#{record.featureno,jdbcType=NVARCHAR}, #{record.feature,jdbcType=NVARCHAR}, 
+      #{record.featureold,jdbcType=NVARCHAR}, #{record.engfeature,jdbcType=NVARCHAR}, #{record.plipmtno,jdbcType=NVARCHAR}, 
+      #{record.prodlineno,jdbcType=NVARCHAR}, #{record.productno,jdbcType=NVARCHAR}, #{record.versionno,jdbcType=NVARCHAR}, 
+      #{record.releaseno,jdbcType=NVARCHAR}, #{record.readers,jdbcType=NVARCHAR}, #{record.remark,jdbcType=NVARCHAR}, 
+      #{record.status,jdbcType=NVARCHAR}, #{record.createdUser,jdbcType=NVARCHAR}, #{record.createdDate,jdbcType=TIMESTAMP}, 
+      #{record.modifyUser,jdbcType=NVARCHAR}, #{record.modifyData,jdbcType=TIMESTAMP}, #{record.standby1,jdbcType=NVARCHAR}, 
+      #{record.standby2,jdbcType=NVARCHAR}, #{record.standby3,jdbcType=NVARCHAR}, #{record.standby4,jdbcType=NVARCHAR}, 
+      #{record.standby5,jdbcType=NVARCHAR}, #{record.standby6,jdbcType=NVARCHAR}, #{record.standby7,jdbcType=NVARCHAR}, 
+      #{record.standby8,jdbcType=NVARCHAR}, #{record.standby9,jdbcType=NVARCHAR}, #{record.standby10,jdbcType=NVARCHAR}
+      )
+    </foreach>
+   
+  </insert>
+   
+   <update id="updateByBatch" parameterType="java.util.List">
+    <foreach collection="list" item="record" index="index" open="" close="" separator=";">
+    update IBDS_FEATRUE
+    set 
+      FEATURE = #{record.feature,jdbcType=NVARCHAR},
+      engFEATURE = #{record.engfeature,jdbcType=NVARCHAR},
+      MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      MODIFY_DATA = #{record.modifyData,jdbcType=TIMESTAMP} 
+      where id=#{record.id}
+  </foreach>
+  </update>
+  
+  <update id="updateByStatusBatch" parameterType="map">
+    update IBDS_FEATRUE
+    set 
+      Status =#{param.status,jdbcType=NVARCHAR}
+    where featureno in 
+     <foreach collection="param.codes.split('\r')" item="record" index="index" open="(" separator="," close=")">
+     #{record,jdbcType=NVARCHAR}
+     </foreach>
+  </update>
+  <select id="selectFeaturebyCodes" parameterType="map" resultMap="BaseResultMap">
+  <!-- 添加操作日志时调用 -->
+      <if test="param.codes!=null and param.codes!=''">
+      	select 
+		<include refid="Base_Column_List" />
+		from IBDS_FEATRUE
+		where featureno in 
+		<foreach collection="param.codes.split(',')" item="record" index="index"
+			open="(" separator="," close=")">
+			#{record}
+		</foreach>
+      </if>
+ </select>
+</mapper>

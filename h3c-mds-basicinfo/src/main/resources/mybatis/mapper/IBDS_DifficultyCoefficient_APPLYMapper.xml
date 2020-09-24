@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.IBDS_DifficultyCoefficient_APPLYMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_APPLY">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="Process_Code" jdbcType="NVARCHAR" property="processCode" />
+    <result column="PLIPMTNo" jdbcType="NVARCHAR" property="plipmtno" />
+    <result column="ProdLineNo" jdbcType="NVARCHAR" property="prodlineno" />
+    <result column="ProductNo" jdbcType="NVARCHAR" property="productno" />
+    <result column="VersionNo" jdbcType="NVARCHAR" property="versionno" />
+    <result column="ReleaseNo" jdbcType="NVARCHAR" property="releaseno" />
+    <result column="IPMTSecretary" jdbcType="NVARCHAR" property="ipmtsecretary" />
+    <result column="BversionNo" jdbcType="NVARCHAR" property="bversionno" />
+    <result column="Bversion" jdbcType="NVARCHAR" property="bversion" />
+    <result column="isPack" jdbcType="CHAR" property="ispack" />
+    <result column="Prod_BasisMaterial" jdbcType="NVARCHAR" property="prodBasismaterial" />
+    <result column="Prod_BasisMaterialId" jdbcType="NVARCHAR" property="prodBasismaterialid" />
+    <result column="Hard_BasisMaterial" jdbcType="NVARCHAR" property="hardBasismaterial" />
+    <result column="Hard_BasisMaterialId" jdbcType="NVARCHAR" property="hardBasismaterialid" />
+    <result column="ProSnRemark" jdbcType="NVARCHAR" property="prosnremark" />
+    <result column="HardSnRemark" jdbcType="NVARCHAR" property="hardsnremark" />
+    <result column="copyto" jdbcType="NVARCHAR" property="copyto" />
+    <result column="Remark" jdbcType="NVARCHAR" property="remark" />
+    <result column="Creator" jdbcType="NVARCHAR" property="creator" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="Modifier" jdbcType="NVARCHAR" property="modifier" />
+    <result column="ModifyTime" jdbcType="TIMESTAMP" property="modifytime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, Process_Code, PLIPMTNo, ProdLineNo, ProductNo, VersionNo, ReleaseNo, IPMTSecretary, 
+    BversionNo, Bversion, isPack, Prod_BasisMaterial, Prod_BasisMaterialId, Hard_BasisMaterial, 
+    Hard_BasisMaterialId, ProSnRemark, HardSnRemark, copyto, Remark, Creator, CreateTime, 
+    Modifier, ModifyTime
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_APPLYExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_DifficultyCoefficient_APPLY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_DifficultyCoefficient_APPLY
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_DifficultyCoefficient_APPLY
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_APPLYExample">
+    delete from IBDS_DifficultyCoefficient_APPLY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_APPLY">
+    insert into IBDS_DifficultyCoefficient_APPLY (ID, Process_Code, PLIPMTNo, 
+      ProdLineNo, ProductNo, VersionNo, 
+      ReleaseNo, IPMTSecretary, BversionNo, 
+      Bversion, isPack, Prod_BasisMaterial, 
+      Prod_BasisMaterialId, Hard_BasisMaterial, 
+      Hard_BasisMaterialId, ProSnRemark, HardSnRemark, 
+      copyto, Remark, Creator, 
+      CreateTime, Modifier, ModifyTime
+      )
+    values (#{id,jdbcType=INTEGER}, #{processCode,jdbcType=NVARCHAR}, #{plipmtno,jdbcType=NVARCHAR}, 
+      #{prodlineno,jdbcType=NVARCHAR}, #{productno,jdbcType=NVARCHAR}, #{versionno,jdbcType=NVARCHAR}, 
+      #{releaseno,jdbcType=NVARCHAR}, #{ipmtsecretary,jdbcType=NVARCHAR}, #{bversionno,jdbcType=NVARCHAR}, 
+      #{bversion,jdbcType=NVARCHAR}, #{ispack,jdbcType=CHAR}, #{prodBasismaterial,jdbcType=NVARCHAR}, 
+      #{prodBasismaterialid,jdbcType=NVARCHAR}, #{hardBasismaterial,jdbcType=NVARCHAR}, 
+      #{hardBasismaterialid,jdbcType=NVARCHAR}, #{prosnremark,jdbcType=NVARCHAR}, #{hardsnremark,jdbcType=NVARCHAR}, 
+      #{copyto,jdbcType=NVARCHAR}, #{remark,jdbcType=NVARCHAR}, #{creator,jdbcType=NVARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=NVARCHAR}, #{modifytime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_APPLY">
+    insert into IBDS_DifficultyCoefficient_APPLY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="processCode != null">
+        Process_Code,
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo,
+      </if>
+      <if test="prodlineno != null">
+        ProdLineNo,
+      </if>
+      <if test="productno != null">
+        ProductNo,
+      </if>
+      <if test="versionno != null">
+        VersionNo,
+      </if>
+      <if test="releaseno != null">
+        ReleaseNo,
+      </if>
+      <if test="ipmtsecretary != null">
+        IPMTSecretary,
+      </if>
+      <if test="bversionno != null">
+        BversionNo,
+      </if>
+      <if test="bversion != null">
+        Bversion,
+      </if>
+      <if test="ispack != null">
+        isPack,
+      </if>
+      <if test="prodBasismaterial != null">
+        Prod_BasisMaterial,
+      </if>
+      <if test="prodBasismaterialid != null">
+        Prod_BasisMaterialId,
+      </if>
+      <if test="hardBasismaterial != null">
+        Hard_BasisMaterial,
+      </if>
+      <if test="hardBasismaterialid != null">
+        Hard_BasisMaterialId,
+      </if>
+      <if test="prosnremark != null">
+        ProSnRemark,
+      </if>
+      <if test="hardsnremark != null">
+        HardSnRemark,
+      </if>
+      <if test="copyto != null">
+        copyto,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="creator != null">
+        Creator,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+      <if test="modifier != null">
+        Modifier,
+      </if>
+      <if test="modifytime != null">
+        ModifyTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="processCode != null">
+        #{processCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmtno != null">
+        #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="productno != null">
+        #{productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionno != null">
+        #{versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releaseno != null">
+        #{releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtsecretary != null">
+        #{ipmtsecretary,jdbcType=NVARCHAR},
+      </if>
+      <if test="bversionno != null">
+        #{bversionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="bversion != null">
+        #{bversion,jdbcType=NVARCHAR},
+      </if>
+      <if test="ispack != null">
+        #{ispack,jdbcType=CHAR},
+      </if>
+      <if test="prodBasismaterial != null">
+        #{prodBasismaterial,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodBasismaterialid != null">
+        #{prodBasismaterialid,jdbcType=NVARCHAR},
+      </if>
+      <if test="hardBasismaterial != null">
+        #{hardBasismaterial,jdbcType=NVARCHAR},
+      </if>
+      <if test="hardBasismaterialid != null">
+        #{hardBasismaterialid,jdbcType=NVARCHAR},
+      </if>
+      <if test="prosnremark != null">
+        #{prosnremark,jdbcType=NVARCHAR},
+      </if>
+      <if test="hardsnremark != null">
+        #{hardsnremark,jdbcType=NVARCHAR},
+      </if>
+      <if test="copyto != null">
+        #{copyto,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifytime != null">
+        #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_APPLYExample" resultType="java.lang.Long">
+    select count(*) from IBDS_DifficultyCoefficient_APPLY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_DifficultyCoefficient_APPLY
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.processCode != null">
+        Process_Code = #{record.processCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plipmtno != null">
+        PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodlineno != null">
+        ProdLineNo = #{record.prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productno != null">
+        ProductNo = #{record.productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.versionno != null">
+        VersionNo = #{record.versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releaseno != null">
+        ReleaseNo = #{record.releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ipmtsecretary != null">
+        IPMTSecretary = #{record.ipmtsecretary,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.bversionno != null">
+        BversionNo = #{record.bversionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.bversion != null">
+        Bversion = #{record.bversion,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ispack != null">
+        isPack = #{record.ispack,jdbcType=CHAR},
+      </if>
+      <if test="record.prodBasismaterial != null">
+        Prod_BasisMaterial = #{record.prodBasismaterial,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodBasismaterialid != null">
+        Prod_BasisMaterialId = #{record.prodBasismaterialid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.hardBasismaterial != null">
+        Hard_BasisMaterial = #{record.hardBasismaterial,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.hardBasismaterialid != null">
+        Hard_BasisMaterialId = #{record.hardBasismaterialid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prosnremark != null">
+        ProSnRemark = #{record.prosnremark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.hardsnremark != null">
+        HardSnRemark = #{record.hardsnremark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.copyto != null">
+        copyto = #{record.copyto,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remark != null">
+        Remark = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.creator != null">
+        Creator = #{record.creator,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifier != null">
+        Modifier = #{record.modifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modifytime != null">
+        ModifyTime = #{record.modifytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_DifficultyCoefficient_APPLY
+    set ID = #{record.id,jdbcType=INTEGER},
+      Process_Code = #{record.processCode,jdbcType=NVARCHAR},
+      PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      ProdLineNo = #{record.prodlineno,jdbcType=NVARCHAR},
+      ProductNo = #{record.productno,jdbcType=NVARCHAR},
+      VersionNo = #{record.versionno,jdbcType=NVARCHAR},
+      ReleaseNo = #{record.releaseno,jdbcType=NVARCHAR},
+      IPMTSecretary = #{record.ipmtsecretary,jdbcType=NVARCHAR},
+      BversionNo = #{record.bversionno,jdbcType=NVARCHAR},
+      Bversion = #{record.bversion,jdbcType=NVARCHAR},
+      isPack = #{record.ispack,jdbcType=CHAR},
+      Prod_BasisMaterial = #{record.prodBasismaterial,jdbcType=NVARCHAR},
+      Prod_BasisMaterialId = #{record.prodBasismaterialid,jdbcType=NVARCHAR},
+      Hard_BasisMaterial = #{record.hardBasismaterial,jdbcType=NVARCHAR},
+      Hard_BasisMaterialId = #{record.hardBasismaterialid,jdbcType=NVARCHAR},
+      ProSnRemark = #{record.prosnremark,jdbcType=NVARCHAR},
+      HardSnRemark = #{record.hardsnremark,jdbcType=NVARCHAR},
+      copyto = #{record.copyto,jdbcType=NVARCHAR},
+      Remark = #{record.remark,jdbcType=NVARCHAR},
+      Creator = #{record.creator,jdbcType=NVARCHAR},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      Modifier = #{record.modifier,jdbcType=NVARCHAR},
+      ModifyTime = #{record.modifytime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_APPLY">
+    update IBDS_DifficultyCoefficient_APPLY
+    <set>
+      <if test="processCode != null">
+        Process_Code = #{processCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo = #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        ProdLineNo = #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="productno != null">
+        ProductNo = #{productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionno != null">
+        VersionNo = #{versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releaseno != null">
+        ReleaseNo = #{releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtsecretary != null">
+        IPMTSecretary = #{ipmtsecretary,jdbcType=NVARCHAR},
+      </if>
+      <if test="bversionno != null">
+        BversionNo = #{bversionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="bversion != null">
+        Bversion = #{bversion,jdbcType=NVARCHAR},
+      </if>
+      <if test="ispack != null">
+        isPack = #{ispack,jdbcType=CHAR},
+      </if>
+      <if test="prodBasismaterial != null">
+        Prod_BasisMaterial = #{prodBasismaterial,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodBasismaterialid != null">
+        Prod_BasisMaterialId = #{prodBasismaterialid,jdbcType=NVARCHAR},
+      </if>
+      <if test="hardBasismaterial != null">
+        Hard_BasisMaterial = #{hardBasismaterial,jdbcType=NVARCHAR},
+      </if>
+      <if test="hardBasismaterialid != null">
+        Hard_BasisMaterialId = #{hardBasismaterialid,jdbcType=NVARCHAR},
+      </if>
+      <if test="prosnremark != null">
+        ProSnRemark = #{prosnremark,jdbcType=NVARCHAR},
+      </if>
+      <if test="hardsnremark != null">
+        HardSnRemark = #{hardsnremark,jdbcType=NVARCHAR},
+      </if>
+      <if test="copyto != null">
+        copyto = #{copyto,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="creator != null">
+        Creator = #{creator,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null">
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        Modifier = #{modifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifytime != null">
+        ModifyTime = #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_APPLY">
+    update IBDS_DifficultyCoefficient_APPLY
+    set Process_Code = #{processCode,jdbcType=NVARCHAR},
+      PLIPMTNo = #{plipmtno,jdbcType=NVARCHAR},
+      ProdLineNo = #{prodlineno,jdbcType=NVARCHAR},
+      ProductNo = #{productno,jdbcType=NVARCHAR},
+      VersionNo = #{versionno,jdbcType=NVARCHAR},
+      ReleaseNo = #{releaseno,jdbcType=NVARCHAR},
+      IPMTSecretary = #{ipmtsecretary,jdbcType=NVARCHAR},
+      BversionNo = #{bversionno,jdbcType=NVARCHAR},
+      Bversion = #{bversion,jdbcType=NVARCHAR},
+      isPack = #{ispack,jdbcType=CHAR},
+      Prod_BasisMaterial = #{prodBasismaterial,jdbcType=NVARCHAR},
+      Prod_BasisMaterialId = #{prodBasismaterialid,jdbcType=NVARCHAR},
+      Hard_BasisMaterial = #{hardBasismaterial,jdbcType=NVARCHAR},
+      Hard_BasisMaterialId = #{hardBasismaterialid,jdbcType=NVARCHAR},
+      ProSnRemark = #{prosnremark,jdbcType=NVARCHAR},
+      HardSnRemark = #{hardsnremark,jdbcType=NVARCHAR},
+      copyto = #{copyto,jdbcType=NVARCHAR},
+      Remark = #{remark,jdbcType=NVARCHAR},
+      Creator = #{creator,jdbcType=NVARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      Modifier = #{modifier,jdbcType=NVARCHAR},
+      ModifyTime = #{modifytime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

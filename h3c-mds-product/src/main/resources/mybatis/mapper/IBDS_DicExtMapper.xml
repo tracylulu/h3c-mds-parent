@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.IBDS_DicMapper">
+	<select id="getDic" parameterType="map"
+		resultMap="BaseResultMap">
+
+		select
+		<include refid="Base_Column_List" />
+		from IBDS_Dic where flag=1
+		<!-- 字典层 -->
+		<if test="param.typeCode !=null">
+			and dic_typeCode=#{param.typeCode}
+		</if>
+
+		<if test="param.dicvalue !=null">
+			and dic_value=#{param.dicvalue}
+		</if>
+		order by dic_value
+	</select>
+	<select id="getList" parameterType="map" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List"></include> from IBDS_Dic where flag=1
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and CHARINDEX(#{param.searchParas},isnull(dic_name,'')+isnull(dic_value,'')+isnull(dic_typecode,'')+isnull(dic_typename,''))&gt;0
+		</if>
+		<if test="param.dicTypeCode!=null and param.dicTypeCode!='' ">
+			and dic_TypeCode=#{param.dicTypeCode}
+		</if>
+		order by  dic_typeCode
+	</select>
+	<select id="getDicTypeComb" resultMap="BaseResultMap">
+		select DISTINCT dic_TypeCode,dic_TypeName from IBDS_Dic where flag=1
+	</select>
+	<select id="getValidation" parameterType="map" resultMap="BaseResultMap">
+		select * from IBDS_Dic where flag=1 and (dic_value=#{param.value} or dic_name=#{param.name})
+			and DIC_TypeCode=#{param.typeCode}
+		<if test="param.isEdit!=null and param.isEdit!='' ">
+			and id!=#{param.id}
+		</if>
+	</select>
+
+</mapper>

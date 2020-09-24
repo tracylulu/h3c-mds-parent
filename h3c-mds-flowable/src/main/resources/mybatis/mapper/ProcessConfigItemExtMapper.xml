@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.flowable.dao.ProcessConfigItemMapper">
+  <select id="getByConfigCodeAndCode" resultMap="BaseResultMap" parameterType="map">
+    select <include refid="Base_Column_List" /> from IBDS_PROCESS_CONFIG_ITEM where CONFIG_CODE = #{params.configCode} and CODE=#{params.code} and state=1
+  </select>
+  <select id="getByConfigCode" resultMap="BaseResultMap" parameterType="map">
+  	select ID, CODE, CONFIG_CODE, CONTENT, TYPE, NOTE, PDT_CODE, FPROD_PERSON, PDT_MGN,state from IBDS_PROCESS_CONFIG_ITEM
+  	  where CONFIG_CODE = #{params.configCode}  and state=1
+  </select>
+  <select id="getAddPageList" resultMap="BaseResultMap" parameterType="map">
+  	SELECT a.ID,a.CODE,a.CONFIG_CODE,a.CONTENT,a.TYPE,a.NOTE,a.PDT_CODE,b.uda_10_509+' '+b.Code FPROD_PERSON,
+  		c.uda_10_509+' '+c.Code PDT_MGN ,a.ORDER_BY,a.State 
+  	FROM dbo.IBDS_PROCESS_CONFIG_ITEM a LEFT JOIN tbl_2_10_EN b ON  b.uda_10_511=a.FPROD_PERSON 
+		LEFT JOIN tbl_2_10_EN c ON c.uda_10_511=a.PDT_MGN
+	WHERE a.CONFIG_CODE=#{param.configCode} AND a.PDT_CODE IS NULL and a.state=1
+  </select>
+  <select id="getTreeData" resultMap="BaseResultMap" parameterType="map" >
+		<if test="param.id==null and (param.searchParas==null or param.searchParas=='')">
+			select Code,Name Content,Code Config_Code from IBDS_PROCESS_CONFIG where type!='flow'
+		</if>
+		<if test="param.id!=null and (param.searchParas==null or param.searchParas=='')">			
+				select a.Code,cast('' as nvarchar(20)) Content,a.Config_Code,a.Note,a.PDT_MGN,a.FPROD_PERSON  from IBDS_PROCESS_CONFIG_ITEM a 
+				 where a.CONFIG_CODE=#{param.id} and a.state=1
+		</if>
+		
+		<if test="param.searchParas!=null and param.searchParas!='' ">
+			
+			SELECT DISTINCT
+				<if test="param.id==null">
+					a.Code,a.Name Content,a.Code Config_Code
+				</if>
+				<if test="param.id!=null">	
+					b.Code,cast('' as nvarchar(20)) Content,b.Config_Code,b.Note,b.PDT_MGN,b.FPROD_PERSON
+				</if>
+			 FROM IBDS_PROCESS_CONFIG a INNER JOIN  IBDS_PROCESS_CONFIG_ITEM b ON a.CODE=b.CONFIG_CODE WHERE b.State=1
+			 	<if test="param.id!=null">
+			 	and  b.CONFIG_CODE=#{param.id}
+			 	</if>
+			
+				 AND CHARINDEX(#{param.searchParas},ISNULL(a.CODE,'')+ISNULL(a.NAME,'')+ISNULL(a.TYPE,'')+ISNULL(a.NOTE,'')+ISNULL(b.CODE,'')
+					+ISNULL(b.CONTENT,'')+ISNULL(b.TYPE,'')+ISNULL(b.NOTE,'')+ISNULL(b.PDT_CODE,'')+ISNULL(b.FPROD_PERSON,'')+ISNULL(b.PDT_MGN,''))&gt;0
+			
+		</if>
+		
+	</select>
+	
+	<select id="getMaxCode" resultType="String">
+		select MAX(CODE) from dbo.IBDS_PROCESS_CONFIG_ITEM  
+		 WHERE  
+			NOT EXISTS(SELECT * FROM dbo.IBDS_PROCESS_CONFIG WHERE CODE=CONFIG_CODE AND TYPE='flow')
+	</select>
+	
+	<select id="getByProdlineId" parameterType="int" resultMap="BaseResultMap">
+		SELECT DISTINCT
+			B.*
+		FROM
+			IBDS_F_PRODUCT_CODE A
+		JOIN IBDS_PROCESS_CONFIG_ITEM B ON A.PDT_ID = B.ID
+		AND B.CONFIG_CODE = 'processPDT'
+		WHERE
+			A.PRODLINE_ID = #{prodlineId}
+	</select>
+
+	<select id="getByProdlineName" parameterType="string" resultMap="BaseResultMap">
+		SELECT DISTINCT
+			A.*
+		FROM
+			IBDS_PROCESS_CONFIG_ITEM A
+		WHERE
+			EXISTS (
+				SELECT
+					1
+				FROM
+					(
+						SELECT
+							B.PDT_ID
+						FROM
+							IBDS_F_PRODUCT_CODE B
+						JOIN IBDS_F_PRODLINE C ON B.PRODLINE_ID = C.ID
+						WHERE
+							C.PRODLINE_DESC = #{prodlineName}
+					) D
+				WHERE
+					A.ID = D.PDT_ID
+			)
+			ORDER BY A.CONTENT
+	</select>
+
+	<select id="getByProdlineIdFromBase" parameterType="int" resultMap="BaseResultMap">
+		SELECT DISTINCT
+			B.*
+		FROM
+			IBDS_F_PRODLINE A
+		JOIN IBDS_PRODLINE C ON A.PRODLINE_CODE=C.PRODLINENO
+		JOIN IBDS_PDT D ON D.PRODLINENO=C.PRODLINENO
+		JOIN IBDS_PROCESS_CONFIG_ITEM B ON D.PDTNO = B.PDT_CODE
+		AND B.CONFIG_CODE = 'processPDT'
+		WHERE
+			A.ID = #{prodlineId}
+	</select>
+
+	<select id="getByProdlineCodeFromBase" parameterType="string" resultMap="BaseResultMap">
+		SELECT DISTINCT
+			B.*
+		FROM
+		 IBDS_PRODLINE C
+		JOIN IBDS_PDT D ON D.PRODLINENO=C.PRODLINENO
+		JOIN IBDS_PROCESS_CONFIG_ITEM B ON D.PDTNO = B.PDT_CODE
+		AND B.CONFIG_CODE = 'processPDT'
+		WHERE
+			C.PRODLINENO = #{prodlineCode} AND B.STATE=1
+	</select>
+</mapper>

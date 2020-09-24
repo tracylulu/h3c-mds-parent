@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.IBDS_BaseObject_ApplyMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.basicinfo.entity.IBDS_BaseObject_Apply">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="PLIPMTNo" jdbcType="NVARCHAR" property="plipmtno" />
+    <result column="PRODLINENo" jdbcType="NVARCHAR" property="prodlineno" />
+    <result column="PRODUCTNo" jdbcType="NVARCHAR" property="productno" />
+    <result column="VERSIONNo" jdbcType="NVARCHAR" property="versionno" />
+    <result column="RELEASENo" jdbcType="NVARCHAR" property="releaseno" />
+    <result column="BVERSIONNo" jdbcType="NVARCHAR" property="bversionno" />
+    <result column="BASELINENo" jdbcType="NVARCHAR" property="baselineno" />
+    <result column="FEATURENo" jdbcType="NVARCHAR" property="featureno" />
+    <result column="SUBSYSTEMNo" jdbcType="NVARCHAR" property="subsystemno" />
+    <result column="MODULENo" jdbcType="NVARCHAR" property="moduleno" />
+    <result column="NumofFEATURENew" jdbcType="NVARCHAR" property="numoffeaturenew" />
+    <result column="ObjectNo" jdbcType="NVARCHAR" property="objectno" />
+    <result column="ObjectName" jdbcType="NVARCHAR" property="objectname" />
+    <result column="engObject" jdbcType="NVARCHAR" property="engobject" />
+    <result column="ObjectNoOld" jdbcType="NVARCHAR" property="objectnoold" />
+    <result column="ObjectNameOld" jdbcType="NVARCHAR" property="objectnameold" />
+    <result column="engObjectOld" jdbcType="NVARCHAR" property="engobjectold" />
+    <result column="ApplyType" jdbcType="NVARCHAR" property="applytype" />
+    <result column="Type" jdbcType="NVARCHAR" property="type" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="CREATE_USER" jdbcType="NVARCHAR" property="createUser" />
+    <result column="MODIFY_DATE" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="MODIFY_USER" jdbcType="NVARCHAR" property="modifyUser" />
+    <result column="PROCESS_CODE" jdbcType="NVARCHAR" property="processCode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, PLIPMTNo, PRODLINENo, PRODUCTNo, VERSIONNo, RELEASENo, BVERSIONNo, BASELINENo, 
+    FEATURENo, SUBSYSTEMNo, MODULENo, NumofFEATURENew, ObjectNo, ObjectName, engObject, 
+    ObjectNoOld, ObjectNameOld, engObjectOld, ApplyType, Type, CREATE_DATE, CREATE_USER, 
+    MODIFY_DATE, MODIFY_USER, PROCESS_CODE
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseObject_ApplyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_BaseObject_Apply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_BaseObject_Apply
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_BaseObject_Apply
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseObject_ApplyExample">
+    delete from IBDS_BaseObject_Apply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseObject_Apply">
+    insert into IBDS_BaseObject_Apply (ID, PLIPMTNo, PRODLINENo, 
+      PRODUCTNo, VERSIONNo, RELEASENo, 
+      BVERSIONNo, BASELINENo, FEATURENo, 
+      SUBSYSTEMNo, MODULENo, NumofFEATURENew, 
+      ObjectNo, ObjectName, engObject, 
+      ObjectNoOld, ObjectNameOld, engObjectOld, 
+      ApplyType, Type, CREATE_DATE, 
+      CREATE_USER, MODIFY_DATE, MODIFY_USER, 
+      PROCESS_CODE)
+    values (#{id,jdbcType=INTEGER}, #{plipmtno,jdbcType=NVARCHAR}, #{prodlineno,jdbcType=NVARCHAR}, 
+      #{productno,jdbcType=NVARCHAR}, #{versionno,jdbcType=NVARCHAR}, #{releaseno,jdbcType=NVARCHAR}, 
+      #{bversionno,jdbcType=NVARCHAR}, #{baselineno,jdbcType=NVARCHAR}, #{featureno,jdbcType=NVARCHAR}, 
+      #{subsystemno,jdbcType=NVARCHAR}, #{moduleno,jdbcType=NVARCHAR}, #{numoffeaturenew,jdbcType=NVARCHAR}, 
+      #{objectno,jdbcType=NVARCHAR}, #{objectname,jdbcType=NVARCHAR}, #{engobject,jdbcType=NVARCHAR}, 
+      #{objectnoold,jdbcType=NVARCHAR}, #{objectnameold,jdbcType=NVARCHAR}, #{engobjectold,jdbcType=NVARCHAR}, 
+      #{applytype,jdbcType=NVARCHAR}, #{type,jdbcType=NVARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=NVARCHAR}, #{modifyDate,jdbcType=TIMESTAMP}, #{modifyUser,jdbcType=NVARCHAR}, 
+      #{processCode,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseObject_Apply">
+    insert into IBDS_BaseObject_Apply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo,
+      </if>
+      <if test="prodlineno != null">
+        PRODLINENo,
+      </if>
+      <if test="productno != null">
+        PRODUCTNo,
+      </if>
+      <if test="versionno != null">
+        VERSIONNo,
+      </if>
+      <if test="releaseno != null">
+        RELEASENo,
+      </if>
+      <if test="bversionno != null">
+        BVERSIONNo,
+      </if>
+      <if test="baselineno != null">
+        BASELINENo,
+      </if>
+      <if test="featureno != null">
+        FEATURENo,
+      </if>
+      <if test="subsystemno != null">
+        SUBSYSTEMNo,
+      </if>
+      <if test="moduleno != null">
+        MODULENo,
+      </if>
+      <if test="numoffeaturenew != null">
+        NumofFEATURENew,
+      </if>
+      <if test="objectno != null">
+        ObjectNo,
+      </if>
+      <if test="objectname != null">
+        ObjectName,
+      </if>
+      <if test="engobject != null">
+        engObject,
+      </if>
+      <if test="objectnoold != null">
+        ObjectNoOld,
+      </if>
+      <if test="objectnameold != null">
+        ObjectNameOld,
+      </if>
+      <if test="engobjectold != null">
+        engObjectOld,
+      </if>
+      <if test="applytype != null">
+        ApplyType,
+      </if>
+      <if test="type != null">
+        Type,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE,
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER,
+      </if>
+      <if test="processCode != null">
+        PROCESS_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="plipmtno != null">
+        #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="productno != null">
+        #{productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionno != null">
+        #{versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releaseno != null">
+        #{releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="bversionno != null">
+        #{bversionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselineno != null">
+        #{baselineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="featureno != null">
+        #{featureno,jdbcType=NVARCHAR},
+      </if>
+      <if test="subsystemno != null">
+        #{subsystemno,jdbcType=NVARCHAR},
+      </if>
+      <if test="moduleno != null">
+        #{moduleno,jdbcType=NVARCHAR},
+      </if>
+      <if test="numoffeaturenew != null">
+        #{numoffeaturenew,jdbcType=NVARCHAR},
+      </if>
+      <if test="objectno != null">
+        #{objectno,jdbcType=NVARCHAR},
+      </if>
+      <if test="objectname != null">
+        #{objectname,jdbcType=NVARCHAR},
+      </if>
+      <if test="engobject != null">
+        #{engobject,jdbcType=NVARCHAR},
+      </if>
+      <if test="objectnoold != null">
+        #{objectnoold,jdbcType=NVARCHAR},
+      </if>
+      <if test="objectnameold != null">
+        #{objectnameold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engobjectold != null">
+        #{engobjectold,jdbcType=NVARCHAR},
+      </if>
+      <if test="applytype != null">
+        #{applytype,jdbcType=NVARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=NVARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="processCode != null">
+        #{processCode,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseObject_ApplyExample" resultType="java.lang.Long">
+    select count(*) from IBDS_BaseObject_Apply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_BaseObject_Apply
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.plipmtno != null">
+        PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodlineno != null">
+        PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productno != null">
+        PRODUCTNo = #{record.productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.versionno != null">
+        VERSIONNo = #{record.versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releaseno != null">
+        RELEASENo = #{record.releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.bversionno != null">
+        BVERSIONNo = #{record.bversionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.baselineno != null">
+        BASELINENo = #{record.baselineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.featureno != null">
+        FEATURENo = #{record.featureno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.subsystemno != null">
+        SUBSYSTEMNo = #{record.subsystemno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.moduleno != null">
+        MODULENo = #{record.moduleno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.numoffeaturenew != null">
+        NumofFEATURENew = #{record.numoffeaturenew,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.objectno != null">
+        ObjectNo = #{record.objectno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.objectname != null">
+        ObjectName = #{record.objectname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engobject != null">
+        engObject = #{record.engobject,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.objectnoold != null">
+        ObjectNoOld = #{record.objectnoold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.objectnameold != null">
+        ObjectNameOld = #{record.objectnameold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engobjectold != null">
+        engObjectOld = #{record.engobjectold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.applytype != null">
+        ApplyType = #{record.applytype,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.type != null">
+        Type = #{record.type,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null">
+        CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modifyDate != null">
+        MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyUser != null">
+        MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.processCode != null">
+        PROCESS_CODE = #{record.processCode,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_BaseObject_Apply
+    set ID = #{record.id,jdbcType=INTEGER},
+      PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      PRODUCTNo = #{record.productno,jdbcType=NVARCHAR},
+      VERSIONNo = #{record.versionno,jdbcType=NVARCHAR},
+      RELEASENo = #{record.releaseno,jdbcType=NVARCHAR},
+      BVERSIONNo = #{record.bversionno,jdbcType=NVARCHAR},
+      BASELINENo = #{record.baselineno,jdbcType=NVARCHAR},
+      FEATURENo = #{record.featureno,jdbcType=NVARCHAR},
+      SUBSYSTEMNo = #{record.subsystemno,jdbcType=NVARCHAR},
+      MODULENo = #{record.moduleno,jdbcType=NVARCHAR},
+      NumofFEATURENew = #{record.numoffeaturenew,jdbcType=NVARCHAR},
+      ObjectNo = #{record.objectno,jdbcType=NVARCHAR},
+      ObjectName = #{record.objectname,jdbcType=NVARCHAR},
+      engObject = #{record.engobject,jdbcType=NVARCHAR},
+      ObjectNoOld = #{record.objectnoold,jdbcType=NVARCHAR},
+      ObjectNameOld = #{record.objectnameold,jdbcType=NVARCHAR},
+      engObjectOld = #{record.engobjectold,jdbcType=NVARCHAR},
+      ApplyType = #{record.applytype,jdbcType=NVARCHAR},
+      Type = #{record.type,jdbcType=NVARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      PROCESS_CODE = #{record.processCode,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseObject_Apply">
+    update IBDS_BaseObject_Apply
+    <set>
+      <if test="plipmtno != null">
+        PLIPMTNo = #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        PRODLINENo = #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="productno != null">
+        PRODUCTNo = #{productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionno != null">
+        VERSIONNo = #{versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releaseno != null">
+        RELEASENo = #{releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="bversionno != null">
+        BVERSIONNo = #{bversionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="baselineno != null">
+        BASELINENo = #{baselineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="featureno != null">
+        FEATURENo = #{featureno,jdbcType=NVARCHAR},
+      </if>
+      <if test="subsystemno != null">
+        SUBSYSTEMNo = #{subsystemno,jdbcType=NVARCHAR},
+      </if>
+      <if test="moduleno != null">
+        MODULENo = #{moduleno,jdbcType=NVARCHAR},
+      </if>
+      <if test="numoffeaturenew != null">
+        NumofFEATURENew = #{numoffeaturenew,jdbcType=NVARCHAR},
+      </if>
+      <if test="objectno != null">
+        ObjectNo = #{objectno,jdbcType=NVARCHAR},
+      </if>
+      <if test="objectname != null">
+        ObjectName = #{objectname,jdbcType=NVARCHAR},
+      </if>
+      <if test="engobject != null">
+        engObject = #{engobject,jdbcType=NVARCHAR},
+      </if>
+      <if test="objectnoold != null">
+        ObjectNoOld = #{objectnoold,jdbcType=NVARCHAR},
+      </if>
+      <if test="objectnameold != null">
+        ObjectNameOld = #{objectnameold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engobjectold != null">
+        engObjectOld = #{engobjectold,jdbcType=NVARCHAR},
+      </if>
+      <if test="applytype != null">
+        ApplyType = #{applytype,jdbcType=NVARCHAR},
+      </if>
+      <if test="type != null">
+        Type = #{type,jdbcType=NVARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        CREATE_USER = #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="processCode != null">
+        PROCESS_CODE = #{processCode,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseObject_Apply">
+    update IBDS_BaseObject_Apply
+    set PLIPMTNo = #{plipmtno,jdbcType=NVARCHAR},
+      PRODLINENo = #{prodlineno,jdbcType=NVARCHAR},
+      PRODUCTNo = #{productno,jdbcType=NVARCHAR},
+      VERSIONNo = #{versionno,jdbcType=NVARCHAR},
+      RELEASENo = #{releaseno,jdbcType=NVARCHAR},
+      BVERSIONNo = #{bversionno,jdbcType=NVARCHAR},
+      BASELINENo = #{baselineno,jdbcType=NVARCHAR},
+      FEATURENo = #{featureno,jdbcType=NVARCHAR},
+      SUBSYSTEMNo = #{subsystemno,jdbcType=NVARCHAR},
+      MODULENo = #{moduleno,jdbcType=NVARCHAR},
+      NumofFEATURENew = #{numoffeaturenew,jdbcType=NVARCHAR},
+      ObjectNo = #{objectno,jdbcType=NVARCHAR},
+      ObjectName = #{objectname,jdbcType=NVARCHAR},
+      engObject = #{engobject,jdbcType=NVARCHAR},
+      ObjectNoOld = #{objectnoold,jdbcType=NVARCHAR},
+      ObjectNameOld = #{objectnameold,jdbcType=NVARCHAR},
+      engObjectOld = #{engobjectold,jdbcType=NVARCHAR},
+      ApplyType = #{applytype,jdbcType=NVARCHAR},
+      Type = #{type,jdbcType=NVARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      CREATE_USER = #{createUser,jdbcType=NVARCHAR},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR},
+      PROCESS_CODE = #{processCode,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

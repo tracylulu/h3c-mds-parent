@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>h3c-mds-parent</artifactId>
+        <groupId>com.h3c.mds</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>h3c-mds-flowable</artifactId>
+
+	<dependencies>
+	
+		 <dependency>
+            <groupId>com.h3c.mds</groupId>
+            <artifactId>erp</artifactId>
+            <version>1.0</version>
+        </dependency>
+	
+		 <!-- Spring 项目整合 Quartz需要 -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz-jobs</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+        
+        <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-web</artifactId>
+  		</dependency>
+		<dependency>
+            <groupId>com.caucho</groupId>
+            <artifactId>hessian</artifactId>
+            <version>4.0.52</version>
+        </dependency>
+		<dependency>
+			<groupId>org.flowable</groupId>
+			<artifactId>flowable-spring-boot-starter</artifactId>
+			<version>6.3.0</version>
+		</dependency>
+		
+  		<dependency>
+  		<groupId>com.h3c.mds</groupId>
+  			<artifactId>h3c-mds-product</artifactId>
+  			<version>0.0.1-SNAPSHOT</version>
+  		</dependency>
+  		<dependency>
+  			<groupId>com.h3c.mds</groupId>
+  			<artifactId>h3c-mds-finance</artifactId>
+  			<version>0.0.1-SNAPSHOT</version>
+  		</dependency>
+  		<!-- <dependency>
+  			<groupId>com.h3c.mds</groupId>
+  			<artifactId>h3c-mds-basicinfo</artifactId>
+  			<version>0.0.1-SNAPSHOT</version>
+  		</dependency> -->
+        <dependency>
+            <groupId>com.h3c.mds</groupId>
+            <artifactId>h3c-mds-dataauth</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+	</dependencies>
+
+</project>

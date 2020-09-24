@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.IBDS_PDTMapper">
+  <select id="getPDT" parameterType="map" resultMap="BaseResultMap">
+   select distinct PDTNo,PDT from IBDS_PDT   from IBDS_PDT  
+  </select>
+
+    <select id="getMaxCode" resultType="String">
+  		select max(PDTNo) from IBDS_PDT WHERE PDTNo LIKE 'PT%';
+  </select>
+
+    <select id="selectByCode" parameterType="String" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from IBDS_PDT WHERE PDTNo = #{code}
+    </select>
+    
+     <select id="selectByID" parameterType="Integer" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from IBDS_PDT WHERE ID = #{code}
+    </select>
+    
+    <select id="selectByCodeList" 	resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from IBDS_PDT WHERE PDTNo  in
+		<foreach collection="codeList" item="code" index="index"
+			open="(" close=")" separator=",">
+			#{code}
+		</foreach>
+	</select>
+	
+</mapper>

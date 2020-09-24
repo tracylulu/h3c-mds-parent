@@ -1,0 +1,112 @@
+@charset "UTF-8";
+
+.toptoolbar {
+  padding: 2px;
+  background: #f8f8f8;
+ /*  border: 1px #cccccc solid; */
+  min-height: 34px;
+}
+
+.toptoolbarhr {
+  height: 2px; }
+
+
+.linkeytable {
+  /* border-collapse: collapse; */
+  /* border: 1px solid #e8e8e8; */
+  width: 100%;
+  font-size: 9pt; 
+ 
+  }
+  .linkeytable td {
+   /*  border-collapse: collapse; */
+    /* border: 1px solid #e8e8e8; */
+    padding: 4px;
+    font-size: 9pt; 
+  
+    }
+    .linkeytable td.texttd {
+      text-align: right;
+      background: #f9f9f9;
+      font-size: 9pt;
+      min-width: 100px;
+
+       }
+    .linkeytable td.texttdl {
+      text-align: left;
+      background: #f9f9f9;
+      font-size: 9pt;
+      min-width: 100px; 
+      }
+     
+.auto_selusers_true,.auto_selusers_false,.auto_selgroups_true,.auto_selgroups_false {
+	
+	 line-height:30px;
+	 
+	  border:1px solid #D3D3D3;
+	
+     }
+ 
+
+.CollapseSubForm {
+  color: #5373ad;
+  padding-left: 20px;
+  font-size: 10pt;
+font-weight:Bold;
+  cursor: pointer;
+  background-position-y: 53%;
+  display: block;
+  position: relative;
+  top: -1px;
+  height: 38px;
+  line-height: 38px;
+text-decoration: underline; }
+
+.ExpandSubForm {
+  color: #5373ad;
+  padding-left: 20px;
+  font-size: 10pt;
+  font-weight:Bold;
+  cursor: pointer;
+  background-position-y: 53%;
+  display: block;
+  position: relative;
+  top: -1px;
+  height: 38px;
+  line-height: 38px;
+text-decoration: underline; }
+
+
+
+.subfild {
+	cursor: pointer;
+    height: 36px;
+    border-bottom: 1px solid #dbdbdb;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    background: url(img/ns-expand.gif) no-repeat 0px center;
+    }
+    
+.subfildRemove {
+	cursor: pointer;
+    height: 36px;
+    border-bottom: 1px solid #dbdbdb;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    background: url(img/ns-collapse.gif) no-repeat 0px center;
+    }
+    
+.subfild span {
+    display: block;
+    margin-left: 2px;
+    width: 14%;
+    text-align: left;
+    height: 36px;
+    line-height: 36px;
+    border-bottom: 3px solid #0e8bc5;
+    font-size: 15px;
+}
+
+ .product{width:100%;border-collapse:collapse;border-spacing:0;border-left:0px solid #dbdbdb;border-top:0px solid #dbdbdb;border-right:0px solid #dbdbdb;border-bottom:0px solid #dbdbdb}
+ .product td{border-right:0px solid #dbdbdb;border-bottom:0px solid #dbdbdb;border-left:0px solid #dbdbdb;border-top:0px solid #dbdbdb;padding:1px 0px 1px 20px;}
+ .product textarea{height:28px;}

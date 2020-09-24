@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.IBDS_Product_ApplyMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.basicinfo.entity.IBDS_Product_Apply">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="PLIPMTNo" jdbcType="NVARCHAR" property="plipmtno" />
+    <result column="PRODLINENo" jdbcType="NVARCHAR" property="prodlineno" />
+    <result column="PRODUCTNo" jdbcType="NVARCHAR" property="productno" />
+    <result column="PRODUCT" jdbcType="NVARCHAR" property="product" />
+    <result column="engPRODUCT" jdbcType="NVARCHAR" property="engproduct" />
+    <result column="FPRODUCTNo" jdbcType="NVARCHAR" property="fproductno" />
+    <result column="PRODUCTTypeNo" jdbcType="NVARCHAR" property="producttypeno" />
+    <result column="PM_ID" jdbcType="NVARCHAR" property="pmId" />
+    <result column="POP_ID" jdbcType="NVARCHAR" property="popId" />
+    <result column="CMO_ID" jdbcType="NVARCHAR" property="cmoId" />
+    <result column="PDE_ID" jdbcType="NVARCHAR" property="pdeId" />
+    <result column="PRODUCTOldNo" jdbcType="NVARCHAR" property="productoldno" />
+    <result column="PRODUCTOld" jdbcType="NVARCHAR" property="productold" />
+    <result column="engPRODUCTOld" jdbcType="NVARCHAR" property="engproductold" />
+    <result column="PRODUCTNameChange" jdbcType="NVARCHAR" property="productnamechange" />
+    <result column="IfDelBelow" jdbcType="NVARCHAR" property="ifdelbelow" />
+    <result column="AppyType" jdbcType="NVARCHAR" property="appytype" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="CREATE_USER" jdbcType="NVARCHAR" property="createUser" />
+    <result column="MODIFY_DATE" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="MODIFY_USER" jdbcType="NVARCHAR" property="modifyUser" />
+    <result column="PROCESS_CODE" jdbcType="NVARCHAR" property="processCode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, PLIPMTNo, PRODLINENo, PRODUCTNo, PRODUCT, engPRODUCT, FPRODUCTNo, PRODUCTTypeNo, 
+    PM_ID, POP_ID, CMO_ID, PDE_ID, PRODUCTOldNo, PRODUCTOld, engPRODUCTOld, PRODUCTNameChange, 
+    IfDelBelow, AppyType, CREATE_DATE, CREATE_USER, MODIFY_DATE, MODIFY_USER, PROCESS_CODE
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_Product_ApplyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_Product_Apply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_Product_Apply
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_Product_Apply
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_Product_ApplyExample">
+    delete from IBDS_Product_Apply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.basicinfo.entity.IBDS_Product_Apply">
+    insert into IBDS_Product_Apply (ID, PLIPMTNo, PRODLINENo, 
+      PRODUCTNo, PRODUCT, engPRODUCT, 
+      FPRODUCTNo, PRODUCTTypeNo, PM_ID, 
+      POP_ID, CMO_ID, PDE_ID, 
+      PRODUCTOldNo, PRODUCTOld, engPRODUCTOld, 
+      PRODUCTNameChange, IfDelBelow, AppyType, 
+      CREATE_DATE, CREATE_USER, MODIFY_DATE, 
+      MODIFY_USER, PROCESS_CODE)
+    values (#{id,jdbcType=INTEGER}, #{plipmtno,jdbcType=NVARCHAR}, #{prodlineno,jdbcType=NVARCHAR}, 
+      #{productno,jdbcType=NVARCHAR}, #{product,jdbcType=NVARCHAR}, #{engproduct,jdbcType=NVARCHAR}, 
+      #{fproductno,jdbcType=NVARCHAR}, #{producttypeno,jdbcType=NVARCHAR}, #{pmId,jdbcType=NVARCHAR}, 
+      #{popId,jdbcType=NVARCHAR}, #{cmoId,jdbcType=NVARCHAR}, #{pdeId,jdbcType=NVARCHAR}, 
+      #{productoldno,jdbcType=NVARCHAR}, #{productold,jdbcType=NVARCHAR}, #{engproductold,jdbcType=NVARCHAR}, 
+      #{productnamechange,jdbcType=NVARCHAR}, #{ifdelbelow,jdbcType=NVARCHAR}, #{appytype,jdbcType=NVARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{createUser,jdbcType=NVARCHAR}, #{modifyDate,jdbcType=TIMESTAMP}, 
+      #{modifyUser,jdbcType=NVARCHAR}, #{processCode,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.basicinfo.entity.IBDS_Product_Apply">
+    insert into IBDS_Product_Apply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo,
+      </if>
+      <if test="prodlineno != null">
+        PRODLINENo,
+      </if>
+      <if test="productno != null">
+        PRODUCTNo,
+      </if>
+      <if test="product != null">
+        PRODUCT,
+      </if>
+      <if test="engproduct != null">
+        engPRODUCT,
+      </if>
+      <if test="fproductno != null">
+        FPRODUCTNo,
+      </if>
+      <if test="producttypeno != null">
+        PRODUCTTypeNo,
+      </if>
+      <if test="pmId != null">
+        PM_ID,
+      </if>
+      <if test="popId != null">
+        POP_ID,
+      </if>
+      <if test="cmoId != null">
+        CMO_ID,
+      </if>
+      <if test="pdeId != null">
+        PDE_ID,
+      </if>
+      <if test="productoldno != null">
+        PRODUCTOldNo,
+      </if>
+      <if test="productold != null">
+        PRODUCTOld,
+      </if>
+      <if test="engproductold != null">
+        engPRODUCTOld,
+      </if>
+      <if test="productnamechange != null">
+        PRODUCTNameChange,
+      </if>
+      <if test="ifdelbelow != null">
+        IfDelBelow,
+      </if>
+      <if test="appytype != null">
+        AppyType,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE,
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER,
+      </if>
+      <if test="processCode != null">
+        PROCESS_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="plipmtno != null">
+        #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="productno != null">
+        #{productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="product != null">
+        #{product,jdbcType=NVARCHAR},
+      </if>
+      <if test="engproduct != null">
+        #{engproduct,jdbcType=NVARCHAR},
+      </if>
+      <if test="fproductno != null">
+        #{fproductno,jdbcType=NVARCHAR},
+      </if>
+      <if test="producttypeno != null">
+        #{producttypeno,jdbcType=NVARCHAR},
+      </if>
+      <if test="pmId != null">
+        #{pmId,jdbcType=NVARCHAR},
+      </if>
+      <if test="popId != null">
+        #{popId,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmoId != null">
+        #{cmoId,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdeId != null">
+        #{pdeId,jdbcType=NVARCHAR},
+      </if>
+      <if test="productoldno != null">
+        #{productoldno,jdbcType=NVARCHAR},
+      </if>
+      <if test="productold != null">
+        #{productold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engproductold != null">
+        #{engproductold,jdbcType=NVARCHAR},
+      </if>
+      <if test="productnamechange != null">
+        #{productnamechange,jdbcType=NVARCHAR},
+      </if>
+      <if test="ifdelbelow != null">
+        #{ifdelbelow,jdbcType=NVARCHAR},
+      </if>
+      <if test="appytype != null">
+        #{appytype,jdbcType=NVARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="processCode != null">
+        #{processCode,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_Product_ApplyExample" resultType="java.lang.Long">
+    select count(*) from IBDS_Product_Apply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_Product_Apply
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.plipmtno != null">
+        PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodlineno != null">
+        PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productno != null">
+        PRODUCTNo = #{record.productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.product != null">
+        PRODUCT = #{record.product,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engproduct != null">
+        engPRODUCT = #{record.engproduct,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fproductno != null">
+        FPRODUCTNo = #{record.fproductno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.producttypeno != null">
+        PRODUCTTypeNo = #{record.producttypeno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pmId != null">
+        PM_ID = #{record.pmId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.popId != null">
+        POP_ID = #{record.popId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.cmoId != null">
+        CMO_ID = #{record.cmoId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdeId != null">
+        PDE_ID = #{record.pdeId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productoldno != null">
+        PRODUCTOldNo = #{record.productoldno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productold != null">
+        PRODUCTOld = #{record.productold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engproductold != null">
+        engPRODUCTOld = #{record.engproductold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productnamechange != null">
+        PRODUCTNameChange = #{record.productnamechange,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ifdelbelow != null">
+        IfDelBelow = #{record.ifdelbelow,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.appytype != null">
+        AppyType = #{record.appytype,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null">
+        CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modifyDate != null">
+        MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyUser != null">
+        MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.processCode != null">
+        PROCESS_CODE = #{record.processCode,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_Product_Apply
+    set ID = #{record.id,jdbcType=INTEGER},
+      PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      PRODUCTNo = #{record.productno,jdbcType=NVARCHAR},
+      PRODUCT = #{record.product,jdbcType=NVARCHAR},
+      engPRODUCT = #{record.engproduct,jdbcType=NVARCHAR},
+      FPRODUCTNo = #{record.fproductno,jdbcType=NVARCHAR},
+      PRODUCTTypeNo = #{record.producttypeno,jdbcType=NVARCHAR},
+      PM_ID = #{record.pmId,jdbcType=NVARCHAR},
+      POP_ID = #{record.popId,jdbcType=NVARCHAR},
+      CMO_ID = #{record.cmoId,jdbcType=NVARCHAR},
+      PDE_ID = #{record.pdeId,jdbcType=NVARCHAR},
+      PRODUCTOldNo = #{record.productoldno,jdbcType=NVARCHAR},
+      PRODUCTOld = #{record.productold,jdbcType=NVARCHAR},
+      engPRODUCTOld = #{record.engproductold,jdbcType=NVARCHAR},
+      PRODUCTNameChange = #{record.productnamechange,jdbcType=NVARCHAR},
+      IfDelBelow = #{record.ifdelbelow,jdbcType=NVARCHAR},
+      AppyType = #{record.appytype,jdbcType=NVARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      PROCESS_CODE = #{record.processCode,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.basicinfo.entity.IBDS_Product_Apply">
+    update IBDS_Product_Apply
+    <set>
+      <if test="plipmtno != null">
+        PLIPMTNo = #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        PRODLINENo = #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="productno != null">
+        PRODUCTNo = #{productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="product != null">
+        PRODUCT = #{product,jdbcType=NVARCHAR},
+      </if>
+      <if test="engproduct != null">
+        engPRODUCT = #{engproduct,jdbcType=NVARCHAR},
+      </if>
+      <if test="fproductno != null">
+        FPRODUCTNo = #{fproductno,jdbcType=NVARCHAR},
+      </if>
+      <if test="producttypeno != null">
+        PRODUCTTypeNo = #{producttypeno,jdbcType=NVARCHAR},
+      </if>
+      <if test="pmId != null">
+        PM_ID = #{pmId,jdbcType=NVARCHAR},
+      </if>
+      <if test="popId != null">
+        POP_ID = #{popId,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmoId != null">
+        CMO_ID = #{cmoId,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdeId != null">
+        PDE_ID = #{pdeId,jdbcType=NVARCHAR},
+      </if>
+      <if test="productoldno != null">
+        PRODUCTOldNo = #{productoldno,jdbcType=NVARCHAR},
+      </if>
+      <if test="productold != null">
+        PRODUCTOld = #{productold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engproductold != null">
+        engPRODUCTOld = #{engproductold,jdbcType=NVARCHAR},
+      </if>
+      <if test="productnamechange != null">
+        PRODUCTNameChange = #{productnamechange,jdbcType=NVARCHAR},
+      </if>
+      <if test="ifdelbelow != null">
+        IfDelBelow = #{ifdelbelow,jdbcType=NVARCHAR},
+      </if>
+      <if test="appytype != null">
+        AppyType = #{appytype,jdbcType=NVARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        CREATE_USER = #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="processCode != null">
+        PROCESS_CODE = #{processCode,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.basicinfo.entity.IBDS_Product_Apply">
+    update IBDS_Product_Apply
+    set PLIPMTNo = #{plipmtno,jdbcType=NVARCHAR},
+      PRODLINENo = #{prodlineno,jdbcType=NVARCHAR},
+      PRODUCTNo = #{productno,jdbcType=NVARCHAR},
+      PRODUCT = #{product,jdbcType=NVARCHAR},
+      engPRODUCT = #{engproduct,jdbcType=NVARCHAR},
+      FPRODUCTNo = #{fproductno,jdbcType=NVARCHAR},
+      PRODUCTTypeNo = #{producttypeno,jdbcType=NVARCHAR},
+      PM_ID = #{pmId,jdbcType=NVARCHAR},
+      POP_ID = #{popId,jdbcType=NVARCHAR},
+      CMO_ID = #{cmoId,jdbcType=NVARCHAR},
+      PDE_ID = #{pdeId,jdbcType=NVARCHAR},
+      PRODUCTOldNo = #{productoldno,jdbcType=NVARCHAR},
+      PRODUCTOld = #{productold,jdbcType=NVARCHAR},
+      engPRODUCTOld = #{engproductold,jdbcType=NVARCHAR},
+      PRODUCTNameChange = #{productnamechange,jdbcType=NVARCHAR},
+      IfDelBelow = #{ifdelbelow,jdbcType=NVARCHAR},
+      AppyType = #{appytype,jdbcType=NVARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      CREATE_USER = #{createUser,jdbcType=NVARCHAR},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR},
+      PROCESS_CODE = #{processCode,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

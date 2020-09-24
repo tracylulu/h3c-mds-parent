@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.IBDS_DifficultyCoefficient_PROCESSMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_PROCESS">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="APPLY_CODE" jdbcType="NVARCHAR" property="applyCode" />
+    <result column="Status" jdbcType="NVARCHAR" property="status" />
+    <result column="Handler" jdbcType="NVARCHAR" property="handler" />
+    <result column="Instanse_ID" jdbcType="NVARCHAR" property="instanseId" />
+    <result column="CurrentNode" jdbcType="NVARCHAR" property="currentnode" />
+    <result column="STATUS_DESC" jdbcType="NVARCHAR" property="statusDesc" />
+    <result column="First_Sign" jdbcType="NVARCHAR" property="firstSign" />
+    <result column="First_Date" jdbcType="TIMESTAMP" property="firstDate" />
+    <result column="MGN_Sign" jdbcType="NVARCHAR" property="mgnSign" />
+    <result column="MGN_Date" jdbcType="TIMESTAMP" property="mgnDate" />
+    <result column="MGN_Opinion" jdbcType="NVARCHAR" property="mgnOpinion" />
+    <result column="MGN_Result" jdbcType="NVARCHAR" property="mgnResult" />
+    <result column="Quality_Sign" jdbcType="NVARCHAR" property="qualitySign" />
+    <result column="Quality_Date" jdbcType="TIMESTAMP" property="qualityDate" />
+    <result column="Quality_Opinion" jdbcType="NVARCHAR" property="qualityOpinion" />
+    <result column="Quality_Result" jdbcType="NVARCHAR" property="qualityResult" />
+    <result column="IPMT_Sign" jdbcType="NVARCHAR" property="ipmtSign" />
+    <result column="IPMT_Date" jdbcType="TIMESTAMP" property="ipmtDate" />
+    <result column="IPMT_Opinion" jdbcType="NVARCHAR" property="ipmtOpinion" />
+    <result column="IPMT_Result" jdbcType="NVARCHAR" property="ipmtResult" />
+    <result column="Creator" jdbcType="NVARCHAR" property="creator" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="Modifier" jdbcType="NVARCHAR" property="modifier" />
+    <result column="ModifyTime" jdbcType="TIMESTAMP" property="modifytime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, APPLY_CODE, Status, Handler, Instanse_ID, CurrentNode, STATUS_DESC, First_Sign, 
+    First_Date, MGN_Sign, MGN_Date, MGN_Opinion, MGN_Result, Quality_Sign, Quality_Date, 
+    Quality_Opinion, Quality_Result, IPMT_Sign, IPMT_Date, IPMT_Opinion, IPMT_Result, 
+    Creator, CreateTime, Modifier, ModifyTime
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_PROCESSExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_DifficultyCoefficient_PROCESS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_DifficultyCoefficient_PROCESS
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_DifficultyCoefficient_PROCESS
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_PROCESSExample">
+    delete from IBDS_DifficultyCoefficient_PROCESS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_PROCESS">
+    insert into IBDS_DifficultyCoefficient_PROCESS (ID, APPLY_CODE, Status, 
+      Handler, Instanse_ID, CurrentNode, 
+      STATUS_DESC, First_Sign, First_Date, 
+      MGN_Sign, MGN_Date, MGN_Opinion, 
+      MGN_Result, Quality_Sign, Quality_Date, 
+      Quality_Opinion, Quality_Result, IPMT_Sign, 
+      IPMT_Date, IPMT_Opinion, IPMT_Result, 
+      Creator, CreateTime, Modifier, 
+      ModifyTime)
+    values (#{id,jdbcType=INTEGER}, #{applyCode,jdbcType=NVARCHAR}, #{status,jdbcType=NVARCHAR}, 
+      #{handler,jdbcType=NVARCHAR}, #{instanseId,jdbcType=NVARCHAR}, #{currentnode,jdbcType=NVARCHAR}, 
+      #{statusDesc,jdbcType=NVARCHAR}, #{firstSign,jdbcType=NVARCHAR}, #{firstDate,jdbcType=TIMESTAMP}, 
+      #{mgnSign,jdbcType=NVARCHAR}, #{mgnDate,jdbcType=TIMESTAMP}, #{mgnOpinion,jdbcType=NVARCHAR}, 
+      #{mgnResult,jdbcType=NVARCHAR}, #{qualitySign,jdbcType=NVARCHAR}, #{qualityDate,jdbcType=TIMESTAMP}, 
+      #{qualityOpinion,jdbcType=NVARCHAR}, #{qualityResult,jdbcType=NVARCHAR}, #{ipmtSign,jdbcType=NVARCHAR}, 
+      #{ipmtDate,jdbcType=TIMESTAMP}, #{ipmtOpinion,jdbcType=NVARCHAR}, #{ipmtResult,jdbcType=NVARCHAR}, 
+      #{creator,jdbcType=NVARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=NVARCHAR}, 
+      #{modifytime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_PROCESS">
+    insert into IBDS_DifficultyCoefficient_PROCESS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="applyCode != null">
+        APPLY_CODE,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="handler != null">
+        Handler,
+      </if>
+      <if test="instanseId != null">
+        Instanse_ID,
+      </if>
+      <if test="currentnode != null">
+        CurrentNode,
+      </if>
+      <if test="statusDesc != null">
+        STATUS_DESC,
+      </if>
+      <if test="firstSign != null">
+        First_Sign,
+      </if>
+      <if test="firstDate != null">
+        First_Date,
+      </if>
+      <if test="mgnSign != null">
+        MGN_Sign,
+      </if>
+      <if test="mgnDate != null">
+        MGN_Date,
+      </if>
+      <if test="mgnOpinion != null">
+        MGN_Opinion,
+      </if>
+      <if test="mgnResult != null">
+        MGN_Result,
+      </if>
+      <if test="qualitySign != null">
+        Quality_Sign,
+      </if>
+      <if test="qualityDate != null">
+        Quality_Date,
+      </if>
+      <if test="qualityOpinion != null">
+        Quality_Opinion,
+      </if>
+      <if test="qualityResult != null">
+        Quality_Result,
+      </if>
+      <if test="ipmtSign != null">
+        IPMT_Sign,
+      </if>
+      <if test="ipmtDate != null">
+        IPMT_Date,
+      </if>
+      <if test="ipmtOpinion != null">
+        IPMT_Opinion,
+      </if>
+      <if test="ipmtResult != null">
+        IPMT_Result,
+      </if>
+      <if test="creator != null">
+        Creator,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+      <if test="modifier != null">
+        Modifier,
+      </if>
+      <if test="modifytime != null">
+        ModifyTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="applyCode != null">
+        #{applyCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="handler != null">
+        #{handler,jdbcType=NVARCHAR},
+      </if>
+      <if test="instanseId != null">
+        #{instanseId,jdbcType=NVARCHAR},
+      </if>
+      <if test="currentnode != null">
+        #{currentnode,jdbcType=NVARCHAR},
+      </if>
+      <if test="statusDesc != null">
+        #{statusDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="firstSign != null">
+        #{firstSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="firstDate != null">
+        #{firstDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mgnSign != null">
+        #{mgnSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="mgnDate != null">
+        #{mgnDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mgnOpinion != null">
+        #{mgnOpinion,jdbcType=NVARCHAR},
+      </if>
+      <if test="mgnResult != null">
+        #{mgnResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="qualitySign != null">
+        #{qualitySign,jdbcType=NVARCHAR},
+      </if>
+      <if test="qualityDate != null">
+        #{qualityDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qualityOpinion != null">
+        #{qualityOpinion,jdbcType=NVARCHAR},
+      </if>
+      <if test="qualityResult != null">
+        #{qualityResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtSign != null">
+        #{ipmtSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtDate != null">
+        #{ipmtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipmtOpinion != null">
+        #{ipmtOpinion,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtResult != null">
+        #{ipmtResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifytime != null">
+        #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_PROCESSExample" resultType="java.lang.Long">
+    select count(*) from IBDS_DifficultyCoefficient_PROCESS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_DifficultyCoefficient_PROCESS
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.applyCode != null">
+        APPLY_CODE = #{record.applyCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null">
+        Status = #{record.status,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.handler != null">
+        Handler = #{record.handler,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.instanseId != null">
+        Instanse_ID = #{record.instanseId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.currentnode != null">
+        CurrentNode = #{record.currentnode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.statusDesc != null">
+        STATUS_DESC = #{record.statusDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.firstSign != null">
+        First_Sign = #{record.firstSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.firstDate != null">
+        First_Date = #{record.firstDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mgnSign != null">
+        MGN_Sign = #{record.mgnSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.mgnDate != null">
+        MGN_Date = #{record.mgnDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mgnOpinion != null">
+        MGN_Opinion = #{record.mgnOpinion,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.mgnResult != null">
+        MGN_Result = #{record.mgnResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.qualitySign != null">
+        Quality_Sign = #{record.qualitySign,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.qualityDate != null">
+        Quality_Date = #{record.qualityDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.qualityOpinion != null">
+        Quality_Opinion = #{record.qualityOpinion,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.qualityResult != null">
+        Quality_Result = #{record.qualityResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ipmtSign != null">
+        IPMT_Sign = #{record.ipmtSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ipmtDate != null">
+        IPMT_Date = #{record.ipmtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ipmtOpinion != null">
+        IPMT_Opinion = #{record.ipmtOpinion,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ipmtResult != null">
+        IPMT_Result = #{record.ipmtResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.creator != null">
+        Creator = #{record.creator,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifier != null">
+        Modifier = #{record.modifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modifytime != null">
+        ModifyTime = #{record.modifytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_DifficultyCoefficient_PROCESS
+    set ID = #{record.id,jdbcType=INTEGER},
+      APPLY_CODE = #{record.applyCode,jdbcType=NVARCHAR},
+      Status = #{record.status,jdbcType=NVARCHAR},
+      Handler = #{record.handler,jdbcType=NVARCHAR},
+      Instanse_ID = #{record.instanseId,jdbcType=NVARCHAR},
+      CurrentNode = #{record.currentnode,jdbcType=NVARCHAR},
+      STATUS_DESC = #{record.statusDesc,jdbcType=NVARCHAR},
+      First_Sign = #{record.firstSign,jdbcType=NVARCHAR},
+      First_Date = #{record.firstDate,jdbcType=TIMESTAMP},
+      MGN_Sign = #{record.mgnSign,jdbcType=NVARCHAR},
+      MGN_Date = #{record.mgnDate,jdbcType=TIMESTAMP},
+      MGN_Opinion = #{record.mgnOpinion,jdbcType=NVARCHAR},
+      MGN_Result = #{record.mgnResult,jdbcType=NVARCHAR},
+      Quality_Sign = #{record.qualitySign,jdbcType=NVARCHAR},
+      Quality_Date = #{record.qualityDate,jdbcType=TIMESTAMP},
+      Quality_Opinion = #{record.qualityOpinion,jdbcType=NVARCHAR},
+      Quality_Result = #{record.qualityResult,jdbcType=NVARCHAR},
+      IPMT_Sign = #{record.ipmtSign,jdbcType=NVARCHAR},
+      IPMT_Date = #{record.ipmtDate,jdbcType=TIMESTAMP},
+      IPMT_Opinion = #{record.ipmtOpinion,jdbcType=NVARCHAR},
+      IPMT_Result = #{record.ipmtResult,jdbcType=NVARCHAR},
+      Creator = #{record.creator,jdbcType=NVARCHAR},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      Modifier = #{record.modifier,jdbcType=NVARCHAR},
+      ModifyTime = #{record.modifytime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_PROCESS">
+    update IBDS_DifficultyCoefficient_PROCESS
+    <set>
+      <if test="applyCode != null">
+        APPLY_CODE = #{applyCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        Status = #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="handler != null">
+        Handler = #{handler,jdbcType=NVARCHAR},
+      </if>
+      <if test="instanseId != null">
+        Instanse_ID = #{instanseId,jdbcType=NVARCHAR},
+      </if>
+      <if test="currentnode != null">
+        CurrentNode = #{currentnode,jdbcType=NVARCHAR},
+      </if>
+      <if test="statusDesc != null">
+        STATUS_DESC = #{statusDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="firstSign != null">
+        First_Sign = #{firstSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="firstDate != null">
+        First_Date = #{firstDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mgnSign != null">
+        MGN_Sign = #{mgnSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="mgnDate != null">
+        MGN_Date = #{mgnDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mgnOpinion != null">
+        MGN_Opinion = #{mgnOpinion,jdbcType=NVARCHAR},
+      </if>
+      <if test="mgnResult != null">
+        MGN_Result = #{mgnResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="qualitySign != null">
+        Quality_Sign = #{qualitySign,jdbcType=NVARCHAR},
+      </if>
+      <if test="qualityDate != null">
+        Quality_Date = #{qualityDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qualityOpinion != null">
+        Quality_Opinion = #{qualityOpinion,jdbcType=NVARCHAR},
+      </if>
+      <if test="qualityResult != null">
+        Quality_Result = #{qualityResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtSign != null">
+        IPMT_Sign = #{ipmtSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtDate != null">
+        IPMT_Date = #{ipmtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipmtOpinion != null">
+        IPMT_Opinion = #{ipmtOpinion,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtResult != null">
+        IPMT_Result = #{ipmtResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="creator != null">
+        Creator = #{creator,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null">
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        Modifier = #{modifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifytime != null">
+        ModifyTime = #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_PROCESS">
+    update IBDS_DifficultyCoefficient_PROCESS
+    set APPLY_CODE = #{applyCode,jdbcType=NVARCHAR},
+      Status = #{status,jdbcType=NVARCHAR},
+      Handler = #{handler,jdbcType=NVARCHAR},
+      Instanse_ID = #{instanseId,jdbcType=NVARCHAR},
+      CurrentNode = #{currentnode,jdbcType=NVARCHAR},
+      STATUS_DESC = #{statusDesc,jdbcType=NVARCHAR},
+      First_Sign = #{firstSign,jdbcType=NVARCHAR},
+      First_Date = #{firstDate,jdbcType=TIMESTAMP},
+      MGN_Sign = #{mgnSign,jdbcType=NVARCHAR},
+      MGN_Date = #{mgnDate,jdbcType=TIMESTAMP},
+      MGN_Opinion = #{mgnOpinion,jdbcType=NVARCHAR},
+      MGN_Result = #{mgnResult,jdbcType=NVARCHAR},
+      Quality_Sign = #{qualitySign,jdbcType=NVARCHAR},
+      Quality_Date = #{qualityDate,jdbcType=TIMESTAMP},
+      Quality_Opinion = #{qualityOpinion,jdbcType=NVARCHAR},
+      Quality_Result = #{qualityResult,jdbcType=NVARCHAR},
+      IPMT_Sign = #{ipmtSign,jdbcType=NVARCHAR},
+      IPMT_Date = #{ipmtDate,jdbcType=TIMESTAMP},
+      IPMT_Opinion = #{ipmtOpinion,jdbcType=NVARCHAR},
+      IPMT_Result = #{ipmtResult,jdbcType=NVARCHAR},
+      Creator = #{creator,jdbcType=NVARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      Modifier = #{modifier,jdbcType=NVARCHAR},
+      ModifyTime = #{modifytime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

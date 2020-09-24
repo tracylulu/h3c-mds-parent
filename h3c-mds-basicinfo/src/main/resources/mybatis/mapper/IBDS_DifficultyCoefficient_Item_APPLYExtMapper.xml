@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.IBDS_DifficultyCoefficient_Item_APPLYMapper">
+  <select id="getDataList" parameterType="Integer" resultMap="BaseResultMap">
+  	  select ID,Diff_ID, BVersionno, BVersion, ProDifficult, HardDifficult, Status from IBDS_DifficultyCoefficient_Item_APPLY where Diff_ID=#{diffid} and status=1
+  </select>
+  <select id="selectZTList" resultMap="BaseResultMap">
+		SELECT c.ID, c.Diff_ID, c.BVersionno, c.BVersion, c.ProDifficult, c.HardDifficult, c.Status, c.Creator, 
+  			 c.CreateTime, c.Modifier, c.ModifyTime FROM dbo.IBDS_DifficultyCoefficient_APPLY a
+		LEFT JOIN
+		dbo.IBDS_DifficultyCoefficient_PROCESS b ON
+		a.Process_Code=b.APPLY_CODE
+		LEFT JOIN
+		dbo.IBDS_DifficultyCoefficient_Item_APPLY c ON
+		a.ID=c.diff_ID
+		WHERE b.Status=1 AND c.id IS NOT NULL
+		<!-- AND c.BversionNo in
+		<foreach collection="codeList" item="code" index="index"
+			open="(" close=")" separator="or">
+			#{code}
+		</foreach> -->
+
+
+	</select>
+</mapper>

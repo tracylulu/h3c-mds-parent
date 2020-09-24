@@ -1,0 +1,82 @@
+{
+	"id": "738e9621-9924-0602-824a-83bd2510c1cb",
+	"name": "IBDS__Parent__COA",
+	"description": "",
+	"order": [
+		"e539f3ac-df77-4e5d-4556-6c8d540cc8e3",
+		"e001d458-5fdc-c45d-bb71-568d6ae4b7cd"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1586319949030,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "e001d458-5fdc-c45d-bb71-568d6ae4b7cd",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://10.90.16.155/api/COAData",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "738e9621-9924-0602-824a-83bd2510c1cb",
+			"data": [],
+			"dataMode": "raw",
+			"name": "断言失败",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1586412282341,
+			"version": 2,
+			"responses": [],
+			"tests": "pm.test(\"返回的信息是：调用成功\", function() {\n    pm.expect(pm.response.text()).to.include(\"！调用成功\");\n});",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\r\n         \"PersonCode\": \"17740\",\r\n         \"SapCode\": [\"80040098\", \"80040099\", \"80040096\"]\r\n}\r\n"
+		},
+		{
+			"id": "e539f3ac-df77-4e5d-4556-6c8d540cc8e3",
+			"headers": "Content-Type: application/json\nAuthorization: Basic enlzMjA2NjpkdW5pZHVuaUA2NDg5OTI=\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Basic enlzMjA2NjpkdW5pZHVuaUA2NDg5OTI=",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://10.90.16.155/api/COAData",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "pm.test(\"Body matches string\", function() {\n    pm.expect(pm.response.text()).to.include(\"调用成功\");\n});",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1586411682928,
+			"name": "断言成功",
+			"description": "",
+			"collectionId": "738e9621-9924-0602-824a-83bd2510c1cb",
+			"responses": [],
+			"rawModeData": "{\r\n         \"PersonCode\": \"17740\",\r\n         \"SapCode\": [\"80040098\", \"80040099\", \"80040096\"]\r\n}\r\n"
+		}
+	]
+}

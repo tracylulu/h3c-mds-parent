@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.sysmgr.dao.RoleResourceRelationMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.sysmgr.entity.RoleResourceRelation">
+    <id column="HRRR_ID" jdbcType="INTEGER" property="hrrrId" />
+    <result column="HRRR_HRL_CODE" jdbcType="VARCHAR" property="hrrrHrlCode" />
+    <result column="HRRR_HRES_CODE" jdbcType="VARCHAR" property="hrrrHresCode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    HRRR_ID, HRRR_HRL_CODE, HRRR_HRES_CODE
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.sysmgr.entity.RoleResourceRelationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_Role_Resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_Role_Resource
+    where HRRR_ID = #{hrrrId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_Role_Resource
+    where HRRR_ID = #{hrrrId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.sysmgr.entity.RoleResourceRelationExample">
+    delete from IBDS_Role_Resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.sysmgr.entity.RoleResourceRelation">
+    insert into IBDS_Role_Resource (HRRR_ID, HRRR_HRL_CODE, HRRR_HRES_CODE
+      )
+    values (#{hrrrId,jdbcType=INTEGER}, #{hrrrHrlCode,jdbcType=VARCHAR}, #{hrrrHresCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.sysmgr.entity.RoleResourceRelation">
+    insert into IBDS_Role_Resource
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hrrrId != null">
+        HRRR_ID,
+      </if>
+      <if test="hrrrHrlCode != null">
+        HRRR_HRL_CODE,
+      </if>
+      <if test="hrrrHresCode != null">
+        HRRR_HRES_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hrrrId != null">
+        #{hrrrId,jdbcType=INTEGER},
+      </if>
+      <if test="hrrrHrlCode != null">
+        #{hrrrHrlCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hrrrHresCode != null">
+        #{hrrrHresCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.sysmgr.entity.RoleResourceRelationExample" resultType="java.lang.Long">
+    select count(*) from IBDS_Role_Resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_Role_Resource
+    <set>
+      <if test="record.hrrrId != null">
+        HRRR_ID = #{record.hrrrId,jdbcType=INTEGER},
+      </if>
+      <if test="record.hrrrHrlCode != null">
+        HRRR_HRL_CODE = #{record.hrrrHrlCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hrrrHresCode != null">
+        HRRR_HRES_CODE = #{record.hrrrHresCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_Role_Resource
+    set HRRR_ID = #{record.hrrrId,jdbcType=INTEGER},
+      HRRR_HRL_CODE = #{record.hrrrHrlCode,jdbcType=VARCHAR},
+      HRRR_HRES_CODE = #{record.hrrrHresCode,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.sysmgr.entity.RoleResourceRelation">
+    update IBDS_Role_Resource
+    <set>
+      <if test="hrrrHrlCode != null">
+        HRRR_HRL_CODE = #{hrrrHrlCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hrrrHresCode != null">
+        HRRR_HRES_CODE = #{hrrrHresCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where HRRR_ID = #{hrrrId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.sysmgr.entity.RoleResourceRelation">
+    update IBDS_Role_Resource
+    set HRRR_HRL_CODE = #{hrrrHrlCode,jdbcType=VARCHAR},
+      HRRR_HRES_CODE = #{hrrrHresCode,jdbcType=VARCHAR}
+    where HRRR_ID = #{hrrrId,jdbcType=INTEGER}
+  </update>
+</mapper>

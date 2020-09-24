@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.IBDS_BaseObject_PROCESSMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.basicinfo.entity.IBDS_BaseObject_PROCESS">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="ApplyCode" jdbcType="NVARCHAR" property="applycode" />
+    <result column="Status" jdbcType="NVARCHAR" property="status" />
+    <result column="Responsible" jdbcType="NVARCHAR" property="responsible" />
+    <result column="StatusName" jdbcType="NVARCHAR" property="statusname" />
+    <result column="APPLY_TYPE" jdbcType="NVARCHAR" property="applyType" />
+    <result column="Remark" jdbcType="NVARCHAR" property="remark" />
+    <result column="Readers" jdbcType="NVARCHAR" property="readers" />
+    <result column="copyto" jdbcType="NVARCHAR" property="copyto" />
+    <result column="sendto_1" jdbcType="NVARCHAR" property="sendto1" />
+    <result column="CMO_FillName" jdbcType="NVARCHAR" property="cmoFillname" />
+    <result column="CMO_FillTime" jdbcType="TIMESTAMP" property="cmoFilltime" />
+    <result column="PDT_Suggestion" jdbcType="NVARCHAR" property="pdtSuggestion" />
+    <result column="PDT_FillName" jdbcType="NVARCHAR" property="pdtFillname" />
+    <result column="PDT_FillTime" jdbcType="TIMESTAMP" property="pdtFilltime" />
+    <result column="CMOLeader_Suggestion" jdbcType="NVARCHAR" property="cmoleaderSuggestion" />
+    <result column="CMOLeader_FillName" jdbcType="NVARCHAR" property="cmoleaderFillname" />
+    <result column="CMOLeader_FillTime" jdbcType="TIMESTAMP" property="cmoleaderFilltime" />
+    <result column="INSTANSE_ID" jdbcType="NVARCHAR" property="instanseId" />
+    <result column="CheckResult" jdbcType="NVARCHAR" property="checkresult" />
+    <result column="EditCurrentUser" jdbcType="NVARCHAR" property="editcurrentuser" />
+    <result column="AssignSign" jdbcType="NVARCHAR" property="assignsign" />
+    <result column="AssignDate" jdbcType="TIMESTAMP" property="assigndate" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="CREATE_USER" jdbcType="NVARCHAR" property="createUser" />
+    <result column="MODIFY_DATE" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="MODIFY_USER" jdbcType="NVARCHAR" property="modifyUser" />
+    <result column="CurrentNode" jdbcType="NVARCHAR" property="currentnode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, ApplyCode, Status, Responsible, StatusName, APPLY_TYPE, Remark, Readers, copyto, 
+    sendto_1, CMO_FillName, CMO_FillTime, PDT_Suggestion, PDT_FillName, PDT_FillTime, 
+    CMOLeader_Suggestion, CMOLeader_FillName, CMOLeader_FillTime, INSTANSE_ID, CheckResult, 
+    EditCurrentUser, AssignSign, AssignDate, CREATE_DATE, CREATE_USER, MODIFY_DATE, MODIFY_USER, 
+    CurrentNode
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseObject_PROCESSExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_BaseObject_PROCESS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_BaseObject_PROCESS
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_BaseObject_PROCESS
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseObject_PROCESSExample">
+    delete from IBDS_BaseObject_PROCESS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseObject_PROCESS">
+    insert into IBDS_BaseObject_PROCESS (ID, ApplyCode, Status, 
+      Responsible, StatusName, APPLY_TYPE, 
+      Remark, Readers, copyto, 
+      sendto_1, CMO_FillName, CMO_FillTime, 
+      PDT_Suggestion, PDT_FillName, PDT_FillTime, 
+      CMOLeader_Suggestion, CMOLeader_FillName, 
+      CMOLeader_FillTime, INSTANSE_ID, CheckResult, 
+      EditCurrentUser, AssignSign, AssignDate, 
+      CREATE_DATE, CREATE_USER, MODIFY_DATE, 
+      MODIFY_USER, CurrentNode)
+    values (#{id,jdbcType=INTEGER}, #{applycode,jdbcType=NVARCHAR}, #{status,jdbcType=NVARCHAR}, 
+      #{responsible,jdbcType=NVARCHAR}, #{statusname,jdbcType=NVARCHAR}, #{applyType,jdbcType=NVARCHAR}, 
+      #{remark,jdbcType=NVARCHAR}, #{readers,jdbcType=NVARCHAR}, #{copyto,jdbcType=NVARCHAR}, 
+      #{sendto1,jdbcType=NVARCHAR}, #{cmoFillname,jdbcType=NVARCHAR}, #{cmoFilltime,jdbcType=TIMESTAMP}, 
+      #{pdtSuggestion,jdbcType=NVARCHAR}, #{pdtFillname,jdbcType=NVARCHAR}, #{pdtFilltime,jdbcType=TIMESTAMP}, 
+      #{cmoleaderSuggestion,jdbcType=NVARCHAR}, #{cmoleaderFillname,jdbcType=NVARCHAR}, 
+      #{cmoleaderFilltime,jdbcType=TIMESTAMP}, #{instanseId,jdbcType=NVARCHAR}, #{checkresult,jdbcType=NVARCHAR}, 
+      #{editcurrentuser,jdbcType=NVARCHAR}, #{assignsign,jdbcType=NVARCHAR}, #{assigndate,jdbcType=TIMESTAMP}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{createUser,jdbcType=NVARCHAR}, #{modifyDate,jdbcType=TIMESTAMP}, 
+      #{modifyUser,jdbcType=NVARCHAR}, #{currentnode,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseObject_PROCESS">
+    insert into IBDS_BaseObject_PROCESS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="applycode != null">
+        ApplyCode,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="responsible != null">
+        Responsible,
+      </if>
+      <if test="statusname != null">
+        StatusName,
+      </if>
+      <if test="applyType != null">
+        APPLY_TYPE,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="readers != null">
+        Readers,
+      </if>
+      <if test="copyto != null">
+        copyto,
+      </if>
+      <if test="sendto1 != null">
+        sendto_1,
+      </if>
+      <if test="cmoFillname != null">
+        CMO_FillName,
+      </if>
+      <if test="cmoFilltime != null">
+        CMO_FillTime,
+      </if>
+      <if test="pdtSuggestion != null">
+        PDT_Suggestion,
+      </if>
+      <if test="pdtFillname != null">
+        PDT_FillName,
+      </if>
+      <if test="pdtFilltime != null">
+        PDT_FillTime,
+      </if>
+      <if test="cmoleaderSuggestion != null">
+        CMOLeader_Suggestion,
+      </if>
+      <if test="cmoleaderFillname != null">
+        CMOLeader_FillName,
+      </if>
+      <if test="cmoleaderFilltime != null">
+        CMOLeader_FillTime,
+      </if>
+      <if test="instanseId != null">
+        INSTANSE_ID,
+      </if>
+      <if test="checkresult != null">
+        CheckResult,
+      </if>
+      <if test="editcurrentuser != null">
+        EditCurrentUser,
+      </if>
+      <if test="assignsign != null">
+        AssignSign,
+      </if>
+      <if test="assigndate != null">
+        AssignDate,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE,
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER,
+      </if>
+      <if test="currentnode != null">
+        CurrentNode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="applycode != null">
+        #{applycode,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="responsible != null">
+        #{responsible,jdbcType=NVARCHAR},
+      </if>
+      <if test="statusname != null">
+        #{statusname,jdbcType=NVARCHAR},
+      </if>
+      <if test="applyType != null">
+        #{applyType,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="readers != null">
+        #{readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="copyto != null">
+        #{copyto,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendto1 != null">
+        #{sendto1,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmoFillname != null">
+        #{cmoFillname,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmoFilltime != null">
+        #{cmoFilltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pdtSuggestion != null">
+        #{pdtSuggestion,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtFillname != null">
+        #{pdtFillname,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtFilltime != null">
+        #{pdtFilltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cmoleaderSuggestion != null">
+        #{cmoleaderSuggestion,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmoleaderFillname != null">
+        #{cmoleaderFillname,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmoleaderFilltime != null">
+        #{cmoleaderFilltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="instanseId != null">
+        #{instanseId,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkresult != null">
+        #{checkresult,jdbcType=NVARCHAR},
+      </if>
+      <if test="editcurrentuser != null">
+        #{editcurrentuser,jdbcType=NVARCHAR},
+      </if>
+      <if test="assignsign != null">
+        #{assignsign,jdbcType=NVARCHAR},
+      </if>
+      <if test="assigndate != null">
+        #{assigndate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="currentnode != null">
+        #{currentnode,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseObject_PROCESSExample" resultType="java.lang.Long">
+    select count(*) from IBDS_BaseObject_PROCESS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_BaseObject_PROCESS
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.applycode != null">
+        ApplyCode = #{record.applycode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null">
+        Status = #{record.status,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.responsible != null">
+        Responsible = #{record.responsible,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.statusname != null">
+        StatusName = #{record.statusname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.applyType != null">
+        APPLY_TYPE = #{record.applyType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remark != null">
+        Remark = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.readers != null">
+        Readers = #{record.readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.copyto != null">
+        copyto = #{record.copyto,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sendto1 != null">
+        sendto_1 = #{record.sendto1,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.cmoFillname != null">
+        CMO_FillName = #{record.cmoFillname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.cmoFilltime != null">
+        CMO_FillTime = #{record.cmoFilltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pdtSuggestion != null">
+        PDT_Suggestion = #{record.pdtSuggestion,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdtFillname != null">
+        PDT_FillName = #{record.pdtFillname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdtFilltime != null">
+        PDT_FillTime = #{record.pdtFilltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cmoleaderSuggestion != null">
+        CMOLeader_Suggestion = #{record.cmoleaderSuggestion,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.cmoleaderFillname != null">
+        CMOLeader_FillName = #{record.cmoleaderFillname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.cmoleaderFilltime != null">
+        CMOLeader_FillTime = #{record.cmoleaderFilltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.instanseId != null">
+        INSTANSE_ID = #{record.instanseId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.checkresult != null">
+        CheckResult = #{record.checkresult,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.editcurrentuser != null">
+        EditCurrentUser = #{record.editcurrentuser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.assignsign != null">
+        AssignSign = #{record.assignsign,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.assigndate != null">
+        AssignDate = #{record.assigndate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createDate != null">
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null">
+        CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modifyDate != null">
+        MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyUser != null">
+        MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.currentnode != null">
+        CurrentNode = #{record.currentnode,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_BaseObject_PROCESS
+    set ID = #{record.id,jdbcType=INTEGER},
+      ApplyCode = #{record.applycode,jdbcType=NVARCHAR},
+      Status = #{record.status,jdbcType=NVARCHAR},
+      Responsible = #{record.responsible,jdbcType=NVARCHAR},
+      StatusName = #{record.statusname,jdbcType=NVARCHAR},
+      APPLY_TYPE = #{record.applyType,jdbcType=NVARCHAR},
+      Remark = #{record.remark,jdbcType=NVARCHAR},
+      Readers = #{record.readers,jdbcType=NVARCHAR},
+      copyto = #{record.copyto,jdbcType=NVARCHAR},
+      sendto_1 = #{record.sendto1,jdbcType=NVARCHAR},
+      CMO_FillName = #{record.cmoFillname,jdbcType=NVARCHAR},
+      CMO_FillTime = #{record.cmoFilltime,jdbcType=TIMESTAMP},
+      PDT_Suggestion = #{record.pdtSuggestion,jdbcType=NVARCHAR},
+      PDT_FillName = #{record.pdtFillname,jdbcType=NVARCHAR},
+      PDT_FillTime = #{record.pdtFilltime,jdbcType=TIMESTAMP},
+      CMOLeader_Suggestion = #{record.cmoleaderSuggestion,jdbcType=NVARCHAR},
+      CMOLeader_FillName = #{record.cmoleaderFillname,jdbcType=NVARCHAR},
+      CMOLeader_FillTime = #{record.cmoleaderFilltime,jdbcType=TIMESTAMP},
+      INSTANSE_ID = #{record.instanseId,jdbcType=NVARCHAR},
+      CheckResult = #{record.checkresult,jdbcType=NVARCHAR},
+      EditCurrentUser = #{record.editcurrentuser,jdbcType=NVARCHAR},
+      AssignSign = #{record.assignsign,jdbcType=NVARCHAR},
+      AssignDate = #{record.assigndate,jdbcType=TIMESTAMP},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      CurrentNode = #{record.currentnode,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseObject_PROCESS">
+    update IBDS_BaseObject_PROCESS
+    <set>
+      <if test="applycode != null">
+        ApplyCode = #{applycode,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        Status = #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="responsible != null">
+        Responsible = #{responsible,jdbcType=NVARCHAR},
+      </if>
+      <if test="statusname != null">
+        StatusName = #{statusname,jdbcType=NVARCHAR},
+      </if>
+      <if test="applyType != null">
+        APPLY_TYPE = #{applyType,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="readers != null">
+        Readers = #{readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="copyto != null">
+        copyto = #{copyto,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendto1 != null">
+        sendto_1 = #{sendto1,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmoFillname != null">
+        CMO_FillName = #{cmoFillname,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmoFilltime != null">
+        CMO_FillTime = #{cmoFilltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pdtSuggestion != null">
+        PDT_Suggestion = #{pdtSuggestion,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtFillname != null">
+        PDT_FillName = #{pdtFillname,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtFilltime != null">
+        PDT_FillTime = #{pdtFilltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cmoleaderSuggestion != null">
+        CMOLeader_Suggestion = #{cmoleaderSuggestion,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmoleaderFillname != null">
+        CMOLeader_FillName = #{cmoleaderFillname,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmoleaderFilltime != null">
+        CMOLeader_FillTime = #{cmoleaderFilltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="instanseId != null">
+        INSTANSE_ID = #{instanseId,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkresult != null">
+        CheckResult = #{checkresult,jdbcType=NVARCHAR},
+      </if>
+      <if test="editcurrentuser != null">
+        EditCurrentUser = #{editcurrentuser,jdbcType=NVARCHAR},
+      </if>
+      <if test="assignsign != null">
+        AssignSign = #{assignsign,jdbcType=NVARCHAR},
+      </if>
+      <if test="assigndate != null">
+        AssignDate = #{assigndate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        CREATE_USER = #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="currentnode != null">
+        CurrentNode = #{currentnode,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.basicinfo.entity.IBDS_BaseObject_PROCESS">
+    update IBDS_BaseObject_PROCESS
+    set ApplyCode = #{applycode,jdbcType=NVARCHAR},
+      Status = #{status,jdbcType=NVARCHAR},
+      Responsible = #{responsible,jdbcType=NVARCHAR},
+      StatusName = #{statusname,jdbcType=NVARCHAR},
+      APPLY_TYPE = #{applyType,jdbcType=NVARCHAR},
+      Remark = #{remark,jdbcType=NVARCHAR},
+      Readers = #{readers,jdbcType=NVARCHAR},
+      copyto = #{copyto,jdbcType=NVARCHAR},
+      sendto_1 = #{sendto1,jdbcType=NVARCHAR},
+      CMO_FillName = #{cmoFillname,jdbcType=NVARCHAR},
+      CMO_FillTime = #{cmoFilltime,jdbcType=TIMESTAMP},
+      PDT_Suggestion = #{pdtSuggestion,jdbcType=NVARCHAR},
+      PDT_FillName = #{pdtFillname,jdbcType=NVARCHAR},
+      PDT_FillTime = #{pdtFilltime,jdbcType=TIMESTAMP},
+      CMOLeader_Suggestion = #{cmoleaderSuggestion,jdbcType=NVARCHAR},
+      CMOLeader_FillName = #{cmoleaderFillname,jdbcType=NVARCHAR},
+      CMOLeader_FillTime = #{cmoleaderFilltime,jdbcType=TIMESTAMP},
+      INSTANSE_ID = #{instanseId,jdbcType=NVARCHAR},
+      CheckResult = #{checkresult,jdbcType=NVARCHAR},
+      EditCurrentUser = #{editcurrentuser,jdbcType=NVARCHAR},
+      AssignSign = #{assignsign,jdbcType=NVARCHAR},
+      AssignDate = #{assigndate,jdbcType=TIMESTAMP},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      CREATE_USER = #{createUser,jdbcType=NVARCHAR},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR},
+      CurrentNode = #{currentnode,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

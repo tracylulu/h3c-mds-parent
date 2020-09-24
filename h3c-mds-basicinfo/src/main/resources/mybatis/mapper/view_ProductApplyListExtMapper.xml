@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.view_ProductApplyListMapper">
+ <select id="getProductApplyList" parameterType="map" resultMap="BaseResultMap">
+        <if test="param.applytype==null and param.prodlineno==null and param.type=='PP'">
+		select distinct PRODLINENo,PRODLINE from view_ProductApplyList where PRODLINENo is not null and PRODLINENo!=''
+		</if>
+		  <if test="param.applytype==null and param.prodlineno!=null and param.type=='PP'">
+		 select distinct isnull(PRODLINENo,'')+'_'+isnull(AppyType,'') as PRODLINENo,AppyType from view_ProductApplyList where  isnull(PRODLINENo,'')=#{param.prodlineno}
+		 </if>
+		 
+		  <if test="param.prodlineno!=null and param.applytype!=null and param.type=='PP'">
+		 select distinct isnull(PRODLINENo,'')+'_'+isnull(AppyType,'')+'_'+isnull(PRODUCTNo,'')+'_'+isnull(code,'')+'_'+Convert(nvarchar,isnull(ApplypId,'')) as PRODLINENo,ID, code,  PRODUCTNo, PRODUCT, banben, CREATE_DATE, 
+    CREATE_USER, Responsible, Status, StatusName, softsn, hardsn from view_ProductApplyList where isnull(AppyType,'')=#{param.applytype}
+    and isnull(PRODLINENo,'')=#{param.prodlineno} 
+		 </if>
+		 
+		 <if test="param.applytype==null and param.prodlineno==null and param.type=='RR'">
+		select distinct isnull(Responsible,'') as PRODLINENo,Responsible as PRODLINE from view_ProductApplyList where Responsible is not null and Responsible!=''
+		</if>
+		  <if test="param.applytype==null and param.prodlineno!=null and param.type=='RR'">
+		 select distinct isnull(Responsible,'')+'_'+isnull(AppyType,'') as PRODLINENo,AppyType from view_ProductApplyList where  isnull(Responsible,'')=#{param.prodlineno}
+		 </if>
+		 
+		  <if test="param.prodlineno!=null and param.applytype!=null and param.type=='RR'">
+		 select distinct isnull(Responsible,'')+'_'+isnull(AppyType,'')+'_'+isnull(PRODUCTNo,'')+'_'+isnull(code,'')+'_'+Convert(nvarchar,isnull(ApplypId,'')) as PRODLINENo,ID, code,  PRODUCTNo, PRODUCT, banben, CREATE_DATE, 
+    CREATE_USER, Responsible, Status, StatusName, softsn, hardsn from view_ProductApplyList where AppyType=#{param.applytype}
+    and isnull(Responsible,'')=#{param.prodlineno}
+		 </if>
+		 
+		  <if test="param.applytype==null and param.prodlineno==null and param.type=='CC'">
+		select distinct isnull(CREATE_USER,'') as PRODLINENo,CREATE_USER as PRODLINE from view_ProductApplyList where CREATE_USER is not null and CREATE_USER!=''
+		</if>
+		  <if test="param.applytype==null and param.prodlineno!=null and param.type=='CC'">
+		 select distinct isnull(CREATE_USER,'')+'_'+isnull(AppyType,'') as PRODLINENo,AppyType from view_ProductApplyList where  isnull(CREATE_USER,'')=#{param.prodlineno}
+		 </if>
+		 
+		  <if test="param.prodlineno!=null and param.applytype!=null and param.type=='CC'">
+		 select distinct isnull(Responsible,'')+'_'+AppyType+'_'+PRODUCTNo+'_'+code+'_'+Convert(nvarchar,ApplypId) as PRODLINENo,ID, code,  PRODUCTNo, PRODUCT, banben, CREATE_DATE, 
+    CREATE_USER, Responsible, Status, StatusName, softsn, hardsn from view_ProductApplyList where isnull(AppyType,'')=#{param.applytype}
+    and isnull(CREATE_USER,'')=#{param.prodlineno}
+		 </if>
+		 
+		  <if test="param.applytype==null and param.prodlineno==null and param.type=='SS'">
+		select distinct isnull(StatusName,'') as PRODLINENo,StatusName as PRODLINE from view_ProductApplyList where StatusName is not null and StatusName!=''
+		</if>
+		  <if test="param.applytype==null and param.prodlineno!=null and param.type=='SS'">
+		 select distinct isnull(StatusName,'')+'_'+isnull(AppyType,'') as PRODLINENo,AppyType from view_ProductApplyList where  isnull(StatusName,'')=#{param.prodlineno}
+		 </if>
+		 
+		  <if test="param.prodlineno!=null and param.applytype!=null and param.type=='SS'">
+		 select distinct isnull(StatusName,'')+'_'+isnull(AppyType,'')+'_'+isnull(PRODUCTNo,'')+'_'+isnull(code,'')+'_'+Convert(nvarchar,isnull(ApplypId,'')) as PRODLINENo,ID, code,  PRODUCTNo, PRODUCT, banben, CREATE_DATE, 
+    CREATE_USER, Responsible, Status, StatusName, softsn, hardsn from view_ProductApplyList where AppyType=#{param.applytype}
+    and isnull(StatusName,'')=#{param.prodlineno} 
+		 </if>
+ 
+		
+		<if test="param.searchParam!=null">
+		and CHARINDEX(#{param.searchParam},isnull(code,'')+isnull(PRODLINENo,'')+isnull(PRODLINE,'')+isnull(AppyType,'')+isnull(PRODUCTNo,'')+isnull(PRODUCT,'')+isnull(banben,'')+isnull(CREATE_USER,'')+isnull(Responsible,'')+isnull(Status,'')+isnull(StatusName,''))>0
+		</if>
+		  <!-- 新增权限控制 自己能查自己的流程，以及自己处理过的流程 -->
+   <if test="param.users != null and param.users != '' and param.users!='all'">
+   and CHARINDEX(#{param.users},isnull(CREATE_USER,'')+isnull(Responsible,''))>0
+   </if>
+		<if test="param.prodlineno!=null and param.applytype!=null">
+		order by CREATE_DATE desc;
+		</if>
+		
+	</select>
+
+
+<select id="getProductApplyDataGridList" parameterType="map" resultMap="BaseResultMap">
+select <include refid="Base_Column_List" /> from view_ProductApplyList 
+<where>
+<if test="param.applytype!=null and param.applytype!=''">
+and isnull(AppyType,'')=#{param.applytype}
+</if>
+<if test="param.searchParam!=null and param.searchParam!=''">
+		and CHARINDEX(#{param.searchParam},isnull(code,'')+isnull(PRODLINENo,'')+isnull(PRODLINE,'')+isnull(AppyType,'')+isnull(PRODUCTNo,'')+isnull(PRODUCT,'')+isnull(banben,'')+isnull(CREATE_USER,'')+isnull(Responsible,'')+isnull(Status,'')+isnull(StatusName,''))>0
+</if>
+<if test="param.users!=null and param.users!='' and param.users!='all'">
+and CHARINDEX(#{param.users},isnull(CREATE_USER,'')+isnull(Responsible,''))>0
+</if>
+</where>
+
+order by CREATE_DATE desc
+</select>
+</mapper>

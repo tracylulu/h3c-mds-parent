@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.IBDSProjectMapper">
+ <select id="getCurrentRAndChildBProject" parameterType="map" resultMap="BaseResultMap">
+ 	SELECT * FROM dbo.IBDS_PROJECT a WHERE EXISTS (SELECT * FROM dbo.IBDS_RELEASE b WHERE b.RELEASENo=#{param.release}  AND CHARINDEX(a.PROJECTNo,b.PROJECTNo)>0) OR EXISTS(
+		SELECT * FROM dbo.IBDS_bversion c WHERE  c.RELEASENo=#{param.release} AND CHARINDEX(a.PROJECTNo,c.PROJECTNo)>0
+	)
+ </select>
+</mapper>

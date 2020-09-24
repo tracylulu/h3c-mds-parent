@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.h3c.mds.basicinfo.dao.view_PeopleApplyListMapper">
+	<select id="selectByMap" parameterType="map"
+		resultMap="BaseResultMap">
+		<if test="param.type=='user' ">
+			<if test="param.id==null">
+				select DISTINCT CREATE_USER
+				from view_PeopleApplyList 
+				<where>
+				  Status !=-2
+					<if test="param.searchParam!=null and param.searchParam!=''">
+					 
+						and  CHARINDEX(#{param.searchParam},isnull(code,'')+  isnull(cast(CREATE_DATE as nvarchar(100)),'')+ isnull(CREATE_USER,'')+
+						isnull(Responsible,'')+isnull(Status,'')+ isnull(StatusName,'')+isnull( ProCode,'')+ isnull(ProName,''))&gt;0
+					</if>
+				</where>
+				
+			</if>
+			<if test="param.id!=null">
+				select
+				 cast('' as nvarchar(100)) CREATE_USER,ID,item_ID, code, CREATE_DATE,YearAndMonth,  Responsible, Status, StatusName, ProCode, ProName
+				from view_PeopleApplyList where CREATE_USER=#{param.id} and Status !=-2
+				<if test="param.searchParam!=null and param.searchParam!=''">
+					and
+					CHARINDEX(#{param.searchParam},isnull(code,'')+  isnull(cast(CREATE_DATE as nvarchar(100)),'')+ isnull(CREATE_USER,'')+
+					isnull(Responsible,'')+isnull(Status,'')+ isnull(StatusName,'')+isnull( ProCode,'')+ isnull(ProName,''))&gt;0
+				</if>
+				order by  CREATE_DATE desc
+			</if>
+		</if>
+		<if test="param.type=='date' ">
+			<if test="param.id==null">
+				select DISTINCT YearAndMonth
+				from view_PeopleApplyList 
+				<where>
+					Status !=-2
+					<if test="param.searchParam!=null and param.searchParam!=''">
+					
+					and	CHARINDEX(#{param.searchParam},isnull(code,'')+  isnull(cast(CREATE_DATE as nvarchar(100)),'')+ isnull(CREATE_USER,'')+
+						isnull(Responsible,'')+isnull(Status,'')+ isnull(StatusName,'')+isnull( ProCode,'')+ isnull(ProName,''))&gt;0
+					</if>
+				</where>
+				
+			</if>
+			<if test="param.id!=null">
+				select
+				 cast('' as nvarchar(100))  YearAndMonth, CREATE_DATE,ID,item_ID, code,  CREATE_USER, Responsible, Status, StatusName, ProCode, ProName
+				from view_PeopleApplyList
+				where YearAndMonth=#{param.id} and Status !=-2
+
+				<if test="param.searchParam!=null and param.searchParam!=''">
+					and
+					CHARINDEX(#{param.searchParam},isnull(code,'')+  isnull(cast(CREATE_DATE as nvarchar(100)),'')+ isnull(CREATE_USER,'')+
+					isnull(Responsible,'')+isnull(Status,'')+ isnull(StatusName,'')+isnull( ProCode,'')+ isnull(ProName,''))&gt;0
+				</if>
+				order by  CREATE_DATE desc
+			</if>
+		</if>
+		
+	</select>
+</mapper>

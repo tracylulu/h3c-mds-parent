@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.h3c.mds.product.dao.view_StopUsingProductsMapper">
+	<select id="selectGrid" parameterType="map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from view_StopUsingProducts
+	</select>
+	<select id="findByPage" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from view_StopUsingProducts
+
+		<where>
+			<if test="param.searchStr != null and param.searchStr != ''">
+
+				CHARINDEX(#{param.searchStr},type+Code+Name+EngName)&gt;0
+			</if>
+			<if test="param.proType != null and param.proType != ''">
+				and type=#{param.proType}
+
+			</if>
+		</where>
+
+	</select>
+
+	<!-- 获取R版本树 -->
+	<select id="selectTreeGrid" parameterType="map"
+		resultMap="BaseResultMap">
+
+		<!-- 产品线层 -->
+		<if test="param.id == null">
+			select distinct ProdLineNo ,ProdLine from view_StopUsingProducts
+
+			<where>
+				<if test="param.searchStr != null and param.searchStr != ''">
+					CHARINDEX(#{param.searchStr},Type+Code+Name+EngName)&gt;0
+				</if>
+				<if test="param.proType != null and param.proType != ''">
+					and type=#{param.proType}
+
+				</if>
+			</where>
+
+		</if>
+
+
+		<if test="param.id != null">
+			<!-- 产品层 -->
+			<if test="param.type =='PL'">
+				select distinct ProductNo+'_'+ProdLineNo ProdLineNo
+				,ProductNo, Product  from
+				view_StopUsingProducts
+				where
+				ProdLineNo=#{param.id}
+			</if>
+			<!--R版本层 -->
+			<if test="param.type =='PP'">
+				select distinct ReleaseNo+'_'+ProductNo+'_'+ProdLineNo
+				ProdLineNo , ReleaseNo,Release from
+				view_StopUsingProducts
+				where
+				ProductNo=#{param.id}
+			</if>
+			<!--R版本层 -->
+			<if test="param.type =='PR'">
+				select distinct
+				Code+'_'+ReleaseNo+'_'+ProductNo+'_'+cast(ID as nvarchar(100))+'_'+ProdLineNo ProdLineNo,
+				Type, Code,Name,EngName,ID
+				from
+				view_StopUsingProducts where
+				ReleaseNO=#{param.id}
+			</if>
+
+			
+			<if test="param.PRODLINENo!=null and param.PRODLINENo!=''">
+				and ProdLineNo=#{param.PRODLINENo}
+			</if>
+			<if test="param.PRODUCTNo!=null and param.PRODUCTNo!=''">
+				and PRODUCTNo=#{param.PRODUCTNo}
+			</if>
+			
+
+			<!-- 搜索条件  -->
+			<if test="param.searchStr != null and param.searchStr != ''">
+				and CHARINDEX(#{param.searchStr},Type+Code+Name+EngName)&gt;0
+			</if>
+			<if test="param.proType != null and param.proType != ''">
+				and type=#{param.proType}
+			</if>
+
+
+		</if>
+
+
+
+
+	</select>
+</mapper>

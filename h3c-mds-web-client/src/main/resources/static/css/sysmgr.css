@@ -1,0 +1,21 @@
+.userClass{
+	margin:0px 20px;
+	}
+	.userClass .l-btn-left:hover{
+    color:white;background-color:#3498DB;
+    }
+      .userClass .l-btn-plain .l-btn-text {
+    padding:5px 15px;
+    }
+    .userClass .easyui-linkbutton.l-btn:hover{
+    color:white;background-color:#3498DB;
+    }
+    .userClass .default.l-btn:hover{
+    color:white;background-color:#3498DB;
+    }
+    .titleClass{
+    float:left;font-weight: bold;width:30%;font-size:18px;margin:10px 0px;
+    }
+    .searchClass{
+    float:right;width:70%;text-align:right;height:28px;margin:3px 0px;
+    }

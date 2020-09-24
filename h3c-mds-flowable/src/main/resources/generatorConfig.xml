@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!--去掉注释-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--需要配置数据库连接-->
+        <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+                        connectionURL="jdbc:sqlserver://10.74.40.183\sql2014;DatabaseName=IBDSDB"
+                        userId=  "sa"  
+                        password= "Hello123"   >
+                        
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!--指定javaBean生成的位置 javaBean生成的位置-->
+        <javaModelGenerator targetPackage="com.h3c.mds.flowable.entity" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!--sql映射文件生成的位置-->
+        <sqlMapGenerator targetPackage="mapper"  targetProject="./src/main/resources/mybatis">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!--指定dao接口生成的位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.h3c.mds.flowable.dao"  targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!-- 产品编码申请流程数据 -->
+<!--        <table tableName="IBDS_PRODUCT_CODE_PROCESS" domainObjectName="ProductCodeProcess"></table>-->
+        <!-- 产品编码表单数据 -->
+       <!--  <table tableName="IBDS_PRDOUCT_CODE_APPLY" domainObjectName="ProductCodeApply"></table> -->
+        <!-- 流程配置表 -->
+<!--        <table tableName="IBDS_PROCESS_CONFIG" domainObjectName="ProcessConfig"></table>-->
+        <!-- 流程配置角色表 -->
+       <!-- <table tableName="IBDS_PROCESS_CONFIG_ITEM" domainObjectName="ProcessConfigItem"></table> -->
+        <!-- 流程人员表 -->
+<!--        <table tableName="IBDS_PROCESS_Person" domainObjectName="ProcessConfigPerson"></table>-->
+		<!-- 流程人员视图 -->
+<!--		<table tableName="view_ProcessConfigPerson" domainObjectName="view_ProcessConfigPerson"></table>-->
+        <!--BOM编码-->
+<!--        <table tableName="IBDS_H3CPDM_Bom" domainObjectName="Bom"></table>-->
+        <!--PART编码流程-->
+<!--                <table tableName="IBDS_PART_CODE_PROCESS" domainObjectName="PartCodeProcess"></table>-->
+        <!--PART编码表单数据-->
+<!--                <table tableName="IBDS_PART_CODE_APPLY" domainObjectName="PartCodeApply"></table>-->
+        <!--流程日志表-->
+<!--        <table tableName="IBDS_PROCESS_LOG" domainObjectName="ProcessLog"></table>-->
+        <!--邮件信息表-->
+      <!--   <table tableName="IBDS_MAIL_INFO" domainObjectName="MailInfo"></table> -->
+       <!--  <table tableName="view_partExport" domainObjectName="PartExport"></table> -->
+<!-- 项目编码申请 -->
+      <!--   <table tableName="IBDS_PROJECT_CODE_APPLY" domainObjectName="ProjectCodeApply"></table> -->
+        <!-- 项目关联产品数据 -->
+        <!-- <table tableName="IBDS_PROJECT_PRODUCT_REL" domainObjectName="ProjectProductRel"></table> -->
+        <!--  项目编码流程相关的 -->
+<!--         <table tableName="IBDS_PROJECT_CODE_PROCESS" domainObjectName="ProjectCodeProcess"></table>-->
+         <!-- 项目编码关联产品编码视图 -->
+         <!-- <table tableName="view_projectCodeProduct" domainObjectName="ProjectCodeProductCodeView"></table> -->
+
+         <!-- 项目编码推荐 -->
+         <!-- <table tableName="IBDS_PROJECT_CODE_RECOMMEND" domainObjectName="ProjectCodeRecommend"></table> -->
+         <!-- <table tableName="view_projectcode_recommend" domainObjectName="ProjectcodeRecommendView"></table> -->
+         <!-- <table tableName="IBDS_PART_CRON" domainObjectName="PartCron"></table> -->
+         <!-- <table tableName="view_pdm_part" domainObjectName="PdmPartView"></table> -->
+        <!--  <table tableName="IBDS_TASK" domainObjectName="IbdsTask"></table> -->
+         <!-- <table tableName="IBDS_PART_CODE_APPLY" domainObjectName="PartCodeApply"></table> -->
+         <!-- <table tableName="IBDS_INIT_LOG" domainObjectName="IbdsInitLog"></table> -->
+
+         <!-- <table tableName="view_hz_part" domainObjectName="HzPartView"></table> -->
+<!--        <table tableName="view_partExport" domainObjectName="PartExport"></table>-->
+        <!--文件日志表-->
+           <!-- <table tableName="IBDS_FILE_LOG" domainObjectName="FileLog"></table> -->
+           <!-- <table tableName="IBDS_IFLOW_REQ" domainObjectName="IbdsEip"></table> -->
+           <!-- <table tableName="IBDS_APPROVEINFO" domainObjectName="IbdsApproveInfo"></table> -->
+           
+        <!--依据材料表-->
+        <!-- <table tableName="IBDS_BASIS_MATERIAL" domainObjectName="BasisMaterial"></table> -->
+        <!-- part导出 -->
+<!--        <table tableName="view_partExport" domainObjectName="PartExport"></table> -->
+		<table tableName="part_pdm_notsync" domainObjectName="PartPdmNotSync"></table>
+
+    </context>
+</generatorConfiguration>

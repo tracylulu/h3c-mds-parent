@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.view_DifficultyCoefficientApplyListMapper">
+ <select id="getDifficultyCoefficientApplyList" parameterType="map" resultMap="BaseResultMap">
+  <if test="param.prodlineno==null">
+		select distinct PRODLINENo,PRODLINE from view_DifficultyCoefficientApplyList 
+  </if>
+  <if test="param.prodlineno!=null and param.type=='PL'">
+  select distinct productno as PRODLINENo,product from view_DifficultyCoefficientApplyList 
+
+  </if>
+  
+   <if test="param.prodlineno!=null and param.type=='PP'">
+   select distinct PRODLINENo+'_'+PRODUCTNo+'_'+code+'_'+Convert(nvarchar,applyID)  as PRODLINENo, ID, code,  VersionNo, VERSION, CREATE_DATE, 
+    CREATE_USER, Responsible, Status, StatusName, ProDifficult, HardDifficult from view_DifficultyCoefficientApplyList  
+  
+   </if>
+   
+     <where>
+     <if test="param.prodlineno==null">
+     and prodlineno!='' and prodlineno is not null
+     </if>
+     <if test="param.prodlineno!=null and param.type=='PL'">
+   productno!='' and productno is not null and prodlineno=#{param.prodlineno}
+   </if>
+    <if test="param.prodlineno!=null and param.type=='PP'">
+    and productno=#{param.prodlineno}
+    </if>
+    <!-- 新增权限控制 自己能查自己的流程，以及自己处理过的流程 -->
+   <if test="param.users != null and param.users != '' and param.users != 'all'">
+   and CHARINDEX(#{param.users},isnull(CREATE_USER,'')+isnull(Responsible,''))>0
+   </if>
+   <if test="param.searchParam != null and param.searchParam != ''">
+  and applyID in (
+select applyID from view_DifficultyCoefficientApplyList where CHARINDEX(#{param.searchParam},isnull(code,'')+isnull(Product,'')+isnull(PRODLINE,'')+isnull(Version,'')+isnull(CREATE_USER,'')+isnull(Responsible,'')+isnull(StatusName,''))&gt;0
+		)
+		</if>
+    
+   </where>
+	
+  </select>
+  
+  
+</mapper>

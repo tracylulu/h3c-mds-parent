@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.finance.dao.ProjectCodeProductCodeViewMapper">
+ 	
+ 	<select id="findByPage" parameterType="map" resultType="map">
+ 		select 
+
+			f_id    as   fId,
+			f_objca    as   fObjca,
+			f_pdtno    as   fPdtno,
+			f_projno    as   fProjno,
+			f_projname    as   fProjname,
+			f_projcode    as   fProjcode,
+			f_productlineno    as   fProductlineno,
+			f_releaseno    as   fReleaseno,
+			f_releasename    as   fReleasename,
+			f_productno    as   fProductno,
+			f_productname    as   fProductname,
+			f_bizhong    as   fBizhong,
+			f_fbizhong    as   fFbizhong,
+			BeginTime    as   begintime,
+			f_projMng    as   fProjmng,
+			f_dept    as   fDept,
+			f_start_project_time    as   fStartProjectTime,
+			f_assign_point    as   fAssignPoint,
+			f_assign_point_name    as   fAssignPointName,
+			<!-- remark    as   remark, -->
+			f_profile    as   fProfile,
+			PRODUCT_NAME_CN    as   productNameCn,
+			f_objca_name    as   fObjcaName,
+			f_pdt_name    as   fPdtName,
+			f_productline_name    as   fProductlineName,
+			f_bversionno    as   fBversionno,
+			f_bversionname    as   fBversionname,
+			<!-- f_version    as   fVersion, -->
+			rate    as   rate
+		 from  view_projectCodeProduct
+ 		<if test="param.searchArgs != null and param.searchArgs!=''">
+ 			where 
+ 			
+ 			CHARINDEX(#{param.searchArgs},
+			isnull(f_projname,'')
+			+isnull(f_projno,'')
+			)&gt;0
+ 		</if>
+ 	</select>
+</mapper>

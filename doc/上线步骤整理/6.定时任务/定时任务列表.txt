@@ -1,0 +1,10 @@
+一.基础数据同步顺序
+1.p_DeptFromRDMDS 部门同步
+2.p_UsersFromRDMDS人员同步
+3.p_DomainGroupFromRDMDS 域群组
+4.p_MemberGroupFromRDMDS 域群组人员
+5.p_UserGroupFromRDMDS 域人员
+二.B版本同步
+1.p_BversionFromIPMP
+三.BOM编码同步
+1.P_H3CPDMBom

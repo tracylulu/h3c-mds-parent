@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.view_ApproveListMapper">
+  <select id="getList" parameterType="map" resultMap="BaseResultMap">
+  	 select 
+  	 	<if test="param.type==null or param.type==''  ">
+  	 		top 15
+  	 	</if>
+  	   <include refid="Base_Column_List"></include> from view_ApproveList where charindex(#{param.user},Responsible)&gt;0 and code is not null and  StatusName!='流程结束' order by CREATE_DATE desc
+  </select>
+  <select id="getMyApplicationList" parameterType='map' resultMap="BaseResultMap">
+  	select 
+  	 	<if test="param.type==null or param.type==''  ">
+  	 		top 15
+  	 	</if>
+  	   <include refid="Base_Column_List"></include> from view_ApproveList where CREATE_USER=#{param.user}   and code is not null and  StatusName!='流程结束' order by CREATE_DATE desc
+  </select>
+  <select id="getHistoryList" parameterType='map' resultMap="BaseResultMap">
+  	SELECT <if test="param.type==null or param.type==''  ">
+  	 		top 15
+  	 	</if>
+  	 	  <include refid="Base_Column_List"></include>
+  	FROM view_ApproveList    WHERE EXISTS(
+			SELECT 1 FROM dbo.IBDS_PROCESS_LOG WHERE CHECK_ACCOUNT=#{param.user} AND PROCESS_CODE= code) ORDER BY CREATE_DATE DESC
+  </select>
+</mapper>

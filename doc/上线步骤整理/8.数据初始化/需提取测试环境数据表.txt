@@ -1,0 +1,12 @@
+1.--菜单IBDS_resource
+2.--角色IBDS_role
+3.--角色资源IBDS_Role_Resource
+4.--用户角色IBDS_User_Role  需清理数据？
+5.--用户资源IBDS_User_Resource
+6.--字典表IBDS_DIC
+7.--流程配置IBDS_PROCESS_CONFIG
+IBDS_PROCESS_CONFIG_ITEM
+IBDS_PROCESS_PERSON
+IBDS_MAXCODE
+8.--字段配置表
+IBDS_ColunmConfig

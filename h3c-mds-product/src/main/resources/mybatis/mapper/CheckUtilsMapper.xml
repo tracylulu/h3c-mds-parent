@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.CheckUtilsMapper">
+	<resultMap id="BaseResultMap" type="com.h3c.mds.product.dao.CheckUtilsMapper">
+		<result column="column" jdbcType="NVARCHAR" property="text" />
+		<result column="code" jdbcType="NVARCHAR" property="value" />
+		<result column="value" jdbcType="NVARCHAR" property="value" />
+	</resultMap>
+  <select id="query" parameterType="map" resultType="java.lang.Integer">
+    select  count(1) from ${param.tableName} where 	${param.column} =#{param.value} 
+    and status=1
+    <if test="param.isEdit!=null and param.isEdit=='True'">
+    	and ${param.Key} !=#{param.KeyValue}
+    	
+    </if>
+  </select>  
+</mapper>

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.flowable.dao.FileLogMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.flowable.entity.FileLog">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="USER_NAME" jdbcType="NVARCHAR" property="userName" />
+    <result column="USER_DESC" jdbcType="NVARCHAR" property="userDesc" />
+    <result column="USER_IP" jdbcType="NVARCHAR" property="userIp" />
+    <result column="FILE_SIZE" jdbcType="INTEGER" property="fileSize" />
+    <result column="OPERATE_TYPE" jdbcType="NVARCHAR" property="operateType" />
+    <result column="FILE_TYPE" jdbcType="NVARCHAR" property="fileType" />
+    <result column="FILE_NAME" jdbcType="NVARCHAR" property="fileName" />
+    <result column="FILE_ID" jdbcType="NVARCHAR" property="fileId" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="CREATE_USER" jdbcType="NVARCHAR" property="createUser" />
+    <result column="MODIFY_DATE" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="MODIFY_USER" jdbcType="NVARCHAR" property="modifyUser" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, USER_NAME, USER_DESC, USER_IP, FILE_SIZE, OPERATE_TYPE, FILE_TYPE, FILE_NAME, 
+    FILE_ID, CREATE_DATE, CREATE_USER, MODIFY_DATE, MODIFY_USER
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.flowable.entity.FileLogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_FILE_LOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_FILE_LOG
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_FILE_LOG
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.flowable.entity.FileLogExample">
+    delete from IBDS_FILE_LOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.flowable.entity.FileLog">
+    insert into IBDS_FILE_LOG (ID, USER_NAME, USER_DESC, 
+      USER_IP, FILE_SIZE, OPERATE_TYPE, 
+      FILE_TYPE, FILE_NAME, FILE_ID, 
+      CREATE_DATE, CREATE_USER, MODIFY_DATE, 
+      MODIFY_USER)
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=NVARCHAR}, #{userDesc,jdbcType=NVARCHAR}, 
+      #{userIp,jdbcType=NVARCHAR}, #{fileSize,jdbcType=INTEGER}, #{operateType,jdbcType=NVARCHAR}, 
+      #{fileType,jdbcType=NVARCHAR}, #{fileName,jdbcType=NVARCHAR}, #{fileId,jdbcType=NVARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{createUser,jdbcType=NVARCHAR}, #{modifyDate,jdbcType=TIMESTAMP}, 
+      #{modifyUser,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.flowable.entity.FileLog">
+    insert into IBDS_FILE_LOG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="userDesc != null">
+        USER_DESC,
+      </if>
+      <if test="userIp != null">
+        USER_IP,
+      </if>
+      <if test="fileSize != null">
+        FILE_SIZE,
+      </if>
+      <if test="operateType != null">
+        OPERATE_TYPE,
+      </if>
+      <if test="fileType != null">
+        FILE_TYPE,
+      </if>
+      <if test="fileName != null">
+        FILE_NAME,
+      </if>
+      <if test="fileId != null">
+        FILE_ID,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE,
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=NVARCHAR},
+      </if>
+      <if test="userDesc != null">
+        #{userDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="userIp != null">
+        #{userIp,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileSize != null">
+        #{fileSize,jdbcType=INTEGER},
+      </if>
+      <if test="operateType != null">
+        #{operateType,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileType != null">
+        #{fileType,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileId != null">
+        #{fileId,jdbcType=NVARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.flowable.entity.FileLogExample" resultType="java.lang.Long">
+    select count(*) from IBDS_FILE_LOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_FILE_LOG
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null">
+        USER_NAME = #{record.userName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userDesc != null">
+        USER_DESC = #{record.userDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userIp != null">
+        USER_IP = #{record.userIp,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileSize != null">
+        FILE_SIZE = #{record.fileSize,jdbcType=INTEGER},
+      </if>
+      <if test="record.operateType != null">
+        OPERATE_TYPE = #{record.operateType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileType != null">
+        FILE_TYPE = #{record.fileType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileName != null">
+        FILE_NAME = #{record.fileName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileId != null">
+        FILE_ID = #{record.fileId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null">
+        CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modifyDate != null">
+        MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyUser != null">
+        MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_FILE_LOG
+    set ID = #{record.id,jdbcType=INTEGER},
+      USER_NAME = #{record.userName,jdbcType=NVARCHAR},
+      USER_DESC = #{record.userDesc,jdbcType=NVARCHAR},
+      USER_IP = #{record.userIp,jdbcType=NVARCHAR},
+      FILE_SIZE = #{record.fileSize,jdbcType=INTEGER},
+      OPERATE_TYPE = #{record.operateType,jdbcType=NVARCHAR},
+      FILE_TYPE = #{record.fileType,jdbcType=NVARCHAR},
+      FILE_NAME = #{record.fileName,jdbcType=NVARCHAR},
+      FILE_ID = #{record.fileId,jdbcType=NVARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.flowable.entity.FileLog">
+    update IBDS_FILE_LOG
+    <set>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=NVARCHAR},
+      </if>
+      <if test="userDesc != null">
+        USER_DESC = #{userDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="userIp != null">
+        USER_IP = #{userIp,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileSize != null">
+        FILE_SIZE = #{fileSize,jdbcType=INTEGER},
+      </if>
+      <if test="operateType != null">
+        OPERATE_TYPE = #{operateType,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileType != null">
+        FILE_TYPE = #{fileType,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileName != null">
+        FILE_NAME = #{fileName,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileId != null">
+        FILE_ID = #{fileId,jdbcType=NVARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        CREATE_USER = #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.flowable.entity.FileLog">
+    update IBDS_FILE_LOG
+    set USER_NAME = #{userName,jdbcType=NVARCHAR},
+      USER_DESC = #{userDesc,jdbcType=NVARCHAR},
+      USER_IP = #{userIp,jdbcType=NVARCHAR},
+      FILE_SIZE = #{fileSize,jdbcType=INTEGER},
+      OPERATE_TYPE = #{operateType,jdbcType=NVARCHAR},
+      FILE_TYPE = #{fileType,jdbcType=NVARCHAR},
+      FILE_NAME = #{fileName,jdbcType=NVARCHAR},
+      FILE_ID = #{fileId,jdbcType=NVARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      CREATE_USER = #{createUser,jdbcType=NVARCHAR},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

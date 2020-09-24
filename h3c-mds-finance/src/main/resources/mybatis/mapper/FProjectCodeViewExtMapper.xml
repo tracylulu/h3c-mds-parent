@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.finance.dao.FProjectCodeViewMapper">
+	
+	
+	
+	
+	<!-- 编辑项目编码回显数据 -->
+	<select id="getFProjectCodeByCode"  parameterType="map" resultType="map">
+		select 		distinct
+					f_projno as fProjno,
+					f_projname as fProjname,
+					f_projcode as fProjcode,
+					f_objca as fObjca,
+					f_objca_name as fObjcaName,
+					f_projMng as fProjmng,
+					f_dept as fDept,
+					f_start_project_time as fStartProjectTime,
+					f_productlineno as fProductlineno,
+					f_productline_name as fProductlineName,
+					f_product_code as fProductCode,
+					PRODUCT_NAME_CN as productNameCn,
+					rate as rate,
+					BeginTime as begintime,
+					f_releaseno as fReleaseno,
+					f_version as fVersion,
+					f_pdtno as fPdtno,
+					f_pdt_name  as fPdtName,
+					f_assign_point as fAssignPoint,
+					f_assign_point_name as fAssignPointName,
+					f_bizhong as fBizhong,
+					f_fbizhong as fFbizhong,
+					remark,
+					mark,
+					f_old_objca as fOldObjca,
+					f_old_objca_name as fOldObjcaName,
+					f_old_pdtno as fOldPdtno,
+					f_old_pdt_name as fOldPdtName,
+					f_old_projno as fOldProjno,
+					f_old_projname as fOldProjname,
+					f_old_projcode as fOldProjcode,
+					f_old_productlineno as fOldProductlineno,
+					f_old_productline_name as fOldProductlineName,
+					f_old_releaseno as fOldReleaseno,
+					f_old_productno as fOldProductno,
+					f_old_productname as fOldProductname,
+					f_old_bizhong as fOldBizhong,
+					f_old_fbizhong as fOldFbizhong,
+					f_old_rate as fOldRate,
+					f_old_version as fOldVersion
+		
+		from view_fprojectCode where f_projno = #{param.fProjno} and f_product_code = #{param.fProductCode}
+	</select>
+	
+	<sql id="search">
+			and 
+			CHARINDEX(#{param.searchParams},
+			isnull(f_projno,'')
+			+ ' '
+			+isnull(f_projname,'')
+			+ ' '
+			+isnull(f_projcode,'')
+			+ ' '
+			+isnull(f_objca_name,'')
+			+ ' '
+			+isnull(f_projMng,'')
+			+ ' '
+			+isnull(f_product_code,'')
+			+ ' '
+			+isnull(f_productline_name,'')
+			+ ' '
+			+isnull(PRODUCT_NAME_CN,'')
+			+ ' '
+			+isnull(f_releaseno,'')
+			+ ' '
+			+isnull(f_pdt_name,'')
+			+ ' '
+			+isnull(f_assign_point_name,'')
+			+ ' '
+			+isnull(f_bizhong,'')
+			+ ' '
+			+isnull(f_fbizhong,'')
+			+ ' '
+			+isnull(remark,'')
+			)&gt;0
+	</sql>
+	
+	
+	<select id="getProperties" parameterType="map" resultType="map">
+		select 
+				f_projno  as fProjno,
+				f_projname  as fProjname,
+				f_projcode  as fProjcode,
+				f_objca_name   as fObjcaName,
+				f_projMng   as fProjMng,
+				f_productline_name AS fProductlineName,
+				f_product_code as  fProductCode,
+				PRODUCT_NAME_CN  as productNameCn,
+				rate   as rate,
+				f_releaseno   as fReleaseno,
+				f_version as fVersion,
+				f_pdtno as fPdtno,
+				f_pdt_name as fPdtName,
+				f_assign_point_name as fAssignPointName,
+				f_bizhong   as fBizhong,
+				f_fbizhong   as fFbizhong,
+				remark
+		 from view_fprojectCode where
+		<if test="param.id!='' and param.id !=null">
+				id=#{param.id}
+		</if>
+		<if test="param.productCode !='' and param.productCode !=null">
+				and f_product_code = #{param.productCode}
+		</if>
+		
+	</select>
+	
+	
+	<!-- <select id="findByPage" parameterType="map" resultType="map">
+		select 
+		
+			id  as   id,
+			f_projno  as   fProjno,
+			f_projname  as   fProjname,
+			f_projcode  as   fProjcode,
+			f_objca  as   fObjca,
+			f_objca_name  as   fObjcaName,
+			f_projMng  as   fProjmng,
+			f_productlineno  as   fProductlineno,
+			f_productline_name  as   fProductlineName,
+			f_product_code  as   fProductCode,
+			PRODUCT_NAME_CN  as   productNameCn,
+			rate  as   rate,
+			BeginTime as begintime,
+			f_dept  as   fDept,
+			f_start_project_time as fStartProjectTime,
+			f_releaseno  as   fReleaseno,
+			f_bversionname as fBversionname,
+			f_bversionno as fBversionno,
+			f_version  as   fVersion,
+			f_pdtno as fPdtno,
+			f_pdt_name  as   fPdtName,
+			f_assign_point  as   fAssignPoint,
+			f_assign_point_name  as   fAssignPointName,
+			f_bizhong  as   fBizhong,
+			f_fbizhong  as   fFbizhong,
+			remark  as   remark
+
+
+	 from view_fprojectCode where 1=1
+		<if test="param.searchParams!='' and param.searchParams !=null">
+				<include refid="search"></include>
+		</if>
+	</select> -->
+	
+	<select id="listOfProjectCode" parameterType="map" resultType="map">
+		select 
+		
+			id + '_' +  f_product_code  as   id,
+			f_projno  as   fProjno,
+			f_projname  as   fProjname,
+			f_projcode  as   fProjcode,
+			f_objca  as   fObjca,
+			f_objca_name  as   fObjcaName,
+			f_projMng  as   fProjmng,
+			f_productlineno  as   fProductlineno,
+			f_productline_name  as   fProductlineName,
+			f_productline_name_productCode as fProductlineNameProductCode,
+			f_pdt_name_productCode as fPdtNameProductCode,
+			f_product_code  as   fProductCode,
+			PRODUCT_NAME_CN  as   productNameCn,
+			rate  as   rate,
+			BeginTime as begintime,
+			f_dept  as   fDept,
+			f_start_project_time as fStartProjectTime,
+			f_releaseno  as   fReleaseno,
+			f_version  as   fVersion,
+			f_pdtno as fPdtno,
+			f_pdt_name  as   fPdtName,
+			f_assign_point  as   fAssignPoint,
+			f_assign_point_name  as   fAssignPointName,
+			f_bizhong  as   fBizhong,
+			f_fbizhong  as   fFbizhong,
+			remark  as   remark,
+			f_old_objca  as   fOldObjca,
+			f_old_objca_name  as   fOldObjcaName,
+			f_old_pdtno  as   fOldPdtno,
+			f_old_pdt_name  as   fOldPdtName,
+			f_old_projno  as   fOldProjno,
+			f_old_projname  as   fOldProjname,
+			f_old_projcode  as   fOldProjcode,
+			f_old_productlineno  as   fOldProductlineno,
+			f_old_productline_name  as   fOldProductlineName,
+			f_old_releaseno  as   fOldReleaseno,
+			f_old_productno  as   fOldProductno,
+			f_old_productname  as   fOldProductname,
+			f_old_bizhong  as   fOldBizhong,
+			f_old_fbizhong  as   fOldFbizhong,
+			f_old_rate  as   fOldRate,
+			f_old_version  as   fOldVersion
+
+
+	 from view_fprojectCode 
+	 
+	 		<include refid="query"></include>
+		order by fProjno asc
+	 offset #{param.page} rows fetch next #{param.rows} rows only
+	</select>
+	
+	<select id="listOfFlowableProjectCode" parameterType="map" resultType="map">
+		select 
+		
+			id + '_' +  f_product_code  as   id,
+			f_projno  as   fProjno,
+			f_projname  as   fProjname,
+			f_projcode  as   fProjcode,
+			f_objca  as   fObjca,
+			f_objca_name  as   fObjcaName,
+			f_projMng  as   fProjmng,
+			f_productlineno  as   fProductlineno,
+			f_productline_name  as   fProductlineName,
+			f_product_code  as   fProductCode,
+			PRODUCT_NAME_CN  as   productNameCn,
+			rate  as   rate,
+			BeginTime as begintime,
+			f_dept  as   fDept,
+			f_start_project_time as fStartProjectTime,
+			f_releaseno  as   fReleaseno,
+			f_bversionno as fBversionno,
+			f_bversionname as fBversionname,
+			f_version  as   fVersion,
+			f_pdtno as fPdtno,
+			f_pdt_name  as   fPdtName,
+			f_assign_point  as   fAssignPoint,
+			f_assign_point_name  as   fAssignPointName,
+			f_bizhong  as   fBizhong,
+			f_fbizhong  as   fFbizhong,
+			remark  as   remark,
+			f_old_objca  as   fOldObjca,
+			f_old_objca_name  as   fOldObjcaName,
+			f_old_pdtno  as   fOldPdtno,
+			f_old_pdt_name  as   fOldPdtName,
+			f_old_projno  as   fOldProjno,
+			f_old_projname  as   fOldProjname,
+			f_old_projcode  as   fOldProjcode,
+			f_old_productlineno  as   fOldProductlineno,
+			f_old_productline_name  as   fOldProductlineName,
+			f_old_releaseno  as   fOldReleaseno,
+			f_old_productno  as   fOldProductno,
+			f_old_productname  as   fOldProductname,
+			f_old_bizhong  as   fOldBizhong,
+			f_old_fbizhong  as   fOldFbizhong,
+			f_old_rate  as   fOldRate,
+			f_old_version  as   fOldVersion
+
+
+	 from view_fprojectCode
+	 		<include refid="query"></include>
+	</select>
+	<select id="countListOfProjectCode" parameterType="map" resultType="Integer">
+		select count(*) from (
+		select 
+		
+			id  as   id,
+			f_projno  as   fProjno,
+			f_projname  as   fProjname,
+			f_projcode  as   fProjcode,
+			f_objca  as   fObjca,
+			f_objca_name  as   fObjcaName,
+			f_projMng  as   fProjmng,
+			f_productlineno  as   fProductlineno,
+			f_productline_name  as   fProductlineName,
+			f_product_code  as   fProductCode,
+			PRODUCT_NAME_CN  as   productNameCn,
+			rate  as   rate,
+			BeginTime as begintime,
+			f_dept  as   fDept,
+			f_start_project_time as fStartProjectTime,
+			f_releaseno  as   fReleaseno,
+			f_version  as   fVersion,
+			f_pdtno as fPdtno,
+			f_pdt_name  as   fPdtName,
+			f_assign_point  as   fAssignPoint,
+			f_assign_point_name  as   fAssignPointName,
+			f_bizhong  as   fBizhong,
+			f_fbizhong  as   fFbizhong,
+			remark  as   remark,
+			f_old_objca  as   fOldObjca,
+			f_old_objca_name  as   fOldObjcaName,
+			f_old_pdtno  as   fOldPdtno,
+			f_old_pdt_name  as   fOldPdtName,
+			f_old_projno  as   fOldProjno,
+			f_old_projname  as   fOldProjname,
+			f_old_projcode  as   fOldProjcode,
+			f_old_productlineno  as   fOldProductlineno,
+			f_old_productline_name  as   fOldProductlineName,
+			f_old_releaseno  as   fOldReleaseno,
+			f_old_productno  as   fOldProductno,
+			f_old_productname  as   fOldProductname,
+			f_old_bizhong  as   fOldBizhong,
+			f_old_fbizhong  as   fOldFbizhong,
+			f_old_rate  as   fOldRate,
+			f_old_version  as   fOldVersion
+
+
+	 from view_fprojectCode 
+	 
+	 		<include refid="query"></include>
+	 
+		) aa
+	</select>
+	
+	<select id="listOfProjectCodeByProd" parameterType="map" resultType="map">
+		select 
+
+			id + '_' +  f_product_code  as   id,
+			f_projno  as   fProjno,
+			f_projname  as   fProjname,
+			f_projcode  as   fProjcode,
+			f_objca  as   fObjca,
+			f_objca_name  as   fObjcaName,
+			f_projMng  as   fProjmng,
+			f_productlineno  as   fProductlineno,
+			f_productline_name  as   fProductlineName,
+			f_product_code  as   fProductCode,
+			PRODUCT_NAME_CN  as   productNameCn,
+			rate  as   rate,
+			BeginTime as begintime,
+			f_dept  as   fDept,
+			f_start_project_time as fStartProjectTime,
+			f_releaseno  as   fReleaseno,
+			f_version  as   fVersion,
+			f_pdtno as  fPdtno,
+			f_pdt_name  as   fPdtName,
+			f_assign_point  as   fAssignPoint,
+			f_assign_point_name  as   fAssignPointName,
+			f_bizhong  as   fBizhong,
+			f_fbizhong  as   fFbizhong,
+			remark  as   remark,
+			f_old_objca  as   fOldObjca,
+			f_old_objca_name  as   fOldObjcaName,
+			f_old_pdtno  as   fOldPdtno,
+			f_old_pdt_name  as   fOldPdtName,
+			f_old_projno  as   fOldProjno,
+			f_old_projname  as   fOldProjname,
+			f_old_projcode  as   fOldProjcode,
+			f_old_productlineno  as   fOldProductlineno,
+			f_old_productline_name  as   fOldProductlineName,
+			f_old_releaseno  as   fOldReleaseno,
+			f_old_productno  as   fOldProductno,
+			f_old_productname  as   fOldProductname,
+			f_old_bizhong  as   fOldBizhong,
+			f_old_fbizhong  as   fOldFbizhong,
+			f_old_rate  as   fOldRate,
+			f_old_version  as   fOldVersion
+		
+		 from view_fprojectCode
+		<where>
+			<if test="param.searchParams!='' and param.searchParams !=null">
+				<include refid="search"></include>
+			</if>
+		</where>
+		
+		
+		order by f_product_code asc , f_projcode desc
+	</select>
+	<!-- 按产品线，pdt查询 -->
+	<select id="listOfProjectCodeByPdt" parameterType="map" resultType="map">
+		
+		<if test="param.id == '' or param.id==null">
+			select distinct
+				f_productlineno as id,
+				f_productline_name as fProductlineName
+			 from view_fprojectCode
+			 <include refid="query"></include>
+			 order by f_productline_name asc
+		</if>
+		
+		<if test="param.id!=null and param.id!=''">
+			<if test="param.pltype=='PL'">
+			
+				SELECT DISTINCT
+					CAST( f_productlineno AS NVARCHAR(200)) + '_' + CAST( f_pdtno AS NVARCHAR(200)) AS id,
+					f_pdt_name AS fProductlineName,
+					f_pdt_name as fPdtName
+				FROM
+					view_fprojectCode
+			
+			 <include refid="query"></include>
+			 order by f_pdt_name asc
+			</if>
+			
+			
+			<if test="param.pttype=='PT'">
+			
+				SELECT DISTINCT 
+					CAST( f_productlineno AS NVARCHAR(200)) + '_' + CAST( f_pdtno AS NVARCHAR(200)) + '_' + f_product_code + '_' + f_projno AS id,
+					id + '_' + f_product_code as tmpId,
+					 f_pdt_name AS fProductlineName,
+					f_pdt_name as fPdtName,
+					f_projno  as fProjno,
+					f_projname  as fProjname,
+					f_projcode  as fProjcode,
+					f_objca_name   as fObjcaName,
+					f_product_code as fProductCode,
+					PRODUCT_NAME_CN  as productNameCn,
+					rate   as rate,
+					f_productline_name_productCode as fProductlineNameProductCode,
+					f_pdt_name_productCode as fPdtNameProductCode,
+					BeginTime   as begintime,
+					f_releaseno   as fReleaseno,
+					f_version as fVersion,
+					f_projMng   as fProjMng,
+					f_bizhong   as fBizhong,
+					f_fbizhong   as fFbizhong
+					
+					
+				FROM
+					view_fprojectCode
+			  <include refid="query"></include>
+			  order by f_projcode desc
+			</if>		
+		</if>
+	</select>
+	
+	
+	
+	<!-- 按产品线，项目类别查询 -->
+	<select id="listOfProjectCodeByProjType" parameterType="map" resultType="map">
+		
+		<if test="param.id == '' or param.id==null">
+			select distinct
+				f_productlineno as id,
+				f_productline_name as fProductlineName
+			 from view_fprojectCode
+			 <include refid="query"></include>
+			 order by f_productline_name asc
+		</if>
+		
+		<if test="param.id!=null and param.id!=''">
+			<if test="param.pltype=='PL'">
+			
+				SELECT DISTINCT
+					CAST( f_productlineno AS NVARCHAR(200)) + '_' + f_objca AS id,
+					f_productline_name as fProductlineName, 
+					f_objca_name AS fObjcaName
+				FROM
+					view_fprojectCode
+			 <include refid="query"></include>
+			 order by f_objca_name asc
+			</if>
+			
+			
+			<if test="param.catype=='CA'">
+			
+				SELECT DISTINCT
+					CAST( f_productlineno AS NVARCHAR(200)) + '_' + CAST( f_pdtno AS NVARCHAR(200)) + '_' + f_product_code + '_' + f_projno AS id,
+					id + '_' + f_product_code  as tmpId,
+					f_productline_name AS fProductlineName,
+					f_pdt_name as fPdtName,
+					f_projno  as fProjno,
+					f_projname  as fProjname,
+					f_projcode  as fProjcode,
+					f_objca_name   as fObjcaName,
+					f_product_code as fProductCode,
+					PRODUCT_NAME_CN  as productNameCn,
+					f_productline_name_productCode as fProductlineNameProductCode,
+					f_pdt_name_productCode as fPdtNameProductCode,
+					rate   as rate,
+					BeginTime   as begintime,
+					f_releaseno   as fReleaseno,
+					f_version as fVersion,
+					f_projMng   as fProjMng,
+					f_bizhong   as fBizhong,
+					f_fbizhong   as fFbizhong
+					
+					
+				FROM
+					view_fprojectCode
+			 
+			 <include refid="query"></include>
+			 order by f_projcode asc
+			</if>
+		</if>
+	</select>
+	<select id="getExportList" parameterType="map" resultMap="BaseResultMap">
+							   
+		select 			
+			c.id     ,
+			a.f_projno,     
+			f_projname   ,
+			f_projcode   ,
+			f_objca     ,
+			f_objca_name     ,
+			f_projMng     ,
+			
+			f_productline_name  ,
+			f_product_code  ,
+			PRODUCT_NAME_CN     ,
+		    case  when rate is null then rate when (rate='' or rate='0') then rate else rate+'%' end rate    ,
+			BeginTime  ,
+			f_dept     ,
+			f_start_project_time  ,
+			f_releaseno     ,
+			f_version     ,
+			f_pdtno ,
+			f_pdt_name  ,
+			f_assign_point  ,
+			f_assign_point_name  ,
+			case  when f_bizhong is null then f_bizhong when (f_bizhong='' or f_bizhong='0') then f_bizhong else f_bizhong+'%' end f_bizhong    ,
+   			case  when f_fbizhong is null then f_fbizhong when (f_fbizhong='' or f_fbizhong='0') then f_fbizhong else f_fbizhong+'%' end f_fbizhong    ,
+			remark  ,
+			f_old_objca  ,
+			f_old_objca_name  ,
+			f_old_pdtno  ,
+			f_old_pdt_name  ,
+			f_old_projno  ,
+			f_old_projname  ,
+			f_old_projcode  ,
+			f_old_productlineno  ,
+			f_old_productline_name  ,
+			f_old_releaseno  ,
+			f_old_productno  ,
+			f_old_productname ,
+			f_old_bizhong  ,
+			f_old_fbizhong  ,
+			f_old_rate  ,
+			f_old_version  ,
+			mark,
+			f_productline_name_productCode,
+			f_pdt_name_productCode,
+			CAST(ISNULL(b.num,'') AS NVARCHAR(20))  f_productlineno   <!-- f_productlineno 字段存储 服务产品个数 -->
+	 from view_fprojectCode a
+	 left join ( SELECT f_projno,COUNT(1) AS num FROM [view_fprojectCode]  GROUP BY  f_projno  ) b on a.f_projno=b.f_projno
+	 left join ( SELECT distinct ROW_NUMBER() OVER( ORDER BY f_projno) id,f_projno FROM [view_fprojectCode]
+	 	 <where>
+	 		<include refid="queryExport"></include>
+	 	</where>
+	  GROUP BY  f_projno  ) c on a.f_projno=c.f_projno
+	 
+	 
+	 	<include refid="query"></include>
+	 
+		order by a.f_projno
+	</select>
+
+
+	<select id="getExportList2" parameterType="map" resultMap="BaseResultMap">
+
+		SELECT DISTINCT Id,f_Projno,f_Projname,f_Projcode,f_Objca_Name,f_Projmng,f_Productline_Name,f_Pdt_Name,Begintime,f_Version,f_Assign_Point_Name,
+		 case  when f_bizhong is null then f_bizhong when (f_bizhong='' or f_bizhong='0') then f_bizhong else f_bizhong+'%' end f_bizhong    ,
+   case  when f_fbizhong is null then f_fbizhong when (f_fbizhong='' or f_fbizhong='0') then f_fbizhong else f_fbizhong+'%' end f_fbizhong    ,Mark FROM view_fprojectCode
+		<include refid="query"></include>
+
+		order by f_projno
+	</select>
+	
+	<sql id="query">
+		<where>
+		
+		
+			<!-- 项目编码流程查询 不用停用的-->
+			<if test="param.projectCodeFlow=='projectCodeFlow'">
+				and status = '1'
+			</if>
+			<!-- 产品线PDT -->
+			<if test="param.pltype=='PL'"><!-- 按产品线查询通用的 -->
+				and f_productlineno = #{param.fProductlineno}
+			</if>
+			<if test="param.pttype=='PT'">
+				and f_pdtno = #{param.fPdtNo} and f_productlineno = #{param.fProductlineno}
+			</if>
+			<!-- 产品线，项目类别 -->
+			<if test="param.catype=='CA'">
+			    and f_objca = #{param.fObjca} and  f_productlineno = #{param.fProductlineno}
+			</if>
+		
+			<if test="param.prodLine!=null and param.prodLine!='' ">
+				and f_productlineno=#{param.prodLine}
+			</if>
+	
+			<if test="param.pdt!=null and param.pdt!='' ">
+				and f_pdtno=#{param.pdt}
+			</if>
+			<if test="param.state!=null  "> 			
+				and status = #{param.state}
+			</if>
+			<if test="param.start!=null and param.start!=''  and param.end!=null and param.end!='' ">
+				and BeginTime  between  #{param.start} and #{param.end}
+			</if>
+		 	<if test="param.searchParams!='' and param.searchParams !=null">
+		 		<if test="param.type!='' and param.type !=null">
+					<include refid="searchExport"></include>
+				</if>
+				<if test="param.type=='' or param.type ==null">
+					<include refid="search"></include>
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="queryExport">
+		<if test="param.prodLine!=null and param.prodLine!='' ">
+			and f_productlineno=#{param.prodLine}
+		</if>
+
+		<if test="param.pdt!=null and param.pdt!='' ">
+			and f_pdtno=#{param.pdt}
+		</if>
+		<if test="param.state!=null and param.state!=''"> 			
+			and status = #{param.state}
+			
+		</if>
+		<if test="param.start!=null and param.start!=''  and param.end!=null and param.end!='' ">
+			and BeginTime  between  #{param.start} and #{param.end}
+		</if>
+	 	<if test="param.searchParams!='' and param.searchParams !=null">	 		
+				<include refid="search"></include>
+		</if>
+	</sql>
+	<sql id="searchExport">
+			and 
+			CHARINDEX(#{param.searchParams},
+			isnull(a.f_projno,'')
+			+isnull(f_projname,'')
+			+isnull(f_projcode,'')
+			+isnull(f_objca_name,'')
+			+isnull(f_projMng,'')
+			
+			+isnull(f_product_code,'')
+			+isnull(f_productline_name,'')
+			+isnull(PRODUCT_NAME_CN,'')
+			
+			+isnull(f_releaseno,'')
+			+isnull(f_pdt_name,'')
+			+isnull(f_assign_point_name,'')
+			+isnull(f_bizhong,'')
+			+isnull(f_fbizhong,'')
+			+isnull(remark,'')
+			)&gt;0
+	</sql>
+	
+	
+	
+	<select id="getAllProdline" resultType="map">
+		
+		select  
+			distinct f_productlineno  as  prodlineno, 
+			f_productline_name   as prodline
+		from view_fprojectCode  where f_productlineno is not null
+		<if test="param.state != null and param.state!=''">
+			and status = #{param.state} 
+		</if>
+		<if test="param.start != null">
+			and BeginTime  <![CDATA[>= ]]> #{param.start}
+		</if>
+		<if test="param.end != null">
+			and BeginTime <![CDATA[ <=]]> #{param.end}
+		</if>
+		ORDER BY f_productline_name ASC
+		
+	</select>
+	
+	<select id="getAllPdt" resultType="map">
+		SELECT DISTINCT
+				f_pdtno as pdtno,
+				f_pdt_name as pdt
+			FROM
+				view_fprojectCode
+			WHERE
+				f_pdtno IS NOT NULL
+				<if test="param.state!=null and param.state!=''">
+					and	status = #{param.state}
+				</if>
+			ORDER BY f_pdt_name ASC
+	</select>
+	
+	<select id="getPdtByProlineno" parameterType="map" resultType="map">
+		SELECT DISTINCT
+				f_pdtno as pdtno,
+				f_pdt_name as pdt
+			FROM
+				view_fprojectCode
+			WHERE
+				f_productlineno = #{param.prolineNo}
+				<if test="param.state != null and param.state!=''">
+					and	status = #{param.state}
+				</if>
+			ORDER BY f_pdt_name ASC
+	</select>
+	
+	
+	
+</mapper>

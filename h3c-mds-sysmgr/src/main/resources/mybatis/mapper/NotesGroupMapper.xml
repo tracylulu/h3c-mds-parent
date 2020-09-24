@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.sysmgr.dao.NotesGroupMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.sysmgr.entity.NotesGroup">
+    <result column="Version_ID" jdbcType="INTEGER" property="versionId" />
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="Status_ID" jdbcType="TINYINT" property="statusId" />
+    <result column="ValidationStatus_ID" jdbcType="TINYINT" property="validationstatusId" />
+    <result column="Name" jdbcType="NVARCHAR" property="name" />
+    <result column="Code" jdbcType="NVARCHAR" property="code" />
+    <result column="ChangeTrackingMask" jdbcType="INTEGER" property="changetrackingmask" />
+    <result column="EnterDTM" jdbcType="TIMESTAMP" property="enterdtm" />
+    <result column="EnterUserID" jdbcType="INTEGER" property="enteruserid" />
+    <result column="EnterVersionID" jdbcType="INTEGER" property="enterversionid" />
+    <result column="LastChgDTM" jdbcType="TIMESTAMP" property="lastchgdtm" />
+    <result column="LastChgUserID" jdbcType="INTEGER" property="lastchguserid" />
+    <result column="LastChgVersionID" jdbcType="INTEGER" property="lastchgversionid" />
+    <result column="AsOf_ID" jdbcType="INTEGER" property="asofId" />
+    <result column="MUID" jdbcType="CHAR" property="muid" />
+    <result column="uda_11_516" jdbcType="NVARCHAR" property="uda11516" />
+    <result column="uda_11_517" jdbcType="NVARCHAR" property="uda11517" />
+    <result column="uda_11_518" jdbcType="TIMESTAMP" property="uda11518" />
+    <result column="uda_11_519" jdbcType="NVARCHAR" property="uda11519" />
+    <result column="uda_11_520" jdbcType="TIMESTAMP" property="uda11520" />
+    <result column="uda_11_521" jdbcType="DECIMAL" property="uda11521" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.h3c.mds.sysmgr.entity.NotesGroup">
+    <result column="LastChgTS" jdbcType="BINARY" property="lastchgts" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Version_ID, ID, Status_ID, ValidationStatus_ID, Name, Code, ChangeTrackingMask, EnterDTM, 
+    EnterUserID, EnterVersionID, LastChgDTM, LastChgUserID, LastChgVersionID, AsOf_ID, 
+    MUID, uda_11_516, uda_11_517, uda_11_518, uda_11_519, uda_11_520, uda_11_521
+  </sql>
+  <sql id="Blob_Column_List">
+    LastChgTS
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.h3c.mds.sysmgr.entity.NotesGroupExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tbl_2_11_EN
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.h3c.mds.sysmgr.entity.NotesGroupExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tbl_2_11_EN
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.sysmgr.entity.NotesGroupExample">
+    delete from tbl_2_11_EN
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.sysmgr.entity.NotesGroup">
+    insert into tbl_2_11_EN (Version_ID, ID, Status_ID, 
+      ValidationStatus_ID, Name, Code, 
+      ChangeTrackingMask, EnterDTM, EnterUserID, 
+      EnterVersionID, LastChgDTM, LastChgUserID, 
+      LastChgVersionID, AsOf_ID, MUID, 
+      uda_11_516, uda_11_517, uda_11_518, 
+      uda_11_519, uda_11_520, uda_11_521, 
+      LastChgTS)
+    values (#{versionId,jdbcType=INTEGER}, #{id,jdbcType=INTEGER}, #{statusId,jdbcType=TINYINT}, 
+      #{validationstatusId,jdbcType=TINYINT}, #{name,jdbcType=NVARCHAR}, #{code,jdbcType=NVARCHAR}, 
+      #{changetrackingmask,jdbcType=INTEGER}, #{enterdtm,jdbcType=TIMESTAMP}, #{enteruserid,jdbcType=INTEGER}, 
+      #{enterversionid,jdbcType=INTEGER}, #{lastchgdtm,jdbcType=TIMESTAMP}, #{lastchguserid,jdbcType=INTEGER}, 
+      #{lastchgversionid,jdbcType=INTEGER}, #{asofId,jdbcType=INTEGER}, #{muid,jdbcType=CHAR}, 
+      #{uda11516,jdbcType=NVARCHAR}, #{uda11517,jdbcType=NVARCHAR}, #{uda11518,jdbcType=TIMESTAMP}, 
+      #{uda11519,jdbcType=NVARCHAR}, #{uda11520,jdbcType=TIMESTAMP}, #{uda11521,jdbcType=DECIMAL}, 
+      #{lastchgts,jdbcType=BINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.sysmgr.entity.NotesGroup">
+    insert into tbl_2_11_EN
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="versionId != null">
+        Version_ID,
+      </if>
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="statusId != null">
+        Status_ID,
+      </if>
+      <if test="validationstatusId != null">
+        ValidationStatus_ID,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="code != null">
+        Code,
+      </if>
+      <if test="changetrackingmask != null">
+        ChangeTrackingMask,
+      </if>
+      <if test="enterdtm != null">
+        EnterDTM,
+      </if>
+      <if test="enteruserid != null">
+        EnterUserID,
+      </if>
+      <if test="enterversionid != null">
+        EnterVersionID,
+      </if>
+      <if test="lastchgdtm != null">
+        LastChgDTM,
+      </if>
+      <if test="lastchguserid != null">
+        LastChgUserID,
+      </if>
+      <if test="lastchgversionid != null">
+        LastChgVersionID,
+      </if>
+      <if test="asofId != null">
+        AsOf_ID,
+      </if>
+      <if test="muid != null">
+        MUID,
+      </if>
+      <if test="uda11516 != null">
+        uda_11_516,
+      </if>
+      <if test="uda11517 != null">
+        uda_11_517,
+      </if>
+      <if test="uda11518 != null">
+        uda_11_518,
+      </if>
+      <if test="uda11519 != null">
+        uda_11_519,
+      </if>
+      <if test="uda11520 != null">
+        uda_11_520,
+      </if>
+      <if test="uda11521 != null">
+        uda_11_521,
+      </if>
+      <if test="lastchgts != null">
+        LastChgTS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="versionId != null">
+        #{versionId,jdbcType=INTEGER},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="statusId != null">
+        #{statusId,jdbcType=TINYINT},
+      </if>
+      <if test="validationstatusId != null">
+        #{validationstatusId,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=NVARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=NVARCHAR},
+      </if>
+      <if test="changetrackingmask != null">
+        #{changetrackingmask,jdbcType=INTEGER},
+      </if>
+      <if test="enterdtm != null">
+        #{enterdtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enteruserid != null">
+        #{enteruserid,jdbcType=INTEGER},
+      </if>
+      <if test="enterversionid != null">
+        #{enterversionid,jdbcType=INTEGER},
+      </if>
+      <if test="lastchgdtm != null">
+        #{lastchgdtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastchguserid != null">
+        #{lastchguserid,jdbcType=INTEGER},
+      </if>
+      <if test="lastchgversionid != null">
+        #{lastchgversionid,jdbcType=INTEGER},
+      </if>
+      <if test="asofId != null">
+        #{asofId,jdbcType=INTEGER},
+      </if>
+      <if test="muid != null">
+        #{muid,jdbcType=CHAR},
+      </if>
+      <if test="uda11516 != null">
+        #{uda11516,jdbcType=NVARCHAR},
+      </if>
+      <if test="uda11517 != null">
+        #{uda11517,jdbcType=NVARCHAR},
+      </if>
+      <if test="uda11518 != null">
+        #{uda11518,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uda11519 != null">
+        #{uda11519,jdbcType=NVARCHAR},
+      </if>
+      <if test="uda11520 != null">
+        #{uda11520,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uda11521 != null">
+        #{uda11521,jdbcType=DECIMAL},
+      </if>
+      <if test="lastchgts != null">
+        #{lastchgts,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.sysmgr.entity.NotesGroupExample" resultType="java.lang.Long">
+    select count(*) from tbl_2_11_EN
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tbl_2_11_EN
+    <set>
+      <if test="record.versionId != null">
+        Version_ID = #{record.versionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.statusId != null">
+        Status_ID = #{record.statusId,jdbcType=TINYINT},
+      </if>
+      <if test="record.validationstatusId != null">
+        ValidationStatus_ID = #{record.validationstatusId,jdbcType=TINYINT},
+      </if>
+      <if test="record.name != null">
+        Name = #{record.name,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.code != null">
+        Code = #{record.code,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.changetrackingmask != null">
+        ChangeTrackingMask = #{record.changetrackingmask,jdbcType=INTEGER},
+      </if>
+      <if test="record.enterdtm != null">
+        EnterDTM = #{record.enterdtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enteruserid != null">
+        EnterUserID = #{record.enteruserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.enterversionid != null">
+        EnterVersionID = #{record.enterversionid,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastchgdtm != null">
+        LastChgDTM = #{record.lastchgdtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastchguserid != null">
+        LastChgUserID = #{record.lastchguserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastchgversionid != null">
+        LastChgVersionID = #{record.lastchgversionid,jdbcType=INTEGER},
+      </if>
+      <if test="record.asofId != null">
+        AsOf_ID = #{record.asofId,jdbcType=INTEGER},
+      </if>
+      <if test="record.muid != null">
+        MUID = #{record.muid,jdbcType=CHAR},
+      </if>
+      <if test="record.uda11516 != null">
+        uda_11_516 = #{record.uda11516,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.uda11517 != null">
+        uda_11_517 = #{record.uda11517,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.uda11518 != null">
+        uda_11_518 = #{record.uda11518,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uda11519 != null">
+        uda_11_519 = #{record.uda11519,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.uda11520 != null">
+        uda_11_520 = #{record.uda11520,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uda11521 != null">
+        uda_11_521 = #{record.uda11521,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lastchgts != null">
+        LastChgTS = #{record.lastchgts,jdbcType=BINARY},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update tbl_2_11_EN
+    set Version_ID = #{record.versionId,jdbcType=INTEGER},
+      ID = #{record.id,jdbcType=INTEGER},
+      Status_ID = #{record.statusId,jdbcType=TINYINT},
+      ValidationStatus_ID = #{record.validationstatusId,jdbcType=TINYINT},
+      Name = #{record.name,jdbcType=NVARCHAR},
+      Code = #{record.code,jdbcType=NVARCHAR},
+      ChangeTrackingMask = #{record.changetrackingmask,jdbcType=INTEGER},
+      EnterDTM = #{record.enterdtm,jdbcType=TIMESTAMP},
+      EnterUserID = #{record.enteruserid,jdbcType=INTEGER},
+      EnterVersionID = #{record.enterversionid,jdbcType=INTEGER},
+      LastChgDTM = #{record.lastchgdtm,jdbcType=TIMESTAMP},
+      LastChgUserID = #{record.lastchguserid,jdbcType=INTEGER},
+      LastChgVersionID = #{record.lastchgversionid,jdbcType=INTEGER},
+      AsOf_ID = #{record.asofId,jdbcType=INTEGER},
+      MUID = #{record.muid,jdbcType=CHAR},
+      uda_11_516 = #{record.uda11516,jdbcType=NVARCHAR},
+      uda_11_517 = #{record.uda11517,jdbcType=NVARCHAR},
+      uda_11_518 = #{record.uda11518,jdbcType=TIMESTAMP},
+      uda_11_519 = #{record.uda11519,jdbcType=NVARCHAR},
+      uda_11_520 = #{record.uda11520,jdbcType=TIMESTAMP},
+      uda_11_521 = #{record.uda11521,jdbcType=DECIMAL},
+      LastChgTS = #{record.lastchgts,jdbcType=BINARY}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tbl_2_11_EN
+    set Version_ID = #{record.versionId,jdbcType=INTEGER},
+      ID = #{record.id,jdbcType=INTEGER},
+      Status_ID = #{record.statusId,jdbcType=TINYINT},
+      ValidationStatus_ID = #{record.validationstatusId,jdbcType=TINYINT},
+      Name = #{record.name,jdbcType=NVARCHAR},
+      Code = #{record.code,jdbcType=NVARCHAR},
+      ChangeTrackingMask = #{record.changetrackingmask,jdbcType=INTEGER},
+      EnterDTM = #{record.enterdtm,jdbcType=TIMESTAMP},
+      EnterUserID = #{record.enteruserid,jdbcType=INTEGER},
+      EnterVersionID = #{record.enterversionid,jdbcType=INTEGER},
+      LastChgDTM = #{record.lastchgdtm,jdbcType=TIMESTAMP},
+      LastChgUserID = #{record.lastchguserid,jdbcType=INTEGER},
+      LastChgVersionID = #{record.lastchgversionid,jdbcType=INTEGER},
+      AsOf_ID = #{record.asofId,jdbcType=INTEGER},
+      MUID = #{record.muid,jdbcType=CHAR},
+      uda_11_516 = #{record.uda11516,jdbcType=NVARCHAR},
+      uda_11_517 = #{record.uda11517,jdbcType=NVARCHAR},
+      uda_11_518 = #{record.uda11518,jdbcType=TIMESTAMP},
+      uda_11_519 = #{record.uda11519,jdbcType=NVARCHAR},
+      uda_11_520 = #{record.uda11520,jdbcType=TIMESTAMP},
+      uda_11_521 = #{record.uda11521,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

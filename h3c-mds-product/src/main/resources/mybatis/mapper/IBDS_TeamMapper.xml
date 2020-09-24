@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.IBDS_TeamMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.product.entity.IBDS_Team">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="TEAMNo" jdbcType="NVARCHAR" property="teamno" />
+    <result column="TEAM" jdbcType="NVARCHAR" property="team" />
+    <result column="TEAMOld" jdbcType="NVARCHAR" property="teamold" />
+    <result column="engTEAM" jdbcType="NVARCHAR" property="engteam" />
+    <result column="PLIPMTNo" jdbcType="NVARCHAR" property="plipmtno" />
+    <result column="PRODLINENo" jdbcType="NVARCHAR" property="prodlineno" />
+    <result column="PRODUCTNo" jdbcType="NVARCHAR" property="productno" />
+    <result column="VERSIONNo" jdbcType="NVARCHAR" property="versionno" />
+    <result column="RELEASENo" jdbcType="NVARCHAR" property="releaseno" />
+    <result column="Readers" jdbcType="NVARCHAR" property="readers" />
+    <result column="Remark" jdbcType="NVARCHAR" property="remark" />
+    <result column="Status" jdbcType="NVARCHAR" property="status" />
+    <result column="CREATED_USER" jdbcType="NVARCHAR" property="createdUser" />
+    <result column="CREATED_DATE" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="MODIFY_USER" jdbcType="NVARCHAR" property="modifyUser" />
+    <result column="MODIFY_DATA" jdbcType="TIMESTAMP" property="modifyData" />
+    <result column="STANDBY1" jdbcType="NVARCHAR" property="standby1" />
+    <result column="STANDBY2" jdbcType="NVARCHAR" property="standby2" />
+    <result column="STANDBY3" jdbcType="NVARCHAR" property="standby3" />
+    <result column="STANDBY4" jdbcType="NVARCHAR" property="standby4" />
+    <result column="STANDBY5" jdbcType="NVARCHAR" property="standby5" />
+    <result column="STANDBY6" jdbcType="NVARCHAR" property="standby6" />
+    <result column="STANDBY7" jdbcType="NVARCHAR" property="standby7" />
+    <result column="STANDBY8" jdbcType="NVARCHAR" property="standby8" />
+    <result column="STANDBY9" jdbcType="NVARCHAR" property="standby9" />
+    <result column="STANDBY10" jdbcType="NVARCHAR" property="standby10" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, TEAMNo, TEAM, TEAMOld, engTEAM, PLIPMTNo, PRODLINENo, PRODUCTNo, VERSIONNo, RELEASENo, 
+    Readers, Remark, Status, CREATED_USER, CREATED_DATE, MODIFY_USER, MODIFY_DATA, STANDBY1, 
+    STANDBY2, STANDBY3, STANDBY4, STANDBY5, STANDBY6, STANDBY7, STANDBY8, STANDBY9, STANDBY10
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.product.entity.IBDS_TeamExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_TEAM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_TEAM
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_TEAM
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.product.entity.IBDS_TeamExample">
+    delete from IBDS_TEAM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.product.entity.IBDS_Team">
+    insert into IBDS_TEAM (ID, TEAMNo, TEAM, 
+      TEAMOld, engTEAM, PLIPMTNo, 
+      PRODLINENo, PRODUCTNo, VERSIONNo, 
+      RELEASENo, Readers, Remark, 
+      Status, CREATED_USER, CREATED_DATE, 
+      MODIFY_USER, MODIFY_DATA, STANDBY1, 
+      STANDBY2, STANDBY3, STANDBY4, 
+      STANDBY5, STANDBY6, STANDBY7, 
+      STANDBY8, STANDBY9, STANDBY10
+      )
+    values (#{id,jdbcType=INTEGER}, #{teamno,jdbcType=NVARCHAR}, #{team,jdbcType=NVARCHAR}, 
+      #{teamold,jdbcType=NVARCHAR}, #{engteam,jdbcType=NVARCHAR}, #{plipmtno,jdbcType=NVARCHAR}, 
+      #{prodlineno,jdbcType=NVARCHAR}, #{productno,jdbcType=NVARCHAR}, #{versionno,jdbcType=NVARCHAR}, 
+      #{releaseno,jdbcType=NVARCHAR}, #{readers,jdbcType=NVARCHAR}, #{remark,jdbcType=NVARCHAR}, 
+      #{status,jdbcType=NVARCHAR}, #{createdUser,jdbcType=NVARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, 
+      #{modifyUser,jdbcType=NVARCHAR}, #{modifyData,jdbcType=TIMESTAMP}, #{standby1,jdbcType=NVARCHAR}, 
+      #{standby2,jdbcType=NVARCHAR}, #{standby3,jdbcType=NVARCHAR}, #{standby4,jdbcType=NVARCHAR}, 
+      #{standby5,jdbcType=NVARCHAR}, #{standby6,jdbcType=NVARCHAR}, #{standby7,jdbcType=NVARCHAR}, 
+      #{standby8,jdbcType=NVARCHAR}, #{standby9,jdbcType=NVARCHAR}, #{standby10,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.product.entity.IBDS_Team">
+    insert into IBDS_TEAM
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="teamno != null">
+        TEAMNo,
+      </if>
+      <if test="team != null">
+        TEAM,
+      </if>
+      <if test="teamold != null">
+        TEAMOld,
+      </if>
+      <if test="engteam != null">
+        engTEAM,
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo,
+      </if>
+      <if test="prodlineno != null">
+        PRODLINENo,
+      </if>
+      <if test="productno != null">
+        PRODUCTNo,
+      </if>
+      <if test="versionno != null">
+        VERSIONNo,
+      </if>
+      <if test="releaseno != null">
+        RELEASENo,
+      </if>
+      <if test="readers != null">
+        Readers,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="createdUser != null">
+        CREATED_USER,
+      </if>
+      <if test="createdDate != null">
+        CREATED_DATE,
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER,
+      </if>
+      <if test="modifyData != null">
+        MODIFY_DATA,
+      </if>
+      <if test="standby1 != null">
+        STANDBY1,
+      </if>
+      <if test="standby2 != null">
+        STANDBY2,
+      </if>
+      <if test="standby3 != null">
+        STANDBY3,
+      </if>
+      <if test="standby4 != null">
+        STANDBY4,
+      </if>
+      <if test="standby5 != null">
+        STANDBY5,
+      </if>
+      <if test="standby6 != null">
+        STANDBY6,
+      </if>
+      <if test="standby7 != null">
+        STANDBY7,
+      </if>
+      <if test="standby8 != null">
+        STANDBY8,
+      </if>
+      <if test="standby9 != null">
+        STANDBY9,
+      </if>
+      <if test="standby10 != null">
+        STANDBY10,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="teamno != null">
+        #{teamno,jdbcType=NVARCHAR},
+      </if>
+      <if test="team != null">
+        #{team,jdbcType=NVARCHAR},
+      </if>
+      <if test="teamold != null">
+        #{teamold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engteam != null">
+        #{engteam,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmtno != null">
+        #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="productno != null">
+        #{productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionno != null">
+        #{versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releaseno != null">
+        #{releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="readers != null">
+        #{readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="createdUser != null">
+        #{createdUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyData != null">
+        #{modifyData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="standby1 != null">
+        #{standby1,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby2 != null">
+        #{standby2,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby3 != null">
+        #{standby3,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby4 != null">
+        #{standby4,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby5 != null">
+        #{standby5,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby6 != null">
+        #{standby6,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby7 != null">
+        #{standby7,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby8 != null">
+        #{standby8,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby9 != null">
+        #{standby9,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby10 != null">
+        #{standby10,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.product.entity.IBDS_TeamExample" resultType="java.lang.Long">
+    select count(*) from IBDS_TEAM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_TEAM
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.teamno != null">
+        TEAMNo = #{record.teamno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.team != null">
+        TEAM = #{record.team,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.teamold != null">
+        TEAMOld = #{record.teamold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engteam != null">
+        engTEAM = #{record.engteam,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plipmtno != null">
+        PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodlineno != null">
+        PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productno != null">
+        PRODUCTNo = #{record.productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.versionno != null">
+        VERSIONNo = #{record.versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releaseno != null">
+        RELEASENo = #{record.releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.readers != null">
+        Readers = #{record.readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remark != null">
+        Remark = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null">
+        Status = #{record.status,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createdUser != null">
+        CREATED_USER = #{record.createdUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createdDate != null">
+        CREATED_DATE = #{record.createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyUser != null">
+        MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modifyData != null">
+        MODIFY_DATA = #{record.modifyData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.standby1 != null">
+        STANDBY1 = #{record.standby1,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby2 != null">
+        STANDBY2 = #{record.standby2,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby3 != null">
+        STANDBY3 = #{record.standby3,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby4 != null">
+        STANDBY4 = #{record.standby4,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby5 != null">
+        STANDBY5 = #{record.standby5,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby6 != null">
+        STANDBY6 = #{record.standby6,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby7 != null">
+        STANDBY7 = #{record.standby7,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby8 != null">
+        STANDBY8 = #{record.standby8,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby9 != null">
+        STANDBY9 = #{record.standby9,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.standby10 != null">
+        STANDBY10 = #{record.standby10,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_TEAM
+    set ID = #{record.id,jdbcType=INTEGER},
+      TEAMNo = #{record.teamno,jdbcType=NVARCHAR},
+      TEAM = #{record.team,jdbcType=NVARCHAR},
+      TEAMOld = #{record.teamold,jdbcType=NVARCHAR},
+      engTEAM = #{record.engteam,jdbcType=NVARCHAR},
+      PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      PRODUCTNo = #{record.productno,jdbcType=NVARCHAR},
+      VERSIONNo = #{record.versionno,jdbcType=NVARCHAR},
+      RELEASENo = #{record.releaseno,jdbcType=NVARCHAR},
+      Readers = #{record.readers,jdbcType=NVARCHAR},
+      Remark = #{record.remark,jdbcType=NVARCHAR},
+      Status = #{record.status,jdbcType=NVARCHAR},
+      CREATED_USER = #{record.createdUser,jdbcType=NVARCHAR},
+      CREATED_DATE = #{record.createdDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      MODIFY_DATA = #{record.modifyData,jdbcType=TIMESTAMP},
+      STANDBY1 = #{record.standby1,jdbcType=NVARCHAR},
+      STANDBY2 = #{record.standby2,jdbcType=NVARCHAR},
+      STANDBY3 = #{record.standby3,jdbcType=NVARCHAR},
+      STANDBY4 = #{record.standby4,jdbcType=NVARCHAR},
+      STANDBY5 = #{record.standby5,jdbcType=NVARCHAR},
+      STANDBY6 = #{record.standby6,jdbcType=NVARCHAR},
+      STANDBY7 = #{record.standby7,jdbcType=NVARCHAR},
+      STANDBY8 = #{record.standby8,jdbcType=NVARCHAR},
+      STANDBY9 = #{record.standby9,jdbcType=NVARCHAR},
+      STANDBY10 = #{record.standby10,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.product.entity.IBDS_Team">
+    update IBDS_TEAM
+    <set>
+      <if test="teamno != null">
+        TEAMNo = #{teamno,jdbcType=NVARCHAR},
+      </if>
+      <if test="team != null">
+        TEAM = #{team,jdbcType=NVARCHAR},
+      </if>
+      <if test="teamold != null">
+        TEAMOld = #{teamold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engteam != null">
+        engTEAM = #{engteam,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo = #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        PRODLINENo = #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="productno != null">
+        PRODUCTNo = #{productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionno != null">
+        VERSIONNo = #{versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releaseno != null">
+        RELEASENo = #{releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="readers != null">
+        Readers = #{readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        Status = #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="createdUser != null">
+        CREATED_USER = #{createdUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="createdDate != null">
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyData != null">
+        MODIFY_DATA = #{modifyData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="standby1 != null">
+        STANDBY1 = #{standby1,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby2 != null">
+        STANDBY2 = #{standby2,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby3 != null">
+        STANDBY3 = #{standby3,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby4 != null">
+        STANDBY4 = #{standby4,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby5 != null">
+        STANDBY5 = #{standby5,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby6 != null">
+        STANDBY6 = #{standby6,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby7 != null">
+        STANDBY7 = #{standby7,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby8 != null">
+        STANDBY8 = #{standby8,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby9 != null">
+        STANDBY9 = #{standby9,jdbcType=NVARCHAR},
+      </if>
+      <if test="standby10 != null">
+        STANDBY10 = #{standby10,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.product.entity.IBDS_Team">
+    update IBDS_TEAM
+    set TEAMNo = #{teamno,jdbcType=NVARCHAR},
+      TEAM = #{team,jdbcType=NVARCHAR},
+      TEAMOld = #{teamold,jdbcType=NVARCHAR},
+      engTEAM = #{engteam,jdbcType=NVARCHAR},
+      PLIPMTNo = #{plipmtno,jdbcType=NVARCHAR},
+      PRODLINENo = #{prodlineno,jdbcType=NVARCHAR},
+      PRODUCTNo = #{productno,jdbcType=NVARCHAR},
+      VERSIONNo = #{versionno,jdbcType=NVARCHAR},
+      RELEASENo = #{releaseno,jdbcType=NVARCHAR},
+      Readers = #{readers,jdbcType=NVARCHAR},
+      Remark = #{remark,jdbcType=NVARCHAR},
+      Status = #{status,jdbcType=NVARCHAR},
+      CREATED_USER = #{createdUser,jdbcType=NVARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR},
+      MODIFY_DATA = #{modifyData,jdbcType=TIMESTAMP},
+      STANDBY1 = #{standby1,jdbcType=NVARCHAR},
+      STANDBY2 = #{standby2,jdbcType=NVARCHAR},
+      STANDBY3 = #{standby3,jdbcType=NVARCHAR},
+      STANDBY4 = #{standby4,jdbcType=NVARCHAR},
+      STANDBY5 = #{standby5,jdbcType=NVARCHAR},
+      STANDBY6 = #{standby6,jdbcType=NVARCHAR},
+      STANDBY7 = #{standby7,jdbcType=NVARCHAR},
+      STANDBY8 = #{standby8,jdbcType=NVARCHAR},
+      STANDBY9 = #{standby9,jdbcType=NVARCHAR},
+      STANDBY10 = #{standby10,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

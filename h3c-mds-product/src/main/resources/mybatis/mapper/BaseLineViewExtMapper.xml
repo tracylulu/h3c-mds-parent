@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.BaseLineViewMapper">
+
+
+	<!-- 获取V版本树 -->
+	<select id="getTreeData" parameterType="map"	resultMap="BaseResultMap">
+
+		<!-- 产品线层 -->
+		<if test="param.id == null">
+			select distinct PRODLINENo , PRODLINE,PL_ORDER from BaseLineView
+			where status = '1'
+		</if>
+		<if test="param.id != null">
+			<!-- 产品层 -->
+			<if test="param.type =='PL'">
+
+				select distinct PRODLINE,productno+'_'+PRODLINENo as PRODLINENo
+				,product from
+				BaseLineView
+				where PRODLINENo=#{param.id} and status =
+				'1'
+
+			</if>
+			<!-- V级版本层 -->
+			<if test="param.type =='PP'">
+
+				select distinct PRODLINE,product,releaseno+'_'+productno+'_'+PRODLINENo as
+				PRODLINENo
+				,release from BaseLineView
+				where PRODUCTNo=#{param.id} and
+				status = '1'
+			</if>
+			<!-- R级版本层 -->
+			<!-- <if test="param.type =='PV'"> select distinct releaseno as PRODLINENo 
+				,release from BaseLineView where productno=#{param.id} and status = '1' </if> -->
+			<!--基线版本版本层 -->
+			<if test="param.type =='PR'">
+				select
+				BASELINENo+'_'+releaseno+'_'+productno+'_'+Convert(varchar,ID)+'_'+PRODLINENo
+				as
+				PRODLINENo,
+				 ID, P, V, R, L, C, B, D, SP, BASELINENo, BASELINE, BASELINEOld, engBASELINE, BASELINE_1, 
+    BASELINEOut, engBASELINEOut, PLIPMTNo, PRODUCTNo, VERSIONNo, RELEASENo, 
+    ParentItemNo, BASELINEStatus, BASELINEType, BASELINE_IssueTime, BASELINE_DisableTime, 
+    BASELINE_usingLimitWhether, BASELINE_UrgencyIssue, BASELINE_UsingRange, BASELINE_IssueRange, 
+    BASELINE_IssueStyle, Readers, ProdDataID, Remark, Status, CREATED_USER, CREATED_DATE, 
+    MODIFY_USER, MODIFY_DATA, STANDBY1, STANDBY2, STANDBY3, STANDBY4, STANDBY5, STANDBY6, 
+    STANDBY7, STANDBY8, STANDBY9, STANDBY10, PRODLINE, product, release, version, ParentItem, 
+    BASELINE_1Name
+				from
+				BaseLineView
+				where releaseNo=#{param.id} and status = '1'
+
+			</if>
+			<if test="param.PRODLINENo!=null and param.PRODLINENo!='' ">
+				and PRODLINENo=#{param.PRODLINENo}
+			</if>
+			<if test="param.PRODUCTNo!=null and param.PRODUCTNo!='' ">
+				and PRODUCTNo=#{param.PRODUCTNo}
+			</if>
+		</if>
+		<!--全文检索 -->
+		<if
+			test="param.projectStatus != null and param.projectStatus != ''">
+			and PROJECTSTATUS=#{param.projectStatus}
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and CHARINDEX(#{param.searchParas},isnull(PRODLINENo,'') +
+			isnull(BASELINE,'') + isnull(BASELINEOld,'')
+			+ isnull(engBASELINE,'')
+			+ isnull(BASELINE_1,'') +
+			isnull(BASELINEOut,'') +
+			isnull(engBASELINEOut,'')
+			+ isnull(PLIPMTNo,'') +
+			isnull(PRODLINENo,'') + isnull(PRODUCTNo,'') +
+			isnull(VERSIONNo,'') +
+			isnull(RELEASENo,'')
+			+ isnull(ParentItemNo,'') +
+			isnull(BASELINEStatus,'') +
+			isnull(BASELINEType,'') +
+			isnull(BASELINE_usingLimitWhether,'')
+			+
+			isnull(BASELINE_UrgencyIssue,'') + isnull(BASELINE_UsingRange,'') +
+			isnull(BASELINE_IssueRange,'') + isnull(BASELINE_IssueStyle,'')
+			+
+			isnull(Readers,'') + isnull(ProdDataID,'') + isnull(Remark,''))&gt;0
+		</if>
+		<if test="param.id == null">
+			order by PL_ORDER,PRODLINE
+		</if>
+		<if test="param.id != null">
+			<if test="param.type =='PL'">
+				order by product
+			</if>
+			<if test="param.type =='PP'">
+				order by release
+			</if>
+			<if test="param.type =='PR'">
+				order by BASELINE
+			</if>		
+		</if>
+	</select>
+
+	<!-- 获取V版本树 -->
+	<select id="getBaseLineSowtWare" parameterType="map"	resultMap="BaseResultMap">
+
+		<!-- 产品线层 -->
+		<if test="param.id == null">
+			select distinct PRODLINENo , PRODLINE from BaseLineView
+			where status = '1'
+		</if>
+		<if test="param.id != null">
+			<!-- 产品层 -->
+			<if test="param.type =='PL'">
+
+				select distinct productno as PRODLINENo
+				,product from
+				BaseLineView
+				where PRODLINENo=#{param.id} and status =
+				'1'
+
+			</if>
+			<!-- V级版本层 -->
+			<if test="param.type =='PP'">
+
+				select distinct releaseno as
+				PRODLINENo
+				,release from BaseLineView
+				where PRODUCTNo=#{param.id} and
+				status = '1'
+			</if>
+			<!-- R级版本层 -->
+			<!-- <if test="param.type =='PV'"> select distinct releaseno as PRODLINENo 
+				,release from BaseLineView where productno=#{param.id} and status = '1' </if> -->
+			<!--基线版本版本层 -->
+			<if test="param.type =='PR'">
+				select
+				BASELINENo
+				as
+				PRODLINENo,
+				BASELINENo,
+				BASELINE,
+				BASELINEOld,
+				engBASELINE,
+				BASELINE_1,
+				BASELINEOut,
+				engBASELINEOut,
+				PLIPMTNo,
+				PRODLINENo,
+				PRODUCTNo,
+				VERSIONNo,
+				RELEASENo,
+				ParentItemNo,
+				BASELINEStatus,
+				BASELINEType,
+				BASELINE_usingLimitWhether,
+				BASELINE_UrgencyIssue,
+				BASELINE_UsingRange,
+				BASELINE_IssueRange,
+				BASELINE_IssueStyle,
+				Readers,
+				ProdDataID,
+				Remark,
+				Status,
+				ParentItem,BASELINE_1Name,
+				ID
+				from
+				BaseLineView
+				where releaseNo=#{param.id} and status = '1'
+
+			</if>
+			<if test="param.PRODLINENo!=null and param.PRODLINENo!='' ">
+				and PRODLINENo=#{param.PRODLINENo}
+			</if>
+			<if test="param.PRODUCTNo!=null and param.PRODUCTNo!='' ">
+				and PRODUCTNo=#{param.PRODUCTNo}
+			</if>
+		</if>
+		<!--全文检索 -->
+		<if
+			test="param.projectStatus != null and param.projectStatus != ''">
+			and PROJECTSTATUS=#{param.projectStatus}
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and CHARINDEX(#{param.searchParas},isnull(PRODLINENo,'') +
+			isnull(BASELINE,'') + isnull(BASELINEOld,'')
+			+ isnull(engBASELINE,'')
+			+ isnull(BASELINE_1,'') +
+			isnull(BASELINEOut,'') +
+			isnull(engBASELINEOut,'')
+			+ isnull(PLIPMTNo,'') +
+			isnull(PRODLINENo,'') + isnull(PRODUCTNo,'') +
+			isnull(VERSIONNo,'') +
+			isnull(RELEASENo,'')
+			+ isnull(ParentItemNo,'') +
+			isnull(BASELINEStatus,'') +
+			isnull(BASELINEType,'') +
+			isnull(BASELINE_usingLimitWhether,'')
+			+
+			isnull(BASELINE_UrgencyIssue,'') + isnull(BASELINE_UsingRange,'') +
+			isnull(BASELINE_IssueRange,'') + isnull(BASELINE_IssueStyle,'')
+			+
+			isnull(Readers,'') + isnull(ProdDataID,'') + isnull(Remark,''))&gt;0
+		</if>
+	 <!-- 产品线层-->
+    <if test="param.id == null">
+    order by PRODLINE
+    </if>
+     <if test="param.id != null">
+      <!-- 产品层 -->
+      <if test="param.type =='PL'">
+      order by Product
+      </if>
+      <!--R版本层 -->
+	  <if test="param.type =='PP'">
+	  order by release
+	  </if>
+	  	<!--基线版本版本层 -->
+	  <if test="param.type =='PR'">
+	  order by BASELINE
+	  </if>
+      </if>
+	</select>
+
+
+	<!--根据内码查询属性 -->
+	<select id="selectByCode" parameterType="string"
+		resultMap="BaseResultMap">
+		select top 1
+		<include refid="Base_Column_List" />
+		from BaseLineView
+		<!-- <if test="code!=null">
+			where BASELINENo=#{code}
+		</if> -->
+		 <if test='code.contains(",")'>
+			where BASELINENo in
+			<foreach collection="code.split(',')" item="item"
+				index="index" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if> 
+		 <if test='code.contains(",")==false'>
+			where BASELINENo=#{code}
+		</if> 
+
+	</select>
+
+	<select id="selectByID" parameterType="Integer"
+		resultMap="BaseResultMap">
+		select top 1
+		<include refid="Base_Column_List" />
+		from BaseLineView
+		where ID=#{code}
+
+	</select>
+
+	<select id="getMaxCode" resultType="String">
+		select max(baselineno) from
+		IBDS_BASE_LINE WHERE baselineno LIKE 'BL%';
+	</select>
+
+	<select id="getDataByColunm" resultMap="BaseResultMap"
+		parameterType="map">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM BaseLineView where ${param.column} in
+		<foreach collection="param.ids" item="record" index="index"
+			open="(" separator="," close=")">
+			#{record,jdbcType=INTEGER}
+		</foreach>
+		<if test="param.status!=null and param.status!=''">
+			and status=#{param.status}
+		</if>
+	</select>
+	
+	<!-- 获取V版本树 -->
+	<select id="getExportList" parameterType="map"	resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from BaseLineView
+			where status = '1'		
+		
+		<!--全文检索 -->
+		<if
+			test="param.projectStatus != null and param.projectStatus != ''">
+			and PROJECTSTATUS=#{param.projectStatus}
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and CHARINDEX(#{param.searchParas},isnull(PRODLINENo,'') +
+			isnull(BASELINE,'') + isnull(BASELINEOld,'')
+			+ isnull(engBASELINE,'')
+			+ isnull(BASELINE_1,'') +
+			isnull(BASELINEOut,'') +
+			isnull(engBASELINEOut,'')
+			+ isnull(PLIPMTNo,'') +
+			isnull(PRODLINENo,'') + isnull(PRODUCTNo,'') +
+			isnull(VERSIONNo,'') +
+			isnull(RELEASENo,'')
+			+ isnull(ParentItemNo,'') +
+			isnull(BASELINEStatus,'') +
+			isnull(BASELINEType,'') +
+			isnull(BASELINE_usingLimitWhether,'')
+			+
+			isnull(BASELINE_UrgencyIssue,'') + isnull(BASELINE_UsingRange,'') +
+			isnull(BASELINE_IssueRange,'') + isnull(BASELINE_IssueStyle,'')
+			+
+			isnull(Readers,'') + isnull(ProdDataID,'') + isnull(Remark,''))&gt;0
+		</if>
+		order by PL_ORDER,PRODLINE
+	</select>
+
+	<select id="getBaseLineTreeData" parameterType="map"	resultMap="BaseResultMap">
+
+		<!-- 产品线层 -->
+		<if test="param.id == null">
+			select distinct PRODLINENo , PRODLINE,PL_ORDER from BaseLineView
+			where status = '1'
+		</if>
+		<if test="param.id != null">
+			<!-- 产品层 -->
+			<if test="param.type =='PL'">
+
+				select distinct product as  PRODLINE,productno+'_'+PRODLINENo as PRODLINENo
+				,product from
+				BaseLineView
+				where PRODLINENo=#{param.id} and status =
+				'1'
+
+			</if>
+			<!-- V级版本层 -->
+			<if test="param.type =='PP'">
+
+				select distinct release as PRODLINE,product,releaseno+'_'+productno+'_'+PRODLINENo as
+				PRODLINENo
+				,release from BaseLineView
+				where PRODUCTNo=#{param.id} and
+				status = '1'
+			</if>
+			<!-- R级版本层 -->
+			<!-- <if test="param.type =='PV'"> select distinct releaseno as PRODLINENo
+				,release from BaseLineView where productno=#{param.id} and status = '1' </if> -->
+			<!--基线版本版本层 -->
+			<if test="param.type =='PR'">
+				select
+				BASELINENo+'_'+releaseno+'_'+productno+'_'+Convert(varchar,ID)+'_'+PRODLINENo
+				as
+				PRODLINENo,
+				ID, P, V, R, L, C, B, D, SP, BASELINENo, BASELINEOld, engBASELINE, BASELINE_1,
+				BASELINEOut, engBASELINEOut, PLIPMTNo, PRODUCTNo, VERSIONNo, RELEASENo,
+				ParentItemNo, BASELINEStatus, BASELINEType, BASELINE_IssueTime, BASELINE_DisableTime,
+				BASELINE_usingLimitWhether, BASELINE_UrgencyIssue, BASELINE_UsingRange, BASELINE_IssueRange,
+				BASELINE_IssueStyle, Readers, ProdDataID, Remark, Status, CREATED_USER, CREATED_DATE,
+				MODIFY_USER, MODIFY_DATA, STANDBY1, STANDBY2, STANDBY3, STANDBY4, STANDBY5, STANDBY6,
+				STANDBY7, STANDBY8, STANDBY9, STANDBY10, BASELINE,BASELINE AS PRODLINE, product, release, version, ParentItem,
+				BASELINE_1Name
+				from
+				BaseLineView
+				where releaseNo=#{param.id} and status = '1'
+
+			</if>
+			<if test="param.PRODLINENo!=null and param.PRODLINENo!='' ">
+				and PRODLINENo=#{param.PRODLINENo}
+			</if>
+			<if test="param.PRODUCTNo!=null and param.PRODUCTNo!='' ">
+				and PRODUCTNo=#{param.PRODUCTNo}
+			</if>
+		</if>
+		<!--全文检索 -->
+		<if
+				test="param.projectStatus != null and param.projectStatus != ''">
+			and PROJECTSTATUS=#{param.projectStatus}
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and CHARINDEX(#{param.searchParas},isnull(PRODLINENo,'') +
+			isnull(BASELINE,'') + isnull(BASELINEOld,'')
+			+ isnull(engBASELINE,'')
+			+ isnull(BASELINE_1,'') +
+			isnull(BASELINEOut,'') +
+			isnull(engBASELINEOut,'')
+			+ isnull(PLIPMTNo,'') +
+			isnull(PRODLINENo,'') + isnull(PRODUCTNo,'') +
+			isnull(VERSIONNo,'') +
+			isnull(RELEASENo,'')
+			+ isnull(ParentItemNo,'') +
+			isnull(BASELINEStatus,'') +
+			isnull(BASELINEType,'') +
+			isnull(BASELINE_usingLimitWhether,'')
+			+
+			isnull(BASELINE_UrgencyIssue,'') + isnull(BASELINE_UsingRange,'') +
+			isnull(BASELINE_IssueRange,'') + isnull(BASELINE_IssueStyle,'')
+			+
+			isnull(Readers,'') + isnull(ProdDataID,'') + isnull(Remark,''))&gt;0
+		</if>
+		<if test="param.id == null">
+			order by PL_ORDER,PRODLINE
+		</if>
+		<if test="param.id != null">
+			<if test="param.type =='PL'">
+				order by product
+			</if>
+			<if test="param.type =='PP'">
+				order by release
+			</if>
+			<if test="param.type =='PR'">
+				order by BASELINE
+			</if>
+		</if>
+	</select>
+
+
+</mapper>

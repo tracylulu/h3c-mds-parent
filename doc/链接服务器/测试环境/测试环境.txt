@@ -1,0 +1,18 @@
+1.Admp
+exec sp_addlinkedserver  'admp_lnk','','SQLOLEDB','10.18.194.159'
+exec sp_addlinkedsrvlogin 'admp_lnk','false',null,'sa','Hello123'
+
+2.RD_MDS
+H3CMDS02-VS\SQL2014
+sa
+hello
+
+3.iplan
+10.90.13.114
+sa
+Hello123
+
+4.ERP
+
+
+5.PDM

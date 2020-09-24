@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.sysmgr.dao.ResourceMapper">
+  
+  <sql id="Base_Column_List_1">
+    HRES_ID, HRES_PCODE, HRES_NAME, HRES_CODE, HRES_CONTENT, HRES_CREATE_USER, HRES_CREATE_DATE, 
+    HRES_MODIFY_USER, HRES_MODIFY_DATE, HRES_SORT, RESOURCE_TYPE, FLAG, REMARK
+  </sql>
+  
+  <select id="getResourcesByRoleCode" parameterType="String" resultMap="BaseResultMap">
+  	select R.* from IBDS_RESOURCE R JOIN IBDS_ROLE_RESOURCE RR ON R.HRES_CODE=RR.HRRR_HRES_CODE AND RR.HRRR_HRL_CODE=#{roleCode}
+  	 ORDER BY R.HRES_SORT 
+  </select>
+  
+  <select id="getResourcesByParentCode" parameterType="String" resultMap="BaseResultMap">
+  	select  
+  	<include refid="Base_Column_List" /> 
+  	from IBDS_ROLE_RESOURCE where isnull(HRES_PCODE,'')=#{parentCode}
+  	 ORDER BY HRES_SORT
+  </select>
+  
+  <select id="getMaxCode" resultType="String">
+  		select max(hres_code) from IBDS_RESOURCE WHERE HRES_CODE LIKE 'R_%';
+  </select>
+  
+  <select id="getResourcesByRoleCodeAndMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select R.* from IBDS_RESOURCE R JOIN IBDS_ROLE_RESOURCE RR ON R.HRES_CODE=RR.HRRR_HRES_CODE AND RR.HRRR_HRL_CODE=#{roleCode}
+  	<if test="resourceType!=null">
+  		WHERE  R.RESOURCE_TYPE = #{resourceType}
+  	</if>
+  	<if test="flag!=null">
+  		AND  R.FLAG = #{flag}
+  	</if>
+  	  ORDER BY R.HRES_SORT
+  </select>
+  <select id="getResourceByUser" parameterType="map" resultMap="BaseResultMap">
+  	SELECT distinct  c.HRES_ID ,CASE e.HRES_PCODE WHEN 'root' THEN  c.HRES_NAME ELSE e.HRES_NAME+'--'+c.HRES_NAME END HRES_NAME,c.HRES_CONTENT,c.HRES_CODE,CASE  WHEN  d.HRRR_HUL_CODE IS NOT NULL THEN cast('check' as nvarchar(200))  ELSE cast('notcheck' as nvarchar(200)) END remark 
+  		,c.HRES_Type
+  	FROM dbo.IBDS_User_Role a INNER JOIN IBDS_Role_Resource b ON a.HURR_HRL_CODE=b.HRRR_HRL_CODE
+	LEFT JOIN dbo.IBDS_Resource c ON b.HRRR_HRES_CODE=c.HRES_CODE 
+	LEFT JOIN (SELECT DISTINCT HRRR_HUL_CODE,HRRR_HRES_CODE FROM  IBDS_User_Resource where HRRR_HUL_CODE=#{param.resUser}) d ON c.HRES_CODE=d.HRRR_HRES_CODE
+	LEFT JOIN dbo.IBDS_Resource e ON c.HRES_PCODE=e.HRES_CODE 
+	WHERE a.HURR_HUL_CODE=#{param.roleUser}  AND c.HRES_CONTENT IS NOT NULL  AND c.HRES_CONTENT!='' AND c.flag=1  and c.isshow=1  ORDER BY c.HRES_ID 
+  </select>
+</mapper>

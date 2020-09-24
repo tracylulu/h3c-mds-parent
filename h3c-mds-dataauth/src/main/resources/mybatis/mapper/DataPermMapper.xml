@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.auth.dao.DataPermMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.auth.entity.DataPerm">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="RESOURCE" jdbcType="NVARCHAR" property="resource" />
+    <result column="EXPRESSION" jdbcType="NVARCHAR" property="expression" />
+    <result column="NOTE" jdbcType="NVARCHAR" property="note" />
+    <result column="CREATE_USER" jdbcType="NVARCHAR" property="createUser" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="MODIFY_USER" jdbcType="NVARCHAR" property="modifyUser" />
+    <result column="MODIFY_DATE" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="FIELD" jdbcType="NVARCHAR" property="field" />
+    <result column="TYPE" jdbcType="NVARCHAR" property="type" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, RESOURCE, EXPRESSION, NOTE, CREATE_USER, CREATE_DATE, MODIFY_USER, MODIFY_DATE, 
+    FIELD, TYPE
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.auth.entity.DataPermExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_DATA_PERM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_DATA_PERM
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_DATA_PERM
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.auth.entity.DataPermExample">
+    delete from IBDS_DATA_PERM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.auth.entity.DataPerm">
+    insert into IBDS_DATA_PERM (ID, RESOURCE, EXPRESSION, 
+      NOTE, CREATE_USER, CREATE_DATE, 
+      MODIFY_USER, MODIFY_DATE, FIELD, 
+      TYPE)
+    values (#{id,jdbcType=INTEGER}, #{resource,jdbcType=NVARCHAR}, #{expression,jdbcType=NVARCHAR}, 
+      #{note,jdbcType=NVARCHAR}, #{createUser,jdbcType=NVARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{modifyUser,jdbcType=NVARCHAR}, #{modifyDate,jdbcType=TIMESTAMP}, #{field,jdbcType=NVARCHAR}, 
+      #{type,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.auth.entity.DataPerm">
+    insert into IBDS_DATA_PERM
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="resource != null">
+        RESOURCE,
+      </if>
+      <if test="expression != null">
+        EXPRESSION,
+      </if>
+      <if test="note != null">
+        NOTE,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER,
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE,
+      </if>
+      <if test="field != null">
+        FIELD,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="resource != null">
+        #{resource,jdbcType=NVARCHAR},
+      </if>
+      <if test="expression != null">
+        #{expression,jdbcType=NVARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=NVARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="field != null">
+        #{field,jdbcType=NVARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.auth.entity.DataPermExample" resultType="java.lang.Long">
+    select count(*) from IBDS_DATA_PERM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_DATA_PERM
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.resource != null">
+        RESOURCE = #{record.resource,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.expression != null">
+        EXPRESSION = #{record.expression,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.note != null">
+        NOTE = #{record.note,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createUser != null">
+        CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyUser != null">
+        MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modifyDate != null">
+        MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.field != null">
+        FIELD = #{record.field,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.type != null">
+        TYPE = #{record.type,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_DATA_PERM
+    set ID = #{record.id,jdbcType=INTEGER},
+      RESOURCE = #{record.resource,jdbcType=NVARCHAR},
+      EXPRESSION = #{record.expression,jdbcType=NVARCHAR},
+      NOTE = #{record.note,jdbcType=NVARCHAR},
+      CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      FIELD = #{record.field,jdbcType=NVARCHAR},
+      TYPE = #{record.type,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.auth.entity.DataPerm">
+    update IBDS_DATA_PERM
+    <set>
+      <if test="resource != null">
+        RESOURCE = #{resource,jdbcType=NVARCHAR},
+      </if>
+      <if test="expression != null">
+        EXPRESSION = #{expression,jdbcType=NVARCHAR},
+      </if>
+      <if test="note != null">
+        NOTE = #{note,jdbcType=NVARCHAR},
+      </if>
+      <if test="createUser != null">
+        CREATE_USER = #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="field != null">
+        FIELD = #{field,jdbcType=NVARCHAR},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.auth.entity.DataPerm">
+    update IBDS_DATA_PERM
+    set RESOURCE = #{resource,jdbcType=NVARCHAR},
+      EXPRESSION = #{expression,jdbcType=NVARCHAR},
+      NOTE = #{note,jdbcType=NVARCHAR},
+      CREATE_USER = #{createUser,jdbcType=NVARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      FIELD = #{field,jdbcType=NVARCHAR},
+      TYPE = #{type,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

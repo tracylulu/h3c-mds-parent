@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.IBDS_ColunmConfigMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.product.entity.IBDS_ColunmConfig">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="ColumnCode" jdbcType="NVARCHAR" property="columncode" />
+    <result column="ColumnName" jdbcType="NVARCHAR" property="columnname" />
+    <result column="ColumnGroup" jdbcType="NVARCHAR" property="columngroup" />
+    <result column="GroupOrder" jdbcType="INTEGER" property="grouporder" />
+    <result column="QueryOrder" jdbcType="INTEGER" property="queryorder" />
+    <result column="AddOrder" jdbcType="INTEGER" property="addorder" />
+    <result column="EditOrder" jdbcType="INTEGER" property="editorder" />
+    <result column="ColumnOrder" jdbcType="INTEGER" property="columnorder" />
+    <result column="Type" jdbcType="VARCHAR" property="type" />
+    <result column="AddFlag" jdbcType="INTEGER" property="addflag" />
+    <result column="EditFlag" jdbcType="INTEGER" property="editflag" />
+    <result column="Flag" jdbcType="INTEGER" property="flag" />
+    <result column="QueryFlag" jdbcType="INTEGER" property="queryflag" />
+    <result column="ColumnFlag" jdbcType="INTEGER" property="columnflag" />
+    <result column="EditStatus" jdbcType="INTEGER" property="editstatus" />
+    <result column="IPMTCheck" jdbcType="INTEGER" property="ipmtcheck" />
+    <result column="CreateUser" jdbcType="VARCHAR" property="createuser" />
+    <result column="CreateDate" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="ModifyUser" jdbcType="VARCHAR" property="modifyuser" />
+    <result column="ModifyDate" jdbcType="TIMESTAMP" property="modifydate" />
+    <result column="Remark" jdbcType="NVARCHAR" property="remark" />
+    <result column="ColumnClass" jdbcType="NVARCHAR" property="columnclass" />
+    <result column="ColumnType" jdbcType="NVARCHAR" property="columntype" />
+    <result column="ColumnValidate" jdbcType="NVARCHAR" property="columnvalidate" />
+    <result column="ColumnMessage" jdbcType="NVARCHAR" property="columnmessage" />
+    <result column="ValidateLength" jdbcType="NVARCHAR" property="validatelength" />
+    <result column="IsReferenceShow" jdbcType="INTEGER" property="isreferenceshow" />
+    <result column="ExportFlag" jdbcType="INTEGER" property="exportflag" />
+    <result column="ExportOrder" jdbcType="INTEGER" property="exportorder" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, ColumnCode, ColumnName, ColumnGroup, GroupOrder, QueryOrder, AddOrder, EditOrder, 
+    ColumnOrder, Type, AddFlag, EditFlag, Flag, QueryFlag, ColumnFlag, EditStatus, IPMTCheck, 
+    CreateUser, CreateDate, ModifyUser, ModifyDate, Remark, ColumnClass, ColumnType, 
+    ColumnValidate, ColumnMessage, ValidateLength, IsReferenceShow, ExportFlag, ExportOrder
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.product.entity.IBDS_ColunmConfigExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_ColunmConfig
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_ColunmConfig
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_ColunmConfig
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.product.entity.IBDS_ColunmConfigExample">
+    delete from IBDS_ColunmConfig
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.product.entity.IBDS_ColunmConfig">
+    insert into IBDS_ColunmConfig (ID, ColumnCode, ColumnName, 
+      ColumnGroup, GroupOrder, QueryOrder, 
+      AddOrder, EditOrder, ColumnOrder, 
+      Type, AddFlag, EditFlag, 
+      Flag, QueryFlag, ColumnFlag, 
+      EditStatus, IPMTCheck, CreateUser, 
+      CreateDate, ModifyUser, ModifyDate, 
+      Remark, ColumnClass, ColumnType, 
+      ColumnValidate, ColumnMessage, ValidateLength, 
+      IsReferenceShow, ExportFlag, ExportOrder
+      )
+    values (#{id,jdbcType=INTEGER}, #{columncode,jdbcType=NVARCHAR}, #{columnname,jdbcType=NVARCHAR}, 
+      #{columngroup,jdbcType=NVARCHAR}, #{grouporder,jdbcType=INTEGER}, #{queryorder,jdbcType=INTEGER}, 
+      #{addorder,jdbcType=INTEGER}, #{editorder,jdbcType=INTEGER}, #{columnorder,jdbcType=INTEGER}, 
+      #{type,jdbcType=VARCHAR}, #{addflag,jdbcType=INTEGER}, #{editflag,jdbcType=INTEGER}, 
+      #{flag,jdbcType=INTEGER}, #{queryflag,jdbcType=INTEGER}, #{columnflag,jdbcType=INTEGER}, 
+      #{editstatus,jdbcType=INTEGER}, #{ipmtcheck,jdbcType=INTEGER}, #{createuser,jdbcType=VARCHAR}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{modifyuser,jdbcType=VARCHAR}, #{modifydate,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=NVARCHAR}, #{columnclass,jdbcType=NVARCHAR}, #{columntype,jdbcType=NVARCHAR}, 
+      #{columnvalidate,jdbcType=NVARCHAR}, #{columnmessage,jdbcType=NVARCHAR}, #{validatelength,jdbcType=NVARCHAR}, 
+      #{isreferenceshow,jdbcType=INTEGER}, #{exportflag,jdbcType=INTEGER}, #{exportorder,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.product.entity.IBDS_ColunmConfig">
+    insert into IBDS_ColunmConfig
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="columncode != null">
+        ColumnCode,
+      </if>
+      <if test="columnname != null">
+        ColumnName,
+      </if>
+      <if test="columngroup != null">
+        ColumnGroup,
+      </if>
+      <if test="grouporder != null">
+        GroupOrder,
+      </if>
+      <if test="queryorder != null">
+        QueryOrder,
+      </if>
+      <if test="addorder != null">
+        AddOrder,
+      </if>
+      <if test="editorder != null">
+        EditOrder,
+      </if>
+      <if test="columnorder != null">
+        ColumnOrder,
+      </if>
+      <if test="type != null">
+        Type,
+      </if>
+      <if test="addflag != null">
+        AddFlag,
+      </if>
+      <if test="editflag != null">
+        EditFlag,
+      </if>
+      <if test="flag != null">
+        Flag,
+      </if>
+      <if test="queryflag != null">
+        QueryFlag,
+      </if>
+      <if test="columnflag != null">
+        ColumnFlag,
+      </if>
+      <if test="editstatus != null">
+        EditStatus,
+      </if>
+      <if test="ipmtcheck != null">
+        IPMTCheck,
+      </if>
+      <if test="createuser != null">
+        CreateUser,
+      </if>
+      <if test="createdate != null">
+        CreateDate,
+      </if>
+      <if test="modifyuser != null">
+        ModifyUser,
+      </if>
+      <if test="modifydate != null">
+        ModifyDate,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="columnclass != null">
+        ColumnClass,
+      </if>
+      <if test="columntype != null">
+        ColumnType,
+      </if>
+      <if test="columnvalidate != null">
+        ColumnValidate,
+      </if>
+      <if test="columnmessage != null">
+        ColumnMessage,
+      </if>
+      <if test="validatelength != null">
+        ValidateLength,
+      </if>
+      <if test="isreferenceshow != null">
+        IsReferenceShow,
+      </if>
+      <if test="exportflag != null">
+        ExportFlag,
+      </if>
+      <if test="exportorder != null">
+        ExportOrder,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="columncode != null">
+        #{columncode,jdbcType=NVARCHAR},
+      </if>
+      <if test="columnname != null">
+        #{columnname,jdbcType=NVARCHAR},
+      </if>
+      <if test="columngroup != null">
+        #{columngroup,jdbcType=NVARCHAR},
+      </if>
+      <if test="grouporder != null">
+        #{grouporder,jdbcType=INTEGER},
+      </if>
+      <if test="queryorder != null">
+        #{queryorder,jdbcType=INTEGER},
+      </if>
+      <if test="addorder != null">
+        #{addorder,jdbcType=INTEGER},
+      </if>
+      <if test="editorder != null">
+        #{editorder,jdbcType=INTEGER},
+      </if>
+      <if test="columnorder != null">
+        #{columnorder,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="addflag != null">
+        #{addflag,jdbcType=INTEGER},
+      </if>
+      <if test="editflag != null">
+        #{editflag,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="queryflag != null">
+        #{queryflag,jdbcType=INTEGER},
+      </if>
+      <if test="columnflag != null">
+        #{columnflag,jdbcType=INTEGER},
+      </if>
+      <if test="editstatus != null">
+        #{editstatus,jdbcType=INTEGER},
+      </if>
+      <if test="ipmtcheck != null">
+        #{ipmtcheck,jdbcType=INTEGER},
+      </if>
+      <if test="createuser != null">
+        #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyuser != null">
+        #{modifyuser,jdbcType=VARCHAR},
+      </if>
+      <if test="modifydate != null">
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="columnclass != null">
+        #{columnclass,jdbcType=NVARCHAR},
+      </if>
+      <if test="columntype != null">
+        #{columntype,jdbcType=NVARCHAR},
+      </if>
+      <if test="columnvalidate != null">
+        #{columnvalidate,jdbcType=NVARCHAR},
+      </if>
+      <if test="columnmessage != null">
+        #{columnmessage,jdbcType=NVARCHAR},
+      </if>
+      <if test="validatelength != null">
+        #{validatelength,jdbcType=NVARCHAR},
+      </if>
+      <if test="isreferenceshow != null">
+        #{isreferenceshow,jdbcType=INTEGER},
+      </if>
+      <if test="exportflag != null">
+        #{exportflag,jdbcType=INTEGER},
+      </if>
+      <if test="exportorder != null">
+        #{exportorder,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.product.entity.IBDS_ColunmConfigExample" resultType="java.lang.Long">
+    select count(*) from IBDS_ColunmConfig
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_ColunmConfig
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.columncode != null">
+        ColumnCode = #{record.columncode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.columnname != null">
+        ColumnName = #{record.columnname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.columngroup != null">
+        ColumnGroup = #{record.columngroup,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.grouporder != null">
+        GroupOrder = #{record.grouporder,jdbcType=INTEGER},
+      </if>
+      <if test="record.queryorder != null">
+        QueryOrder = #{record.queryorder,jdbcType=INTEGER},
+      </if>
+      <if test="record.addorder != null">
+        AddOrder = #{record.addorder,jdbcType=INTEGER},
+      </if>
+      <if test="record.editorder != null">
+        EditOrder = #{record.editorder,jdbcType=INTEGER},
+      </if>
+      <if test="record.columnorder != null">
+        ColumnOrder = #{record.columnorder,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null">
+        Type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addflag != null">
+        AddFlag = #{record.addflag,jdbcType=INTEGER},
+      </if>
+      <if test="record.editflag != null">
+        EditFlag = #{record.editflag,jdbcType=INTEGER},
+      </if>
+      <if test="record.flag != null">
+        Flag = #{record.flag,jdbcType=INTEGER},
+      </if>
+      <if test="record.queryflag != null">
+        QueryFlag = #{record.queryflag,jdbcType=INTEGER},
+      </if>
+      <if test="record.columnflag != null">
+        ColumnFlag = #{record.columnflag,jdbcType=INTEGER},
+      </if>
+      <if test="record.editstatus != null">
+        EditStatus = #{record.editstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.ipmtcheck != null">
+        IPMTCheck = #{record.ipmtcheck,jdbcType=INTEGER},
+      </if>
+      <if test="record.createuser != null">
+        CreateUser = #{record.createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null">
+        CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyuser != null">
+        ModifyUser = #{record.modifyuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifydate != null">
+        ModifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null">
+        Remark = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.columnclass != null">
+        ColumnClass = #{record.columnclass,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.columntype != null">
+        ColumnType = #{record.columntype,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.columnvalidate != null">
+        ColumnValidate = #{record.columnvalidate,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.columnmessage != null">
+        ColumnMessage = #{record.columnmessage,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.validatelength != null">
+        ValidateLength = #{record.validatelength,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isreferenceshow != null">
+        IsReferenceShow = #{record.isreferenceshow,jdbcType=INTEGER},
+      </if>
+      <if test="record.exportflag != null">
+        ExportFlag = #{record.exportflag,jdbcType=INTEGER},
+      </if>
+      <if test="record.exportorder != null">
+        ExportOrder = #{record.exportorder,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_ColunmConfig
+    set ID = #{record.id,jdbcType=INTEGER},
+      ColumnCode = #{record.columncode,jdbcType=NVARCHAR},
+      ColumnName = #{record.columnname,jdbcType=NVARCHAR},
+      ColumnGroup = #{record.columngroup,jdbcType=NVARCHAR},
+      GroupOrder = #{record.grouporder,jdbcType=INTEGER},
+      QueryOrder = #{record.queryorder,jdbcType=INTEGER},
+      AddOrder = #{record.addorder,jdbcType=INTEGER},
+      EditOrder = #{record.editorder,jdbcType=INTEGER},
+      ColumnOrder = #{record.columnorder,jdbcType=INTEGER},
+      Type = #{record.type,jdbcType=VARCHAR},
+      AddFlag = #{record.addflag,jdbcType=INTEGER},
+      EditFlag = #{record.editflag,jdbcType=INTEGER},
+      Flag = #{record.flag,jdbcType=INTEGER},
+      QueryFlag = #{record.queryflag,jdbcType=INTEGER},
+      ColumnFlag = #{record.columnflag,jdbcType=INTEGER},
+      EditStatus = #{record.editstatus,jdbcType=INTEGER},
+      IPMTCheck = #{record.ipmtcheck,jdbcType=INTEGER},
+      CreateUser = #{record.createuser,jdbcType=VARCHAR},
+      CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      ModifyUser = #{record.modifyuser,jdbcType=VARCHAR},
+      ModifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      Remark = #{record.remark,jdbcType=NVARCHAR},
+      ColumnClass = #{record.columnclass,jdbcType=NVARCHAR},
+      ColumnType = #{record.columntype,jdbcType=NVARCHAR},
+      ColumnValidate = #{record.columnvalidate,jdbcType=NVARCHAR},
+      ColumnMessage = #{record.columnmessage,jdbcType=NVARCHAR},
+      ValidateLength = #{record.validatelength,jdbcType=NVARCHAR},
+      IsReferenceShow = #{record.isreferenceshow,jdbcType=INTEGER},
+      ExportFlag = #{record.exportflag,jdbcType=INTEGER},
+      ExportOrder = #{record.exportorder,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.product.entity.IBDS_ColunmConfig">
+    update IBDS_ColunmConfig
+    <set>
+      <if test="columncode != null">
+        ColumnCode = #{columncode,jdbcType=NVARCHAR},
+      </if>
+      <if test="columnname != null">
+        ColumnName = #{columnname,jdbcType=NVARCHAR},
+      </if>
+      <if test="columngroup != null">
+        ColumnGroup = #{columngroup,jdbcType=NVARCHAR},
+      </if>
+      <if test="grouporder != null">
+        GroupOrder = #{grouporder,jdbcType=INTEGER},
+      </if>
+      <if test="queryorder != null">
+        QueryOrder = #{queryorder,jdbcType=INTEGER},
+      </if>
+      <if test="addorder != null">
+        AddOrder = #{addorder,jdbcType=INTEGER},
+      </if>
+      <if test="editorder != null">
+        EditOrder = #{editorder,jdbcType=INTEGER},
+      </if>
+      <if test="columnorder != null">
+        ColumnOrder = #{columnorder,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        Type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="addflag != null">
+        AddFlag = #{addflag,jdbcType=INTEGER},
+      </if>
+      <if test="editflag != null">
+        EditFlag = #{editflag,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        Flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="queryflag != null">
+        QueryFlag = #{queryflag,jdbcType=INTEGER},
+      </if>
+      <if test="columnflag != null">
+        ColumnFlag = #{columnflag,jdbcType=INTEGER},
+      </if>
+      <if test="editstatus != null">
+        EditStatus = #{editstatus,jdbcType=INTEGER},
+      </if>
+      <if test="ipmtcheck != null">
+        IPMTCheck = #{ipmtcheck,jdbcType=INTEGER},
+      </if>
+      <if test="createuser != null">
+        CreateUser = #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyuser != null">
+        ModifyUser = #{modifyuser,jdbcType=VARCHAR},
+      </if>
+      <if test="modifydate != null">
+        ModifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="columnclass != null">
+        ColumnClass = #{columnclass,jdbcType=NVARCHAR},
+      </if>
+      <if test="columntype != null">
+        ColumnType = #{columntype,jdbcType=NVARCHAR},
+      </if>
+      <if test="columnvalidate != null">
+        ColumnValidate = #{columnvalidate,jdbcType=NVARCHAR},
+      </if>
+      <if test="columnmessage != null">
+        ColumnMessage = #{columnmessage,jdbcType=NVARCHAR},
+      </if>
+      <if test="validatelength != null">
+        ValidateLength = #{validatelength,jdbcType=NVARCHAR},
+      </if>
+      <if test="isreferenceshow != null">
+        IsReferenceShow = #{isreferenceshow,jdbcType=INTEGER},
+      </if>
+      <if test="exportflag != null">
+        ExportFlag = #{exportflag,jdbcType=INTEGER},
+      </if>
+      <if test="exportorder != null">
+        ExportOrder = #{exportorder,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.product.entity.IBDS_ColunmConfig">
+    update IBDS_ColunmConfig
+    set ColumnCode = #{columncode,jdbcType=NVARCHAR},
+      ColumnName = #{columnname,jdbcType=NVARCHAR},
+      ColumnGroup = #{columngroup,jdbcType=NVARCHAR},
+      GroupOrder = #{grouporder,jdbcType=INTEGER},
+      QueryOrder = #{queryorder,jdbcType=INTEGER},
+      AddOrder = #{addorder,jdbcType=INTEGER},
+      EditOrder = #{editorder,jdbcType=INTEGER},
+      ColumnOrder = #{columnorder,jdbcType=INTEGER},
+      Type = #{type,jdbcType=VARCHAR},
+      AddFlag = #{addflag,jdbcType=INTEGER},
+      EditFlag = #{editflag,jdbcType=INTEGER},
+      Flag = #{flag,jdbcType=INTEGER},
+      QueryFlag = #{queryflag,jdbcType=INTEGER},
+      ColumnFlag = #{columnflag,jdbcType=INTEGER},
+      EditStatus = #{editstatus,jdbcType=INTEGER},
+      IPMTCheck = #{ipmtcheck,jdbcType=INTEGER},
+      CreateUser = #{createuser,jdbcType=VARCHAR},
+      CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      ModifyUser = #{modifyuser,jdbcType=VARCHAR},
+      ModifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      Remark = #{remark,jdbcType=NVARCHAR},
+      ColumnClass = #{columnclass,jdbcType=NVARCHAR},
+      ColumnType = #{columntype,jdbcType=NVARCHAR},
+      ColumnValidate = #{columnvalidate,jdbcType=NVARCHAR},
+      ColumnMessage = #{columnmessage,jdbcType=NVARCHAR},
+      ValidateLength = #{validatelength,jdbcType=NVARCHAR},
+      IsReferenceShow = #{isreferenceshow,jdbcType=INTEGER},
+      ExportFlag = #{exportflag,jdbcType=INTEGER},
+      ExportOrder = #{exportorder,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

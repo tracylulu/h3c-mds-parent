@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.SubFeatureViewMapper">
+
+	<!-- 获取特性版本树 -->
+	<select id="getTreeData" parameterType="map"
+		resultMap="BaseResultMap">
+
+		<!-- 产品线层 -->
+		<if test="param.id == null and param.codes==null">
+			select distinct PRODLINENo , PRODLINE,PL_ORDER from SubFeatureView where
+			status = '1'
+		</if>
+
+
+		<if test="param.id != null">
+			<!-- 产品层 -->
+			<if test="param.type =='PL'">
+
+				select distinct productno+'_'+PRODLINENo as PRODLINENo ,product, PRODLINE
+				from SubFeatureView
+				where PRODLINENo=#{param.id} and status = '1'
+
+			</if>
+
+			<!-- R级版本层 -->
+			<if test="param.type =='PP'">
+
+				select distinct releaseno+'_'+productno+'_'+PRODLINENo as PRODLINENo
+				,release,product, PRODLINE from SubFeatureView
+				where PRODUCTNo=#{param.id} and status = '1'
+
+			</if>
+			<!--特性层 -->
+			<if test="param.type =='PR'">
+
+				select distinct featureno+'_'+releaseno+'_'+productno+'_'+PRODLINENo as
+				PRODLINENo ,feature,release,product, PRODLINE from SubFeatureView
+				where RELEASENo=#{param.id} and status = '1'
+
+			</if>
+			<if test="param.type =='FT'">
+
+				select
+				SUBFEATURENo+'_'+featureno+'_'+releaseno+'_'+productno+'_'+Convert(varchar,ID)+'_'+PRODLINENo
+				as PRODLINENo,
+				SUBFEATURENo,feature,release,product, PRODLINE,
+				SUBFEATURE,
+				SUBFEATUREOld,
+				engSUBFEATURE,
+				PLIPMTNo,
+				PRODLINENo,
+				PRODUCTNo,
+				VERSIONNo,
+				RELEASENo,
+				FEATURENo,
+				Readers,
+				Remark,
+				Status,ID
+				from SubFeatureView
+				where FeatureNo=#{param.id} and status = '1'
+
+			</if>
+
+			<if test="param.PRODLINENo!=null and param.PRODLINENo!='' ">
+				and PRODLINENo=#{param.PRODLINENo}
+			</if>
+			<if test="param.PRODUCTNo!=null and param.PRODUCTNo!='' ">
+				and PRODUCTNo=#{param.PRODUCTNo}
+			</if>
+		</if>
+		<!--全文检索 -->
+		<if
+			test="param.projectStatus != null and param.projectStatus != ''">
+			and PROJECTSTATUS=#{param.projectStatus}
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and CHARINDEX(#{param.searchParas}, isnull(SUBFEATURENo,'')
+			+ isnull(SUBFEATURE,'')
+			+ isnull(SUBFEATUREOld,'')
+			+ isnull(engSUBFEATURE,'')
+			+ isnull(PLIPMTNo,'')
+			+ isnull(PRODLINENo,'')
+			+ isnull(PRODUCTNo,'')
+			+ isnull(VERSIONNo,'')
+			+ isnull(RELEASENo,'')
+			+ isnull(FEATURENo,'')
+			+ isnull(Readers,'')
+			+ isnull(Remark,''))&gt;0
+		</if>
+
+		<if test="param.codes!=null and param.type=='SF'">
+			select
+			SUBFEATURENo+'_'+featureno+'_'+releaseno+'_'+productno+'_'+PRODLINENo
+			as PRODLINENo,feature,release,product, PRODLINE,
+			SUBFEATURENo,
+			SUBFEATURE,
+			SUBFEATUREOld,
+			engSUBFEATURE,
+			PLIPMTNo,
+			PRODLINENo,
+			PRODUCTNo,
+			VERSIONNo,
+			RELEASENo,
+			FEATURENo,
+			Readers,
+			Remark,
+			Status
+			from SubFeatureView
+			where status = '1' and FeatureNo in
+			<foreach collection="param.codes.split(';')" item="item"
+				index="index" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+
+		<!-- 产品线层 -->
+		<if test="param.id == null">
+			order by PL_ORDER,PRODLINE
+		</if>
+		<if test="param.id != null">
+			<!-- 产品层 -->
+			<if test="param.type =='PL'">
+				order by Product
+			</if>
+			<!--R版本层 -->
+			<if test="param.type =='PP'">
+				order by release
+			</if>
+			<!--特性层 -->
+			<if test="param.type =='PR'">
+				order by FEATURE
+			</if>
+			<if test="param.type =='FT'">
+				order by SUBFEATURE
+			</if>
+		</if>
+	</select>
+
+
+
+
+	<!--根据内码查询属性 -->
+	<select id="selectByCode" parameterType="string"
+		resultMap="BaseResultMap">
+		select top 1
+		<include refid="Base_Column_List" />
+		from SubFeatureView
+		where SubFEATURENo=#{code}
+
+	</select>
+
+	<!--根据内码查询属性 -->
+	<select id="selectByID" parameterType="Integer"
+		resultMap="BaseResultMap">
+		select top 1
+		<include refid="Base_Column_List" />
+		from SubFeatureView
+		where ID=#{code}
+
+	</select>
+
+	<select id="getMaxCode" resultType="String">
+		select max(SUBFEATURENo) from IBDS_SUB_FEATRUE WHERE SUBFEATURENo LIKE
+		'SF%';
+	</select>
+
+	<!-- 获取特性版本树 -->
+	<select id="getExportList" parameterType="map"
+		resultMap="BaseResultMap">
+
+		select
+		<include refid="Base_Column_List" />
+		from SubFeatureView where status = '1'
+
+		<!--全文检索 -->
+		<if
+			test="param.projectStatus != null and param.projectStatus != ''">
+			and PROJECTSTATUS=#{param.projectStatus}
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and CHARINDEX(#{param.searchParas}, isnull(SUBFEATURENo,'')
+			+ isnull(SUBFEATURE,'')
+			+ isnull(SUBFEATUREOld,'')
+			+ isnull(engSUBFEATURE,'')
+			+ isnull(PLIPMTNo,'')
+			+ isnull(PRODLINENo,'')
+			+ isnull(PRODUCTNo,'')
+			+ isnull(VERSIONNo,'')
+			+ isnull(RELEASENo,'')
+			+ isnull(FEATURENo,'')
+			+ isnull(Readers,'')
+			+ isnull(Remark,''))&gt;0
+		</if>
+
+		<if test="param.codes!=null and param.type=='SF'">
+			select
+			SUBFEATURENo+'_'+featureno+'_'+releaseno+'_'+productno+'_'+PRODLINENo
+			as PRODLINENo,feature,release,product, PRODLINE,
+			SUBFEATURENo,
+			SUBFEATURE,
+			SUBFEATUREOld,
+			engSUBFEATURE,
+			PLIPMTNo,
+			PRODLINENo,
+			PRODUCTNo,
+			VERSIONNo,
+			RELEASENo,
+			FEATURENo,
+			Readers,
+			Remark,
+			Status
+			from SubFeatureView
+			where status = '1' and FeatureNo in
+			<foreach collection="param.codes.split(';')" item="item"
+				index="index" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+
+
+		order by PL_ORDER,PRODLINE
+	</select>
+</mapper>

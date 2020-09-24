@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.IBDS_PLIPMTMapper">
+	<select id="getPLIPMT" parameterType="map"
+		resultMap="BaseResultMap">
+		select distinct PLIPMT,PLIPMTNo from IBDS_PLIPMT
+	</select>
+
+	<select id="getByMap" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from IBDS_PLIPMT where status='1'
+
+		<if test="searchParas != null and searchParas != ''">
+			and
+			CHARINDEX(#{searchParas},isnull(PLIPMTNo,'')+isnull(PLIPMT,'')+isnull(engPLIPMT,'')+isnull(PLIPMTOld,'')+isnull(REMARK,'')+isnull(PLIPMT_Umpire,'')+isnull(PLIPMT_ViceUmpire,'')+isnull(PLIMPT_Secretary,''))>0
+		</if>
+		order by plipmt_order,PLIPMT
+	</select>
+
+	<select id="getMaxCode" resultType="String">
+		select max(PLIPMTNo) from IBDS_PLIPMT WHERE PLIPMTNo LIKE 'PI%';
+	</select>
+
+	<select id="selectByCode" parameterType="String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from IBDS_PLIPMT WHERE PLIPMTNo = #{code}
+	</select>
+	<select id="selectByID" parameterType="Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from IBDS_PLIPMT WHERE ID= #{code}
+	</select>
+	
+	<select id="selectByCodeList" 	resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from IBDS_PLIPMT WHERE PLIPMTNo  in
+		<foreach collection="codeList" item="code" index="index"
+			open="(" close=")" separator=",">
+			#{code}
+		</foreach>
+	</select>
+	
+	<select id="getExportList" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from IBDS_PLIPMT where status='1'
+
+		<if test="searchParas != null and searchParas != ''">
+			and
+			CHARINDEX(#{searchParas},isnull(PLIPMTNo,'')+isnull(PLIPMT,'')+isnull(engPLIPMT,'')+isnull(PLIPMTOld,'')+isnull(REMARK,'')+isnull(PLIPMT_Umpire,'')+isnull(PLIPMT_ViceUmpire,'')+isnull(PLIMPT_Secretary,''))>0
+		</if>
+		order by plipmt_order,PLIPMT
+	</select>
+</mapper>

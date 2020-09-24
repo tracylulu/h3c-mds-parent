@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.sysmgr.dao.viewUserGroupMapper">
+  <select id="selUserGroupViewbyparam" parameterType="map" resultMap="BaseResultMap">
+  select name,code,uda_10_509,UserCode,deptName,GroupName  from view_UserGroup where UserCode in
+  (select UserCode from view_UserGroup
+  
+<where>
+<if test="param.name!=null and param.name!=''"> 
+   		and  charindex(#{param.name},isnull(name,'')+isnull(usercode,'')+isnull(code,'')+isnull(uda_10_509,'')+isnull(deptName,'')+isnull(groupName,''))>0 
+  	</if> 
+  	 
+  	</where>
+  	 <where>
+<if test="param.groupname!=null and param.groupname!=''"> 
+   		and groupname=#{param.groupname}
+   		 <if test="param.user!=null and param.user!=''"> 
+   		 and usercode=#{param.user}
+  	</if> 
+  	</if> 
+  	<if test="param.code!=null">
+  	 <if test='param.code.contains(",")'>
+		 and isnull(groupname,'') in
+		 <foreach collection="param.code.split(',')" item="item"
+				index="index" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		 </if>
+  	 <if test='param.code.contains(",")==false'>
+  	  isnull(groupname,'')=#{param.code}
+  	 </if>
+  	 </if>
+  	</where>
+  	)
+  	
+
+
+  	
+  	
+  </select>
+</mapper>

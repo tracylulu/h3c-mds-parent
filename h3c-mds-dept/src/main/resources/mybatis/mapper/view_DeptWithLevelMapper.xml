@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.dept.dao.view_DeptWithLevelMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.dept.entity.view_DeptWithLevel">
+    <result column="firstCode" jdbcType="VARCHAR" property="firstcode" />
+    <result column="firstName" jdbcType="VARCHAR" property="firstname" />
+    <result column="secondCode" jdbcType="VARCHAR" property="secondcode" />
+    <result column="secondName" jdbcType="VARCHAR" property="secondname" />
+    <result column="thirdCode" jdbcType="VARCHAR" property="thirdcode" />
+    <result column="thirdName" jdbcType="VARCHAR" property="thirdname" />
+    <result column="fourthCode" jdbcType="VARCHAR" property="fourthcode" />
+    <result column="fourthName" jdbcType="VARCHAR" property="fourthname" />
+    <result column="Code" jdbcType="VARCHAR" property="code" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="COACode" jdbcType="VARCHAR" property="coacode" />
+    <result column="Nature" jdbcType="VARCHAR" property="nature" />
+    <result column="parentCode" jdbcType="VARCHAR" property="parentcode" />
+    <result column="level" jdbcType="DECIMAL" property="level" />
+    <result column="NameEng" jdbcType="NVARCHAR" property="nameeng" />
+    <result column="Manager" jdbcType="NVARCHAR" property="manager" />
+    <result column="ManagerName" jdbcType="NVARCHAR" property="managername" />
+    <result column="Secretary" jdbcType="NVARCHAR" property="secretary" />
+    <result column="SecretaryName" jdbcType="NVARCHAR" property="secretaryname" />
+    <result column="DeptPlanner" jdbcType="NVARCHAR" property="deptplanner" />
+    <result column="DeptPlannerName" jdbcType="NVARCHAR" property="deptplannername" />
+    <result column="Approver" jdbcType="NVARCHAR" property="approver" />
+    <result column="ApproverName" jdbcType="NVARCHAR" property="approvername" />
+    <result column="Abbreviation" jdbcType="NVARCHAR" property="abbreviation" />
+    <result column="AbbreviationName" jdbcType="NVARCHAR" property="abbreviationname" />
+    <result column="PlanApprover" jdbcType="NVARCHAR" property="planapprover" />
+    <result column="PlanApproverName" jdbcType="NVARCHAR" property="planapprovername" />
+    <result column="PR" jdbcType="NVARCHAR" property="pr" />
+    <result column="PRName" jdbcType="NVARCHAR" property="prname" />
+    <result column="Consignor" jdbcType="NVARCHAR" property="consignor" />
+    <result column="ConsignorName" jdbcType="NVARCHAR" property="consignorname" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    firstCode, firstName, secondCode, secondName, thirdCode, thirdName, fourthCode, fourthName, 
+    Code, Name, COACode, Nature, parentCode, level, NameEng, Manager, ManagerName, Secretary, 
+    SecretaryName, DeptPlanner, DeptPlannerName, Approver, ApproverName, Abbreviation, 
+    AbbreviationName, PlanApprover, PlanApproverName, PR, PRName, Consignor, ConsignorName
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.dept.entity.ViewDeptWithLevelExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from view_DeptWithLevel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.dept.entity.ViewDeptWithLevelExample">
+    delete from view_DeptWithLevel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.dept.entity.view_DeptWithLevel">
+    insert into view_DeptWithLevel (firstCode, firstName, secondCode, 
+      secondName, thirdCode, thirdName, 
+      fourthCode, fourthName, Code, 
+      Name, COACode, Nature, 
+      parentCode, level, NameEng, 
+      Manager, ManagerName, Secretary, 
+      SecretaryName, DeptPlanner, DeptPlannerName, 
+      Approver, ApproverName, Abbreviation, 
+      AbbreviationName, PlanApprover, PlanApproverName, 
+      PR, PRName, Consignor, 
+      ConsignorName)
+    values (#{firstcode,jdbcType=VARCHAR}, #{firstname,jdbcType=VARCHAR}, #{secondcode,jdbcType=VARCHAR}, 
+      #{secondname,jdbcType=VARCHAR}, #{thirdcode,jdbcType=VARCHAR}, #{thirdname,jdbcType=VARCHAR}, 
+      #{fourthcode,jdbcType=VARCHAR}, #{fourthname,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{coacode,jdbcType=VARCHAR}, #{nature,jdbcType=VARCHAR}, 
+      #{parentcode,jdbcType=VARCHAR}, #{level,jdbcType=DECIMAL}, #{nameeng,jdbcType=NVARCHAR}, 
+      #{manager,jdbcType=NVARCHAR}, #{managername,jdbcType=NVARCHAR}, #{secretary,jdbcType=NVARCHAR}, 
+      #{secretaryname,jdbcType=NVARCHAR}, #{deptplanner,jdbcType=NVARCHAR}, #{deptplannername,jdbcType=NVARCHAR}, 
+      #{approver,jdbcType=NVARCHAR}, #{approvername,jdbcType=NVARCHAR}, #{abbreviation,jdbcType=NVARCHAR}, 
+      #{abbreviationname,jdbcType=NVARCHAR}, #{planapprover,jdbcType=NVARCHAR}, #{planapprovername,jdbcType=NVARCHAR}, 
+      #{pr,jdbcType=NVARCHAR}, #{prname,jdbcType=NVARCHAR}, #{consignor,jdbcType=NVARCHAR}, 
+      #{consignorname,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.dept.entity.view_DeptWithLevel">
+    insert into view_DeptWithLevel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="firstcode != null">
+        firstCode,
+      </if>
+      <if test="firstname != null">
+        firstName,
+      </if>
+      <if test="secondcode != null">
+        secondCode,
+      </if>
+      <if test="secondname != null">
+        secondName,
+      </if>
+      <if test="thirdcode != null">
+        thirdCode,
+      </if>
+      <if test="thirdname != null">
+        thirdName,
+      </if>
+      <if test="fourthcode != null">
+        fourthCode,
+      </if>
+      <if test="fourthname != null">
+        fourthName,
+      </if>
+      <if test="code != null">
+        Code,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="coacode != null">
+        COACode,
+      </if>
+      <if test="nature != null">
+        Nature,
+      </if>
+      <if test="parentcode != null">
+        parentCode,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="nameeng != null">
+        NameEng,
+      </if>
+      <if test="manager != null">
+        Manager,
+      </if>
+      <if test="managername != null">
+        ManagerName,
+      </if>
+      <if test="secretary != null">
+        Secretary,
+      </if>
+      <if test="secretaryname != null">
+        SecretaryName,
+      </if>
+      <if test="deptplanner != null">
+        DeptPlanner,
+      </if>
+      <if test="deptplannername != null">
+        DeptPlannerName,
+      </if>
+      <if test="approver != null">
+        Approver,
+      </if>
+      <if test="approvername != null">
+        ApproverName,
+      </if>
+      <if test="abbreviation != null">
+        Abbreviation,
+      </if>
+      <if test="abbreviationname != null">
+        AbbreviationName,
+      </if>
+      <if test="planapprover != null">
+        PlanApprover,
+      </if>
+      <if test="planapprovername != null">
+        PlanApproverName,
+      </if>
+      <if test="pr != null">
+        PR,
+      </if>
+      <if test="prname != null">
+        PRName,
+      </if>
+      <if test="consignor != null">
+        Consignor,
+      </if>
+      <if test="consignorname != null">
+        ConsignorName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="firstcode != null">
+        #{firstcode,jdbcType=VARCHAR},
+      </if>
+      <if test="firstname != null">
+        #{firstname,jdbcType=VARCHAR},
+      </if>
+      <if test="secondcode != null">
+        #{secondcode,jdbcType=VARCHAR},
+      </if>
+      <if test="secondname != null">
+        #{secondname,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdcode != null">
+        #{thirdcode,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdname != null">
+        #{thirdname,jdbcType=VARCHAR},
+      </if>
+      <if test="fourthcode != null">
+        #{fourthcode,jdbcType=VARCHAR},
+      </if>
+      <if test="fourthname != null">
+        #{fourthname,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="coacode != null">
+        #{coacode,jdbcType=VARCHAR},
+      </if>
+      <if test="nature != null">
+        #{nature,jdbcType=VARCHAR},
+      </if>
+      <if test="parentcode != null">
+        #{parentcode,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=DECIMAL},
+      </if>
+      <if test="nameeng != null">
+        #{nameeng,jdbcType=NVARCHAR},
+      </if>
+      <if test="manager != null">
+        #{manager,jdbcType=NVARCHAR},
+      </if>
+      <if test="managername != null">
+        #{managername,jdbcType=NVARCHAR},
+      </if>
+      <if test="secretary != null">
+        #{secretary,jdbcType=NVARCHAR},
+      </if>
+      <if test="secretaryname != null">
+        #{secretaryname,jdbcType=NVARCHAR},
+      </if>
+      <if test="deptplanner != null">
+        #{deptplanner,jdbcType=NVARCHAR},
+      </if>
+      <if test="deptplannername != null">
+        #{deptplannername,jdbcType=NVARCHAR},
+      </if>
+      <if test="approver != null">
+        #{approver,jdbcType=NVARCHAR},
+      </if>
+      <if test="approvername != null">
+        #{approvername,jdbcType=NVARCHAR},
+      </if>
+      <if test="abbreviation != null">
+        #{abbreviation,jdbcType=NVARCHAR},
+      </if>
+      <if test="abbreviationname != null">
+        #{abbreviationname,jdbcType=NVARCHAR},
+      </if>
+      <if test="planapprover != null">
+        #{planapprover,jdbcType=NVARCHAR},
+      </if>
+      <if test="planapprovername != null">
+        #{planapprovername,jdbcType=NVARCHAR},
+      </if>
+      <if test="pr != null">
+        #{pr,jdbcType=NVARCHAR},
+      </if>
+      <if test="prname != null">
+        #{prname,jdbcType=NVARCHAR},
+      </if>
+      <if test="consignor != null">
+        #{consignor,jdbcType=NVARCHAR},
+      </if>
+      <if test="consignorname != null">
+        #{consignorname,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.dept.entity.ViewDeptWithLevelExample" resultType="java.lang.Long">
+    select count(*) from view_DeptWithLevel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update view_DeptWithLevel
+    <set>
+      <if test="record.firstcode != null">
+        firstCode = #{record.firstcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstname != null">
+        firstName = #{record.firstname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secondcode != null">
+        secondCode = #{record.secondcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secondname != null">
+        secondName = #{record.secondname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thirdcode != null">
+        thirdCode = #{record.thirdcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thirdname != null">
+        thirdName = #{record.thirdname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fourthcode != null">
+        fourthCode = #{record.fourthcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fourthname != null">
+        fourthName = #{record.fourthname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null">
+        Code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        Name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coacode != null">
+        COACode = #{record.coacode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nature != null">
+        Nature = #{record.nature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentcode != null">
+        parentCode = #{record.parentcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null">
+        level = #{record.level,jdbcType=DECIMAL},
+      </if>
+      <if test="record.nameeng != null">
+        NameEng = #{record.nameeng,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.manager != null">
+        Manager = #{record.manager,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.managername != null">
+        ManagerName = #{record.managername,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.secretary != null">
+        Secretary = #{record.secretary,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.secretaryname != null">
+        SecretaryName = #{record.secretaryname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.deptplanner != null">
+        DeptPlanner = #{record.deptplanner,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.deptplannername != null">
+        DeptPlannerName = #{record.deptplannername,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.approver != null">
+        Approver = #{record.approver,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.approvername != null">
+        ApproverName = #{record.approvername,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.abbreviation != null">
+        Abbreviation = #{record.abbreviation,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.abbreviationname != null">
+        AbbreviationName = #{record.abbreviationname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.planapprover != null">
+        PlanApprover = #{record.planapprover,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.planapprovername != null">
+        PlanApproverName = #{record.planapprovername,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pr != null">
+        PR = #{record.pr,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prname != null">
+        PRName = #{record.prname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.consignor != null">
+        Consignor = #{record.consignor,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.consignorname != null">
+        ConsignorName = #{record.consignorname,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update view_DeptWithLevel
+    set firstCode = #{record.firstcode,jdbcType=VARCHAR},
+      firstName = #{record.firstname,jdbcType=VARCHAR},
+      secondCode = #{record.secondcode,jdbcType=VARCHAR},
+      secondName = #{record.secondname,jdbcType=VARCHAR},
+      thirdCode = #{record.thirdcode,jdbcType=VARCHAR},
+      thirdName = #{record.thirdname,jdbcType=VARCHAR},
+      fourthCode = #{record.fourthcode,jdbcType=VARCHAR},
+      fourthName = #{record.fourthname,jdbcType=VARCHAR},
+      Code = #{record.code,jdbcType=VARCHAR},
+      Name = #{record.name,jdbcType=VARCHAR},
+      COACode = #{record.coacode,jdbcType=VARCHAR},
+      Nature = #{record.nature,jdbcType=VARCHAR},
+      parentCode = #{record.parentcode,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=DECIMAL},
+      NameEng = #{record.nameeng,jdbcType=NVARCHAR},
+      Manager = #{record.manager,jdbcType=NVARCHAR},
+      ManagerName = #{record.managername,jdbcType=NVARCHAR},
+      Secretary = #{record.secretary,jdbcType=NVARCHAR},
+      SecretaryName = #{record.secretaryname,jdbcType=NVARCHAR},
+      DeptPlanner = #{record.deptplanner,jdbcType=NVARCHAR},
+      DeptPlannerName = #{record.deptplannername,jdbcType=NVARCHAR},
+      Approver = #{record.approver,jdbcType=NVARCHAR},
+      ApproverName = #{record.approvername,jdbcType=NVARCHAR},
+      Abbreviation = #{record.abbreviation,jdbcType=NVARCHAR},
+      AbbreviationName = #{record.abbreviationname,jdbcType=NVARCHAR},
+      PlanApprover = #{record.planapprover,jdbcType=NVARCHAR},
+      PlanApproverName = #{record.planapprovername,jdbcType=NVARCHAR},
+      PR = #{record.pr,jdbcType=NVARCHAR},
+      PRName = #{record.prname,jdbcType=NVARCHAR},
+      Consignor = #{record.consignor,jdbcType=NVARCHAR},
+      ConsignorName = #{record.consignorname,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

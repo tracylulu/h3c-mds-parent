@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.flowable.dao.ProcessLogMapper">
+  <select id="getByProcessCode" parameterType="map" resultType="com.h3c.mds.flowable.entity.ProcessLog">
+  	select check_account as checkAccount  from IBDS_PROCESS_LOG with(nolock)
+  	where process_code=#{param.processCode}
+  </select>
+</mapper>

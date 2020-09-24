@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.flowable.dao.ProcessConfigPersonMapper">
+  <select id="getByProcessCodeAndRoleCode" resultMap="BaseResultMap" parameterType="map">
+    SELECT  <include refid="Base_Column_List" /> from IBDS_PROCESS_PERSON WHERE PROCESS_CODE = #{params.processCode} AND PROCESS_ROLE_CODE = #{params.roleCode} AND (DEPT_CODE IS NULL OR DEPT_CODE='')
+  </select>
+  <select id="checkRepeat" resultType="int" parameterType="map">
+  	select count(1) from IBDS_PROCESS_PERSON WHERE PROCESS_CODE = #{param.processCode} AND PROCESS_ROLE_CODE = #{param.roleCode}
+  		and dept_code=#{param.deptCode}
+  		<if test="param.id!=null">
+  			and id!=#{param.id}
+  		</if>
+  </select>
+</mapper>

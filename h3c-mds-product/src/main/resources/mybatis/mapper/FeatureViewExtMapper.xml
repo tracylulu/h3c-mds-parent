@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.FeatureViewMapper">
+
+	<!-- 获取特性版本树 -->
+	<select id="getTreeData" parameterType="map"
+		resultMap="BaseResultMap">
+
+		<!-- 产品线层 -->
+		<if test="param.id == null">
+			select distinct PRODLINENo , PRODLINE,PL_ORDER from FeatureView where status = '1'
+		</if>
+
+
+		<if test="param.id != null">
+			<!-- 产品层 -->
+			<if test="param.type =='PL'">
+
+				select distinct productno+'_'+PRODLINENo as PRODLINENo , PRODLINE,product from
+				FeatureView
+				where PRODLINENo=#{param.id} and status = '1'
+
+			</if>
+
+			<!-- R级版本层 -->
+			<if test="param.type =='PP'">
+
+				select distinct releaseno+'_'+productno+'_'+PRODLINENo as PRODLINENo
+				, PRODLINE,product,release from FeatureView
+				where PRODUCTNo=#{param.id} and status = '1'
+
+			</if>
+			<!--特性层 -->
+			<if test="param.type =='PR'">
+
+				select FEATURENo+'_'+releaseno+'_'+productno+'_'+Convert(varchar,ID)+'_'+PRODLINENo as PRODLINENo, PRODLINE,product,release,
+				FEATURENo,
+				FEATURE,
+				FEATUREOld,
+				engFEATURE,
+				PLIPMTNo,
+				PRODLINENo,
+				PRODUCTNo,
+				VERSIONNo,
+				RELEASENo,
+				Readers,
+				Remark,
+				Status,ID
+				from FeatureView
+				where status = '1'
+				<if test="param.codes==null or param.codes==''">
+				and RELEASENo=#{param.id}
+				</if>
+				<if test="param.codes!=null and param.codes!=''">
+				and RELEASENo in 
+				<foreach collection="param.codes.split(',')" item="record" index="index" open="(" separator="," close=")">
+					#{record,jdbcType=NVARCHAR}
+				</foreach>
+				</if>
+				
+			</if>
+			<if test="param.PRODLINENo!=null and param.PRODLINENo!='' ">
+				and PRODLINENo=#{param.PRODLINENo}
+			</if>
+			<if test="param.PRODUCTNo!=null and param.PRODUCTNo!='' ">
+				and PRODUCTNo=#{param.PRODUCTNo}
+			</if>
+		</if>
+		<!--全文检索 -->
+		<if
+			test="param.projectStatus != null and param.projectStatus != ''">
+			and PROJECTSTATUS=#{param.projectStatus}
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and CHARINDEX(#{param.searchParas}, isnull(FEATURE,'')
+			+ isnull(FEATUREOld,'')
+			+ isnull(engFEATURE,'')
+			+ isnull(PLIPMTNo,'')
+			+ isnull(PRODLINENo,'')
+			+ isnull(PRODUCTNo,'')
+			+ isnull(VERSIONNo,'')
+			+ isnull(RELEASENo,'')
+			+ isnull(Readers,'')
+			+ isnull(Remark,''))&gt;0
+		</if>
+		
+		 <!-- 产品线层-->
+    <if test="param.id == null">
+    order by PL_ORDER,PRODLINE
+    </if>
+     <if test="param.id != null">
+      <!-- 产品层 -->
+      <if test="param.type =='PL'">
+      order by Product
+      </if>
+      <!--R版本层 -->
+	  <if test="param.type =='PP'">
+	  order by release
+	  </if>
+	  	<!--特性层 -->
+	  <if test="param.type =='PR'">
+	  order by FEATURE
+	  </if>
+      </if>
+	</select>
+
+
+
+
+	<!--根据内码查询属性 -->
+	<select id="selectByCode" parameterType="string"
+		resultMap="BaseResultMap">
+		select top 1
+		<include refid="Base_Column_List" />
+		from FeatureView
+		where FEATURENo=#{code}
+
+	</select>
+<!--根据ID查询属性 -->
+	<select id="selectByID" parameterType="Integer"
+		resultMap="BaseResultMap">
+		select top 1
+		<include refid="Base_Column_List" />
+		from FeatureView
+		where ID=#{code}
+
+	</select>
+	<select id="getMaxCode" resultType="String">
+		select max(featureno) from IBDS_FEATRUE WHERE featureno LIKE 'FT%';
+	</select>
+	
+	<!-- 获取特性版本树 -->
+	<select id="getExportList" parameterType="map"
+		resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from FeatureView where status = '1'
+		
+		<!--全文检索 -->
+		<if
+			test="param.projectStatus != null and param.projectStatus != ''">
+			and PROJECTSTATUS=#{param.projectStatus}
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and CHARINDEX(#{param.searchParas}, isnull(FEATURE,'')
+			+ isnull(FEATUREOld,'')
+			+ isnull(engFEATURE,'')
+			+ isnull(PLIPMTNo,'')
+			+ isnull(PRODLINENo,'')
+			+ isnull(PRODUCTNo,'')
+			+ isnull(VERSIONNo,'')
+			+ isnull(RELEASENo,'')
+			+ isnull(Readers,'')
+			+ isnull(Remark,''))&gt;0
+		</if>
+		
+		  order by PL_ORDER,PRODLINE
+	</select>
+</mapper>

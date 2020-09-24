@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.IbdsProjectCodeRecommendMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.product.entity.IbdsProjectCodeRecommend">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="pro_number" jdbcType="VARCHAR" property="proNumber" />
+    <result column="pro_name" jdbcType="NVARCHAR" property="proName" />
+    <result column="pdt_no" jdbcType="VARCHAR" property="pdtNo" />
+    <result column="bversion_name" jdbcType="NVARCHAR" property="bversionName" />
+    <result column="pdt_name" jdbcType="NVARCHAR" property="pdtName" />
+    <result column="proline_name" jdbcType="NVARCHAR" property="prolineName" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, pro_number, pro_name, pdt_no, bversion_name, pdt_name, proline_name, status
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.product.entity.IbdsProjectCodeRecommendExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_PROJECT_CODE_RECOMMEND
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_PROJECT_CODE_RECOMMEND
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_PROJECT_CODE_RECOMMEND
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.product.entity.IbdsProjectCodeRecommendExample">
+    delete from IBDS_PROJECT_CODE_RECOMMEND
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.product.entity.IbdsProjectCodeRecommend">
+    insert into IBDS_PROJECT_CODE_RECOMMEND (ID, pro_number, pro_name, 
+      pdt_no, bversion_name, pdt_name, 
+      proline_name, status)
+    values (#{id,jdbcType=INTEGER}, #{proNumber,jdbcType=VARCHAR}, #{proName,jdbcType=NVARCHAR}, 
+      #{pdtNo,jdbcType=VARCHAR}, #{bversionName,jdbcType=NVARCHAR}, #{pdtName,jdbcType=NVARCHAR}, 
+      #{prolineName,jdbcType=NVARCHAR}, #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.product.entity.IbdsProjectCodeRecommend">
+    insert into IBDS_PROJECT_CODE_RECOMMEND
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="proNumber != null">
+        pro_number,
+      </if>
+      <if test="proName != null">
+        pro_name,
+      </if>
+      <if test="pdtNo != null">
+        pdt_no,
+      </if>
+      <if test="bversionName != null">
+        bversion_name,
+      </if>
+      <if test="pdtName != null">
+        pdt_name,
+      </if>
+      <if test="prolineName != null">
+        proline_name,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="proNumber != null">
+        #{proNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="proName != null">
+        #{proName,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtNo != null">
+        #{pdtNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bversionName != null">
+        #{bversionName,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtName != null">
+        #{pdtName,jdbcType=NVARCHAR},
+      </if>
+      <if test="prolineName != null">
+        #{prolineName,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.product.entity.IbdsProjectCodeRecommendExample" resultType="java.lang.Long">
+    select count(*) from IBDS_PROJECT_CODE_RECOMMEND
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_PROJECT_CODE_RECOMMEND
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.proNumber != null">
+        pro_number = #{record.proNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proName != null">
+        pro_name = #{record.proName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdtNo != null">
+        pdt_no = #{record.pdtNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bversionName != null">
+        bversion_name = #{record.bversionName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdtName != null">
+        pdt_name = #{record.pdtName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prolineName != null">
+        proline_name = #{record.prolineName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_PROJECT_CODE_RECOMMEND
+    set ID = #{record.id,jdbcType=INTEGER},
+      pro_number = #{record.proNumber,jdbcType=VARCHAR},
+      pro_name = #{record.proName,jdbcType=NVARCHAR},
+      pdt_no = #{record.pdtNo,jdbcType=VARCHAR},
+      bversion_name = #{record.bversionName,jdbcType=NVARCHAR},
+      pdt_name = #{record.pdtName,jdbcType=NVARCHAR},
+      proline_name = #{record.prolineName,jdbcType=NVARCHAR},
+      status = #{record.status,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.product.entity.IbdsProjectCodeRecommend">
+    update IBDS_PROJECT_CODE_RECOMMEND
+    <set>
+      <if test="proNumber != null">
+        pro_number = #{proNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="proName != null">
+        pro_name = #{proName,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtNo != null">
+        pdt_no = #{pdtNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bversionName != null">
+        bversion_name = #{bversionName,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtName != null">
+        pdt_name = #{pdtName,jdbcType=NVARCHAR},
+      </if>
+      <if test="prolineName != null">
+        proline_name = #{prolineName,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.product.entity.IbdsProjectCodeRecommend">
+    update IBDS_PROJECT_CODE_RECOMMEND
+    set pro_number = #{proNumber,jdbcType=VARCHAR},
+      pro_name = #{proName,jdbcType=NVARCHAR},
+      pdt_no = #{pdtNo,jdbcType=VARCHAR},
+      bversion_name = #{bversionName,jdbcType=NVARCHAR},
+      pdt_name = #{pdtName,jdbcType=NVARCHAR},
+      proline_name = #{prolineName,jdbcType=NVARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.VersionViewMapper">
+	<!-- 获取V版本树 -->
+	<select id="getTreeData" parameterType="map"
+		resultMap="BaseResultMap">
+
+		<!-- IPMT层 -->
+		<if test="param.id == null">
+			select distinct PLIPMT,PLIPMTNo,plipmt_order from VersionView where status = '1'
+		</if>
+
+
+		<if test="param.id != null">
+			<!-- 产品线层 -->
+			<if test="param.type =='PI'">
+
+				select distinct PRODLINENo+'_'+PLIPMTNo as PLIPMTNo ,PLIPMT,PRODLINE,PL_ORDER from
+				VersionView
+				where PLIPMTNo=#{param.id} and status = '1'
+
+			</if>
+			<!-- 产品层 -->
+			<if test="param.type =='PL'">
+
+				select distinct productno+'_'+PRODLINENo+'_'+PLIPMTNo as PLIPMTNo ,product,PLIPMT,PRODLINE
+				from VersionView
+				where PRODLINENo=#{param.id} and status = '1'
+
+			</if>
+			<!--V版本层 -->
+			<if test="param.type =='PP'">
+
+				select VERSIONNo+'_'+productno+'_'+PRODLINENo+'_'+Convert(varchar,ID)+'_'+PLIPMTNo as PLIPMTNo,product,PLIPMT,PRODLINE,
+				VERSIONNo,
+				VERSION, PRODUCTNo,
+				engVERSION, VERSIONOld, Status,
+				PRODUCTNo,POP_ID,CMO_ID,Remark,Match,VersionMatch,ProdDataID,PilotProduction_Mnger,
+				TechSupport_Mnger,Oversea_Mnger,readers,ID
+				from VersionView
+				where productno=#{param.id} and status = '1'
+
+			</if>
+			
+			<if test="param.PRODLINENo!=null and param.PRODLINENo!=''">
+				and PRODLINENo=#{param.PRODLINENo}
+			</if>
+			<if test="param.PLIPMTNo!=null and param.PLIPMTNo!=''">
+				and PLIPMTNo=#{param.PLIPMTNo}
+			</if>
+
+		</if>
+		<!--全文检索 -->
+		<if
+			test="param.projectStatus != null and param.projectStatus != ''">
+			and PROJECTSTATUS=#{param.projectStatus}
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and CHARINDEX(#{param.searchParas},isnull(VERSIONNo,'') +' '+
+			isnull(VERSION,'')+' '+ isnull(PRODUCTNo,'')+' '
+			+ isnull(PRODUCT,'') +' '+ isnull(engVERSION,'')+' '+ isnull(VERSIONOld,'')+' ' +
+			isnull(PRODUCTNo,'')+' '
+			+isnull(POP_ID,'')+' ' + isnull(CMO_ID,'') +' '+ isnull(Remark,'')+' ' + isnull(Match,'')+' '
+			+ isnull(VersionMatch,'')+' ' + isnull(ProdDataID,'') +' '+
+			isnull(PilotProduction_Mnger,'')+' '
+			+ isnull(TechSupport_Mnger+Oversea_Mnger,''))&gt;0
+		</if>
+		
+		 <!-- IPMT层-->
+    <if test="param.id == null">
+    order by plipmt_order,PLIPMT
+    </if>
+     <if test="param.id != null">
+     <!-- 产品线层 -->
+	 <if test="param.type =='PI'">
+     order by PL_ORDER,PRODLINE
+     </if>
+      <!-- PDT层 -->
+      <if test="param.type =='PL'">
+      order by Product
+      </if>
+      <!--V版本层 -->
+	  <if test="param.type =='PP'">
+	  order by VERSION
+	  </if>
+      </if>
+	</select>
+
+
+
+
+	<!--根据内码查询属性 -->
+	<select id="selectByCode" parameterType="string"
+		resultMap="BaseResultMap">
+		select top 1
+		<include refid="Base_Column_List" />
+		from VersionView
+		where VERSIONNo=#{code}
+
+	</select>
+	
+	<!--根据内码查询属性 -->
+	<select id="selectByID" parameterType="Integer"
+		resultMap="BaseResultMap">
+		select top 1
+		<include refid="Base_Column_List" />
+		from VersionView
+		where ID=#{code}
+
+	</select>
+	
+	<select id="getMaxCode" resultType="String">
+		select max(versionno) from IBDS_version WHERE versionno LIKE 'PV%';
+	</select>
+	
+	<select id="getExportList" parameterType="map"
+		resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from VersionView where status = '1'
+		
+		<!--全文检索 -->
+		<if
+			test="param.projectStatus != null and param.projectStatus != ''">
+			and PROJECTSTATUS=#{param.projectStatus}
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and CHARINDEX(#{param.searchParas},isnull(VERSIONNo,'') +' '+
+			isnull(VERSION,'')+' '+ isnull(PRODUCTNo,'')+' '
+			+ isnull(PRODUCT,'') +' '+ isnull(engVERSION,'')+' '+ isnull(VERSIONOld,'')+' ' +
+			isnull(PRODUCTNo,'')+' '
+			+isnull(POP_ID,'')+' ' + isnull(CMO_ID,'') +' '+ isnull(Remark,'')+' ' + isnull(Match,'')+' '
+			+ isnull(VersionMatch,'')+' ' + isnull(ProdDataID,'') +' '+
+			isnull(PilotProduction_Mnger,'')+' '
+			+ isnull(TechSupport_Mnger+Oversea_Mnger,''))&gt;0
+		</if>
+		
+		 order by plipmt_order,PLIPMT
+	</select>
+</mapper>

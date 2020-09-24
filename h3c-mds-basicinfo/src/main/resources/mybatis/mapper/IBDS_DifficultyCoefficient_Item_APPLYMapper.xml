@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.IBDS_DifficultyCoefficient_Item_APPLYMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_Item_APPLY">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="Diff_ID" jdbcType="INTEGER" property="diffId" />
+    <result column="BVersionno" jdbcType="NVARCHAR" property="bversionno" />
+    <result column="BVersion" jdbcType="NVARCHAR" property="bversion" />
+    <result column="ProDifficult" jdbcType="DECIMAL" property="prodifficult" />
+    <result column="HardDifficult" jdbcType="DECIMAL" property="harddifficult" />
+    <result column="Status" jdbcType="CHAR" property="status" />
+    <result column="Creator" jdbcType="NVARCHAR" property="creator" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="Modifier" jdbcType="NVARCHAR" property="modifier" />
+    <result column="ModifyTime" jdbcType="TIMESTAMP" property="modifytime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, Diff_ID, BVersionno, BVersion, ProDifficult, HardDifficult, Status, Creator, 
+    CreateTime, Modifier, ModifyTime
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_Item_APPLYExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_DifficultyCoefficient_Item_APPLY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_DifficultyCoefficient_Item_APPLY
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_DifficultyCoefficient_Item_APPLY
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_Item_APPLYExample">
+    delete from IBDS_DifficultyCoefficient_Item_APPLY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_Item_APPLY">
+    insert into IBDS_DifficultyCoefficient_Item_APPLY (ID, Diff_ID, BVersionno, 
+      BVersion, ProDifficult, HardDifficult, 
+      Status, Creator, CreateTime, 
+      Modifier, ModifyTime)
+    values (#{id,jdbcType=INTEGER}, #{diffId,jdbcType=INTEGER}, #{bversionno,jdbcType=NVARCHAR}, 
+      #{bversion,jdbcType=NVARCHAR}, #{prodifficult,jdbcType=DECIMAL}, #{harddifficult,jdbcType=DECIMAL}, 
+      #{status,jdbcType=CHAR}, #{creator,jdbcType=NVARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{modifier,jdbcType=NVARCHAR}, #{modifytime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_Item_APPLY">
+    insert into IBDS_DifficultyCoefficient_Item_APPLY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="diffId != null">
+        Diff_ID,
+      </if>
+      <if test="bversionno != null">
+        BVersionno,
+      </if>
+      <if test="bversion != null">
+        BVersion,
+      </if>
+      <if test="prodifficult != null">
+        ProDifficult,
+      </if>
+      <if test="harddifficult != null">
+        HardDifficult,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="creator != null">
+        Creator,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+      <if test="modifier != null">
+        Modifier,
+      </if>
+      <if test="modifytime != null">
+        ModifyTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="diffId != null">
+        #{diffId,jdbcType=INTEGER},
+      </if>
+      <if test="bversionno != null">
+        #{bversionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="bversion != null">
+        #{bversion,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodifficult != null">
+        #{prodifficult,jdbcType=DECIMAL},
+      </if>
+      <if test="harddifficult != null">
+        #{harddifficult,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifytime != null">
+        #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_Item_APPLYExample" resultType="java.lang.Long">
+    select count(*) from IBDS_DifficultyCoefficient_Item_APPLY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_DifficultyCoefficient_Item_APPLY
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.diffId != null">
+        Diff_ID = #{record.diffId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bversionno != null">
+        BVersionno = #{record.bversionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.bversion != null">
+        BVersion = #{record.bversion,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodifficult != null">
+        ProDifficult = #{record.prodifficult,jdbcType=DECIMAL},
+      </if>
+      <if test="record.harddifficult != null">
+        HardDifficult = #{record.harddifficult,jdbcType=DECIMAL},
+      </if>
+      <if test="record.status != null">
+        Status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.creator != null">
+        Creator = #{record.creator,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifier != null">
+        Modifier = #{record.modifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modifytime != null">
+        ModifyTime = #{record.modifytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_DifficultyCoefficient_Item_APPLY
+    set ID = #{record.id,jdbcType=INTEGER},
+      Diff_ID = #{record.diffId,jdbcType=INTEGER},
+      BVersionno = #{record.bversionno,jdbcType=NVARCHAR},
+      BVersion = #{record.bversion,jdbcType=NVARCHAR},
+      ProDifficult = #{record.prodifficult,jdbcType=DECIMAL},
+      HardDifficult = #{record.harddifficult,jdbcType=DECIMAL},
+      Status = #{record.status,jdbcType=CHAR},
+      Creator = #{record.creator,jdbcType=NVARCHAR},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      Modifier = #{record.modifier,jdbcType=NVARCHAR},
+      ModifyTime = #{record.modifytime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_Item_APPLY">
+    update IBDS_DifficultyCoefficient_Item_APPLY
+    <set>
+      <if test="diffId != null">
+        Diff_ID = #{diffId,jdbcType=INTEGER},
+      </if>
+      <if test="bversionno != null">
+        BVersionno = #{bversionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="bversion != null">
+        BVersion = #{bversion,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodifficult != null">
+        ProDifficult = #{prodifficult,jdbcType=DECIMAL},
+      </if>
+      <if test="harddifficult != null">
+        HardDifficult = #{harddifficult,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        Status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="creator != null">
+        Creator = #{creator,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null">
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        Modifier = #{modifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifytime != null">
+        ModifyTime = #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_Item_APPLY">
+    update IBDS_DifficultyCoefficient_Item_APPLY
+    set Diff_ID = #{diffId,jdbcType=INTEGER},
+      BVersionno = #{bversionno,jdbcType=NVARCHAR},
+      BVersion = #{bversion,jdbcType=NVARCHAR},
+      ProDifficult = #{prodifficult,jdbcType=DECIMAL},
+      HardDifficult = #{harddifficult,jdbcType=DECIMAL},
+      Status = #{status,jdbcType=CHAR},
+      Creator = #{creator,jdbcType=NVARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      Modifier = #{modifier,jdbcType=NVARCHAR},
+      ModifyTime = #{modifytime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

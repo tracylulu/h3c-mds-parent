@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.flowable.dao.ProjectProductRelMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.flowable.entity.ProjectProductRel">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="proj_no" jdbcType="NVARCHAR" property="projNo" />
+    <result column="PRODUCT_CODE" jdbcType="NVARCHAR" property="productCode" />
+    <result column="aplicant" jdbcType="NVARCHAR" property="aplicant" />
+    <result column="applyDate" jdbcType="TIMESTAMP" property="applydate" />
+    <result column="pdtno" jdbcType="NVARCHAR" property="pdtno" />
+    <result column="rate" jdbcType="NVARCHAR" property="rate" />
+    <result column="status" jdbcType="NVARCHAR" property="status" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="pdt_name" jdbcType="VARCHAR" property="pdtName" />
+    <result column="project_code_id" jdbcType="INTEGER" property="projectCodeId" />
+    <result column="old_product_name" jdbcType="VARCHAR" property="oldProductName" />
+    <result column="old_pdt_name" jdbcType="VARCHAR" property="oldPdtName" />
+    <result column="old_product_code" jdbcType="VARCHAR" property="oldProductCode" />
+    <result column="old_rate" jdbcType="VARCHAR" property="oldRate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, proj_no, PRODUCT_CODE, aplicant, applyDate, pdtno, rate, status, product_name, 
+    pdt_name, project_code_id, old_product_name, old_pdt_name, old_product_code, old_rate
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.flowable.entity.ProjectProductRelExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_PROJECT_PRODUCT_REL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_PROJECT_PRODUCT_REL
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_PROJECT_PRODUCT_REL
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.flowable.entity.ProjectProductRelExample">
+    delete from IBDS_PROJECT_PRODUCT_REL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.flowable.entity.ProjectProductRel">
+    insert into IBDS_PROJECT_PRODUCT_REL (ID, proj_no, PRODUCT_CODE, 
+      aplicant, applyDate, pdtno, 
+      rate, status, product_name, 
+      pdt_name, project_code_id, old_product_name, 
+      old_pdt_name, old_product_code, old_rate
+      )
+    values (#{id,jdbcType=INTEGER}, #{projNo,jdbcType=NVARCHAR}, #{productCode,jdbcType=NVARCHAR}, 
+      #{aplicant,jdbcType=NVARCHAR}, #{applydate,jdbcType=TIMESTAMP}, #{pdtno,jdbcType=NVARCHAR}, 
+      #{rate,jdbcType=NVARCHAR}, #{status,jdbcType=NVARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{pdtName,jdbcType=VARCHAR}, #{projectCodeId,jdbcType=INTEGER}, #{oldProductName,jdbcType=VARCHAR}, 
+      #{oldPdtName,jdbcType=VARCHAR}, #{oldProductCode,jdbcType=VARCHAR}, #{oldRate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.flowable.entity.ProjectProductRel">
+    insert into IBDS_PROJECT_PRODUCT_REL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="projNo != null">
+        proj_no,
+      </if>
+      <if test="productCode != null">
+        PRODUCT_CODE,
+      </if>
+      <if test="aplicant != null">
+        aplicant,
+      </if>
+      <if test="applydate != null">
+        applyDate,
+      </if>
+      <if test="pdtno != null">
+        pdtno,
+      </if>
+      <if test="rate != null">
+        rate,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="pdtName != null">
+        pdt_name,
+      </if>
+      <if test="projectCodeId != null">
+        project_code_id,
+      </if>
+      <if test="oldProductName != null">
+        old_product_name,
+      </if>
+      <if test="oldPdtName != null">
+        old_pdt_name,
+      </if>
+      <if test="oldProductCode != null">
+        old_product_code,
+      </if>
+      <if test="oldRate != null">
+        old_rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projNo != null">
+        #{projNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="productCode != null">
+        #{productCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="aplicant != null">
+        #{aplicant,jdbcType=NVARCHAR},
+      </if>
+      <if test="applydate != null">
+        #{applydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pdtno != null">
+        #{pdtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="pdtName != null">
+        #{pdtName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectCodeId != null">
+        #{projectCodeId,jdbcType=INTEGER},
+      </if>
+      <if test="oldProductName != null">
+        #{oldProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldPdtName != null">
+        #{oldPdtName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldProductCode != null">
+        #{oldProductCode,jdbcType=VARCHAR},
+      </if>
+      <if test="oldRate != null">
+        #{oldRate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.flowable.entity.ProjectProductRelExample" resultType="java.lang.Long">
+    select count(*) from IBDS_PROJECT_PRODUCT_REL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_PROJECT_PRODUCT_REL
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.projNo != null">
+        proj_no = #{record.projNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productCode != null">
+        PRODUCT_CODE = #{record.productCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.aplicant != null">
+        aplicant = #{record.aplicant,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.applydate != null">
+        applyDate = #{record.applydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pdtno != null">
+        pdtno = #{record.pdtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.rate != null">
+        rate = #{record.rate,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productName != null">
+        product_name = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pdtName != null">
+        pdt_name = #{record.pdtName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectCodeId != null">
+        project_code_id = #{record.projectCodeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.oldProductName != null">
+        old_product_name = #{record.oldProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oldPdtName != null">
+        old_pdt_name = #{record.oldPdtName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oldProductCode != null">
+        old_product_code = #{record.oldProductCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oldRate != null">
+        old_rate = #{record.oldRate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_PROJECT_PRODUCT_REL
+    set ID = #{record.id,jdbcType=INTEGER},
+      proj_no = #{record.projNo,jdbcType=NVARCHAR},
+      PRODUCT_CODE = #{record.productCode,jdbcType=NVARCHAR},
+      aplicant = #{record.aplicant,jdbcType=NVARCHAR},
+      applyDate = #{record.applydate,jdbcType=TIMESTAMP},
+      pdtno = #{record.pdtno,jdbcType=NVARCHAR},
+      rate = #{record.rate,jdbcType=NVARCHAR},
+      status = #{record.status,jdbcType=NVARCHAR},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      pdt_name = #{record.pdtName,jdbcType=VARCHAR},
+      project_code_id = #{record.projectCodeId,jdbcType=INTEGER},
+      old_product_name = #{record.oldProductName,jdbcType=VARCHAR},
+      old_pdt_name = #{record.oldPdtName,jdbcType=VARCHAR},
+      old_product_code = #{record.oldProductCode,jdbcType=VARCHAR},
+      old_rate = #{record.oldRate,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.flowable.entity.ProjectProductRel">
+    update IBDS_PROJECT_PRODUCT_REL
+    <set>
+      <if test="projNo != null">
+        proj_no = #{projNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="productCode != null">
+        PRODUCT_CODE = #{productCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="aplicant != null">
+        aplicant = #{aplicant,jdbcType=NVARCHAR},
+      </if>
+      <if test="applydate != null">
+        applyDate = #{applydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pdtno != null">
+        pdtno = #{pdtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="rate != null">
+        rate = #{rate,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="pdtName != null">
+        pdt_name = #{pdtName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectCodeId != null">
+        project_code_id = #{projectCodeId,jdbcType=INTEGER},
+      </if>
+      <if test="oldProductName != null">
+        old_product_name = #{oldProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldPdtName != null">
+        old_pdt_name = #{oldPdtName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldProductCode != null">
+        old_product_code = #{oldProductCode,jdbcType=VARCHAR},
+      </if>
+      <if test="oldRate != null">
+        old_rate = #{oldRate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.flowable.entity.ProjectProductRel">
+    update IBDS_PROJECT_PRODUCT_REL
+    set proj_no = #{projNo,jdbcType=NVARCHAR},
+      PRODUCT_CODE = #{productCode,jdbcType=NVARCHAR},
+      aplicant = #{aplicant,jdbcType=NVARCHAR},
+      applyDate = #{applydate,jdbcType=TIMESTAMP},
+      pdtno = #{pdtno,jdbcType=NVARCHAR},
+      rate = #{rate,jdbcType=NVARCHAR},
+      status = #{status,jdbcType=NVARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      pdt_name = #{pdtName,jdbcType=VARCHAR},
+      project_code_id = #{projectCodeId,jdbcType=INTEGER},
+      old_product_name = #{oldProductName,jdbcType=VARCHAR},
+      old_pdt_name = #{oldPdtName,jdbcType=VARCHAR},
+      old_product_code = #{oldProductCode,jdbcType=VARCHAR},
+      old_rate = #{oldRate,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

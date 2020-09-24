@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.finance.dao.FProdLineMapper">
+
+  <select id="getDistinctNameByDept" parameterType="string" resultMap="BaseResultMap">
+    SELECT DISTINCT PRODLINE_DESC,PRODLINE_CODE FROM IBDS_F_PRODLINE
+    <where>
+      <if test="_parameter == 'D0001'">
+        PRODLINE_CODE IS NOT NULL
+      </if>
+      <if test="_parameter == 'D0002' || _parameter == 'D0003'">
+        PRODLINE_CODE IS NULL
+      </if>
+    </where>
+      ORDER BY PRODLINE_DESC
+  </select>
+
+  <select id="getDistinctDescFromCode" resultMap="BaseResultMap">
+    SELECT DISTINCT PRODLINE_DESC,PRODLINE_CODE FROM IBDS_F_PRODLINE JOIN IBDS_F_PRODUCT_CODE ON IBDS_F_PRODLINE.ID=IBDS_F_PRODUCT_CODE.PRODLINE_ID ORDER BY IBDS_F_PRODLINE.PRODLINE_DESC
+  </select>
+
+
+
+</mapper>

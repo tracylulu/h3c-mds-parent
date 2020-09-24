@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.finance.dao.FProductCodeMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.finance.entity.FProductCode">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="PRODLINE_NAME" jdbcType="NVARCHAR" property="prodlineName" />
+    <result column="PRODUCT_NAME" jdbcType="NVARCHAR" property="productName" />
+    <result column="PDT_NAME" jdbcType="NVARCHAR" property="pdtName" />
+    <result column="PDT_NO" jdbcType="NVARCHAR" property="pdtNo" />
+    <result column="PDT_MNG" jdbcType="NVARCHAR" property="pdtMng" />
+    <result column="PRODLINE_NO" jdbcType="NVARCHAR" property="prodlineNo" />
+    <result column="PRODUCT_NO" jdbcType="NVARCHAR" property="productNo" />
+    <result column="PRODUCT_CODE" jdbcType="NVARCHAR" property="productCode" />
+    <result column="PRODUCT_NAME_CN" jdbcType="NVARCHAR" property="productNameCn" />
+    <result column="PRODUCT_NAME_EN" jdbcType="NVARCHAR" property="productNameEn" />
+    <result column="BASIS_MATERIAL" jdbcType="NVARCHAR" property="basisMaterial" />
+    <result column="BOM_CODE" jdbcType="NVARCHAR" property="bomCode" />
+    <result column="BOM_DESC" jdbcType="NVARCHAR" property="bomDesc" />
+    <result column="PROCESS_CODE" jdbcType="NVARCHAR" property="processCode" />
+    <result column="ORDER_BY" jdbcType="INTEGER" property="orderBy" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="CREATE_USER" jdbcType="NVARCHAR" property="createUser" />
+    <result column="MODIFY_DATE" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="MODIFY_USER" jdbcType="NVARCHAR" property="modifyUser" />
+    <result column="NOTE" jdbcType="NVARCHAR" property="note" />
+    <result column="OLD_PRODUCT_CODE" jdbcType="NVARCHAR" property="oldProductCode" />
+    <result column="OLD_PRODLINE_NAME" jdbcType="NVARCHAR" property="oldProdlineName" />
+    <result column="OLD_PRODUCT_NAME" jdbcType="NVARCHAR" property="oldProductName" />
+    <result column="OLD_PDT_NAME" jdbcType="NVARCHAR" property="oldPdtName" />
+    <result column="OLD_PDT_NO" jdbcType="NVARCHAR" property="oldPdtNo" />
+    <result column="OLD_PDT_MNG" jdbcType="NVARCHAR" property="oldPdtMng" />
+    <result column="OLD_PRODLINE_NO" jdbcType="NVARCHAR" property="oldProdlineNo" />
+    <result column="OLD_PRODUCT_NO" jdbcType="NVARCHAR" property="oldProductNo" />
+    <result column="OLD_PRODUCT_NAME_CN" jdbcType="NVARCHAR" property="oldProductNameCn" />
+    <result column="OLD_PRODUCT_NAME_EN" jdbcType="NVARCHAR" property="oldProductNameEn" />
+    <result column="OLD_BOM_CODE" jdbcType="NVARCHAR" property="oldBomCode" />
+    <result column="OLD_BOM_DESC" jdbcType="NVARCHAR" property="oldBomDesc" />
+    <result column="STATUS" jdbcType="NVARCHAR" property="status" />
+    <result column="EFFECT_DATE" jdbcType="TIMESTAMP" property="effectDate" />
+    <result column="BASIS_MATERIAL_ID" jdbcType="NVARCHAR" property="basisMaterialId" />
+    <result column="FPROD_NO" jdbcType="NVARCHAR" property="fprodNo" />
+    <result column="APPLY_DEPT" jdbcType="NVARCHAR" property="applyDept" />
+    <result column="PRODLINE_ID" jdbcType="INTEGER" property="prodlineId" />
+    <result column="PRODUCT_ID" jdbcType="INTEGER" property="productId" />
+    <result column="PDT_ID" jdbcType="INTEGER" property="pdtId" />
+    <result column="OLD_PRODLINE_ID" jdbcType="INTEGER" property="oldProdlineId" />
+    <result column="OLD_PRODUCT_ID" jdbcType="INTEGER" property="oldProductId" />
+    <result column="OLD_PDT_ID" jdbcType="INTEGER" property="oldPdtId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, PRODLINE_NAME, PRODUCT_NAME, PDT_NAME, PDT_NO, PDT_MNG, PRODLINE_NO, PRODUCT_NO, 
+    PRODUCT_CODE, PRODUCT_NAME_CN, PRODUCT_NAME_EN, BASIS_MATERIAL, BOM_CODE, BOM_DESC, 
+    PROCESS_CODE, ORDER_BY, CREATE_DATE, CREATE_USER, MODIFY_DATE, MODIFY_USER, NOTE, 
+    OLD_PRODUCT_CODE, OLD_PRODLINE_NAME, OLD_PRODUCT_NAME, OLD_PDT_NAME, OLD_PDT_NO, 
+    OLD_PDT_MNG, OLD_PRODLINE_NO, OLD_PRODUCT_NO, OLD_PRODUCT_NAME_CN, OLD_PRODUCT_NAME_EN, 
+    OLD_BOM_CODE, OLD_BOM_DESC, STATUS, EFFECT_DATE, BASIS_MATERIAL_ID, FPROD_NO, APPLY_DEPT, 
+    PRODLINE_ID, PRODUCT_ID, PDT_ID, OLD_PRODLINE_ID, OLD_PRODUCT_ID, OLD_PDT_ID
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.finance.entity.FProductCodeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_F_PRODUCT_CODE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_F_PRODUCT_CODE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_F_PRODUCT_CODE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.finance.entity.FProductCodeExample">
+    delete from IBDS_F_PRODUCT_CODE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.finance.entity.FProductCode">
+    insert into IBDS_F_PRODUCT_CODE (ID, PRODLINE_NAME, PRODUCT_NAME, 
+      PDT_NAME, PDT_NO, PDT_MNG, 
+      PRODLINE_NO, PRODUCT_NO, PRODUCT_CODE, 
+      PRODUCT_NAME_CN, PRODUCT_NAME_EN, BASIS_MATERIAL, 
+      BOM_CODE, BOM_DESC, PROCESS_CODE, 
+      ORDER_BY, CREATE_DATE, CREATE_USER, 
+      MODIFY_DATE, MODIFY_USER, NOTE, 
+      OLD_PRODUCT_CODE, OLD_PRODLINE_NAME, OLD_PRODUCT_NAME, 
+      OLD_PDT_NAME, OLD_PDT_NO, OLD_PDT_MNG, 
+      OLD_PRODLINE_NO, OLD_PRODUCT_NO, OLD_PRODUCT_NAME_CN, 
+      OLD_PRODUCT_NAME_EN, OLD_BOM_CODE, OLD_BOM_DESC, 
+      STATUS, EFFECT_DATE, BASIS_MATERIAL_ID, 
+      FPROD_NO, APPLY_DEPT, PRODLINE_ID, 
+      PRODUCT_ID, PDT_ID, OLD_PRODLINE_ID, 
+      OLD_PRODUCT_ID, OLD_PDT_ID)
+    values (#{id,jdbcType=INTEGER}, #{prodlineName,jdbcType=NVARCHAR}, #{productName,jdbcType=NVARCHAR}, 
+      #{pdtName,jdbcType=NVARCHAR}, #{pdtNo,jdbcType=NVARCHAR}, #{pdtMng,jdbcType=NVARCHAR}, 
+      #{prodlineNo,jdbcType=NVARCHAR}, #{productNo,jdbcType=NVARCHAR}, #{productCode,jdbcType=NVARCHAR}, 
+      #{productNameCn,jdbcType=NVARCHAR}, #{productNameEn,jdbcType=NVARCHAR}, #{basisMaterial,jdbcType=NVARCHAR}, 
+      #{bomCode,jdbcType=NVARCHAR}, #{bomDesc,jdbcType=NVARCHAR}, #{processCode,jdbcType=NVARCHAR}, 
+      #{orderBy,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{createUser,jdbcType=NVARCHAR}, 
+      #{modifyDate,jdbcType=TIMESTAMP}, #{modifyUser,jdbcType=NVARCHAR}, #{note,jdbcType=NVARCHAR}, 
+      #{oldProductCode,jdbcType=NVARCHAR}, #{oldProdlineName,jdbcType=NVARCHAR}, #{oldProductName,jdbcType=NVARCHAR}, 
+      #{oldPdtName,jdbcType=NVARCHAR}, #{oldPdtNo,jdbcType=NVARCHAR}, #{oldPdtMng,jdbcType=NVARCHAR}, 
+      #{oldProdlineNo,jdbcType=NVARCHAR}, #{oldProductNo,jdbcType=NVARCHAR}, #{oldProductNameCn,jdbcType=NVARCHAR}, 
+      #{oldProductNameEn,jdbcType=NVARCHAR}, #{oldBomCode,jdbcType=NVARCHAR}, #{oldBomDesc,jdbcType=NVARCHAR}, 
+      #{status,jdbcType=NVARCHAR}, #{effectDate,jdbcType=TIMESTAMP}, #{basisMaterialId,jdbcType=NVARCHAR}, 
+      #{fprodNo,jdbcType=NVARCHAR}, #{applyDept,jdbcType=NVARCHAR}, #{prodlineId,jdbcType=INTEGER}, 
+      #{productId,jdbcType=INTEGER}, #{pdtId,jdbcType=INTEGER}, #{oldProdlineId,jdbcType=INTEGER}, 
+      #{oldProductId,jdbcType=INTEGER}, #{oldPdtId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.finance.entity.FProductCode">
+    insert into IBDS_F_PRODUCT_CODE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="prodlineName != null">
+        PRODLINE_NAME,
+      </if>
+      <if test="productName != null">
+        PRODUCT_NAME,
+      </if>
+      <if test="pdtName != null">
+        PDT_NAME,
+      </if>
+      <if test="pdtNo != null">
+        PDT_NO,
+      </if>
+      <if test="pdtMng != null">
+        PDT_MNG,
+      </if>
+      <if test="prodlineNo != null">
+        PRODLINE_NO,
+      </if>
+      <if test="productNo != null">
+        PRODUCT_NO,
+      </if>
+      <if test="productCode != null">
+        PRODUCT_CODE,
+      </if>
+      <if test="productNameCn != null">
+        PRODUCT_NAME_CN,
+      </if>
+      <if test="productNameEn != null">
+        PRODUCT_NAME_EN,
+      </if>
+      <if test="basisMaterial != null">
+        BASIS_MATERIAL,
+      </if>
+      <if test="bomCode != null">
+        BOM_CODE,
+      </if>
+      <if test="bomDesc != null">
+        BOM_DESC,
+      </if>
+      <if test="processCode != null">
+        PROCESS_CODE,
+      </if>
+      <if test="orderBy != null">
+        ORDER_BY,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE,
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER,
+      </if>
+      <if test="note != null">
+        NOTE,
+      </if>
+      <if test="oldProductCode != null">
+        OLD_PRODUCT_CODE,
+      </if>
+      <if test="oldProdlineName != null">
+        OLD_PRODLINE_NAME,
+      </if>
+      <if test="oldProductName != null">
+        OLD_PRODUCT_NAME,
+      </if>
+      <if test="oldPdtName != null">
+        OLD_PDT_NAME,
+      </if>
+      <if test="oldPdtNo != null">
+        OLD_PDT_NO,
+      </if>
+      <if test="oldPdtMng != null">
+        OLD_PDT_MNG,
+      </if>
+      <if test="oldProdlineNo != null">
+        OLD_PRODLINE_NO,
+      </if>
+      <if test="oldProductNo != null">
+        OLD_PRODUCT_NO,
+      </if>
+      <if test="oldProductNameCn != null">
+        OLD_PRODUCT_NAME_CN,
+      </if>
+      <if test="oldProductNameEn != null">
+        OLD_PRODUCT_NAME_EN,
+      </if>
+      <if test="oldBomCode != null">
+        OLD_BOM_CODE,
+      </if>
+      <if test="oldBomDesc != null">
+        OLD_BOM_DESC,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="effectDate != null">
+        EFFECT_DATE,
+      </if>
+      <if test="basisMaterialId != null">
+        BASIS_MATERIAL_ID,
+      </if>
+      <if test="fprodNo != null">
+        FPROD_NO,
+      </if>
+      <if test="applyDept != null">
+        APPLY_DEPT,
+      </if>
+      <if test="prodlineId != null">
+        PRODLINE_ID,
+      </if>
+      <if test="productId != null">
+        PRODUCT_ID,
+      </if>
+      <if test="pdtId != null">
+        PDT_ID,
+      </if>
+      <if test="oldProdlineId != null">
+        OLD_PRODLINE_ID,
+      </if>
+      <if test="oldProductId != null">
+        OLD_PRODUCT_ID,
+      </if>
+      <if test="oldPdtId != null">
+        OLD_PDT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="prodlineName != null">
+        #{prodlineName,jdbcType=NVARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtName != null">
+        #{pdtName,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtNo != null">
+        #{pdtNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtMng != null">
+        #{pdtMng,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineNo != null">
+        #{prodlineNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="productNo != null">
+        #{productNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="productCode != null">
+        #{productCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="productNameCn != null">
+        #{productNameCn,jdbcType=NVARCHAR},
+      </if>
+      <if test="productNameEn != null">
+        #{productNameEn,jdbcType=NVARCHAR},
+      </if>
+      <if test="basisMaterial != null">
+        #{basisMaterial,jdbcType=NVARCHAR},
+      </if>
+      <if test="bomCode != null">
+        #{bomCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="bomDesc != null">
+        #{bomDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="processCode != null">
+        #{processCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="orderBy != null">
+        #{orderBy,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldProductCode != null">
+        #{oldProductCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldProdlineName != null">
+        #{oldProdlineName,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldProductName != null">
+        #{oldProductName,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldPdtName != null">
+        #{oldPdtName,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldPdtNo != null">
+        #{oldPdtNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldPdtMng != null">
+        #{oldPdtMng,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldProdlineNo != null">
+        #{oldProdlineNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldProductNo != null">
+        #{oldProductNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldProductNameCn != null">
+        #{oldProductNameCn,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldProductNameEn != null">
+        #{oldProductNameEn,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldBomCode != null">
+        #{oldBomCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldBomDesc != null">
+        #{oldBomDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="effectDate != null">
+        #{effectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="basisMaterialId != null">
+        #{basisMaterialId,jdbcType=NVARCHAR},
+      </if>
+      <if test="fprodNo != null">
+        #{fprodNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="applyDept != null">
+        #{applyDept,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineId != null">
+        #{prodlineId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="pdtId != null">
+        #{pdtId,jdbcType=INTEGER},
+      </if>
+      <if test="oldProdlineId != null">
+        #{oldProdlineId,jdbcType=INTEGER},
+      </if>
+      <if test="oldProductId != null">
+        #{oldProductId,jdbcType=INTEGER},
+      </if>
+      <if test="oldPdtId != null">
+        #{oldPdtId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.finance.entity.FProductCodeExample" resultType="java.lang.Long">
+    select count(*) from IBDS_F_PRODUCT_CODE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_F_PRODUCT_CODE
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.prodlineName != null">
+        PRODLINE_NAME = #{record.prodlineName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productName != null">
+        PRODUCT_NAME = #{record.productName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdtName != null">
+        PDT_NAME = #{record.pdtName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdtNo != null">
+        PDT_NO = #{record.pdtNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdtMng != null">
+        PDT_MNG = #{record.pdtMng,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodlineNo != null">
+        PRODLINE_NO = #{record.prodlineNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productNo != null">
+        PRODUCT_NO = #{record.productNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productCode != null">
+        PRODUCT_CODE = #{record.productCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productNameCn != null">
+        PRODUCT_NAME_CN = #{record.productNameCn,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productNameEn != null">
+        PRODUCT_NAME_EN = #{record.productNameEn,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.basisMaterial != null">
+        BASIS_MATERIAL = #{record.basisMaterial,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.bomCode != null">
+        BOM_CODE = #{record.bomCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.bomDesc != null">
+        BOM_DESC = #{record.bomDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.processCode != null">
+        PROCESS_CODE = #{record.processCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.orderBy != null">
+        ORDER_BY = #{record.orderBy,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null">
+        CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modifyDate != null">
+        MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyUser != null">
+        MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.note != null">
+        NOTE = #{record.note,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.oldProductCode != null">
+        OLD_PRODUCT_CODE = #{record.oldProductCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.oldProdlineName != null">
+        OLD_PRODLINE_NAME = #{record.oldProdlineName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.oldProductName != null">
+        OLD_PRODUCT_NAME = #{record.oldProductName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.oldPdtName != null">
+        OLD_PDT_NAME = #{record.oldPdtName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.oldPdtNo != null">
+        OLD_PDT_NO = #{record.oldPdtNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.oldPdtMng != null">
+        OLD_PDT_MNG = #{record.oldPdtMng,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.oldProdlineNo != null">
+        OLD_PRODLINE_NO = #{record.oldProdlineNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.oldProductNo != null">
+        OLD_PRODUCT_NO = #{record.oldProductNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.oldProductNameCn != null">
+        OLD_PRODUCT_NAME_CN = #{record.oldProductNameCn,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.oldProductNameEn != null">
+        OLD_PRODUCT_NAME_EN = #{record.oldProductNameEn,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.oldBomCode != null">
+        OLD_BOM_CODE = #{record.oldBomCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.oldBomDesc != null">
+        OLD_BOM_DESC = #{record.oldBomDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.effectDate != null">
+        EFFECT_DATE = #{record.effectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.basisMaterialId != null">
+        BASIS_MATERIAL_ID = #{record.basisMaterialId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fprodNo != null">
+        FPROD_NO = #{record.fprodNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.applyDept != null">
+        APPLY_DEPT = #{record.applyDept,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodlineId != null">
+        PRODLINE_ID = #{record.prodlineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.productId != null">
+        PRODUCT_ID = #{record.productId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pdtId != null">
+        PDT_ID = #{record.pdtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.oldProdlineId != null">
+        OLD_PRODLINE_ID = #{record.oldProdlineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.oldProductId != null">
+        OLD_PRODUCT_ID = #{record.oldProductId,jdbcType=INTEGER},
+      </if>
+      <if test="record.oldPdtId != null">
+        OLD_PDT_ID = #{record.oldPdtId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_F_PRODUCT_CODE
+    set ID = #{record.id,jdbcType=INTEGER},
+      PRODLINE_NAME = #{record.prodlineName,jdbcType=NVARCHAR},
+      PRODUCT_NAME = #{record.productName,jdbcType=NVARCHAR},
+      PDT_NAME = #{record.pdtName,jdbcType=NVARCHAR},
+      PDT_NO = #{record.pdtNo,jdbcType=NVARCHAR},
+      PDT_MNG = #{record.pdtMng,jdbcType=NVARCHAR},
+      PRODLINE_NO = #{record.prodlineNo,jdbcType=NVARCHAR},
+      PRODUCT_NO = #{record.productNo,jdbcType=NVARCHAR},
+      PRODUCT_CODE = #{record.productCode,jdbcType=NVARCHAR},
+      PRODUCT_NAME_CN = #{record.productNameCn,jdbcType=NVARCHAR},
+      PRODUCT_NAME_EN = #{record.productNameEn,jdbcType=NVARCHAR},
+      BASIS_MATERIAL = #{record.basisMaterial,jdbcType=NVARCHAR},
+      BOM_CODE = #{record.bomCode,jdbcType=NVARCHAR},
+      BOM_DESC = #{record.bomDesc,jdbcType=NVARCHAR},
+      PROCESS_CODE = #{record.processCode,jdbcType=NVARCHAR},
+      ORDER_BY = #{record.orderBy,jdbcType=INTEGER},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      NOTE = #{record.note,jdbcType=NVARCHAR},
+      OLD_PRODUCT_CODE = #{record.oldProductCode,jdbcType=NVARCHAR},
+      OLD_PRODLINE_NAME = #{record.oldProdlineName,jdbcType=NVARCHAR},
+      OLD_PRODUCT_NAME = #{record.oldProductName,jdbcType=NVARCHAR},
+      OLD_PDT_NAME = #{record.oldPdtName,jdbcType=NVARCHAR},
+      OLD_PDT_NO = #{record.oldPdtNo,jdbcType=NVARCHAR},
+      OLD_PDT_MNG = #{record.oldPdtMng,jdbcType=NVARCHAR},
+      OLD_PRODLINE_NO = #{record.oldProdlineNo,jdbcType=NVARCHAR},
+      OLD_PRODUCT_NO = #{record.oldProductNo,jdbcType=NVARCHAR},
+      OLD_PRODUCT_NAME_CN = #{record.oldProductNameCn,jdbcType=NVARCHAR},
+      OLD_PRODUCT_NAME_EN = #{record.oldProductNameEn,jdbcType=NVARCHAR},
+      OLD_BOM_CODE = #{record.oldBomCode,jdbcType=NVARCHAR},
+      OLD_BOM_DESC = #{record.oldBomDesc,jdbcType=NVARCHAR},
+      STATUS = #{record.status,jdbcType=NVARCHAR},
+      EFFECT_DATE = #{record.effectDate,jdbcType=TIMESTAMP},
+      BASIS_MATERIAL_ID = #{record.basisMaterialId,jdbcType=NVARCHAR},
+      FPROD_NO = #{record.fprodNo,jdbcType=NVARCHAR},
+      APPLY_DEPT = #{record.applyDept,jdbcType=NVARCHAR},
+      PRODLINE_ID = #{record.prodlineId,jdbcType=INTEGER},
+      PRODUCT_ID = #{record.productId,jdbcType=INTEGER},
+      PDT_ID = #{record.pdtId,jdbcType=INTEGER},
+      OLD_PRODLINE_ID = #{record.oldProdlineId,jdbcType=INTEGER},
+      OLD_PRODUCT_ID = #{record.oldProductId,jdbcType=INTEGER},
+      OLD_PDT_ID = #{record.oldPdtId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.finance.entity.FProductCode">
+    update IBDS_F_PRODUCT_CODE
+    <set>
+      <if test="prodlineName != null">
+        PRODLINE_NAME = #{prodlineName,jdbcType=NVARCHAR},
+      </if>
+      <if test="productName != null">
+        PRODUCT_NAME = #{productName,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtName != null">
+        PDT_NAME = #{pdtName,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtNo != null">
+        PDT_NO = #{pdtNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtMng != null">
+        PDT_MNG = #{pdtMng,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineNo != null">
+        PRODLINE_NO = #{prodlineNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="productNo != null">
+        PRODUCT_NO = #{productNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="productCode != null">
+        PRODUCT_CODE = #{productCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="productNameCn != null">
+        PRODUCT_NAME_CN = #{productNameCn,jdbcType=NVARCHAR},
+      </if>
+      <if test="productNameEn != null">
+        PRODUCT_NAME_EN = #{productNameEn,jdbcType=NVARCHAR},
+      </if>
+      <if test="basisMaterial != null">
+        BASIS_MATERIAL = #{basisMaterial,jdbcType=NVARCHAR},
+      </if>
+      <if test="bomCode != null">
+        BOM_CODE = #{bomCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="bomDesc != null">
+        BOM_DESC = #{bomDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="processCode != null">
+        PROCESS_CODE = #{processCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="orderBy != null">
+        ORDER_BY = #{orderBy,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        CREATE_USER = #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="note != null">
+        NOTE = #{note,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldProductCode != null">
+        OLD_PRODUCT_CODE = #{oldProductCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldProdlineName != null">
+        OLD_PRODLINE_NAME = #{oldProdlineName,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldProductName != null">
+        OLD_PRODUCT_NAME = #{oldProductName,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldPdtName != null">
+        OLD_PDT_NAME = #{oldPdtName,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldPdtNo != null">
+        OLD_PDT_NO = #{oldPdtNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldPdtMng != null">
+        OLD_PDT_MNG = #{oldPdtMng,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldProdlineNo != null">
+        OLD_PRODLINE_NO = #{oldProdlineNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldProductNo != null">
+        OLD_PRODUCT_NO = #{oldProductNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldProductNameCn != null">
+        OLD_PRODUCT_NAME_CN = #{oldProductNameCn,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldProductNameEn != null">
+        OLD_PRODUCT_NAME_EN = #{oldProductNameEn,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldBomCode != null">
+        OLD_BOM_CODE = #{oldBomCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="oldBomDesc != null">
+        OLD_BOM_DESC = #{oldBomDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="effectDate != null">
+        EFFECT_DATE = #{effectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="basisMaterialId != null">
+        BASIS_MATERIAL_ID = #{basisMaterialId,jdbcType=NVARCHAR},
+      </if>
+      <if test="fprodNo != null">
+        FPROD_NO = #{fprodNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="applyDept != null">
+        APPLY_DEPT = #{applyDept,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineId != null">
+        PRODLINE_ID = #{prodlineId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null">
+        PRODUCT_ID = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="pdtId != null">
+        PDT_ID = #{pdtId,jdbcType=INTEGER},
+      </if>
+      <if test="oldProdlineId != null">
+        OLD_PRODLINE_ID = #{oldProdlineId,jdbcType=INTEGER},
+      </if>
+      <if test="oldProductId != null">
+        OLD_PRODUCT_ID = #{oldProductId,jdbcType=INTEGER},
+      </if>
+      <if test="oldPdtId != null">
+        OLD_PDT_ID = #{oldPdtId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.finance.entity.FProductCode">
+    update IBDS_F_PRODUCT_CODE
+    set PRODLINE_NAME = #{prodlineName,jdbcType=NVARCHAR},
+      PRODUCT_NAME = #{productName,jdbcType=NVARCHAR},
+      PDT_NAME = #{pdtName,jdbcType=NVARCHAR},
+      PDT_NO = #{pdtNo,jdbcType=NVARCHAR},
+      PDT_MNG = #{pdtMng,jdbcType=NVARCHAR},
+      PRODLINE_NO = #{prodlineNo,jdbcType=NVARCHAR},
+      PRODUCT_NO = #{productNo,jdbcType=NVARCHAR},
+      PRODUCT_CODE = #{productCode,jdbcType=NVARCHAR},
+      PRODUCT_NAME_CN = #{productNameCn,jdbcType=NVARCHAR},
+      PRODUCT_NAME_EN = #{productNameEn,jdbcType=NVARCHAR},
+      BASIS_MATERIAL = #{basisMaterial,jdbcType=NVARCHAR},
+      BOM_CODE = #{bomCode,jdbcType=NVARCHAR},
+      BOM_DESC = #{bomDesc,jdbcType=NVARCHAR},
+      PROCESS_CODE = #{processCode,jdbcType=NVARCHAR},
+      ORDER_BY = #{orderBy,jdbcType=INTEGER},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      CREATE_USER = #{createUser,jdbcType=NVARCHAR},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR},
+      NOTE = #{note,jdbcType=NVARCHAR},
+      OLD_PRODUCT_CODE = #{oldProductCode,jdbcType=NVARCHAR},
+      OLD_PRODLINE_NAME = #{oldProdlineName,jdbcType=NVARCHAR},
+      OLD_PRODUCT_NAME = #{oldProductName,jdbcType=NVARCHAR},
+      OLD_PDT_NAME = #{oldPdtName,jdbcType=NVARCHAR},
+      OLD_PDT_NO = #{oldPdtNo,jdbcType=NVARCHAR},
+      OLD_PDT_MNG = #{oldPdtMng,jdbcType=NVARCHAR},
+      OLD_PRODLINE_NO = #{oldProdlineNo,jdbcType=NVARCHAR},
+      OLD_PRODUCT_NO = #{oldProductNo,jdbcType=NVARCHAR},
+      OLD_PRODUCT_NAME_CN = #{oldProductNameCn,jdbcType=NVARCHAR},
+      OLD_PRODUCT_NAME_EN = #{oldProductNameEn,jdbcType=NVARCHAR},
+      OLD_BOM_CODE = #{oldBomCode,jdbcType=NVARCHAR},
+      OLD_BOM_DESC = #{oldBomDesc,jdbcType=NVARCHAR},
+      STATUS = #{status,jdbcType=NVARCHAR},
+      EFFECT_DATE = #{effectDate,jdbcType=TIMESTAMP},
+      BASIS_MATERIAL_ID = #{basisMaterialId,jdbcType=NVARCHAR},
+      FPROD_NO = #{fprodNo,jdbcType=NVARCHAR},
+      APPLY_DEPT = #{applyDept,jdbcType=NVARCHAR},
+      PRODLINE_ID = #{prodlineId,jdbcType=INTEGER},
+      PRODUCT_ID = #{productId,jdbcType=INTEGER},
+      PDT_ID = #{pdtId,jdbcType=INTEGER},
+      OLD_PRODLINE_ID = #{oldProdlineId,jdbcType=INTEGER},
+      OLD_PRODUCT_ID = #{oldProductId,jdbcType=INTEGER},
+      OLD_PDT_ID = #{oldPdtId,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

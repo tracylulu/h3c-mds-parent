@@ -1,0 +1,1286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.IBDS_ReleaseMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.product.entity.IBDS_Release">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="RELEASENo" jdbcType="NVARCHAR" property="releaseno" />
+    <result column="RELEASE" jdbcType="NVARCHAR" property="release" />
+    <result column="P" jdbcType="NVARCHAR" property="p" />
+    <result column="V" jdbcType="NVARCHAR" property="v" />
+    <result column="R" jdbcType="NVARCHAR" property="r" />
+    <result column="RELEASEOld" jdbcType="NVARCHAR" property="releaseold" />
+    <result column="engRELEASE" jdbcType="NVARCHAR" property="engrelease" />
+    <result column="PLIPMTNo" jdbcType="NVARCHAR" property="plipmtno" />
+    <result column="PRODLINENo" jdbcType="NVARCHAR" property="prodlineno" />
+    <result column="Status" jdbcType="NVARCHAR" property="status" />
+    <result column="VersionNo" jdbcType="NVARCHAR" property="versionno" />
+    <result column="PDTNo" jdbcType="NVARCHAR" property="pdtno" />
+    <result column="projectno" jdbcType="NVARCHAR" property="projectno" />
+    <result column="RELEASENo_Software" jdbcType="NVARCHAR" property="releasenoSoftware" />
+    <result column="PROJECTStatus" jdbcType="NVARCHAR" property="projectstatus" />
+    <result column="Match" jdbcType="NVARCHAR" property="match" />
+    <result column="RELEASEMatch" jdbcType="NVARCHAR" property="releasematch" />
+    <result column="ProdDataID" jdbcType="NVARCHAR" property="proddataid" />
+    <result column="POP_ID" jdbcType="NVARCHAR" property="popId" />
+    <result column="CMO_ID" jdbcType="NVARCHAR" property="cmoId" />
+    <result column="Testing_Mnger" jdbcType="NVARCHAR" property="testingMnger" />
+    <result column="TechSupport_Mnger" jdbcType="NVARCHAR" property="techsupportMnger" />
+    <result column="Product_Mnger" jdbcType="NVARCHAR" property="productMnger" />
+    <result column="MarketTM" jdbcType="NVARCHAR" property="markettm" />
+    <result column="softmg" jdbcType="NVARCHAR" property="softmg" />
+    <result column="hardmg" jdbcType="NVARCHAR" property="hardmg" />
+    <result column="fldPDE" jdbcType="NVARCHAR" property="fldpde" />
+    <result column="RNDPDT_ID" jdbcType="NVARCHAR" property="rndpdtId" />
+    <result column="Oversea_Mnger" jdbcType="NVARCHAR" property="overseaMnger" />
+    <result column="PilotProduction_Mnger" jdbcType="NVARCHAR" property="pilotproductionMnger" />
+    <result column="OMC_Mnger" jdbcType="NVARCHAR" property="omcMnger" />
+    <result column="System_Mnger" jdbcType="NVARCHAR" property="systemMnger" />
+    <result column="Quality_Mnger" jdbcType="NVARCHAR" property="qualityMnger" />
+    <result column="Equipment_Mnger" jdbcType="NVARCHAR" property="equipmentMnger" />
+    <result column="Documents_Mnger" jdbcType="NVARCHAR" property="documentsMnger" />
+    <result column="Purchase_Mnger" jdbcType="NVARCHAR" property="purchaseMnger" />
+    <result column="Sales_Mnger" jdbcType="NVARCHAR" property="salesMnger" />
+    <result column="PPPDT_ID" jdbcType="NVARCHAR" property="pppdtId" />
+    <result column="Manufacture_Mnger" jdbcType="NVARCHAR" property="manufactureMnger" />
+    <result column="FF_ID" jdbcType="NVARCHAR" property="ffId" />
+    <result column="proDifficult" jdbcType="NVARCHAR" property="prodifficult" />
+    <result column="harddiffcult" jdbcType="NVARCHAR" property="harddiffcult" />
+    <result column="Readers" jdbcType="NVARCHAR" property="readers" />
+    <result column="FINPDT_ID" jdbcType="NVARCHAR" property="finpdtId" />
+    <result column="Remark" jdbcType="NVARCHAR" property="remark" />
+    <result column="ProductNO" jdbcType="NVARCHAR" property="productno" />
+    <result column="fdr" jdbcType="NVARCHAR" property="fdr" />
+    <result column="outnetparter" jdbcType="NVARCHAR" property="outnetparter" />
+    <result column="SE" jdbcType="NVARCHAR" property="se" />
+    <result column="SQA_ID" jdbcType="NVARCHAR" property="sqaId" />
+    <result column="HQA_ID" jdbcType="NVARCHAR" property="hqaId" />
+    <result column="TQA_ID" jdbcType="NVARCHAR" property="tqaId" />
+    <result column="SOFTTESTMNG" jdbcType="NVARCHAR" property="softtestmng" />
+    <result column="HARDTESTMNG" jdbcType="NVARCHAR" property="hardtestmng" />
+    <result column="SOFTPLAT_ID" jdbcType="NVARCHAR" property="softplatId" />
+    <result column="NETMGPERSON_ID" jdbcType="NVARCHAR" property="netmgpersonId" />
+    <result column="NETMGNET" jdbcType="NVARCHAR" property="netmgnet" />
+    <result column="bom" jdbcType="NVARCHAR" property="bom" />
+    <result column="Column01" jdbcType="NVARCHAR" property="column01" />
+    <result column="Column02" jdbcType="NVARCHAR" property="column02" />
+    <result column="Column03" jdbcType="NVARCHAR" property="column03" />
+    <result column="Column04" jdbcType="NVARCHAR" property="column04" />
+    <result column="Column05" jdbcType="NVARCHAR" property="column05" />
+    <result column="Column06" jdbcType="NVARCHAR" property="column06" />
+    <result column="Column07" jdbcType="NVARCHAR" property="column07" />
+    <result column="Column08" jdbcType="NVARCHAR" property="column08" />
+    <result column="Column09" jdbcType="NVARCHAR" property="column09" />
+    <result column="Column10" jdbcType="NVARCHAR" property="column10" />
+    <result column="CREATE_USER" jdbcType="NVARCHAR" property="createUser" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="MODIFY_DATE" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="MODIFY_USER" jdbcType="NVARCHAR" property="modifyUser" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, RELEASENo, RELEASE, P, V, R, RELEASEOld, engRELEASE, PLIPMTNo, PRODLINENo, Status, 
+    VersionNo, PDTNo, projectno, RELEASENo_Software, PROJECTStatus, Match, RELEASEMatch, 
+    ProdDataID, POP_ID, CMO_ID, Testing_Mnger, TechSupport_Mnger, Product_Mnger, MarketTM, 
+    softmg, hardmg, fldPDE, RNDPDT_ID, Oversea_Mnger, PilotProduction_Mnger, OMC_Mnger, 
+    System_Mnger, Quality_Mnger, Equipment_Mnger, Documents_Mnger, Purchase_Mnger, Sales_Mnger, 
+    PPPDT_ID, Manufacture_Mnger, FF_ID, proDifficult, harddiffcult, Readers, FINPDT_ID, 
+    Remark, ProductNO, fdr, outnetparter, SE, SQA_ID, HQA_ID, TQA_ID, SOFTTESTMNG, HARDTESTMNG, 
+    SOFTPLAT_ID, NETMGPERSON_ID, NETMGNET, bom, Column01, Column02, Column03, Column04, 
+    Column05, Column06, Column07, Column08, Column09, Column10, CREATE_USER, CREATE_DATE, 
+    MODIFY_DATE, MODIFY_USER
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.product.entity.IBDS_ReleaseExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_RELEASE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_RELEASE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_RELEASE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.product.entity.IBDS_ReleaseExample">
+    delete from IBDS_RELEASE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.product.entity.IBDS_Release">
+    insert into IBDS_RELEASE (ID, RELEASENo, RELEASE, 
+      P, V, R, RELEASEOld, 
+      engRELEASE, PLIPMTNo, PRODLINENo, 
+      Status, VersionNo, PDTNo, 
+      projectno, RELEASENo_Software, PROJECTStatus, 
+      Match, RELEASEMatch, ProdDataID, 
+      POP_ID, CMO_ID, Testing_Mnger, 
+      TechSupport_Mnger, Product_Mnger, MarketTM, 
+      softmg, hardmg, fldPDE, 
+      RNDPDT_ID, Oversea_Mnger, PilotProduction_Mnger, 
+      OMC_Mnger, System_Mnger, Quality_Mnger, 
+      Equipment_Mnger, Documents_Mnger, Purchase_Mnger, 
+      Sales_Mnger, PPPDT_ID, Manufacture_Mnger, 
+      FF_ID, proDifficult, harddiffcult, 
+      Readers, FINPDT_ID, Remark, 
+      ProductNO, fdr, outnetparter, 
+      SE, SQA_ID, HQA_ID, 
+      TQA_ID, SOFTTESTMNG, HARDTESTMNG, 
+      SOFTPLAT_ID, NETMGPERSON_ID, NETMGNET, 
+      bom, Column01, Column02, 
+      Column03, Column04, Column05, 
+      Column06, Column07, Column08, 
+      Column09, Column10, CREATE_USER, 
+      CREATE_DATE, MODIFY_DATE, MODIFY_USER
+      )
+    values (#{id,jdbcType=INTEGER}, #{releaseno,jdbcType=NVARCHAR}, #{release,jdbcType=NVARCHAR}, 
+      #{p,jdbcType=NVARCHAR}, #{v,jdbcType=NVARCHAR}, #{r,jdbcType=NVARCHAR}, #{releaseold,jdbcType=NVARCHAR}, 
+      #{engrelease,jdbcType=NVARCHAR}, #{plipmtno,jdbcType=NVARCHAR}, #{prodlineno,jdbcType=NVARCHAR}, 
+      #{status,jdbcType=NVARCHAR}, #{versionno,jdbcType=NVARCHAR}, #{pdtno,jdbcType=NVARCHAR}, 
+      #{projectno,jdbcType=NVARCHAR}, #{releasenoSoftware,jdbcType=NVARCHAR}, #{projectstatus,jdbcType=NVARCHAR}, 
+      #{match,jdbcType=NVARCHAR}, #{releasematch,jdbcType=NVARCHAR}, #{proddataid,jdbcType=NVARCHAR}, 
+      #{popId,jdbcType=NVARCHAR}, #{cmoId,jdbcType=NVARCHAR}, #{testingMnger,jdbcType=NVARCHAR}, 
+      #{techsupportMnger,jdbcType=NVARCHAR}, #{productMnger,jdbcType=NVARCHAR}, #{markettm,jdbcType=NVARCHAR}, 
+      #{softmg,jdbcType=NVARCHAR}, #{hardmg,jdbcType=NVARCHAR}, #{fldpde,jdbcType=NVARCHAR}, 
+      #{rndpdtId,jdbcType=NVARCHAR}, #{overseaMnger,jdbcType=NVARCHAR}, #{pilotproductionMnger,jdbcType=NVARCHAR}, 
+      #{omcMnger,jdbcType=NVARCHAR}, #{systemMnger,jdbcType=NVARCHAR}, #{qualityMnger,jdbcType=NVARCHAR}, 
+      #{equipmentMnger,jdbcType=NVARCHAR}, #{documentsMnger,jdbcType=NVARCHAR}, #{purchaseMnger,jdbcType=NVARCHAR}, 
+      #{salesMnger,jdbcType=NVARCHAR}, #{pppdtId,jdbcType=NVARCHAR}, #{manufactureMnger,jdbcType=NVARCHAR}, 
+      #{ffId,jdbcType=NVARCHAR}, #{prodifficult,jdbcType=NVARCHAR}, #{harddiffcult,jdbcType=NVARCHAR}, 
+      #{readers,jdbcType=NVARCHAR}, #{finpdtId,jdbcType=NVARCHAR}, #{remark,jdbcType=NVARCHAR}, 
+      #{productno,jdbcType=NVARCHAR}, #{fdr,jdbcType=NVARCHAR}, #{outnetparter,jdbcType=NVARCHAR}, 
+      #{se,jdbcType=NVARCHAR}, #{sqaId,jdbcType=NVARCHAR}, #{hqaId,jdbcType=NVARCHAR}, 
+      #{tqaId,jdbcType=NVARCHAR}, #{softtestmng,jdbcType=NVARCHAR}, #{hardtestmng,jdbcType=NVARCHAR}, 
+      #{softplatId,jdbcType=NVARCHAR}, #{netmgpersonId,jdbcType=NVARCHAR}, #{netmgnet,jdbcType=NVARCHAR}, 
+      #{bom,jdbcType=NVARCHAR}, #{column01,jdbcType=NVARCHAR}, #{column02,jdbcType=NVARCHAR}, 
+      #{column03,jdbcType=NVARCHAR}, #{column04,jdbcType=NVARCHAR}, #{column05,jdbcType=NVARCHAR}, 
+      #{column06,jdbcType=NVARCHAR}, #{column07,jdbcType=NVARCHAR}, #{column08,jdbcType=NVARCHAR}, 
+      #{column09,jdbcType=NVARCHAR}, #{column10,jdbcType=NVARCHAR}, #{createUser,jdbcType=NVARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP}, #{modifyUser,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.product.entity.IBDS_Release">
+    insert into IBDS_RELEASE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="releaseno != null">
+        RELEASENo,
+      </if>
+      <if test="release != null">
+        RELEASE,
+      </if>
+      <if test="p != null">
+        P,
+      </if>
+      <if test="v != null">
+        V,
+      </if>
+      <if test="r != null">
+        R,
+      </if>
+      <if test="releaseold != null">
+        RELEASEOld,
+      </if>
+      <if test="engrelease != null">
+        engRELEASE,
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo,
+      </if>
+      <if test="prodlineno != null">
+        PRODLINENo,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="versionno != null">
+        VersionNo,
+      </if>
+      <if test="pdtno != null">
+        PDTNo,
+      </if>
+      <if test="projectno != null">
+        projectno,
+      </if>
+      <if test="releasenoSoftware != null">
+        RELEASENo_Software,
+      </if>
+      <if test="projectstatus != null">
+        PROJECTStatus,
+      </if>
+      <if test="match != null">
+        Match,
+      </if>
+      <if test="releasematch != null">
+        RELEASEMatch,
+      </if>
+      <if test="proddataid != null">
+        ProdDataID,
+      </if>
+      <if test="popId != null">
+        POP_ID,
+      </if>
+      <if test="cmoId != null">
+        CMO_ID,
+      </if>
+      <if test="testingMnger != null">
+        Testing_Mnger,
+      </if>
+      <if test="techsupportMnger != null">
+        TechSupport_Mnger,
+      </if>
+      <if test="productMnger != null">
+        Product_Mnger,
+      </if>
+      <if test="markettm != null">
+        MarketTM,
+      </if>
+      <if test="softmg != null">
+        softmg,
+      </if>
+      <if test="hardmg != null">
+        hardmg,
+      </if>
+      <if test="fldpde != null">
+        fldPDE,
+      </if>
+      <if test="rndpdtId != null">
+        RNDPDT_ID,
+      </if>
+      <if test="overseaMnger != null">
+        Oversea_Mnger,
+      </if>
+      <if test="pilotproductionMnger != null">
+        PilotProduction_Mnger,
+      </if>
+      <if test="omcMnger != null">
+        OMC_Mnger,
+      </if>
+      <if test="systemMnger != null">
+        System_Mnger,
+      </if>
+      <if test="qualityMnger != null">
+        Quality_Mnger,
+      </if>
+      <if test="equipmentMnger != null">
+        Equipment_Mnger,
+      </if>
+      <if test="documentsMnger != null">
+        Documents_Mnger,
+      </if>
+      <if test="purchaseMnger != null">
+        Purchase_Mnger,
+      </if>
+      <if test="salesMnger != null">
+        Sales_Mnger,
+      </if>
+      <if test="pppdtId != null">
+        PPPDT_ID,
+      </if>
+      <if test="manufactureMnger != null">
+        Manufacture_Mnger,
+      </if>
+      <if test="ffId != null">
+        FF_ID,
+      </if>
+      <if test="prodifficult != null">
+        proDifficult,
+      </if>
+      <if test="harddiffcult != null">
+        harddiffcult,
+      </if>
+      <if test="readers != null">
+        Readers,
+      </if>
+      <if test="finpdtId != null">
+        FINPDT_ID,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="productno != null">
+        ProductNO,
+      </if>
+      <if test="fdr != null">
+        fdr,
+      </if>
+      <if test="outnetparter != null">
+        outnetparter,
+      </if>
+      <if test="se != null">
+        SE,
+      </if>
+      <if test="sqaId != null">
+        SQA_ID,
+      </if>
+      <if test="hqaId != null">
+        HQA_ID,
+      </if>
+      <if test="tqaId != null">
+        TQA_ID,
+      </if>
+      <if test="softtestmng != null">
+        SOFTTESTMNG,
+      </if>
+      <if test="hardtestmng != null">
+        HARDTESTMNG,
+      </if>
+      <if test="softplatId != null">
+        SOFTPLAT_ID,
+      </if>
+      <if test="netmgpersonId != null">
+        NETMGPERSON_ID,
+      </if>
+      <if test="netmgnet != null">
+        NETMGNET,
+      </if>
+      <if test="bom != null">
+        bom,
+      </if>
+      <if test="column01 != null">
+        Column01,
+      </if>
+      <if test="column02 != null">
+        Column02,
+      </if>
+      <if test="column03 != null">
+        Column03,
+      </if>
+      <if test="column04 != null">
+        Column04,
+      </if>
+      <if test="column05 != null">
+        Column05,
+      </if>
+      <if test="column06 != null">
+        Column06,
+      </if>
+      <if test="column07 != null">
+        Column07,
+      </if>
+      <if test="column08 != null">
+        Column08,
+      </if>
+      <if test="column09 != null">
+        Column09,
+      </if>
+      <if test="column10 != null">
+        Column10,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE,
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="releaseno != null">
+        #{releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="release != null">
+        #{release,jdbcType=NVARCHAR},
+      </if>
+      <if test="p != null">
+        #{p,jdbcType=NVARCHAR},
+      </if>
+      <if test="v != null">
+        #{v,jdbcType=NVARCHAR},
+      </if>
+      <if test="r != null">
+        #{r,jdbcType=NVARCHAR},
+      </if>
+      <if test="releaseold != null">
+        #{releaseold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engrelease != null">
+        #{engrelease,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmtno != null">
+        #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionno != null">
+        #{versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtno != null">
+        #{pdtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="projectno != null">
+        #{projectno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releasenoSoftware != null">
+        #{releasenoSoftware,jdbcType=NVARCHAR},
+      </if>
+      <if test="projectstatus != null">
+        #{projectstatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="match != null">
+        #{match,jdbcType=NVARCHAR},
+      </if>
+      <if test="releasematch != null">
+        #{releasematch,jdbcType=NVARCHAR},
+      </if>
+      <if test="proddataid != null">
+        #{proddataid,jdbcType=NVARCHAR},
+      </if>
+      <if test="popId != null">
+        #{popId,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmoId != null">
+        #{cmoId,jdbcType=NVARCHAR},
+      </if>
+      <if test="testingMnger != null">
+        #{testingMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="techsupportMnger != null">
+        #{techsupportMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="productMnger != null">
+        #{productMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="markettm != null">
+        #{markettm,jdbcType=NVARCHAR},
+      </if>
+      <if test="softmg != null">
+        #{softmg,jdbcType=NVARCHAR},
+      </if>
+      <if test="hardmg != null">
+        #{hardmg,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldpde != null">
+        #{fldpde,jdbcType=NVARCHAR},
+      </if>
+      <if test="rndpdtId != null">
+        #{rndpdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="overseaMnger != null">
+        #{overseaMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="pilotproductionMnger != null">
+        #{pilotproductionMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="omcMnger != null">
+        #{omcMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="systemMnger != null">
+        #{systemMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="qualityMnger != null">
+        #{qualityMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="equipmentMnger != null">
+        #{equipmentMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="documentsMnger != null">
+        #{documentsMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="purchaseMnger != null">
+        #{purchaseMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="salesMnger != null">
+        #{salesMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="pppdtId != null">
+        #{pppdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="manufactureMnger != null">
+        #{manufactureMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="ffId != null">
+        #{ffId,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodifficult != null">
+        #{prodifficult,jdbcType=NVARCHAR},
+      </if>
+      <if test="harddiffcult != null">
+        #{harddiffcult,jdbcType=NVARCHAR},
+      </if>
+      <if test="readers != null">
+        #{readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="finpdtId != null">
+        #{finpdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="productno != null">
+        #{productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="fdr != null">
+        #{fdr,jdbcType=NVARCHAR},
+      </if>
+      <if test="outnetparter != null">
+        #{outnetparter,jdbcType=NVARCHAR},
+      </if>
+      <if test="se != null">
+        #{se,jdbcType=NVARCHAR},
+      </if>
+      <if test="sqaId != null">
+        #{sqaId,jdbcType=NVARCHAR},
+      </if>
+      <if test="hqaId != null">
+        #{hqaId,jdbcType=NVARCHAR},
+      </if>
+      <if test="tqaId != null">
+        #{tqaId,jdbcType=NVARCHAR},
+      </if>
+      <if test="softtestmng != null">
+        #{softtestmng,jdbcType=NVARCHAR},
+      </if>
+      <if test="hardtestmng != null">
+        #{hardtestmng,jdbcType=NVARCHAR},
+      </if>
+      <if test="softplatId != null">
+        #{softplatId,jdbcType=NVARCHAR},
+      </if>
+      <if test="netmgpersonId != null">
+        #{netmgpersonId,jdbcType=NVARCHAR},
+      </if>
+      <if test="netmgnet != null">
+        #{netmgnet,jdbcType=NVARCHAR},
+      </if>
+      <if test="bom != null">
+        #{bom,jdbcType=NVARCHAR},
+      </if>
+      <if test="column01 != null">
+        #{column01,jdbcType=NVARCHAR},
+      </if>
+      <if test="column02 != null">
+        #{column02,jdbcType=NVARCHAR},
+      </if>
+      <if test="column03 != null">
+        #{column03,jdbcType=NVARCHAR},
+      </if>
+      <if test="column04 != null">
+        #{column04,jdbcType=NVARCHAR},
+      </if>
+      <if test="column05 != null">
+        #{column05,jdbcType=NVARCHAR},
+      </if>
+      <if test="column06 != null">
+        #{column06,jdbcType=NVARCHAR},
+      </if>
+      <if test="column07 != null">
+        #{column07,jdbcType=NVARCHAR},
+      </if>
+      <if test="column08 != null">
+        #{column08,jdbcType=NVARCHAR},
+      </if>
+      <if test="column09 != null">
+        #{column09,jdbcType=NVARCHAR},
+      </if>
+      <if test="column10 != null">
+        #{column10,jdbcType=NVARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.product.entity.IBDS_ReleaseExample" resultType="java.lang.Long">
+    select count(*) from IBDS_RELEASE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_RELEASE
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.releaseno != null">
+        RELEASENo = #{record.releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.release != null">
+        RELEASE = #{record.release,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.p != null">
+        P = #{record.p,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.v != null">
+        V = #{record.v,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.r != null">
+        R = #{record.r,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releaseold != null">
+        RELEASEOld = #{record.releaseold,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engrelease != null">
+        engRELEASE = #{record.engrelease,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plipmtno != null">
+        PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodlineno != null">
+        PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null">
+        Status = #{record.status,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.versionno != null">
+        VersionNo = #{record.versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdtno != null">
+        PDTNo = #{record.pdtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.projectno != null">
+        projectno = #{record.projectno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releasenoSoftware != null">
+        RELEASENo_Software = #{record.releasenoSoftware,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.projectstatus != null">
+        PROJECTStatus = #{record.projectstatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.match != null">
+        Match = #{record.match,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releasematch != null">
+        RELEASEMatch = #{record.releasematch,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.proddataid != null">
+        ProdDataID = #{record.proddataid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.popId != null">
+        POP_ID = #{record.popId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.cmoId != null">
+        CMO_ID = #{record.cmoId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.testingMnger != null">
+        Testing_Mnger = #{record.testingMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.techsupportMnger != null">
+        TechSupport_Mnger = #{record.techsupportMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productMnger != null">
+        Product_Mnger = #{record.productMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.markettm != null">
+        MarketTM = #{record.markettm,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.softmg != null">
+        softmg = #{record.softmg,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.hardmg != null">
+        hardmg = #{record.hardmg,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fldpde != null">
+        fldPDE = #{record.fldpde,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.rndpdtId != null">
+        RNDPDT_ID = #{record.rndpdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.overseaMnger != null">
+        Oversea_Mnger = #{record.overseaMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pilotproductionMnger != null">
+        PilotProduction_Mnger = #{record.pilotproductionMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.omcMnger != null">
+        OMC_Mnger = #{record.omcMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.systemMnger != null">
+        System_Mnger = #{record.systemMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.qualityMnger != null">
+        Quality_Mnger = #{record.qualityMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.equipmentMnger != null">
+        Equipment_Mnger = #{record.equipmentMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.documentsMnger != null">
+        Documents_Mnger = #{record.documentsMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.purchaseMnger != null">
+        Purchase_Mnger = #{record.purchaseMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.salesMnger != null">
+        Sales_Mnger = #{record.salesMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pppdtId != null">
+        PPPDT_ID = #{record.pppdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.manufactureMnger != null">
+        Manufacture_Mnger = #{record.manufactureMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ffId != null">
+        FF_ID = #{record.ffId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodifficult != null">
+        proDifficult = #{record.prodifficult,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.harddiffcult != null">
+        harddiffcult = #{record.harddiffcult,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.readers != null">
+        Readers = #{record.readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.finpdtId != null">
+        FINPDT_ID = #{record.finpdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remark != null">
+        Remark = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productno != null">
+        ProductNO = #{record.productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fdr != null">
+        fdr = #{record.fdr,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.outnetparter != null">
+        outnetparter = #{record.outnetparter,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.se != null">
+        SE = #{record.se,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sqaId != null">
+        SQA_ID = #{record.sqaId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.hqaId != null">
+        HQA_ID = #{record.hqaId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tqaId != null">
+        TQA_ID = #{record.tqaId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.softtestmng != null">
+        SOFTTESTMNG = #{record.softtestmng,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.hardtestmng != null">
+        HARDTESTMNG = #{record.hardtestmng,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.softplatId != null">
+        SOFTPLAT_ID = #{record.softplatId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.netmgpersonId != null">
+        NETMGPERSON_ID = #{record.netmgpersonId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.netmgnet != null">
+        NETMGNET = #{record.netmgnet,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.bom != null">
+        bom = #{record.bom,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column01 != null">
+        Column01 = #{record.column01,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column02 != null">
+        Column02 = #{record.column02,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column03 != null">
+        Column03 = #{record.column03,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column04 != null">
+        Column04 = #{record.column04,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column05 != null">
+        Column05 = #{record.column05,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column06 != null">
+        Column06 = #{record.column06,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column07 != null">
+        Column07 = #{record.column07,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column08 != null">
+        Column08 = #{record.column08,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column09 != null">
+        Column09 = #{record.column09,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.column10 != null">
+        Column10 = #{record.column10,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createUser != null">
+        CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyDate != null">
+        MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyUser != null">
+        MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_RELEASE
+    set ID = #{record.id,jdbcType=INTEGER},
+      RELEASENo = #{record.releaseno,jdbcType=NVARCHAR},
+      RELEASE = #{record.release,jdbcType=NVARCHAR},
+      P = #{record.p,jdbcType=NVARCHAR},
+      V = #{record.v,jdbcType=NVARCHAR},
+      R = #{record.r,jdbcType=NVARCHAR},
+      RELEASEOld = #{record.releaseold,jdbcType=NVARCHAR},
+      engRELEASE = #{record.engrelease,jdbcType=NVARCHAR},
+      PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      Status = #{record.status,jdbcType=NVARCHAR},
+      VersionNo = #{record.versionno,jdbcType=NVARCHAR},
+      PDTNo = #{record.pdtno,jdbcType=NVARCHAR},
+      projectno = #{record.projectno,jdbcType=NVARCHAR},
+      RELEASENo_Software = #{record.releasenoSoftware,jdbcType=NVARCHAR},
+      PROJECTStatus = #{record.projectstatus,jdbcType=NVARCHAR},
+      Match = #{record.match,jdbcType=NVARCHAR},
+      RELEASEMatch = #{record.releasematch,jdbcType=NVARCHAR},
+      ProdDataID = #{record.proddataid,jdbcType=NVARCHAR},
+      POP_ID = #{record.popId,jdbcType=NVARCHAR},
+      CMO_ID = #{record.cmoId,jdbcType=NVARCHAR},
+      Testing_Mnger = #{record.testingMnger,jdbcType=NVARCHAR},
+      TechSupport_Mnger = #{record.techsupportMnger,jdbcType=NVARCHAR},
+      Product_Mnger = #{record.productMnger,jdbcType=NVARCHAR},
+      MarketTM = #{record.markettm,jdbcType=NVARCHAR},
+      softmg = #{record.softmg,jdbcType=NVARCHAR},
+      hardmg = #{record.hardmg,jdbcType=NVARCHAR},
+      fldPDE = #{record.fldpde,jdbcType=NVARCHAR},
+      RNDPDT_ID = #{record.rndpdtId,jdbcType=NVARCHAR},
+      Oversea_Mnger = #{record.overseaMnger,jdbcType=NVARCHAR},
+      PilotProduction_Mnger = #{record.pilotproductionMnger,jdbcType=NVARCHAR},
+      OMC_Mnger = #{record.omcMnger,jdbcType=NVARCHAR},
+      System_Mnger = #{record.systemMnger,jdbcType=NVARCHAR},
+      Quality_Mnger = #{record.qualityMnger,jdbcType=NVARCHAR},
+      Equipment_Mnger = #{record.equipmentMnger,jdbcType=NVARCHAR},
+      Documents_Mnger = #{record.documentsMnger,jdbcType=NVARCHAR},
+      Purchase_Mnger = #{record.purchaseMnger,jdbcType=NVARCHAR},
+      Sales_Mnger = #{record.salesMnger,jdbcType=NVARCHAR},
+      PPPDT_ID = #{record.pppdtId,jdbcType=NVARCHAR},
+      Manufacture_Mnger = #{record.manufactureMnger,jdbcType=NVARCHAR},
+      FF_ID = #{record.ffId,jdbcType=NVARCHAR},
+      proDifficult = #{record.prodifficult,jdbcType=NVARCHAR},
+      harddiffcult = #{record.harddiffcult,jdbcType=NVARCHAR},
+      Readers = #{record.readers,jdbcType=NVARCHAR},
+      FINPDT_ID = #{record.finpdtId,jdbcType=NVARCHAR},
+      Remark = #{record.remark,jdbcType=NVARCHAR},
+      ProductNO = #{record.productno,jdbcType=NVARCHAR},
+      fdr = #{record.fdr,jdbcType=NVARCHAR},
+      outnetparter = #{record.outnetparter,jdbcType=NVARCHAR},
+      SE = #{record.se,jdbcType=NVARCHAR},
+      SQA_ID = #{record.sqaId,jdbcType=NVARCHAR},
+      HQA_ID = #{record.hqaId,jdbcType=NVARCHAR},
+      TQA_ID = #{record.tqaId,jdbcType=NVARCHAR},
+      SOFTTESTMNG = #{record.softtestmng,jdbcType=NVARCHAR},
+      HARDTESTMNG = #{record.hardtestmng,jdbcType=NVARCHAR},
+      SOFTPLAT_ID = #{record.softplatId,jdbcType=NVARCHAR},
+      NETMGPERSON_ID = #{record.netmgpersonId,jdbcType=NVARCHAR},
+      NETMGNET = #{record.netmgnet,jdbcType=NVARCHAR},
+      bom = #{record.bom,jdbcType=NVARCHAR},
+      Column01 = #{record.column01,jdbcType=NVARCHAR},
+      Column02 = #{record.column02,jdbcType=NVARCHAR},
+      Column03 = #{record.column03,jdbcType=NVARCHAR},
+      Column04 = #{record.column04,jdbcType=NVARCHAR},
+      Column05 = #{record.column05,jdbcType=NVARCHAR},
+      Column06 = #{record.column06,jdbcType=NVARCHAR},
+      Column07 = #{record.column07,jdbcType=NVARCHAR},
+      Column08 = #{record.column08,jdbcType=NVARCHAR},
+      Column09 = #{record.column09,jdbcType=NVARCHAR},
+      Column10 = #{record.column10,jdbcType=NVARCHAR},
+      CREATE_USER = #{record.createUser,jdbcType=NVARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.product.entity.IBDS_Release">
+    update IBDS_RELEASE
+    <set>
+      <if test="releaseno != null">
+        RELEASENo = #{releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="release != null">
+        RELEASE = #{release,jdbcType=NVARCHAR},
+      </if>
+      <if test="p != null">
+        P = #{p,jdbcType=NVARCHAR},
+      </if>
+      <if test="v != null">
+        V = #{v,jdbcType=NVARCHAR},
+      </if>
+      <if test="r != null">
+        R = #{r,jdbcType=NVARCHAR},
+      </if>
+      <if test="releaseold != null">
+        RELEASEOld = #{releaseold,jdbcType=NVARCHAR},
+      </if>
+      <if test="engrelease != null">
+        engRELEASE = #{engrelease,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo = #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        PRODLINENo = #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        Status = #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionno != null">
+        VersionNo = #{versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtno != null">
+        PDTNo = #{pdtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="projectno != null">
+        projectno = #{projectno,jdbcType=NVARCHAR},
+      </if>
+      <if test="releasenoSoftware != null">
+        RELEASENo_Software = #{releasenoSoftware,jdbcType=NVARCHAR},
+      </if>
+      <if test="projectstatus != null">
+        PROJECTStatus = #{projectstatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="match != null">
+        Match = #{match,jdbcType=NVARCHAR},
+      </if>
+      <if test="releasematch != null">
+        RELEASEMatch = #{releasematch,jdbcType=NVARCHAR},
+      </if>
+      <if test="proddataid != null">
+        ProdDataID = #{proddataid,jdbcType=NVARCHAR},
+      </if>
+      <if test="popId != null">
+        POP_ID = #{popId,jdbcType=NVARCHAR},
+      </if>
+      <if test="cmoId != null">
+        CMO_ID = #{cmoId,jdbcType=NVARCHAR},
+      </if>
+      <if test="testingMnger != null">
+        Testing_Mnger = #{testingMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="techsupportMnger != null">
+        TechSupport_Mnger = #{techsupportMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="productMnger != null">
+        Product_Mnger = #{productMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="markettm != null">
+        MarketTM = #{markettm,jdbcType=NVARCHAR},
+      </if>
+      <if test="softmg != null">
+        softmg = #{softmg,jdbcType=NVARCHAR},
+      </if>
+      <if test="hardmg != null">
+        hardmg = #{hardmg,jdbcType=NVARCHAR},
+      </if>
+      <if test="fldpde != null">
+        fldPDE = #{fldpde,jdbcType=NVARCHAR},
+      </if>
+      <if test="rndpdtId != null">
+        RNDPDT_ID = #{rndpdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="overseaMnger != null">
+        Oversea_Mnger = #{overseaMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="pilotproductionMnger != null">
+        PilotProduction_Mnger = #{pilotproductionMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="omcMnger != null">
+        OMC_Mnger = #{omcMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="systemMnger != null">
+        System_Mnger = #{systemMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="qualityMnger != null">
+        Quality_Mnger = #{qualityMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="equipmentMnger != null">
+        Equipment_Mnger = #{equipmentMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="documentsMnger != null">
+        Documents_Mnger = #{documentsMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="purchaseMnger != null">
+        Purchase_Mnger = #{purchaseMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="salesMnger != null">
+        Sales_Mnger = #{salesMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="pppdtId != null">
+        PPPDT_ID = #{pppdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="manufactureMnger != null">
+        Manufacture_Mnger = #{manufactureMnger,jdbcType=NVARCHAR},
+      </if>
+      <if test="ffId != null">
+        FF_ID = #{ffId,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodifficult != null">
+        proDifficult = #{prodifficult,jdbcType=NVARCHAR},
+      </if>
+      <if test="harddiffcult != null">
+        harddiffcult = #{harddiffcult,jdbcType=NVARCHAR},
+      </if>
+      <if test="readers != null">
+        Readers = #{readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="finpdtId != null">
+        FINPDT_ID = #{finpdtId,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="productno != null">
+        ProductNO = #{productno,jdbcType=NVARCHAR},
+      </if>
+      <if test="fdr != null">
+        fdr = #{fdr,jdbcType=NVARCHAR},
+      </if>
+      <if test="outnetparter != null">
+        outnetparter = #{outnetparter,jdbcType=NVARCHAR},
+      </if>
+      <if test="se != null">
+        SE = #{se,jdbcType=NVARCHAR},
+      </if>
+      <if test="sqaId != null">
+        SQA_ID = #{sqaId,jdbcType=NVARCHAR},
+      </if>
+      <if test="hqaId != null">
+        HQA_ID = #{hqaId,jdbcType=NVARCHAR},
+      </if>
+      <if test="tqaId != null">
+        TQA_ID = #{tqaId,jdbcType=NVARCHAR},
+      </if>
+      <if test="softtestmng != null">
+        SOFTTESTMNG = #{softtestmng,jdbcType=NVARCHAR},
+      </if>
+      <if test="hardtestmng != null">
+        HARDTESTMNG = #{hardtestmng,jdbcType=NVARCHAR},
+      </if>
+      <if test="softplatId != null">
+        SOFTPLAT_ID = #{softplatId,jdbcType=NVARCHAR},
+      </if>
+      <if test="netmgpersonId != null">
+        NETMGPERSON_ID = #{netmgpersonId,jdbcType=NVARCHAR},
+      </if>
+      <if test="netmgnet != null">
+        NETMGNET = #{netmgnet,jdbcType=NVARCHAR},
+      </if>
+      <if test="bom != null">
+        bom = #{bom,jdbcType=NVARCHAR},
+      </if>
+      <if test="column01 != null">
+        Column01 = #{column01,jdbcType=NVARCHAR},
+      </if>
+      <if test="column02 != null">
+        Column02 = #{column02,jdbcType=NVARCHAR},
+      </if>
+      <if test="column03 != null">
+        Column03 = #{column03,jdbcType=NVARCHAR},
+      </if>
+      <if test="column04 != null">
+        Column04 = #{column04,jdbcType=NVARCHAR},
+      </if>
+      <if test="column05 != null">
+        Column05 = #{column05,jdbcType=NVARCHAR},
+      </if>
+      <if test="column06 != null">
+        Column06 = #{column06,jdbcType=NVARCHAR},
+      </if>
+      <if test="column07 != null">
+        Column07 = #{column07,jdbcType=NVARCHAR},
+      </if>
+      <if test="column08 != null">
+        Column08 = #{column08,jdbcType=NVARCHAR},
+      </if>
+      <if test="column09 != null">
+        Column09 = #{column09,jdbcType=NVARCHAR},
+      </if>
+      <if test="column10 != null">
+        Column10 = #{column10,jdbcType=NVARCHAR},
+      </if>
+      <if test="createUser != null">
+        CREATE_USER = #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.product.entity.IBDS_Release">
+    update IBDS_RELEASE
+    set RELEASENo = #{releaseno,jdbcType=NVARCHAR},
+      RELEASE = #{release,jdbcType=NVARCHAR},
+      P = #{p,jdbcType=NVARCHAR},
+      V = #{v,jdbcType=NVARCHAR},
+      R = #{r,jdbcType=NVARCHAR},
+      RELEASEOld = #{releaseold,jdbcType=NVARCHAR},
+      engRELEASE = #{engrelease,jdbcType=NVARCHAR},
+      PLIPMTNo = #{plipmtno,jdbcType=NVARCHAR},
+      PRODLINENo = #{prodlineno,jdbcType=NVARCHAR},
+      Status = #{status,jdbcType=NVARCHAR},
+      VersionNo = #{versionno,jdbcType=NVARCHAR},
+      PDTNo = #{pdtno,jdbcType=NVARCHAR},
+      projectno = #{projectno,jdbcType=NVARCHAR},
+      RELEASENo_Software = #{releasenoSoftware,jdbcType=NVARCHAR},
+      PROJECTStatus = #{projectstatus,jdbcType=NVARCHAR},
+      Match = #{match,jdbcType=NVARCHAR},
+      RELEASEMatch = #{releasematch,jdbcType=NVARCHAR},
+      ProdDataID = #{proddataid,jdbcType=NVARCHAR},
+      POP_ID = #{popId,jdbcType=NVARCHAR},
+      CMO_ID = #{cmoId,jdbcType=NVARCHAR},
+      Testing_Mnger = #{testingMnger,jdbcType=NVARCHAR},
+      TechSupport_Mnger = #{techsupportMnger,jdbcType=NVARCHAR},
+      Product_Mnger = #{productMnger,jdbcType=NVARCHAR},
+      MarketTM = #{markettm,jdbcType=NVARCHAR},
+      softmg = #{softmg,jdbcType=NVARCHAR},
+      hardmg = #{hardmg,jdbcType=NVARCHAR},
+      fldPDE = #{fldpde,jdbcType=NVARCHAR},
+      RNDPDT_ID = #{rndpdtId,jdbcType=NVARCHAR},
+      Oversea_Mnger = #{overseaMnger,jdbcType=NVARCHAR},
+      PilotProduction_Mnger = #{pilotproductionMnger,jdbcType=NVARCHAR},
+      OMC_Mnger = #{omcMnger,jdbcType=NVARCHAR},
+      System_Mnger = #{systemMnger,jdbcType=NVARCHAR},
+      Quality_Mnger = #{qualityMnger,jdbcType=NVARCHAR},
+      Equipment_Mnger = #{equipmentMnger,jdbcType=NVARCHAR},
+      Documents_Mnger = #{documentsMnger,jdbcType=NVARCHAR},
+      Purchase_Mnger = #{purchaseMnger,jdbcType=NVARCHAR},
+      Sales_Mnger = #{salesMnger,jdbcType=NVARCHAR},
+      PPPDT_ID = #{pppdtId,jdbcType=NVARCHAR},
+      Manufacture_Mnger = #{manufactureMnger,jdbcType=NVARCHAR},
+      FF_ID = #{ffId,jdbcType=NVARCHAR},
+      proDifficult = #{prodifficult,jdbcType=NVARCHAR},
+      harddiffcult = #{harddiffcult,jdbcType=NVARCHAR},
+      Readers = #{readers,jdbcType=NVARCHAR},
+      FINPDT_ID = #{finpdtId,jdbcType=NVARCHAR},
+      Remark = #{remark,jdbcType=NVARCHAR},
+      ProductNO = #{productno,jdbcType=NVARCHAR},
+      fdr = #{fdr,jdbcType=NVARCHAR},
+      outnetparter = #{outnetparter,jdbcType=NVARCHAR},
+      SE = #{se,jdbcType=NVARCHAR},
+      SQA_ID = #{sqaId,jdbcType=NVARCHAR},
+      HQA_ID = #{hqaId,jdbcType=NVARCHAR},
+      TQA_ID = #{tqaId,jdbcType=NVARCHAR},
+      SOFTTESTMNG = #{softtestmng,jdbcType=NVARCHAR},
+      HARDTESTMNG = #{hardtestmng,jdbcType=NVARCHAR},
+      SOFTPLAT_ID = #{softplatId,jdbcType=NVARCHAR},
+      NETMGPERSON_ID = #{netmgpersonId,jdbcType=NVARCHAR},
+      NETMGNET = #{netmgnet,jdbcType=NVARCHAR},
+      bom = #{bom,jdbcType=NVARCHAR},
+      Column01 = #{column01,jdbcType=NVARCHAR},
+      Column02 = #{column02,jdbcType=NVARCHAR},
+      Column03 = #{column03,jdbcType=NVARCHAR},
+      Column04 = #{column04,jdbcType=NVARCHAR},
+      Column05 = #{column05,jdbcType=NVARCHAR},
+      Column06 = #{column06,jdbcType=NVARCHAR},
+      Column07 = #{column07,jdbcType=NVARCHAR},
+      Column08 = #{column08,jdbcType=NVARCHAR},
+      Column09 = #{column09,jdbcType=NVARCHAR},
+      Column10 = #{column10,jdbcType=NVARCHAR},
+      CREATE_USER = #{createUser,jdbcType=NVARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{modifyUser,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

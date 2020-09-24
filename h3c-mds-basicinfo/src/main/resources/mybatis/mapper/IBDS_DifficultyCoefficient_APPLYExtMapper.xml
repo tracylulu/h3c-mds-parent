@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.h3c.mds.basicinfo.dao.IBDS_DifficultyCoefficient_APPLYMapper">
+
+
+	<insert id="insertBackID"
+		parameterType="com.h3c.mds.basicinfo.entity.IBDS_DifficultyCoefficient_APPLY"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into IBDS_DifficultyCoefficient_APPLY
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="processCode != null">
+				Process_Code,
+			</if>
+			<if test="plipmtno != null">
+				PLIPMTNo,
+			</if>
+			<if test="prodlineno != null">
+				ProdLineNo,
+			</if>
+			<if test="productno != null">
+				ProductNo,
+			</if>
+			<if test="versionno != null">
+				VersionNo,
+			</if>
+			<if test="releaseno != null">
+				ReleaseNo,
+			</if>
+			<if test="ipmtsecretary != null">
+				IPMTSecretary,
+			</if>
+			<if test="bversionno != null">
+				BversionNo,
+			</if>
+			<if test="bversion != null">
+				Bversion,
+			</if>
+			<if test="prodBasismaterial != null">
+				Prod_BasisMaterial,
+			</if>
+			<if test="prodBasismaterialid != null">
+				Prod_BasisMaterialId,
+			</if>
+			<if test="hardBasismaterial != null">
+				Hard_BasisMaterial,
+			</if>
+			<if test="hardBasismaterialid != null">
+				Hard_BasisMaterialId,
+			</if>
+			<if test="prosnremark != null">
+				ProSnRemark,
+			</if>
+			<if test="hardsnremark != null">
+				HardSnRemark,
+			</if>
+			<if test="copyto != null">
+				copyto,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="creator != null">
+				Creator,
+			</if>
+			<if test="createtime != null">
+				CreateTime,
+			</if>
+			<if test="modifier != null">
+				Modifier,
+			</if>
+			<if test="modifytime != null">
+				ModifyTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="processCode != null">
+				#{processCode,jdbcType=NVARCHAR},
+			</if>
+			<if test="plipmtno != null">
+				#{plipmtno,jdbcType=NVARCHAR},
+			</if>
+			<if test="prodlineno != null">
+				#{prodlineno,jdbcType=NVARCHAR},
+			</if>
+			<if test="productno != null">
+				#{productno,jdbcType=NVARCHAR},
+			</if>
+			<if test="versionno != null">
+				#{versionno,jdbcType=NVARCHAR},
+			</if>
+			<if test="releaseno != null">
+				#{releaseno,jdbcType=NVARCHAR},
+			</if>
+			<if test="ipmtsecretary != null">
+				#{ipmtsecretary,jdbcType=NVARCHAR},
+			</if>
+			<if test="bversionno != null">
+				#{bversionno,jdbcType=NVARCHAR},
+			</if>
+			<if test="bversion != null">
+				#{bversion,jdbcType=NVARCHAR},
+			</if>
+			<if test="prodBasismaterial != null">
+				#{prodBasismaterial,jdbcType=NVARCHAR},
+			</if>
+			<if test="prodBasismaterialid != null">
+				#{prodBasismaterialid,jdbcType=NVARCHAR},
+			</if>
+			<if test="hardBasismaterial != null">
+				#{hardBasismaterial,jdbcType=NVARCHAR},
+			</if>
+			<if test="hardBasismaterialid != null">
+				#{hardBasismaterialid,jdbcType=NVARCHAR},
+			</if>
+			<if test="prosnremark != null">
+				#{prosnremark,jdbcType=NVARCHAR},
+			</if>
+			<if test="hardsnremark != null">
+				#{hardsnremark,jdbcType=NVARCHAR},
+			</if>
+			<if test="copyto != null">
+				#{copyto,jdbcType=NVARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=NVARCHAR},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=NVARCHAR},
+			</if>
+			<if test="createtime != null">
+				#{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifier != null">
+				#{modifier,jdbcType=NVARCHAR},
+			</if>
+			<if test="modifytime != null">
+				#{modifytime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+
+	<select id="selectByReleaseCode" resultType="Integer">
+		SELECT COUNT(1) FROM dbo.IBDS_DifficultyCoefficient_APPLY a
+		LEFT JOIN
+		dbo.IBDS_DifficultyCoefficient_PROCESS b ON
+		a.Process_Code=b.APPLY_CODE
+		LEFT JOIN
+		dbo.IBDS_DifficultyCoefficient_Item_APPLY c ON
+		a.ID=c.ProDifficult
+		WHERE b.Status=1 AND c.BversionNo in
+		<foreach collection="codeList" item="code" index="index"
+			open="(" close=")" separator="or">
+			#{code}
+		</foreach>
+
+
+	</select>
+</mapper>

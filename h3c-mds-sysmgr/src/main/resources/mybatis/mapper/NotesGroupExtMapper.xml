@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.sysmgr.dao.NotesGroupMapper">
+   <select id="selGroupbyparam" parameterType="map" resultMap="BaseResultMap">
+  	select   <include refid="Base_Column_List" /> from tbl_2_11_EN 
+  	<where>
+<if test="param.name!=null and param.name!=''"> -->
+   		  charindex(#{param.name},name+code)>0 
+  	</if> 
+  	
+  	</where>
+  	
+  </select>
+</mapper>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.dept.dao.IBDS_Dept_SysRoleMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.dept.entity.IBDS_Dept_SysRole">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="RoleTypeCode" jdbcType="NVARCHAR" property="roletypecode" />
+    <result column="RoleType" jdbcType="NVARCHAR" property="roletype" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, RoleTypeCode, RoleType
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.dept.entity.IbdsDeptSysRoleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_Dept_SysRole
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_Dept_SysRole
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_Dept_SysRole
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.dept.entity.IbdsDeptSysRoleExample">
+    delete from IBDS_Dept_SysRole
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.dept.entity.IBDS_Dept_SysRole">
+    insert into IBDS_Dept_SysRole (ID, RoleTypeCode, RoleType
+      )
+    values (#{id,jdbcType=INTEGER}, #{roletypecode,jdbcType=NVARCHAR}, #{roletype,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.dept.entity.IBDS_Dept_SysRole">
+    insert into IBDS_Dept_SysRole
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="roletypecode != null">
+        RoleTypeCode,
+      </if>
+      <if test="roletype != null">
+        RoleType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roletypecode != null">
+        #{roletypecode,jdbcType=NVARCHAR},
+      </if>
+      <if test="roletype != null">
+        #{roletype,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.dept.entity.IbdsDeptSysRoleExample" resultType="java.lang.Long">
+    select count(*) from IBDS_Dept_SysRole
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_Dept_SysRole
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.roletypecode != null">
+        RoleTypeCode = #{record.roletypecode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.roletype != null">
+        RoleType = #{record.roletype,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_Dept_SysRole
+    set ID = #{record.id,jdbcType=INTEGER},
+      RoleTypeCode = #{record.roletypecode,jdbcType=NVARCHAR},
+      RoleType = #{record.roletype,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.dept.entity.IBDS_Dept_SysRole">
+    update IBDS_Dept_SysRole
+    <set>
+      <if test="roletypecode != null">
+        RoleTypeCode = #{roletypecode,jdbcType=NVARCHAR},
+      </if>
+      <if test="roletype != null">
+        RoleType = #{roletype,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.dept.entity.IBDS_Dept_SysRole">
+    update IBDS_Dept_SysRole
+    set RoleTypeCode = #{roletypecode,jdbcType=NVARCHAR},
+      RoleType = #{roletype,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

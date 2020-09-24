@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.flowable.dao.PartCodeApplyMapper">
+  <select id="getZTCountByProductCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT count(1) FROM IBDS_PART_CODE_APPLY a JOIN IBDS_PART_CODE_PROCESS b  ON a.PROCESS_CODE = b.APPLY_CODE AND b.status='1' WHERE a.PRODUCT_CODE=#{productCode}
+  </select>
+
+  <select id="getZTByProductCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT a.* FROM IBDS_PART_CODE_APPLY a JOIN IBDS_PART_CODE_PROCESS b  ON a.PROCESS_CODE = b.APPLY_CODE AND b.status='1' WHERE a.PRODUCT_CODE=#{productCode}
+  </select>
+
+  <select id="getZTProcessCodeByProductCode" resultType="string" parameterType="java.lang.String">
+    SELECT DISTINCT a.PROCESS_CODE FROM IBDS_PART_CODE_APPLY a JOIN IBDS_PART_CODE_PROCESS b  ON a.PROCESS_CODE = b.APPLY_CODE AND b.status='1' WHERE a.PRODUCT_CODE=#{productCode}
+  </select>
+</mapper>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.dept.dao.DeptDataMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.dept.entity.DeptData">
+    <result column="DeptCode" jdbcType="VARCHAR" property="deptCode" />
+    <result column="DeptName" jdbcType="VARCHAR" property="deptName" />
+    <result column="coaCode" jdbcType="VARCHAR" property="coaCode" />
+    <result column="DeptLevel" jdbcType="DECIMAL" property="deptLevel" />
+    <result column="SupDeptCode" jdbcType="VARCHAR" property="supDeptCode" />
+    <result column="DeptType" jdbcType="VARCHAR" property="deptType" />
+  </resultMap>
+
+	<sql id="condition_sql">
+		<where>
+			<if test="deptCode !=null and deptCode !='' ">
+				AND DeptCode=#{deptCode}
+			</if>
+			<if test="deptName !=null and deptName !='' ">
+				AND DeptName=#{deptName}
+			</if>
+			<if test="coaCode !=null and coaCode !='' ">
+				AND coaCode=#{coaCode}
+			</if>
+			<if test="deptLevel !=null and deptLevel !='' ">
+				AND DeptLevel=#{deptLevel}
+			</if>
+			<if test="supDeptCode !=null and supDeptCode !='' ">
+				AND SupDeptCode=#{supDeptCode}
+			</if>
+			<if test="deptType !=null and deptType !='' ">
+				AND DeptType=#{deptType}
+			</if>
+		</where>
+	</sql>
+  <sql id="Base_Column_List">
+  DeptCode,DeptName,coaCode,DeptLevel,SupDeptCode,DeptType
+  </sql>
+  <select id="selectDeptData" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dbo.IBDS_Dept_Data
+  </select>
+  
+  <select id="selectDeptDataTemp" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dbo.IBDS_Dept
+  </select>  
+  
+  
+  <select id="selectDeptDataByParam" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dbo.IBDS_Dept_Data
+    <if test="_parameter != null">
+    <include refid="condition_sql"></include>
+    </if>
+    
+  </select>
+  
+  <delete id="deleteDeptData" >
+    delete from dbo.IBDS_Dept_Data
+  </delete>
+  
+  <delete id="deleteDeptDataTemp" >
+    delete from dbo.IBDS_Dept
+  </delete>
+
+  <insert id="insertDeptDataTemp" parameterType="java.util.List">
+    insert into dbo.IBDS_Dept (DeptCode,DeptName,coaCode,DeptLevel,SupDeptCode,DeptType,updateTime)
+    values
+    <foreach collection="list" item="param" index="index"
+                 separator=",">
+    (
+    #{param.deptCode}, 
+    #{param.deptName}, 
+    #{param.coa},
+    #{param.deptLevel},
+    #{param.supDeptCode},
+    #{param.deptType},
+    GETDATE()
+    )
+    </foreach>
+  </insert>
+  
+  <insert id="insertDeptData" >
+	insert into dbo.IBDS_Dept_Data
+	(DeptCode,DeptName,coaCode,DeptLevel,SupDeptCode,DeptType,updateTime)
+	select DeptCode,DeptName,coaCode,DeptLevel,SupDeptCode,DeptType,GETDATE() from
+	dbo.IBDS_Dept where DeptCode not in
+	(select DeptCode from dbo.IBDS_Dept where DeptCode= '50040426'
+	union all
+	select DeptCode from dbo.IBDS_Dept where SupDeptCode= '50040426'
+	union all
+	SELECT DeptCode from dbo.IBDS_Dept where SupDeptCode in
+	(select DeptCode from dbo.IBDS_Dept where SupDeptCode= '50040426')
+	union all
+	select DeptCode from dbo.IBDS_Dept where supdeptCode in 
+	(SELECT DeptCode from dbo.IBDS_Dept where SupDeptCode in 
+	(select DeptCode from dbo.IBDS_Dept where SupDeptCode='50040426'))
+	)
+  </insert>
+  
+  <insert id="insertDeptMgn">
+	insert into dbo.IBDS_Dept_MgnRole(code,deleteflag,createTime)
+	select c.deptCode,'0',GETDATE() from
+	( select DeptCode from dbo.IBDS_Dept_Data a where not exists
+	(select code as DeptCode from dbo.IBDS_Dept_MgnRole b where
+	a.DeptCode=b.code))c;
+  </insert>
+</mapper>

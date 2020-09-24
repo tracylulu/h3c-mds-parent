@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.IBDS_Product_PROCESSMapper">
+  <!-- 获取最大单号 -->
+  <select id="getMaxCode" resultType="string" parameterType="string">
+		select MAX(prefix) from IBDS_Product_MAXCODE ROWLOCK WHERE  SUBSTRING(prefix,2,8)=REPLACE(CONVERT(NVARCHAR(200),GETDATE(),23),'-','') 
+		and project_name=#{name}
+	</select>
+   <!-- 插入数据并返回主键 -->
+  <insert id="insertAndGetId" parameterType="com.h3c.mds.basicinfo.entity.IBDS_Product_PROCESS" useGeneratedKeys="true" keyProperty="id">
+
+     insert into IBDS_Product_PROCESS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="applycode != null">
+        ApplyCode,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="responsible != null">
+        Responsible,
+      </if>
+      <if test="statusname != null">
+        StatusName,
+      </if>
+      <if test="applyType != null">
+        APPLY_TYPE,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="readers != null">
+        Readers,
+      </if>
+      <if test="copyto != null">
+        copyto,
+      </if>
+      <if test="popFillname != null">
+        POP_FillName,
+      </if>
+      <if test="popFilltime != null">
+        POP_FillTime,
+      </if>
+      <if test="ipmtSuggestion != null">
+        IPMT_Suggestion,
+      </if>
+      <if test="ipmtFillname != null">
+        IPMT_FillName,
+      </if>
+      <if test="ipmtFilltime != null">
+        IPMT_FillTime,
+      </if>
+      <if test="checkresult != null">
+        CheckResult,
+      </if>
+      <if test="editcurrentuser != null">
+        EditCurrentUser,
+      </if>
+      <if test="instanseId != null">
+        INSTANSE_ID,
+      </if>
+      <if test="currentNode != null">
+        CURRENT_NODE,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE,
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="applycode != null">
+        #{applycode,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="responsible != null">
+        #{responsible,jdbcType=NVARCHAR},
+      </if>
+      <if test="statusname != null">
+        #{statusname,jdbcType=NVARCHAR},
+      </if>
+      <if test="applyType != null">
+        #{applyType,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="readers != null">
+        #{readers,jdbcType=NVARCHAR},
+      </if>
+      <if test="copyto != null">
+        #{copyto,jdbcType=NVARCHAR},
+      </if>
+      <if test="popFillname != null">
+        #{popFillname,jdbcType=NVARCHAR},
+      </if>
+      <if test="popFilltime != null">
+        #{popFilltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipmtSuggestion != null">
+        #{ipmtSuggestion,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtFillname != null">
+        #{ipmtFillname,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtFilltime != null">
+        #{ipmtFilltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkresult != null">
+        #{checkresult,jdbcType=NVARCHAR},
+      </if>
+      <if test="editcurrentuser != null">
+        #{editcurrentuser,jdbcType=NVARCHAR},
+      </if>
+      <if test="instanseId != null">
+        #{instanseId,jdbcType=NVARCHAR},
+      </if>
+      <if test="currentNode != null">
+        #{currentNode,jdbcType=NVARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <resultMap id="BaseResultMapExt" type="com.h3c.mds.basicinfo.entity.IBDS_Product_PROCESSExt" extends="BaseResultMap">
+
+  </resultMap>
+  <!-- 根据ID查询产品流程数据 -->
+   <select id="getExtById" resultMap="BaseResultMapExt" parameterType="java.lang.Integer">
+    SELECT <include refid="Base_Column_List" />
+    from IBDS_PRODUCT_PROCESS
+    WHERE ID=#{id}
+  </select>
+</mapper>

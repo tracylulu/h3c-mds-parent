@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.basicinfo.dao.view_PeopleApplyMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.basicinfo.entity.view_PeopleApply">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="Process_Code" jdbcType="NVARCHAR" property="processCode" />
+    <result column="PInfoType" jdbcType="NVARCHAR" property="pinfotype" />
+    <result column="PLIPMTNo" jdbcType="NVARCHAR" property="plipmtno" />
+    <result column="PLIPMT" jdbcType="NVARCHAR" property="plipmt" />
+    <result column="EngPLIPMT" jdbcType="NVARCHAR" property="engplipmt" />
+    <result column="PRODLINENo" jdbcType="NVARCHAR" property="prodlineno" />
+    <result column="PRODLINE" jdbcType="NVARCHAR" property="prodline" />
+    <result column="EngPRODLINE" jdbcType="NVARCHAR" property="engprodline" />
+    <result column="PDTNo" jdbcType="NVARCHAR" property="pdtno" />
+    <result column="PDT" jdbcType="NVARCHAR" property="pdt" />
+    <result column="EngPDT" jdbcType="NVARCHAR" property="engpdt" />
+    <result column="VersionNo" jdbcType="NVARCHAR" property="versionno" />
+    <result column="Version" jdbcType="NVARCHAR" property="version" />
+    <result column="EngVersion" jdbcType="NVARCHAR" property="engversion" />
+    <result column="ReleaseNo" jdbcType="NVARCHAR" property="releaseno" />
+    <result column="Release" jdbcType="NVARCHAR" property="release" />
+    <result column="EngRelease" jdbcType="NVARCHAR" property="engrelease" />
+    <result column="BVersionno" jdbcType="NVARCHAR" property="bversionno" />
+    <result column="BVersion" jdbcType="NVARCHAR" property="bversion" />
+    <result column="EngBVersion" jdbcType="NVARCHAR" property="engbversion" />
+    <result column="IPMTSecretary" jdbcType="NVARCHAR" property="ipmtsecretary" />
+    <result column="IsIPMTCheck" jdbcType="NVARCHAR" property="isipmtcheck" />
+    <result column="Remark" jdbcType="NVARCHAR" property="remark" />
+    <result column="Creator" jdbcType="NVARCHAR" property="creator" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="Modifier" jdbcType="NVARCHAR" property="modifier" />
+    <result column="ModifyTime" jdbcType="TIMESTAMP" property="modifytime" />
+    <result column="ProcessID" jdbcType="INTEGER" property="processid" />
+    <result column="APPLY_CODE" jdbcType="NVARCHAR" property="applyCode" />
+    <result column="Status" jdbcType="NVARCHAR" property="status" />
+    <result column="Handler" jdbcType="NVARCHAR" property="handler" />
+    <result column="Instanse_ID" jdbcType="NVARCHAR" property="instanseId" />
+    <result column="CurrentNode" jdbcType="NVARCHAR" property="currentnode" />
+    <result column="STATUS_DESC" jdbcType="NVARCHAR" property="statusDesc" />
+    <result column="First_Sign" jdbcType="NVARCHAR" property="firstSign" />
+    <result column="First_Date" jdbcType="TIMESTAMP" property="firstDate" />
+    <result column="IPMT_Sign" jdbcType="NVARCHAR" property="ipmtSign" />
+    <result column="IPMT_Date" jdbcType="TIMESTAMP" property="ipmtDate" />
+    <result column="IPMT_Opinion" jdbcType="NVARCHAR" property="ipmtOpinion" />
+    <result column="IPMT_Result" jdbcType="NVARCHAR" property="ipmtResult" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, Process_Code, PInfoType, PLIPMTNo, PLIPMT, EngPLIPMT, PRODLINENo, PRODLINE, EngPRODLINE, 
+    PDTNo, PDT, EngPDT, VersionNo, Version, EngVersion, ReleaseNo, Release, EngRelease, 
+    BVersionno, BVersion, EngBVersion, IPMTSecretary, IsIPMTCheck, Remark, Creator, CreateTime, 
+    Modifier, ModifyTime, ProcessID, APPLY_CODE, Status, Handler, Instanse_ID, CurrentNode, 
+    STATUS_DESC, First_Sign, First_Date, IPMT_Sign, IPMT_Date, IPMT_Opinion, IPMT_Result
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.basicinfo.entity.view_PeopleApplyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from view_PeopleApply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.basicinfo.entity.view_PeopleApplyExample">
+    delete from view_PeopleApply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.basicinfo.entity.view_PeopleApply">
+    insert into view_PeopleApply (ID, Process_Code, PInfoType, 
+      PLIPMTNo, PLIPMT, EngPLIPMT, 
+      PRODLINENo, PRODLINE, EngPRODLINE, 
+      PDTNo, PDT, EngPDT, 
+      VersionNo, Version, EngVersion, 
+      ReleaseNo, Release, EngRelease, 
+      BVersionno, BVersion, EngBVersion, 
+      IPMTSecretary, IsIPMTCheck, Remark, 
+      Creator, CreateTime, Modifier, 
+      ModifyTime, ProcessID, APPLY_CODE, 
+      Status, Handler, Instanse_ID, 
+      CurrentNode, STATUS_DESC, First_Sign, 
+      First_Date, IPMT_Sign, IPMT_Date, 
+      IPMT_Opinion, IPMT_Result)
+    values (#{id,jdbcType=INTEGER}, #{processCode,jdbcType=NVARCHAR}, #{pinfotype,jdbcType=NVARCHAR}, 
+      #{plipmtno,jdbcType=NVARCHAR}, #{plipmt,jdbcType=NVARCHAR}, #{engplipmt,jdbcType=NVARCHAR}, 
+      #{prodlineno,jdbcType=NVARCHAR}, #{prodline,jdbcType=NVARCHAR}, #{engprodline,jdbcType=NVARCHAR}, 
+      #{pdtno,jdbcType=NVARCHAR}, #{pdt,jdbcType=NVARCHAR}, #{engpdt,jdbcType=NVARCHAR}, 
+      #{versionno,jdbcType=NVARCHAR}, #{version,jdbcType=NVARCHAR}, #{engversion,jdbcType=NVARCHAR}, 
+      #{releaseno,jdbcType=NVARCHAR}, #{release,jdbcType=NVARCHAR}, #{engrelease,jdbcType=NVARCHAR}, 
+      #{bversionno,jdbcType=NVARCHAR}, #{bversion,jdbcType=NVARCHAR}, #{engbversion,jdbcType=NVARCHAR}, 
+      #{ipmtsecretary,jdbcType=NVARCHAR}, #{isipmtcheck,jdbcType=NVARCHAR}, #{remark,jdbcType=NVARCHAR}, 
+      #{creator,jdbcType=NVARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=NVARCHAR}, 
+      #{modifytime,jdbcType=TIMESTAMP}, #{processid,jdbcType=INTEGER}, #{applyCode,jdbcType=NVARCHAR}, 
+      #{status,jdbcType=NVARCHAR}, #{handler,jdbcType=NVARCHAR}, #{instanseId,jdbcType=NVARCHAR}, 
+      #{currentnode,jdbcType=NVARCHAR}, #{statusDesc,jdbcType=NVARCHAR}, #{firstSign,jdbcType=NVARCHAR}, 
+      #{firstDate,jdbcType=TIMESTAMP}, #{ipmtSign,jdbcType=NVARCHAR}, #{ipmtDate,jdbcType=TIMESTAMP}, 
+      #{ipmtOpinion,jdbcType=NVARCHAR}, #{ipmtResult,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.basicinfo.entity.view_PeopleApply">
+    insert into view_PeopleApply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="processCode != null">
+        Process_Code,
+      </if>
+      <if test="pinfotype != null">
+        PInfoType,
+      </if>
+      <if test="plipmtno != null">
+        PLIPMTNo,
+      </if>
+      <if test="plipmt != null">
+        PLIPMT,
+      </if>
+      <if test="engplipmt != null">
+        EngPLIPMT,
+      </if>
+      <if test="prodlineno != null">
+        PRODLINENo,
+      </if>
+      <if test="prodline != null">
+        PRODLINE,
+      </if>
+      <if test="engprodline != null">
+        EngPRODLINE,
+      </if>
+      <if test="pdtno != null">
+        PDTNo,
+      </if>
+      <if test="pdt != null">
+        PDT,
+      </if>
+      <if test="engpdt != null">
+        EngPDT,
+      </if>
+      <if test="versionno != null">
+        VersionNo,
+      </if>
+      <if test="version != null">
+        Version,
+      </if>
+      <if test="engversion != null">
+        EngVersion,
+      </if>
+      <if test="releaseno != null">
+        ReleaseNo,
+      </if>
+      <if test="release != null">
+        Release,
+      </if>
+      <if test="engrelease != null">
+        EngRelease,
+      </if>
+      <if test="bversionno != null">
+        BVersionno,
+      </if>
+      <if test="bversion != null">
+        BVersion,
+      </if>
+      <if test="engbversion != null">
+        EngBVersion,
+      </if>
+      <if test="ipmtsecretary != null">
+        IPMTSecretary,
+      </if>
+      <if test="isipmtcheck != null">
+        IsIPMTCheck,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="creator != null">
+        Creator,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+      <if test="modifier != null">
+        Modifier,
+      </if>
+      <if test="modifytime != null">
+        ModifyTime,
+      </if>
+      <if test="processid != null">
+        ProcessID,
+      </if>
+      <if test="applyCode != null">
+        APPLY_CODE,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="handler != null">
+        Handler,
+      </if>
+      <if test="instanseId != null">
+        Instanse_ID,
+      </if>
+      <if test="currentnode != null">
+        CurrentNode,
+      </if>
+      <if test="statusDesc != null">
+        STATUS_DESC,
+      </if>
+      <if test="firstSign != null">
+        First_Sign,
+      </if>
+      <if test="firstDate != null">
+        First_Date,
+      </if>
+      <if test="ipmtSign != null">
+        IPMT_Sign,
+      </if>
+      <if test="ipmtDate != null">
+        IPMT_Date,
+      </if>
+      <if test="ipmtOpinion != null">
+        IPMT_Opinion,
+      </if>
+      <if test="ipmtResult != null">
+        IPMT_Result,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="processCode != null">
+        #{processCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="pinfotype != null">
+        #{pinfotype,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmtno != null">
+        #{plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="plipmt != null">
+        #{plipmt,jdbcType=NVARCHAR},
+      </if>
+      <if test="engplipmt != null">
+        #{engplipmt,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineno != null">
+        #{prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodline != null">
+        #{prodline,jdbcType=NVARCHAR},
+      </if>
+      <if test="engprodline != null">
+        #{engprodline,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtno != null">
+        #{pdtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdt != null">
+        #{pdt,jdbcType=NVARCHAR},
+      </if>
+      <if test="engpdt != null">
+        #{engpdt,jdbcType=NVARCHAR},
+      </if>
+      <if test="versionno != null">
+        #{versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=NVARCHAR},
+      </if>
+      <if test="engversion != null">
+        #{engversion,jdbcType=NVARCHAR},
+      </if>
+      <if test="releaseno != null">
+        #{releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="release != null">
+        #{release,jdbcType=NVARCHAR},
+      </if>
+      <if test="engrelease != null">
+        #{engrelease,jdbcType=NVARCHAR},
+      </if>
+      <if test="bversionno != null">
+        #{bversionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="bversion != null">
+        #{bversion,jdbcType=NVARCHAR},
+      </if>
+      <if test="engbversion != null">
+        #{engbversion,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtsecretary != null">
+        #{ipmtsecretary,jdbcType=NVARCHAR},
+      </if>
+      <if test="isipmtcheck != null">
+        #{isipmtcheck,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifytime != null">
+        #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processid != null">
+        #{processid,jdbcType=INTEGER},
+      </if>
+      <if test="applyCode != null">
+        #{applyCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="handler != null">
+        #{handler,jdbcType=NVARCHAR},
+      </if>
+      <if test="instanseId != null">
+        #{instanseId,jdbcType=NVARCHAR},
+      </if>
+      <if test="currentnode != null">
+        #{currentnode,jdbcType=NVARCHAR},
+      </if>
+      <if test="statusDesc != null">
+        #{statusDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="firstSign != null">
+        #{firstSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="firstDate != null">
+        #{firstDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipmtSign != null">
+        #{ipmtSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtDate != null">
+        #{ipmtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipmtOpinion != null">
+        #{ipmtOpinion,jdbcType=NVARCHAR},
+      </if>
+      <if test="ipmtResult != null">
+        #{ipmtResult,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.basicinfo.entity.view_PeopleApplyExample" resultType="java.lang.Long">
+    select count(*) from view_PeopleApply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update view_PeopleApply
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.processCode != null">
+        Process_Code = #{record.processCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pinfotype != null">
+        PInfoType = #{record.pinfotype,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plipmtno != null">
+        PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plipmt != null">
+        PLIPMT = #{record.plipmt,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engplipmt != null">
+        EngPLIPMT = #{record.engplipmt,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodlineno != null">
+        PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodline != null">
+        PRODLINE = #{record.prodline,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engprodline != null">
+        EngPRODLINE = #{record.engprodline,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdtno != null">
+        PDTNo = #{record.pdtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pdt != null">
+        PDT = #{record.pdt,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engpdt != null">
+        EngPDT = #{record.engpdt,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.versionno != null">
+        VersionNo = #{record.versionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.version != null">
+        Version = #{record.version,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engversion != null">
+        EngVersion = #{record.engversion,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.releaseno != null">
+        ReleaseNo = #{record.releaseno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.release != null">
+        Release = #{record.release,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engrelease != null">
+        EngRelease = #{record.engrelease,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.bversionno != null">
+        BVersionno = #{record.bversionno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.bversion != null">
+        BVersion = #{record.bversion,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engbversion != null">
+        EngBVersion = #{record.engbversion,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ipmtsecretary != null">
+        IPMTSecretary = #{record.ipmtsecretary,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isipmtcheck != null">
+        IsIPMTCheck = #{record.isipmtcheck,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remark != null">
+        Remark = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.creator != null">
+        Creator = #{record.creator,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifier != null">
+        Modifier = #{record.modifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modifytime != null">
+        ModifyTime = #{record.modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.processid != null">
+        ProcessID = #{record.processid,jdbcType=INTEGER},
+      </if>
+      <if test="record.applyCode != null">
+        APPLY_CODE = #{record.applyCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null">
+        Status = #{record.status,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.handler != null">
+        Handler = #{record.handler,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.instanseId != null">
+        Instanse_ID = #{record.instanseId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.currentnode != null">
+        CurrentNode = #{record.currentnode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.statusDesc != null">
+        STATUS_DESC = #{record.statusDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.firstSign != null">
+        First_Sign = #{record.firstSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.firstDate != null">
+        First_Date = #{record.firstDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ipmtSign != null">
+        IPMT_Sign = #{record.ipmtSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ipmtDate != null">
+        IPMT_Date = #{record.ipmtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ipmtOpinion != null">
+        IPMT_Opinion = #{record.ipmtOpinion,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ipmtResult != null">
+        IPMT_Result = #{record.ipmtResult,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update view_PeopleApply
+    set ID = #{record.id,jdbcType=INTEGER},
+      Process_Code = #{record.processCode,jdbcType=NVARCHAR},
+      PInfoType = #{record.pinfotype,jdbcType=NVARCHAR},
+      PLIPMTNo = #{record.plipmtno,jdbcType=NVARCHAR},
+      PLIPMT = #{record.plipmt,jdbcType=NVARCHAR},
+      EngPLIPMT = #{record.engplipmt,jdbcType=NVARCHAR},
+      PRODLINENo = #{record.prodlineno,jdbcType=NVARCHAR},
+      PRODLINE = #{record.prodline,jdbcType=NVARCHAR},
+      EngPRODLINE = #{record.engprodline,jdbcType=NVARCHAR},
+      PDTNo = #{record.pdtno,jdbcType=NVARCHAR},
+      PDT = #{record.pdt,jdbcType=NVARCHAR},
+      EngPDT = #{record.engpdt,jdbcType=NVARCHAR},
+      VersionNo = #{record.versionno,jdbcType=NVARCHAR},
+      Version = #{record.version,jdbcType=NVARCHAR},
+      EngVersion = #{record.engversion,jdbcType=NVARCHAR},
+      ReleaseNo = #{record.releaseno,jdbcType=NVARCHAR},
+      Release = #{record.release,jdbcType=NVARCHAR},
+      EngRelease = #{record.engrelease,jdbcType=NVARCHAR},
+      BVersionno = #{record.bversionno,jdbcType=NVARCHAR},
+      BVersion = #{record.bversion,jdbcType=NVARCHAR},
+      EngBVersion = #{record.engbversion,jdbcType=NVARCHAR},
+      IPMTSecretary = #{record.ipmtsecretary,jdbcType=NVARCHAR},
+      IsIPMTCheck = #{record.isipmtcheck,jdbcType=NVARCHAR},
+      Remark = #{record.remark,jdbcType=NVARCHAR},
+      Creator = #{record.creator,jdbcType=NVARCHAR},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      Modifier = #{record.modifier,jdbcType=NVARCHAR},
+      ModifyTime = #{record.modifytime,jdbcType=TIMESTAMP},
+      ProcessID = #{record.processid,jdbcType=INTEGER},
+      APPLY_CODE = #{record.applyCode,jdbcType=NVARCHAR},
+      Status = #{record.status,jdbcType=NVARCHAR},
+      Handler = #{record.handler,jdbcType=NVARCHAR},
+      Instanse_ID = #{record.instanseId,jdbcType=NVARCHAR},
+      CurrentNode = #{record.currentnode,jdbcType=NVARCHAR},
+      STATUS_DESC = #{record.statusDesc,jdbcType=NVARCHAR},
+      First_Sign = #{record.firstSign,jdbcType=NVARCHAR},
+      First_Date = #{record.firstDate,jdbcType=TIMESTAMP},
+      IPMT_Sign = #{record.ipmtSign,jdbcType=NVARCHAR},
+      IPMT_Date = #{record.ipmtDate,jdbcType=TIMESTAMP},
+      IPMT_Opinion = #{record.ipmtOpinion,jdbcType=NVARCHAR},
+      IPMT_Result = #{record.ipmtResult,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

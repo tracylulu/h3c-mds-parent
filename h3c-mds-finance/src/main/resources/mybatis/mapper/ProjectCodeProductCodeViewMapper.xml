@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.finance.dao.ProjectCodeProductCodeViewMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.finance.entity.ProjectCodeProductCodeView">
+    <result column="f_id" jdbcType="INTEGER" property="fId" />
+    <result column="f_objca" jdbcType="VARCHAR" property="fObjca" />
+    <result column="f_pdtno" jdbcType="NVARCHAR" property="fPdtno" />
+    <result column="f_projno" jdbcType="VARCHAR" property="fProjno" />
+    <result column="f_projname" jdbcType="VARCHAR" property="fProjname" />
+    <result column="f_projcode" jdbcType="VARCHAR" property="fProjcode" />
+    <result column="f_productlineno" jdbcType="VARCHAR" property="fProductlineno" />
+    <result column="f_releaseno" jdbcType="VARCHAR" property="fReleaseno" />
+    <result column="f_releasename" jdbcType="NVARCHAR" property="fReleasename" />
+    <result column="f_productno" jdbcType="VARCHAR" property="fProductno" />
+    <result column="f_productname" jdbcType="VARCHAR" property="fProductname" />
+    <result column="f_bizhong" jdbcType="VARCHAR" property="fBizhong" />
+    <result column="f_fbizhong" jdbcType="VARCHAR" property="fFbizhong" />
+    <result column="BeginTime" jdbcType="TIMESTAMP" property="begintime" />
+    <result column="f_projMng" jdbcType="VARCHAR" property="fProjmng" />
+    <result column="f_dept" jdbcType="VARCHAR" property="fDept" />
+    <result column="f_start_project_time" jdbcType="TIMESTAMP" property="fStartProjectTime" />
+    <result column="f_assign_point" jdbcType="VARCHAR" property="fAssignPoint" />
+    <result column="f_assign_point_name" jdbcType="VARCHAR" property="fAssignPointName" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="f_profile" jdbcType="VARCHAR" property="fProfile" />
+    <result column="PRODUCT_NAME_CN" jdbcType="NVARCHAR" property="productNameCn" />
+    <result column="f_objca_name" jdbcType="VARCHAR" property="fObjcaName" />
+    <result column="f_pdt_name" jdbcType="NVARCHAR" property="fPdtName" />
+    <result column="f_productline_name" jdbcType="VARCHAR" property="fProductlineName" />
+    <result column="f_bversionno" jdbcType="VARCHAR" property="fBversionno" />
+    <result column="f_bversionname" jdbcType="NVARCHAR" property="fBversionname" />
+    <result column="f_version" jdbcType="VARCHAR" property="fVersion" />
+    <result column="rate" jdbcType="VARCHAR" property="rate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    f_id, f_objca, f_pdtno, f_projno, f_projname, f_projcode, f_productlineno, f_releaseno, 
+    f_releasename, f_productno, f_productname, f_bizhong, f_fbizhong, BeginTime, f_projMng, 
+    f_dept, f_start_project_time, f_assign_point, f_assign_point_name, remark, f_profile, 
+    PRODUCT_NAME_CN, f_objca_name, f_pdt_name, f_productline_name, f_bversionno, f_bversionname, 
+    f_version, rate
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.finance.entity.ProjectCodeProductCodeViewExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from view_projectCodeProduct
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.finance.entity.ProjectCodeProductCodeViewExample">
+    delete from view_projectCodeProduct
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.finance.entity.ProjectCodeProductCodeView">
+    insert into view_projectCodeProduct (f_id, f_objca, f_pdtno, 
+      f_projno, f_projname, f_projcode, 
+      f_productlineno, f_releaseno, f_releasename, 
+      f_productno, f_productname, f_bizhong, 
+      f_fbizhong, BeginTime, f_projMng, 
+      f_dept, f_start_project_time, f_assign_point, 
+      f_assign_point_name, remark, f_profile, 
+      PRODUCT_NAME_CN, f_objca_name, f_pdt_name, 
+      f_productline_name, f_bversionno, f_bversionname, 
+      f_version, rate)
+    values (#{fId,jdbcType=INTEGER}, #{fObjca,jdbcType=VARCHAR}, #{fPdtno,jdbcType=NVARCHAR}, 
+      #{fProjno,jdbcType=VARCHAR}, #{fProjname,jdbcType=VARCHAR}, #{fProjcode,jdbcType=VARCHAR}, 
+      #{fProductlineno,jdbcType=VARCHAR}, #{fReleaseno,jdbcType=VARCHAR}, #{fReleasename,jdbcType=NVARCHAR}, 
+      #{fProductno,jdbcType=VARCHAR}, #{fProductname,jdbcType=VARCHAR}, #{fBizhong,jdbcType=VARCHAR}, 
+      #{fFbizhong,jdbcType=VARCHAR}, #{begintime,jdbcType=TIMESTAMP}, #{fProjmng,jdbcType=VARCHAR}, 
+      #{fDept,jdbcType=VARCHAR}, #{fStartProjectTime,jdbcType=TIMESTAMP}, #{fAssignPoint,jdbcType=VARCHAR}, 
+      #{fAssignPointName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{fProfile,jdbcType=VARCHAR}, 
+      #{productNameCn,jdbcType=NVARCHAR}, #{fObjcaName,jdbcType=VARCHAR}, #{fPdtName,jdbcType=NVARCHAR}, 
+      #{fProductlineName,jdbcType=VARCHAR}, #{fBversionno,jdbcType=VARCHAR}, #{fBversionname,jdbcType=NVARCHAR}, 
+      #{fVersion,jdbcType=VARCHAR}, #{rate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.finance.entity.ProjectCodeProductCodeView">
+    insert into view_projectCodeProduct
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        f_id,
+      </if>
+      <if test="fObjca != null">
+        f_objca,
+      </if>
+      <if test="fPdtno != null">
+        f_pdtno,
+      </if>
+      <if test="fProjno != null">
+        f_projno,
+      </if>
+      <if test="fProjname != null">
+        f_projname,
+      </if>
+      <if test="fProjcode != null">
+        f_projcode,
+      </if>
+      <if test="fProductlineno != null">
+        f_productlineno,
+      </if>
+      <if test="fReleaseno != null">
+        f_releaseno,
+      </if>
+      <if test="fReleasename != null">
+        f_releasename,
+      </if>
+      <if test="fProductno != null">
+        f_productno,
+      </if>
+      <if test="fProductname != null">
+        f_productname,
+      </if>
+      <if test="fBizhong != null">
+        f_bizhong,
+      </if>
+      <if test="fFbizhong != null">
+        f_fbizhong,
+      </if>
+      <if test="begintime != null">
+        BeginTime,
+      </if>
+      <if test="fProjmng != null">
+        f_projMng,
+      </if>
+      <if test="fDept != null">
+        f_dept,
+      </if>
+      <if test="fStartProjectTime != null">
+        f_start_project_time,
+      </if>
+      <if test="fAssignPoint != null">
+        f_assign_point,
+      </if>
+      <if test="fAssignPointName != null">
+        f_assign_point_name,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="fProfile != null">
+        f_profile,
+      </if>
+      <if test="productNameCn != null">
+        PRODUCT_NAME_CN,
+      </if>
+      <if test="fObjcaName != null">
+        f_objca_name,
+      </if>
+      <if test="fPdtName != null">
+        f_pdt_name,
+      </if>
+      <if test="fProductlineName != null">
+        f_productline_name,
+      </if>
+      <if test="fBversionno != null">
+        f_bversionno,
+      </if>
+      <if test="fBversionname != null">
+        f_bversionname,
+      </if>
+      <if test="fVersion != null">
+        f_version,
+      </if>
+      <if test="rate != null">
+        rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=INTEGER},
+      </if>
+      <if test="fObjca != null">
+        #{fObjca,jdbcType=VARCHAR},
+      </if>
+      <if test="fPdtno != null">
+        #{fPdtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="fProjno != null">
+        #{fProjno,jdbcType=VARCHAR},
+      </if>
+      <if test="fProjname != null">
+        #{fProjname,jdbcType=VARCHAR},
+      </if>
+      <if test="fProjcode != null">
+        #{fProjcode,jdbcType=VARCHAR},
+      </if>
+      <if test="fProductlineno != null">
+        #{fProductlineno,jdbcType=VARCHAR},
+      </if>
+      <if test="fReleaseno != null">
+        #{fReleaseno,jdbcType=VARCHAR},
+      </if>
+      <if test="fReleasename != null">
+        #{fReleasename,jdbcType=NVARCHAR},
+      </if>
+      <if test="fProductno != null">
+        #{fProductno,jdbcType=VARCHAR},
+      </if>
+      <if test="fProductname != null">
+        #{fProductname,jdbcType=VARCHAR},
+      </if>
+      <if test="fBizhong != null">
+        #{fBizhong,jdbcType=VARCHAR},
+      </if>
+      <if test="fFbizhong != null">
+        #{fFbizhong,jdbcType=VARCHAR},
+      </if>
+      <if test="begintime != null">
+        #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fProjmng != null">
+        #{fProjmng,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fStartProjectTime != null">
+        #{fStartProjectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fAssignPoint != null">
+        #{fAssignPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="fAssignPointName != null">
+        #{fAssignPointName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="fProfile != null">
+        #{fProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="productNameCn != null">
+        #{productNameCn,jdbcType=NVARCHAR},
+      </if>
+      <if test="fObjcaName != null">
+        #{fObjcaName,jdbcType=VARCHAR},
+      </if>
+      <if test="fPdtName != null">
+        #{fPdtName,jdbcType=NVARCHAR},
+      </if>
+      <if test="fProductlineName != null">
+        #{fProductlineName,jdbcType=VARCHAR},
+      </if>
+      <if test="fBversionno != null">
+        #{fBversionno,jdbcType=VARCHAR},
+      </if>
+      <if test="fBversionname != null">
+        #{fBversionname,jdbcType=NVARCHAR},
+      </if>
+      <if test="fVersion != null">
+        #{fVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.finance.entity.ProjectCodeProductCodeViewExample" resultType="java.lang.Long">
+    select count(*) from view_projectCodeProduct
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update view_projectCodeProduct
+    <set>
+      <if test="record.fId != null">
+        f_id = #{record.fId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fObjca != null">
+        f_objca = #{record.fObjca,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fPdtno != null">
+        f_pdtno = #{record.fPdtno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fProjno != null">
+        f_projno = #{record.fProjno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fProjname != null">
+        f_projname = #{record.fProjname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fProjcode != null">
+        f_projcode = #{record.fProjcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fProductlineno != null">
+        f_productlineno = #{record.fProductlineno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fReleaseno != null">
+        f_releaseno = #{record.fReleaseno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fReleasename != null">
+        f_releasename = #{record.fReleasename,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fProductno != null">
+        f_productno = #{record.fProductno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fProductname != null">
+        f_productname = #{record.fProductname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBizhong != null">
+        f_bizhong = #{record.fBizhong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fFbizhong != null">
+        f_fbizhong = #{record.fFbizhong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.begintime != null">
+        BeginTime = #{record.begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fProjmng != null">
+        f_projMng = #{record.fProjmng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fDept != null">
+        f_dept = #{record.fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fStartProjectTime != null">
+        f_start_project_time = #{record.fStartProjectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fAssignPoint != null">
+        f_assign_point = #{record.fAssignPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fAssignPointName != null">
+        f_assign_point_name = #{record.fAssignPointName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fProfile != null">
+        f_profile = #{record.fProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productNameCn != null">
+        PRODUCT_NAME_CN = #{record.productNameCn,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fObjcaName != null">
+        f_objca_name = #{record.fObjcaName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fPdtName != null">
+        f_pdt_name = #{record.fPdtName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fProductlineName != null">
+        f_productline_name = #{record.fProductlineName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBversionno != null">
+        f_bversionno = #{record.fBversionno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBversionname != null">
+        f_bversionname = #{record.fBversionname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fVersion != null">
+        f_version = #{record.fVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rate != null">
+        rate = #{record.rate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update view_projectCodeProduct
+    set f_id = #{record.fId,jdbcType=INTEGER},
+      f_objca = #{record.fObjca,jdbcType=VARCHAR},
+      f_pdtno = #{record.fPdtno,jdbcType=NVARCHAR},
+      f_projno = #{record.fProjno,jdbcType=VARCHAR},
+      f_projname = #{record.fProjname,jdbcType=VARCHAR},
+      f_projcode = #{record.fProjcode,jdbcType=VARCHAR},
+      f_productlineno = #{record.fProductlineno,jdbcType=VARCHAR},
+      f_releaseno = #{record.fReleaseno,jdbcType=VARCHAR},
+      f_releasename = #{record.fReleasename,jdbcType=NVARCHAR},
+      f_productno = #{record.fProductno,jdbcType=VARCHAR},
+      f_productname = #{record.fProductname,jdbcType=VARCHAR},
+      f_bizhong = #{record.fBizhong,jdbcType=VARCHAR},
+      f_fbizhong = #{record.fFbizhong,jdbcType=VARCHAR},
+      BeginTime = #{record.begintime,jdbcType=TIMESTAMP},
+      f_projMng = #{record.fProjmng,jdbcType=VARCHAR},
+      f_dept = #{record.fDept,jdbcType=VARCHAR},
+      f_start_project_time = #{record.fStartProjectTime,jdbcType=TIMESTAMP},
+      f_assign_point = #{record.fAssignPoint,jdbcType=VARCHAR},
+      f_assign_point_name = #{record.fAssignPointName,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      f_profile = #{record.fProfile,jdbcType=VARCHAR},
+      PRODUCT_NAME_CN = #{record.productNameCn,jdbcType=NVARCHAR},
+      f_objca_name = #{record.fObjcaName,jdbcType=VARCHAR},
+      f_pdt_name = #{record.fPdtName,jdbcType=NVARCHAR},
+      f_productline_name = #{record.fProductlineName,jdbcType=VARCHAR},
+      f_bversionno = #{record.fBversionno,jdbcType=VARCHAR},
+      f_bversionname = #{record.fBversionname,jdbcType=NVARCHAR},
+      f_version = #{record.fVersion,jdbcType=VARCHAR},
+      rate = #{record.rate,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

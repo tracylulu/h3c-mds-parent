@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.h3c.mds.flowable.dao.view_ProcessConfigPersonMapper">
+	<select id="getTreeData" parameterType="map"
+		resultMap="BaseResultMap">
+		<if test="param.id==null">
+			select distinct code,name from view_ProcessConfigPerson
+			<if test="param.searchParas!=null and param.searchParas!=''">
+				where
+				charindex(#{param.searchParas},isnull(code,'')+isnull(name,'')+isnull(roleCode,'')+isnull(roleName,'')+isnull(deptcode,'')
+					+isnull(deptname,'')+isnull(checker_id,'')+isnull(checker_name,'')+isnull(note,''))&gt;0
+			</if>
+		</if>
+		<if test="param.id!=null">
+			<if test="param.code==null">
+				select distinct roleCode+'_'+Code code,rolename from view_ProcessConfigPerson
+				where code=#{param.id}
+			</if>
+			<if test="param.code!=null and param.code!='' ">
+				select distinct cast(id as nvarchar(100))+'_'+roleCode+'_'+Code code,deptName,CHECKER_NAME,note,id from
+				view_ProcessConfigPerson where code=#{param.code} and
+				roleCode=#{param.id}
+			</if>
+			<if test="param.searchParas!=null and param.searchParas!=''">
+				and
+				charindex(#{param.searchParas},isnull(code,'')+isnull(name,'')+isnull(roleCode,'')+isnull(roleName,'')+isnull(deptcode,'')
+					+isnull(deptname,'')+isnull(checker_id,'')+isnull(checker_name,'')+isnull(note,''))&gt;0
+			</if>
+		</if>
+
+	</select>
+</mapper>

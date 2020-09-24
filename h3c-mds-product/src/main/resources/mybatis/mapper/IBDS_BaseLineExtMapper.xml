@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.IBDS_BaseLineMapper">
+    <insert id="insertSelectiveBatch" useGeneratedKeys="true"  parameterType="com.h3c.mds.product.entity.IBDS_BaseLineExample">
+    insert into IBDS_BASE_LINE (BASELINENo, BASELINE, 
+      BASELINEOld, engBASELINE, BASELINE_1, 
+      BASELINEOut, engBASELINEOut, PLIPMTNo, 
+      PRODLINENo, PRODUCTNo, VERSIONNo, 
+      RELEASENo, ParentItemNo, BASELINEStatus, 
+      BASELINEType, BASELINE_IssueTime, BASELINE_DisableTime, 
+      BASELINE_usingLimitWhether, BASELINE_UrgencyIssue, 
+      BASELINE_UsingRange, BASELINE_IssueRange, 
+      BASELINE_IssueStyle, Readers, ProdDataID, 
+      Remark, Status, CREATED_USER, 
+      CREATED_DATE, MODIFY_USER, MODIFY_DATA, 
+      STANDBY1, STANDBY2, STANDBY3, 
+      STANDBY4, STANDBY5, STANDBY6, 
+      STANDBY7, STANDBY8, STANDBY9, 
+      STANDBY10)
+    values 
+      <foreach collection="list" item="record" index="index" separator=",">
+      (#{record.baselineno,jdbcType=NVARCHAR}, #{record.baseline,jdbcType=NVARCHAR}, 
+      #{record.baselineold,jdbcType=NVARCHAR}, #{record.engbaseline,jdbcType=NVARCHAR}, #{record.baseline1,jdbcType=NVARCHAR}, 
+      #{record.baselineout,jdbcType=NVARCHAR}, #{record.engbaselineout,jdbcType=NVARCHAR}, #{record.plipmtno,jdbcType=NVARCHAR}, 
+      #{record.prodlineno,jdbcType=NVARCHAR}, #{record.productno,jdbcType=NVARCHAR}, #{record.versionno,jdbcType=NVARCHAR}, 
+      #{record.releaseno,jdbcType=NVARCHAR}, #{record.parentitemno,jdbcType=NVARCHAR}, #{record.baselinestatus,jdbcType=NVARCHAR}, 
+      #{record.baselinetype,jdbcType=NVARCHAR}, #{record.baselineIssuetime,jdbcType=TIMESTAMP}, #{record.baselineDisabletime,jdbcType=TIMESTAMP}, 
+      #{record.baselineUsinglimitwhether,jdbcType=NVARCHAR}, #{record.baselineUrgencyissue,jdbcType=NVARCHAR}, 
+      #{record.baselineUsingrange,jdbcType=NVARCHAR}, #{record.baselineIssuerange,jdbcType=NVARCHAR}, 
+      #{record.baselineIssuestyle,jdbcType=NVARCHAR}, #{record.readers,jdbcType=NVARCHAR}, #{record.proddataid,jdbcType=NVARCHAR}, 
+      #{record.remark,jdbcType=NVARCHAR}, #{record.status,jdbcType=NVARCHAR}, #{record.createdUser,jdbcType=NVARCHAR}, 
+      #{record.createdDate,jdbcType=TIMESTAMP}, #{record.modifyUser,jdbcType=NVARCHAR}, #{record.modifyData,jdbcType=TIMESTAMP}, 
+      #{record.standby1,jdbcType=NVARCHAR}, #{record.standby2,jdbcType=NVARCHAR}, #{record.standby3,jdbcType=NVARCHAR}, 
+      #{record.standby4,jdbcType=NVARCHAR}, #{record.standby5,jdbcType=NVARCHAR}, #{record.standby6,jdbcType=NVARCHAR}, 
+      #{record.standby7,jdbcType=NVARCHAR}, #{record.standby8,jdbcType=NVARCHAR}, #{record.standby9,jdbcType=NVARCHAR}, 
+      #{record.standby10,jdbcType=NVARCHAR})
+    </foreach>
+   
+  </insert>
+   
+   <update id="updateByBatch" parameterType="java.util.List">
+    <foreach collection="list" item="record" index="index" open="" close="" separator=";">
+   
+     update IBDS_BASE_LINE
+    set 
+      BASELINE = #{record.baseline,jdbcType=NVARCHAR},
+      engBASELINE = #{record.engbaseline,jdbcType=NVARCHAR},
+      BASELINE_1 = #{record.baseline1,jdbcType=NVARCHAR},
+      BASELINEOut = #{record.baselineout,jdbcType=NVARCHAR},
+      engBASELINEOut = #{record.engbaselineout,jdbcType=NVARCHAR},
+      ParentItemNo = #{record.parentitemno,jdbcType=NVARCHAR},
+      MODIFY_USER = #{record.modifyUser,jdbcType=NVARCHAR},
+      MODIFY_DATA = #{record.modifyData,jdbcType=TIMESTAMP}
+      where  id = #{record.id}  
+  </foreach>
+  </update>
+  
+  <update id="updateByStatusBatch" parameterType="map">
+  update IBDS_BASE_LINE
+    set 
+      Status = #{record.status,jdbcType=NVARCHAR}
+    where BASELINENo in 
+     <foreach collection="param.codes.split('\r')" item="record" index="index" open="(" separator="," close=")">
+     #{record,jdbcType=NVARCHAR}
+     </foreach>
+  </update>
+  
+  <select id="selectBaselinebyCodes" parameterType="map" resultMap="BaseResultMap">
+  <!-- 添加操作日志时调用 -->
+      <if test="param.codes!=null and param.codes!=''">
+      	select 
+		<include refid="Base_Column_List" />
+		from IBDS_BASE_LINE
+		where BASELINENo in 
+		<foreach collection="param.codes.split(',')" item="record" index="index"
+			open="(" separator="," close=")">
+			#{record}
+		</foreach>
+      </if>
+ </select>
+</mapper>

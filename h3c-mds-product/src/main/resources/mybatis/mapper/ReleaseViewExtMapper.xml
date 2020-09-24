@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.ReleaseViewMapper">
+	<!-- 获取R版本树 -->
+	<select id="getPDT" parameterType="map"
+		resultMap="BaseResultMap">
+
+		<!-- IPMT层 -->
+		<if test="param.id == null">
+			select distinct PLIPMT,PLIPMTNo,plipmt_order from ReleaseView where
+			status=1 
+		</if>
+		<if test="param.id != null">
+			<!-- 产品线层 -->
+			<if test="param.type =='PI'">
+
+				select distinct PRODLINENo+'_'+PLIPMTNo as PLIPMTNo
+				,PRODLINE,PLIPMT,pl_order from ReleaseView
+				where status=1 and PLIPMTNo=#{param.id} 
+
+			</if>
+			<!-- PDT层 -->
+			<if test="param.type =='PL'">
+
+				select distinct PDTNo+'_'+PRODLINENo+'_'+PLIPMTNo as
+				PLIPMTNo ,PDT,PRODLINE,PLIPMT from ReleaseView
+				where status=1 and
+				PRODLINENo=#{param.id} 
+
+			</if>
+				<!-- PDT层 -->
+			<if test="param.type =='PP'">
+
+				select distinct PDTNo+'_'+PRODLINENo+'_'+PLIPMTNo as
+				PLIPMTNo ,PDT,PRODLINE,PLIPMT from ReleaseView
+				where status=1 and
+				PRODLINENo=#{param.id} 
+
+			</if>
+			<!--R版本层 -->
+			<if test="param.type =='PT'">
+				select releaseno+'_'+VERSIONNo+'_'+ PRODUCTNo+ '_'+ PDTNo+'_'+PRODLINENo+'_'+Convert(varchar,ID)+'_'+PLIPMTNo as PLIPMTNo,
+
+				VERSIONNo, VERSION, PRODUCTNo,PRODLINE,PLIPMT,PDT,
+			<!-- 	PDT as pdt,
+				PDTNo as pdtNo, -->
+					PRODUCT, RELEASE, engRELEASE, RELEASEOld, Status, POP_ID,
+					Product_Mnger,
+					RNDPDT_ID, Sales_Mnger, FINPDT_ID, Purchase_Mnger,
+					Manufacture_Mnger, PPPDT_ID, TechSupport_Mnger,
+					Quality_Mnger,
+					System_Mnger, softmg, hardmg, Documents_Mnger, Equipment_Mnger,
+					fldPDE,
+					CMO_ID, Testing_Mnger, MarketTM, OMC_Mnger, FF_ID,
+					PilotProduction_Mnger,Oversea_Mnger,fdr,outnetparter,SQA_ID,HQA_ID,TQA_ID,SOFTTESTMNG,HARDTESTMNG,SOFTPLAT_ID,NETMGPERSON_ID,
+					NETMGNET,bom,
+					Remark,Match,RELEASEMatch,ProdDataID,
+					PROJECTStatus,RELEASENo_Software,RELEASE_Software,releaseno,project,projectno,ID,harddiffcult,proDifficult,Readers
+					,Column01,Column02,Column03,Column04,Column05,Column06,Column07,Column08,Column09,Column10,SE
+				
+				from ReleaseView
+				where status=1 and PDTNo=#{param.id}
+
+			</if>
+
+			<if test="param.PLIPMTNo!=null and param.PLIPMTNo!=''">
+				and PLIPMTNo=#{param.PLIPMTNo}
+			</if>
+			<if test="param.PRODLINENo!=null and param.PRODLINENo!=''">
+				and PRODLINENo=#{param.PRODLINENo}
+			</if>
+
+		</if>
+		<!--全文检索 -->
+		<if
+			test="param.projectStatus != null and param.projectStatus.length>0">
+			and 
+			<if test="param.projectStatusNull!= null and param.projectStatusNull=='all'">
+			(
+			</if>
+			PROJECTSTATUS in
+			<foreach item="item" collection="param.projectStatus"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+			<if test="param.projectStatusNull!= null and param.projectStatusNull=='all'">
+			or PROJECTSTATUS is null or PROJECTSTATUS='' )
+			</if>
+			
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and
+			CHARINDEX(#{param.searchParas},ISNULL(PRODLINENo,'')+ISNULL(PRODLINE,'')+ISNULL(PRODLINE,'')+ISNULL(PDT,'')+ISNULL(RELEASE,'')
+			+ISNULL(RELEASENO,'')+ISNULL(RELEASENO,'')+ISNULL(PRODUCT,'')+VERSION+ISNULL(PROJECTSTATUS,'')+ISNULL(RNDPDT_ID,'')+ISNULL(PRODUCT_MNGER,''))&gt;0
+		</if>
+		<!-- IPMT层 -->
+	<if test="param.id == null">
+	order by plipmt_order,PLIPMT
+	</if>
+	<if test="param.id != null">
+	<!-- 产品线层 -->
+	<if test="param.type =='PI'">
+	order by PL_ORDER,PRODLINE
+	</if>
+	<!-- PDT层 -->
+			<if test="param.type =='PL'">
+	order by PDT
+	</if>
+	<!--R版本层 -->
+	<if test="param.type =='PT'">
+	order by PRODUCT,VERSION,RELEASE
+	</if>
+	</if>
+
+	</select>
+	
+	
+	
+	<select id="getRelease" parameterType="map"
+		resultMap="BaseResultMap">
+
+		<!-- IPMT层 -->
+		<if test="param.id == null">
+			select distinct PLIPMT,PLIPMTNo,plipmt_order from ReleaseView where
+			status=1 
+		</if>
+		<if test="param.id != null">
+			<!-- 产品线层 -->
+			<if test="param.type =='PI'">
+
+				select distinct PRODLINENo+'_'+PLIPMTNo as PLIPMTNo
+				,PRODLINE as PLIPMT,pl_order from ReleaseView
+				where status=1 and PLIPMTNo=#{param.id} 
+
+			</if>
+			<!-- PDT层 -->
+			<if test="param.type =='PL'">
+
+				select distinct PDTNo+'_'+PRODLINENo+'_'+PLIPMTNo as
+				PLIPMTNo ,PDT as PLIPMT from ReleaseView
+				where status=1 and
+				PRODLINENo=#{param.id} 
+
+			</if>
+				<!-- PDT层 -->
+			<if test="param.type =='PP'">
+
+				select distinct PDTNo+'_'+PRODLINENo+'_'+PLIPMTNo as
+				PLIPMTNo ,PDT as PLIPMT from ReleaseView
+				where status=1 and
+				PRODLINENo=#{param.id} 
+
+			</if>
+			<!--R版本层 -->
+			<if test="param.type =='PT'">
+				select releaseno+'_'+VERSIONNo+'_'+ PRODUCTNo+ '_'+ PDTNo+'_'+PRODLINENo+'_'+Convert(varchar,ID)+'_'+PLIPMTNo as PLIPMTNo,
+
+				VERSIONNo, VERSION, PRODUCTNo,
+			<!-- 	PDT as pdt,
+				PDTNo as pdtNo, -->
+					PRODUCT, RELEASE  as PLIPMT,RELEASE, engRELEASE, RELEASEOld, Status, POP_ID,
+					Product_Mnger,
+					RNDPDT_ID, Sales_Mnger, FINPDT_ID, Purchase_Mnger,
+					Manufacture_Mnger, PPPDT_ID, TechSupport_Mnger,
+					Quality_Mnger,
+					System_Mnger, softmg, hardmg, Documents_Mnger, Equipment_Mnger,
+					fldPDE,
+					CMO_ID, Testing_Mnger, MarketTM, OMC_Mnger, FF_ID,
+					PilotProduction_Mnger,Oversea_Mnger,fdr,outnetparter,SQA_ID,HQA_ID,TQA_ID,SOFTTESTMNG,HARDTESTMNG,SOFTPLAT_ID,NETMGPERSON_ID,
+					NETMGNET,bom,
+					Remark,Match,RELEASEMatch,ProdDataID,
+					PROJECTStatus,RELEASENo_Software,RELEASE_Software,releaseno,project,projectno,ID,harddiffcult,proDifficult,Readers
+					,Column01,Column02,Column03,Column04,Column05,Column06,Column07,Column08,Column09,Column10,SE
+				
+				from ReleaseView
+				where status=1 and PDTNo=#{param.id}
+
+			</if>
+
+			<if test="param.PLIPMTNo!=null and param.PLIPMTNo!=''">
+				and PLIPMTNo=#{param.PLIPMTNo}
+			</if>
+			<if test="param.PRODLINENo!=null and param.PRODLINENo!=''">
+				and PRODLINENo=#{param.PRODLINENo}
+			</if>
+
+		</if>
+		<!--全文检索 -->
+		<if
+			test="param.projectStatus != null and param.projectStatus.length>0">
+			and 
+			<if test="param.projectStatusNull!= null and param.projectStatusNull=='all'">
+			(
+			</if>
+			PROJECTSTATUS in
+			<foreach item="item" collection="param.projectStatus"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+			<if test="param.projectStatusNull!= null and param.projectStatusNull=='all'">
+			or PROJECTSTATUS is null or PROJECTSTATUS='' )
+			</if>
+			
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and
+			CHARINDEX(#{param.searchParas},ISNULL(PRODLINENo,'')+ISNULL(PRODLINE,'')+ISNULL(PRODLINE,'')+ISNULL(PDT,'')+ISNULL(RELEASE,'')
+			+ISNULL(RELEASENO,'')+ISNULL(RELEASENO,'')+ISNULL(PRODUCT,'')+VERSION+ISNULL(PROJECTSTATUS,'')+ISNULL(RNDPDT_ID,'')+ISNULL(PRODUCT_MNGER,''))&gt;0
+		</if>
+		<!-- IPMT层 -->
+	<if test="param.id == null">
+	order by plipmt_order,PLIPMT
+	</if>
+	<if test="param.id != null">
+	<!-- 产品线层 -->
+	<if test="param.type =='PI'">
+	order by PL_ORDER,PRODLINE
+	</if>
+	<!-- PDT层 -->
+			<if test="param.type =='PL'">
+	order by PDT
+	</if>
+	<!--R版本层 -->
+	<if test="param.type =='PT'">
+	order by PRODUCT,VERSION,RELEASE
+	</if>
+	</if>
+
+	</select>
+	
+	
+	<select id="getTreeDataForFlowable" parameterType="map"
+		resultMap="BaseResultMap">
+
+		<!-- IPMT层 -->
+		<if test="param.id == null">
+			select distinct PLIPMT,PLIPMTNo from ReleaseView where
+			status=1
+		</if>
+
+
+		<if test="param.id != null">
+			<!-- 产品线层 -->
+			<if test="param.type =='PI'">
+
+				select distinct PRODLINENo+'_'+PLIPMTNo as PLIPMTNo,
+				PLIPMT,
+				PRODLINE from ReleaseView
+				where status=1 and PLIPMTNo=#{param.id}
+
+			</if>
+			<!-- PDT层 -->
+			<if test="param.type =='PL'">
+
+				select distinct PDTNo+'_'+PRODLINENo+'_'+PLIPMTNo as PLIPMTNo ,
+				PLIPMT,
+				PRODLINE,
+				PDT from ReleaseView
+				where status=1 and
+				PRODLINENo=#{param.id}
+
+			</if>
+			<!--R版本层 -->
+			<if test="param.type =='PT'">
+				select releaseno+'_'+PDTNo+'_'+PRODLINENo+'_'+Convert(varchar,ID)+'_'+PLIPMTNo as PLIPMTNo,
+
+				PLIPMT,
+				PRODLINE,
+				PDT,
+				VERSIONNo, VERSION, PRODUCTNo,
+			 	PDT as pdt,
+				PDTNo as pdtNo,
+				PRODUCT, RELEASE, engRELEASE, RELEASEOld, Status, POP_ID,
+				Product_Mnger,
+				RNDPDT_ID, Sales_Mnger, FINPDT_ID, Purchase_Mnger,
+				Manufacture_Mnger, PPPDT_ID, TechSupport_Mnger,
+				Quality_Mnger,
+				System_Mnger, softmg, hardmg, Documents_Mnger, Equipment_Mnger,
+				fldPDE,
+				CMO_ID, Testing_Mnger, MarketTM, OMC_Mnger, FF_ID,
+				PilotProduction_Mnger,Oversea_Mnger,fdr,outnetparter,SQA_ID,HQA_ID,TQA_ID,SOFTTESTMNG,HARDTESTMNG,SOFTPLAT_ID,NETMGPERSON_ID,
+					NETMGNET,bom,
+					Remark,Match,RELEASEMatch,ProdDataID,
+					PROJECTStatus,RELEASENo_Software,RELEASE_Software,releaseno,project,projectno,ID,harddiffcult,proDifficult,Readers
+					,Column01,Column02,Column03,Column04,Column05,Column06,Column07,Column08,Column09,Column10,SE
+				from ReleaseView
+				where status=1 and PDTNo=#{param.id}
+
+			</if>
+
+			<if test="param.PLIPMTNo!=null and param.PLIPMTNo!=''">
+				and PLIPMTNo=#{param.PLIPMTNo}
+			</if>
+			<if test="param.PRODLINENo!=null and param.PRODLINENo!=''">
+				and PRODLINENo=#{param.PRODLINENo}
+			</if>
+
+		</if>
+
+
+		<!--全文检索 -->
+		<if
+			test="param.projectStatus != null and param.projectStatus.length>0">
+			and 
+			<if test="param.projectStatusNull!= null and param.projectStatusNull=='all'">
+			(
+			</if>
+			PROJECTSTATUS in
+			<foreach item="item" collection="param.projectStatus"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+			<if test="param.projectStatusNull!= null and param.projectStatusNull=='all'">
+			or PROJECTSTATUS is null or PROJECTSTATUS='' )
+			</if>
+			
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and
+			CHARINDEX(#{param.searchParas},ISNULL(PRODLINENo,'')+ISNULL(PRODLINE,'')+ISNULL(PRODLINE,'')+ISNULL(PDT,'')+ISNULL(RELEASE,'')
+			+ISNULL(RELEASENO,'')+ISNULL(RELEASENO,'')+ISNULL(PRODUCT,'')+VERSION+ISNULL(PROJECTSTATUS,'')+ISNULL(RNDPDT_ID,'')+ISNULL(PRODUCT_MNGER,''))&gt;0
+		</if>
+
+<!-- IPMT层 -->
+	<if test="param.id == null">
+	order by PLIPMT
+	</if>
+	<if test="param.id != null">
+	<!-- 产品线层 -->
+	<if test="param.type =='PI'">
+	order by PRODLINE
+	</if>
+	<!-- PDT层 -->
+			<if test="param.type =='PL'">
+	order by PDT
+	</if>
+	<!--R版本层 -->
+	<if test="param.type =='PT'">
+	order by PRODUCT,VERSION,RELEASE
+	</if>
+	</if>
+
+	</select>
+	
+	
+	
+	<!-- 获取R版本树 -->
+	<select id="getSoftware" parameterType="map" resultMap="BaseResultMap">
+		<!-- IPMT层 -->
+		<if test="param.id == null">
+			select distinct PLIPMT,PLIPMTNo from ReleaseView where
+			status=1
+		</if>
+
+
+		<if test="param.id != null">
+			<!-- 产品线层 -->
+			<if test="param.type =='PI'">
+
+				select distinct PRODLINENo as PLIPMTNo
+				,PRODLINE from ReleaseView
+				where status=1 and PLIPMTNo=#{param.id}
+
+			</if>
+			<!-- PDT层 -->
+			<if test="param.type =='PL'">
+
+				select distinct PDTNo as
+				PLIPMTNo ,PDT from ReleaseView
+				where status=1 and
+				PRODLINENo=#{param.id}
+
+			</if>
+			<!--R版本层 -->
+			<if test="param.type =='PT'">
+
+				select releaseno as
+				PLIPMTNo,
+				VERSIONNo, VERSION, PRODUCTNo,
+				<!-- PDT as pdt,
+				PDTNo as pdtNo, -->
+				PRODUCT, RELEASE, engRELEASE, RELEASEOld, Status, POP_ID,
+				Product_Mnger,
+				RNDPDT_ID, Sales_Mnger, FINPDT_ID, Purchase_Mnger,
+				Manufacture_Mnger, PPPDT_ID, TechSupport_Mnger,
+				Quality_Mnger,
+				System_Mnger, softmg, hardmg, Documents_Mnger, Equipment_Mnger,
+				fldPDE,
+				CMO_ID, Testing_Mnger, MarketTM, OMC_Mnger, FF_ID,
+			PilotProduction_Mnger,Oversea_Mnger,fdr,outnetparter,SQA_ID,HQA_ID,TQA_ID,SOFTTESTMNG,HARDTESTMNG,SOFTPLAT_ID,NETMGPERSON_ID,
+					NETMGNET,bom,
+					Remark,Match,RELEASEMatch,ProdDataID,
+					PROJECTStatus,RELEASENo_Software,RELEASE_Software,releaseno,project,projectno,ID,harddiffcult,proDifficult,Readers
+					,Column01,Column02,Column03,Column04,Column05,Column06,Column07,Column08,Column09,Column10,SE
+				from ReleaseView
+				where status=1 and PDTNo=#{param.id}
+
+			</if>
+
+			<if test="param.PLIPMTNo!=null and param.PLIPMTNo!=''">
+				and PLIPMTNo=#{param.PLIPMTNo}
+			</if>
+			<if test="param.PRODLINENo!=null and param.PRODLINENo!=''">
+				and PRODLINENo=#{param.PRODLINENo}
+			</if>
+
+		</if>
+
+
+		<!--全文检索 -->
+		<if
+			test="param.projectStatus != null and param.projectStatus.length>0">
+			and PROJECTSTATUS in
+			<foreach item="item" collection="param.projectStatus"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and
+			CHARINDEX(#{param.searchParas},ISNULL(PRODLINENo,'')+ISNULL(PRODLINE,'')+ISNULL(PRODLINE,'')+ISNULL(PDT,'')
+			+ISNULL(RELEASE,'')+ISNULL(RELEASENO,'')+ISNULL(RELEASENO,'')+ISNULL(PRODUCT,'')+VERSION+ISNULL(PROJECTSTATUS,'')+ISNULL(RNDPDT_ID,'')+ISNULL(PRODUCT_MNGER,''))&gt;0
+		</if>
+		
+		<!-- IPMT层 -->
+	<if test="param.id == null">
+	order by PLIPMT
+	</if>
+	<if test="param.id != null">
+	<!-- 产品线层 -->
+	<if test="param.type =='PI'">
+	order by PRODLINE
+	</if>
+	<!-- PDT层 -->
+			<if test="param.type =='PL'">
+	order by PDT
+	</if>
+	<!--R版本层 -->
+	<if test="param.type =='PT'">
+	order by PRODUCT,VERSION,RELEASE
+	</if>
+	</if>
+
+	</select>
+	<!--根据内码查询属性 -->
+	<select id="selectByCode" parameterType="string"
+		resultMap="BaseResultMap">
+		select top 1
+		<include refid="Base_Column_List" />
+		from ReleaseView
+		where RELEASENO=#{code}
+
+	</select>
+	
+	<!--根据内码查询属性 -->
+	<select id="selectByID" parameterType="Integer"
+		resultMap="BaseResultMap">
+		select top 1
+		<include refid="Base_Column_List" />
+		from ReleaseView
+		where ID=#{code}
+
+	</select>
+
+	<select id="getExportList" parameterType="map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ReleaseView where
+		status=1
+
+		<!--全文检索 -->
+		<if
+			test="param.projectStatus != null and param.projectStatus.length>0">
+			and
+			<if
+				test="param.projectStatusNull!= null and param.projectStatusNull=='all'">
+				(
+			</if>
+			PROJECTSTATUS in
+			<foreach item="item" collection="param.projectStatus"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+			<if
+				test="param.projectStatusNull!= null and param.projectStatusNull=='all'">
+				or PROJECTSTATUS is null or PROJECTSTATUS='' )
+			</if>
+
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and
+			CHARINDEX(#{param.searchParas},ISNULL(PRODLINENo,'')+ISNULL(PRODLINE,'')+ISNULL(PRODLINE,'')+ISNULL(PDT,'')+ISNULL(RELEASE,'')
+			+ISNULL(RELEASENO,'')+ISNULL(RELEASENO,'')+ISNULL(PRODUCT,'')+VERSION+ISNULL(PROJECTSTATUS,'')+ISNULL(RNDPDT_ID,'')+ISNULL(PRODUCT_MNGER,''))&gt;0
+		</if>
+		<if test="param.PLIPMTNo!=null and param.PLIPMTNo!=''">
+			and PLIPMTNo=#{param.PLIPMTNo}
+		</if>
+		<if test="param.PRODLINENo!=null and param.PRODLINENo!=''">
+			and PRODLINENo=#{param.PRODLINENo}
+		</if>
+
+		order by plipmt_order,PLIPMT
+
+
+	</select>
+</mapper>

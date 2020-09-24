@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.IBDS_DicMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.product.entity.IBDS_Dic">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="DIC_NAME" jdbcType="NVARCHAR" property="dicName" />
+    <result column="DIC_VALUE" jdbcType="NVARCHAR" property="dicValue" />
+    <result column="DIC_TypeCode" jdbcType="NVARCHAR" property="dicTypecode" />
+    <result column="DIC_TypeName" jdbcType="NVARCHAR" property="dicTypename" />
+    <result column="FLAG" jdbcType="INTEGER" property="flag" />
+    <result column="Remark" jdbcType="NVARCHAR" property="remark" />
+    <result column="Creator" jdbcType="NVARCHAR" property="creator" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="Modifier" jdbcType="NVARCHAR" property="modifier" />
+    <result column="ModifyTime" jdbcType="TIMESTAMP" property="modifytime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, DIC_NAME, DIC_VALUE, DIC_TypeCode, DIC_TypeName, FLAG, Remark, Creator, CreateTime, 
+    Modifier, ModifyTime
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.product.entity.IBDS_DicExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_Dic
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_Dic
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_Dic
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.product.entity.IBDS_DicExample">
+    delete from IBDS_Dic
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.product.entity.IBDS_Dic">
+    insert into IBDS_Dic (ID, DIC_NAME, DIC_VALUE, 
+      DIC_TypeCode, DIC_TypeName, FLAG, 
+      Remark, Creator, CreateTime, 
+      Modifier, ModifyTime)
+    values (#{id,jdbcType=INTEGER}, #{dicName,jdbcType=NVARCHAR}, #{dicValue,jdbcType=NVARCHAR}, 
+      #{dicTypecode,jdbcType=NVARCHAR}, #{dicTypename,jdbcType=NVARCHAR}, #{flag,jdbcType=INTEGER}, 
+      #{remark,jdbcType=NVARCHAR}, #{creator,jdbcType=NVARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{modifier,jdbcType=NVARCHAR}, #{modifytime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.product.entity.IBDS_Dic">
+    insert into IBDS_Dic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="dicName != null">
+        DIC_NAME,
+      </if>
+      <if test="dicValue != null">
+        DIC_VALUE,
+      </if>
+      <if test="dicTypecode != null">
+        DIC_TypeCode,
+      </if>
+      <if test="dicTypename != null">
+        DIC_TypeName,
+      </if>
+      <if test="flag != null">
+        FLAG,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="creator != null">
+        Creator,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+      <if test="modifier != null">
+        Modifier,
+      </if>
+      <if test="modifytime != null">
+        ModifyTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dicName != null">
+        #{dicName,jdbcType=NVARCHAR},
+      </if>
+      <if test="dicValue != null">
+        #{dicValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="dicTypecode != null">
+        #{dicTypecode,jdbcType=NVARCHAR},
+      </if>
+      <if test="dicTypename != null">
+        #{dicTypename,jdbcType=NVARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifytime != null">
+        #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.product.entity.IBDS_DicExample" resultType="java.lang.Long">
+    select count(*) from IBDS_Dic
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_Dic
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.dicName != null">
+        DIC_NAME = #{record.dicName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.dicValue != null">
+        DIC_VALUE = #{record.dicValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.dicTypecode != null">
+        DIC_TypeCode = #{record.dicTypecode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.dicTypename != null">
+        DIC_TypeName = #{record.dicTypename,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.flag != null">
+        FLAG = #{record.flag,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null">
+        Remark = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.creator != null">
+        Creator = #{record.creator,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifier != null">
+        Modifier = #{record.modifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.modifytime != null">
+        ModifyTime = #{record.modifytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_Dic
+    set ID = #{record.id,jdbcType=INTEGER},
+      DIC_NAME = #{record.dicName,jdbcType=NVARCHAR},
+      DIC_VALUE = #{record.dicValue,jdbcType=NVARCHAR},
+      DIC_TypeCode = #{record.dicTypecode,jdbcType=NVARCHAR},
+      DIC_TypeName = #{record.dicTypename,jdbcType=NVARCHAR},
+      FLAG = #{record.flag,jdbcType=INTEGER},
+      Remark = #{record.remark,jdbcType=NVARCHAR},
+      Creator = #{record.creator,jdbcType=NVARCHAR},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      Modifier = #{record.modifier,jdbcType=NVARCHAR},
+      ModifyTime = #{record.modifytime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.product.entity.IBDS_Dic">
+    update IBDS_Dic
+    <set>
+      <if test="dicName != null">
+        DIC_NAME = #{dicName,jdbcType=NVARCHAR},
+      </if>
+      <if test="dicValue != null">
+        DIC_VALUE = #{dicValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="dicTypecode != null">
+        DIC_TypeCode = #{dicTypecode,jdbcType=NVARCHAR},
+      </if>
+      <if test="dicTypename != null">
+        DIC_TypeName = #{dicTypename,jdbcType=NVARCHAR},
+      </if>
+      <if test="flag != null">
+        FLAG = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="creator != null">
+        Creator = #{creator,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null">
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        Modifier = #{modifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifytime != null">
+        ModifyTime = #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.product.entity.IBDS_Dic">
+    update IBDS_Dic
+    set DIC_NAME = #{dicName,jdbcType=NVARCHAR},
+      DIC_VALUE = #{dicValue,jdbcType=NVARCHAR},
+      DIC_TypeCode = #{dicTypecode,jdbcType=NVARCHAR},
+      DIC_TypeName = #{dicTypename,jdbcType=NVARCHAR},
+      FLAG = #{flag,jdbcType=INTEGER},
+      Remark = #{remark,jdbcType=NVARCHAR},
+      Creator = #{creator,jdbcType=NVARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      Modifier = #{modifier,jdbcType=NVARCHAR},
+      ModifyTime = #{modifytime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

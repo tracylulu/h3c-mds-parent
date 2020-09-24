@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.dept.dao.IBDS_Dept_SysPersonRoleMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.dept.entity.IBDS_Dept_SysPersonRole">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="SAPcode" jdbcType="NVARCHAR" property="sapcode" />
+    <result column="RoleTypeCode" jdbcType="NVARCHAR" property="roletypecode" />
+    <result column="PersonCode" jdbcType="NVARCHAR" property="personcode" />
+    <result column="CreatorCode" jdbcType="NVARCHAR" property="creatorcode" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="PersonName" jdbcType="NVARCHAR" property="personname" />
+    <result column="CreatorName" jdbcType="NVARCHAR" property="creatorname" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, SAPcode, RoleTypeCode, PersonCode, CreatorCode, CreateTime,PersonName,CreatorName
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.dept.entity.IbdsDeptSysPersonRoleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_Dept_SysPersonRole
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_Dept_SysPersonRole
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_Dept_SysPersonRole
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.dept.entity.IbdsDeptSysPersonRoleExample">
+    delete from IBDS_Dept_SysPersonRole
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.dept.entity.IBDS_Dept_SysPersonRole">
+    insert into IBDS_Dept_SysPersonRole (ID, SAPcode, RoleTypeCode, 
+      PersonCode, CreatorCode, CreateTime,PersonName,CreatorName
+      )
+    values (#{id,jdbcType=INTEGER}, #{sapcode,jdbcType=NVARCHAR}, #{roletypecode,jdbcType=NVARCHAR}, 
+      #{personcode,jdbcType=NVARCHAR}, #{creatorcode,jdbcType=NVARCHAR}, #{createtime,jdbcType=TIMESTAMP},
+      #{personname,jdbcType=NVARCHAR}, #{creatorname,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.dept.entity.IBDS_Dept_SysPersonRole">
+    insert into IBDS_Dept_SysPersonRole
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="sapcode != null">
+        SAPcode,
+      </if>
+      <if test="roletypecode != null">
+        RoleTypeCode,
+      </if>
+      <if test="personcode != null">
+        PersonCode,
+      </if>
+      <if test="creatorcode != null">
+        CreatorCode,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+      <if test="personname != null">
+        PersonName,
+      </if>
+      <if test="creatorname != null">
+        CreatorName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sapcode != null">
+        #{sapcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="roletypecode != null">
+        #{roletypecode,jdbcType=NVARCHAR},
+      </if>
+      <if test="personcode != null">
+        #{personcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="creatorcode != null">
+        #{creatorcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="personname != null">
+        #{personname,jdbcType=NVARCHAR},
+      </if>
+      <if test="creatorname != null">
+        #{creatorname,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.dept.entity.IbdsDeptSysPersonRoleExample" resultType="java.lang.Long">
+    select count(*) from IBDS_Dept_SysPersonRole
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_Dept_SysPersonRole
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sapcode != null">
+        SAPcode = #{record.sapcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.roletypecode != null">
+        RoleTypeCode = #{record.roletypecode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.personcode != null">
+        PersonCode = #{record.personcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.creatorcode != null">
+        CreatorCode = #{record.creatorcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.personname != null">
+        PersonName = #{record.personname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.creatorname != null">
+        CreatorName = #{record.creatorname,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_Dept_SysPersonRole
+    set ID = #{record.id,jdbcType=INTEGER},
+      SAPcode = #{record.sapcode,jdbcType=NVARCHAR},
+      RoleTypeCode = #{record.roletypecode,jdbcType=NVARCHAR},
+      PersonCode = #{record.personcode,jdbcType=NVARCHAR},
+      CreatorCode = #{record.creatorcode,jdbcType=NVARCHAR},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP}
+       PersonName = #{record.personname,jdbcType=NVARCHAR},
+      CreatorName = #{record.creatorname,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.dept.entity.IBDS_Dept_SysPersonRole">
+    update IBDS_Dept_SysPersonRole
+    <set>
+      <if test="sapcode != null">
+        SAPcode = #{sapcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="roletypecode != null">
+        RoleTypeCode = #{roletypecode,jdbcType=NVARCHAR},
+      </if>
+      <if test="personcode != null">
+        PersonCode = #{personcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="creatorcode != null">
+        CreatorCode = #{creatorcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null">
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="personname != null">
+        PersonName = #{personname,jdbcType=NVARCHAR},
+      </if>
+      <if test="creatorname != null">
+        CreatorName = #{creatorname,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.dept.entity.IBDS_Dept_SysPersonRole">
+    update IBDS_Dept_SysPersonRole
+    set SAPcode = #{sapcode,jdbcType=NVARCHAR},
+      RoleTypeCode = #{roletypecode,jdbcType=NVARCHAR},
+      PersonCode = #{personcode,jdbcType=NVARCHAR},
+      CreatorCode = #{creatorcode,jdbcType=NVARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      PersonName = #{personname,jdbcType=NVARCHAR},
+      CreatorName = #{creatorname,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!--add by chenlulu on 20200313  -->
+   <select id="getUserByDeptCode" resultMap="BaseResultMap" parameterType="map">		
+		select 	*  from IBDS_Dept_SysPersonRole where SAPcode = #{params.code} and RoleTypeCode = #{params.roleTypeCode}
+		
+	</select>
+  
+   <select id="getMessageByDeptCode" resultType="java.util.Map" parameterType="map">		
+		select 	r.*,a.DeptName  from IBDS_Dept_SysPersonRole r join IBDS_Dept_Data  a on r.SAPcode=a.DeptCode
+		where SAPcode = #{params.code} and RoleTypeCode = #{params.roleTypeCode}
+		<if test="params.searchParam!=null and params.searchParam!=''">
+			and
+			<include refid="query"></include>
+		</if>
+	</select>
+	
+	<select id="getMessageByDeptCodeForAdmin" resultType="java.util.Map" parameterType="map">		
+		select 	r.*,a.DeptName  from IBDS_Dept_SysPersonRole r join IBDS_Dept_Data  a on r.SAPcode=a.DeptCode
+		where  RoleTypeCode = #{params.roleTypeCode}
+		<if test="params.searchParam!=null and params.searchParam!=''">
+			and
+			<include refid="query"></include>
+		</if>
+	</select>
+  
+ 	<sql id="query">
+		CHARINDEX(#{params.searchParam},isnull(PersonCode,'')+ isnull(PersonName,'')+ isnull(DeptName,''))&gt;0
+	</sql>
+	
+  
+  <select id="selectRoleListByParam" parameterType="com.h3c.mds.dept.entity.IBDS_Dept_SysPersonRole" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dbo.IBDS_Dept_SysPersonRole
+    <if test="_parameter != null">
+    <include refid="condition_sql"></include>
+    </if>
+  </select>
+  
+  <sql id="condition_sql">
+		<where>
+			<if test="id !=null and id !='' ">
+				AND ID=#{id}
+			</if>
+			<if test="sapcode !=null and sapcode !='' ">
+				AND SAPcode=#{sapcode}
+			</if>
+			<if test="roletypecode !=null and roletypecode !='' ">
+				AND RoleTypeCode=#{roletypecode}
+			</if>
+			<if test="personcode !=null and personcode !='' ">
+				AND PersonCode=#{personcode}
+			</if>
+			<if test="creatorcode !=null and creatorcode !='' ">
+				AND CreatorCode=#{creatorcode}
+			</if>
+			<if test="createtime !=null and createtime !='' ">
+				AND CreateTime=#{createtime}
+			</if>
+			<if test="personname !=null and personname !='' ">
+				AND PersonName=#{personname}
+			</if>
+			<if test="creatorname !=null and creatorname !='' ">
+				AND CreatorName=#{creatorname}
+			</if>
+		</where>
+	</sql>
+  
+</mapper>

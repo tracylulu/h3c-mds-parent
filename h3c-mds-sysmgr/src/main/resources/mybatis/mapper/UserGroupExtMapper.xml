@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.sysmgr.dao.UserGroupMapper">
+   <select id="selUserGroupbyparam" parameterType="map" resultMap="BaseResultMap">
+  	select   <include refid="Base_Column_List" /> from IBDS_UserGroup
+  	<where>
+<if test="param.name!=null and param.name!=''"> 
+   		  charindex(#{param.name},NotesGroup+AdmpGroup)>0 
+  	</if> 
+  	<if test="param.name!=null and param.name!=''"> 
+   		  and charindex(#{param.user},GroupUserCode)>0
+  	</if> 
+  	</where>
+  	
+  </select>
+</mapper>

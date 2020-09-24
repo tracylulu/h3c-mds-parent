@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.flowable.dao.ProductCodeProcessMapper">
+  <!-- 插入数据并返回主键 -->
+  <insert id="insertAndGetId" parameterType="com.h3c.mds.flowable.entity.ProductCodeProcess" useGeneratedKeys="true" keyProperty="id">
+
+    insert into IBDS_PRODUCT_CODE_PROCESS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="applyCode != null">
+        APPLY_CODE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="handler != null">
+        HANDLER,
+      </if>
+      <if test="applyDept != null">
+        APPLY_DEPT,
+      </if>
+      <if test="applyType != null">
+        APPLY_TYPE,
+      </if>
+      <if test="applyCount != null">
+        APPLY_COUNT,
+      </if>
+      <if test="subSign != null">
+        SUB_SIGN,
+      </if>
+      <if test="checkOpinion != null">
+        CHECK_OPINION,
+      </if>
+      <if test="checkSign != null">
+        CHECK_SIGN,
+      </if>
+      <if test="checkResult != null">
+        CHECK_RESULT,
+      </if>
+      <if test="pdtSign != null">
+        PDT_SIGN,
+      </if>
+      <if test="pdtOpinion != null">
+        PDT_OPINION,
+      </if>
+      <if test="pdtResult != null">
+        PDT_RESULT,
+      </if>
+      <if test="fprodSign != null">
+        FPROD_SIGN,
+      </if>
+      <if test="fprodOpinion != null">
+        FPROD_OPINION,
+      </if>
+      <if test="fprodResult != null">
+        FPROD_RESULT,
+      </if>
+      <if test="cwSign != null">
+        CW_SIGN,
+      </if>
+      <if test="cwOpinion != null">
+        CW_OPINION,
+      </if>
+      <if test="cwResult != null">
+        CW_RESULT,
+      </if>
+      <if test="processmgnSign != null">
+        PROCESSMGN_SIGN,
+      </if>
+      <if test="processmgnResult != null">
+        PROCESSMGN_RESULT,
+      </if>
+      <if test="orderBy != null">
+        ORDER_BY,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE,
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER,
+      </if>
+      <if test="submitDate != null">
+        SUBMIT_DATE,
+      </if>
+      <if test="checkDate != null">
+        CHECK_DATE,
+      </if>
+      <if test="pdtDate != null">
+        PDT_DATE,
+      </if>
+      <if test="fprodDate != null">
+        FPROD_DATE,
+      </if>
+      <if test="cwDate != null">
+        CW_DATE,
+      </if>
+      <if test="processmgnDate != null">
+        PROCESSMGN_DATE,
+      </if>
+      <if test="instanseId != null">
+        INSTANSE_ID,
+      </if>
+      <if test="currentNode != null">
+        CURRENT_NODE,
+      </if>
+      <if test="assignSign != null">
+        ASSIGN_SIGN,
+      </if>
+      <if test="assignDate != null">
+        ASSIGN_DATE,
+      </if>
+      <if test="statusDesc != null">
+        STATUS_DESC,
+      </if>
+      <if test="pdtMgn != null">
+        PDT_MGN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="applyCode != null">
+        #{applyCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="handler != null">
+        #{handler,jdbcType=NVARCHAR},
+      </if>
+      <if test="applyDept != null">
+        #{applyDept,jdbcType=NVARCHAR},
+      </if>
+      <if test="applyType != null">
+        #{applyType,jdbcType=NVARCHAR},
+      </if>
+      <if test="applyCount != null">
+        #{applyCount,jdbcType=NVARCHAR},
+      </if>
+      <if test="subSign != null">
+        #{subSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkOpinion != null">
+        #{checkOpinion,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkSign != null">
+        #{checkSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkResult != null">
+        #{checkResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtSign != null">
+        #{pdtSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtOpinion != null">
+        #{pdtOpinion,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtResult != null">
+        #{pdtResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="fprodSign != null">
+        #{fprodSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="fprodOpinion != null">
+        #{fprodOpinion,jdbcType=NVARCHAR},
+      </if>
+      <if test="fprodResult != null">
+        #{fprodResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="cwSign != null">
+        #{cwSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="cwOpinion != null">
+        #{cwOpinion,jdbcType=NVARCHAR},
+      </if>
+      <if test="cwResult != null">
+        #{cwResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="processmgnSign != null">
+        #{processmgnSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="processmgnResult != null">
+        #{processmgnResult,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null">
+        #{orderBy,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="submitDate != null">
+        #{submitDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkDate != null">
+        #{checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pdtDate != null">
+        #{pdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fprodDate != null">
+        #{fprodDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cwDate != null">
+        #{cwDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processmgnDate != null">
+        #{processmgnDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="instanseId != null">
+        #{instanseId,jdbcType=NVARCHAR},
+      </if>
+      <if test="currentNode != null">
+        #{currentNode,jdbcType=NVARCHAR},
+      </if>
+      <if test="assignSign != null">
+        #{assignSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="assignDate != null">
+        #{assignDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusDesc != null">
+        #{statusDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="pdtMgn != null">
+        #{pdtMgn,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+
+  <resultMap id="BaseResultMapExt" type="com.h3c.mds.flowable.entity.ProductCodeProcessExt" extends="BaseResultMap">
+      <result column="CODE"  property="code"/>
+      <result column="NAME"  property="name"/>
+      <result column="PRODUCT_CODES" property="productCodes"/>
+  </resultMap>
+
+<!--  <select id="findByPage" resultMap="BaseResultMap" parameterType="java.lang.String">-->
+<!--    SELECT <include refid="Base_Column_List" />-->
+<!--    from IBDS_PRODUCT_CODE_PROCESS-->
+<!--    <where>-->
+<!--        <if test="_parameter != null and _parameter != ''">-->
+<!--          CHARINDEX(#{searchStr},isnull(APPLY_CODE,'')+isnull(HANDLER,'')+isnull(SUB_SIGN,''))>0-->
+<!--        </if>-->
+<!--    </where>-->
+<!--  </select>-->
+
+  <select id="findByPage" resultMap="BaseResultMapExt" parameterType="java.lang.String">
+    SELECT *
+    from VIEW_PRODUCT_CODE_PROCESS A WHERE STATUS != '-2'
+
+      <if test="_parameter != null and _parameter != ''">
+        and  CHARINDEX(#{searchStr},isnull(A.APPLY_CODE,'')+isnull(A.HANDLER,'')+isnull(A.SUB_SIGN,'')+isnull(PRODUCT_CODES,''))>0
+      </if>
+    ORDER BY A.APPLY_CODE
+  </select>
+
+  <select id="getExtById" resultMap="BaseResultMapExt" parameterType="java.lang.Integer">
+    SELECT <include refid="Base_Column_List" />
+    from IBDS_PRODUCT_CODE_PROCESS
+    WHERE ID=#{id}
+  </select>
+  
+  <select id="getMaxCode" resultType="string" >
+    SELECT MAX(APPLY_CODE) FROM IBDS_PRODUCT_CODE_PROCESS WHERE APPLY_CODE LIKE 'PRC%' AND LEN(APPLY_CODE)=10
+  </select>
+
+  <select id="dataList" resultMap="BaseResultMapExt" parameterType="java.util.Map">
+    <if test="param.id == null">
+
+    <!--按申请人-->
+      <if test="param.type == 1">
+        SELECT DISTINCT SUB_SIGN AS CODE,SUB_SIGN AS NAME FROM VIEW_PRODUCT_CODE_PROCESS WHERE STATUS != '-2'
+      </if>
+      <!--按状态-->
+      <if test="param.type == 2">
+        SELECT DISTINCT STATUS_DESC AS CODE,STATUS_DESC AS NAME,STATUS_CODE FROM VIEW_PRODUCT_CODE_PROCESS WHERE STATUS != '-2'
+      </if>
+      <!--未关闭流程-->
+      <if test="param.type == 3">
+        SELECT DISTINCT STATUS_DESC AS CODE,STATUS_DESC AS NAME FROM VIEW_PRODUCT_CODE_PROCESS WHERE STATUS != '-2' AND STATUS != '10'
+      </if>
+      <!--按当前责任人-->
+      <if test="param.type == 4">
+        SELECT DISTINCT HANDLER AS CODE,HANDLER AS NAME FROM VIEW_PRODUCT_CODE_PROCESS WHERE STATUS != '-2'
+      </if>
+    </if>
+    <if test="param.id != null">
+      <if test="param.type == 1">
+        SELECT  ID+'' AS CODE,'CODE_APPLY' AS NAME,APPLY_CODE,APPLY_DEPT,STATUS_DESC,APPLY_TYPE,HANDLER,PRODUCT_CODES FROM VIEW_PRODUCT_CODE_PROCESS WHERE STATUS != '-2' AND SUB_SIGN=#{param.id}
+      </if>
+      <!--按状态-->
+      <if test="param.type == 2">
+        SELECT ID+'' AS CODE,'CODE_APPLY' AS NAME,SUB_SIGN,APPLY_CODE,APPLY_DEPT,APPLY_TYPE,HANDLER,PRODUCT_CODES FROM VIEW_PRODUCT_CODE_PROCESS WHERE STATUS != '-2' AND STATUS_DESC=#{param.id}
+      </if>
+      <!--未关闭流程-->
+      <if test="param.type == 3">
+        SELECT ID+'' AS CODE,'CODE_APPLY' AS NAME,SUB_SIGN,APPLY_CODE,APPLY_DEPT,APPLY_TYPE,HANDLER,PRODUCT_CODES FROM VIEW_PRODUCT_CODE_PROCESS WHERE STATUS != '-2' AND STATUS_DESC=#{param.id}
+      </if>
+      <!--按当前责任人-->
+      <if test="param.type == 4">
+        SELECT ID+'' AS CODE,'CODE_APPLY' AS NAME,APPLY_CODE,APPLY_DEPT,SUB_SIGN,STATUS_DESC,APPLY_TYPE,PRODUCT_CODES FROM VIEW_PRODUCT_CODE_PROCESS WHERE STATUS != '-2' AND HANDLER=#{param.id}
+      </if>
+    </if>
+
+      <if test="param.searchParas != null and param.searchParas != ''">
+        and CHARINDEX(#{param.searchParas},isnull(APPLY_CODE,'')+isnull(HANDLER,'')+isnull(SUB_SIGN,'')+isnull(PRODUCT_CODES,''))>0
+      </if>
+
+      <if test="param.id == null">
+        <if test="param.type == 2">
+            ORDER BY STATUS_CODE
+        </if>
+      </if>
+
+  </select>
+</mapper>

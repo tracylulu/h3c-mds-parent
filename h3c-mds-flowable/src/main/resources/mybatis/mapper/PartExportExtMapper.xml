@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.flowable.dao.PartExportMapper">
+ <select id="getExportList" parameterType="map"  resultMap="BaseResultMap">
+ 	select <include refid="Base_Column_List"></include>
+ 	from view_partExport
+ 	<where>
+ 		<if test="param.prodLine!=null and param.prodLine!='' ">
+			and PRODLINE_ID=#{param.prodLine}
+		</if>
+
+		<if test="param.pdt!=null and param.pdt!='' ">
+			and pdt_id=#{param.pdt}
+		</if>
+		<if test="param.start!=null and param.start!=''  and param.end!=null and param.end!='' ">
+			and PROCESSMGN_DATE  between  #{param.start} and #{param.end}
+		</if>
+
+	 	<if test="param.searchParams!='' and param.searchParams !=null">
+			and  CHARINDEX(#{param.searchParams},isnull(APPLY_CODE,'')+isnull(STATUS,'')
+			+isnull(HANDLER,'')+isnull(APPLY_PERSON,'')+isnull(SUB_SIGN,''))>0
+		</if>
+		
+ 	</where>
+ </select>
+</mapper>

@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.sysmgr.dao.ResourceMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.sysmgr.entity.Resource">
+    <id column="HRES_ID" jdbcType="INTEGER" property="hresId" />
+    <result column="HRES_PCODE" jdbcType="NVARCHAR" property="hresPcode" />
+    <result column="HRES_NAME" jdbcType="NVARCHAR" property="hresName" />
+    <result column="HRES_CODE" jdbcType="NVARCHAR" property="hresCode" />
+    <result column="HRES_CONTENT" jdbcType="NVARCHAR" property="hresContent" />
+    <result column="HRES_CREATE_USER" jdbcType="NVARCHAR" property="hresCreateUser" />
+    <result column="HRES_CREATE_DATE" jdbcType="TIMESTAMP" property="hresCreateDate" />
+    <result column="HRES_MODIFY_USER" jdbcType="NVARCHAR" property="hresModifyUser" />
+    <result column="HRES_MODIFY_DATE" jdbcType="TIMESTAMP" property="hresModifyDate" />
+    <result column="HRES_SORT" jdbcType="INTEGER" property="hresSort" />
+    <result column="RESOURCE_TYPE" jdbcType="NVARCHAR" property="resourceType" />
+    <result column="FLAG" jdbcType="NVARCHAR" property="flag" />
+    <result column="REMARK" jdbcType="NVARCHAR" property="remark" />
+    <result column="IsShow" jdbcType="CHAR" property="isshow" />
+    <result column="HRES_TYPE" jdbcType="NVARCHAR" property="hresType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    HRES_ID, HRES_PCODE, HRES_NAME, HRES_CODE, HRES_CONTENT, HRES_CREATE_USER, HRES_CREATE_DATE, 
+    HRES_MODIFY_USER, HRES_MODIFY_DATE, HRES_SORT, RESOURCE_TYPE, FLAG, REMARK, IsShow, 
+    HRES_TYPE
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.sysmgr.entity.ResourceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from IBDS_Resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from IBDS_Resource
+    where HRES_ID = #{hresId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from IBDS_Resource
+    where HRES_ID = #{hresId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.sysmgr.entity.ResourceExample">
+    delete from IBDS_Resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.sysmgr.entity.Resource">
+    insert into IBDS_Resource (HRES_ID, HRES_PCODE, HRES_NAME, 
+      HRES_CODE, HRES_CONTENT, HRES_CREATE_USER, 
+      HRES_CREATE_DATE, HRES_MODIFY_USER, HRES_MODIFY_DATE, 
+      HRES_SORT, RESOURCE_TYPE, FLAG, 
+      REMARK, IsShow, HRES_TYPE
+      )
+    values (#{hresId,jdbcType=INTEGER}, #{hresPcode,jdbcType=NVARCHAR}, #{hresName,jdbcType=NVARCHAR}, 
+      #{hresCode,jdbcType=NVARCHAR}, #{hresContent,jdbcType=NVARCHAR}, #{hresCreateUser,jdbcType=NVARCHAR}, 
+      #{hresCreateDate,jdbcType=TIMESTAMP}, #{hresModifyUser,jdbcType=NVARCHAR}, #{hresModifyDate,jdbcType=TIMESTAMP}, 
+      #{hresSort,jdbcType=INTEGER}, #{resourceType,jdbcType=NVARCHAR}, #{flag,jdbcType=NVARCHAR}, 
+      #{remark,jdbcType=NVARCHAR}, #{isshow,jdbcType=CHAR}, #{hresType,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.sysmgr.entity.Resource">
+    insert into IBDS_Resource
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hresId != null">
+        HRES_ID,
+      </if>
+      <if test="hresPcode != null">
+        HRES_PCODE,
+      </if>
+      <if test="hresName != null">
+        HRES_NAME,
+      </if>
+      <if test="hresCode != null">
+        HRES_CODE,
+      </if>
+      <if test="hresContent != null">
+        HRES_CONTENT,
+      </if>
+      <if test="hresCreateUser != null">
+        HRES_CREATE_USER,
+      </if>
+      <if test="hresCreateDate != null">
+        HRES_CREATE_DATE,
+      </if>
+      <if test="hresModifyUser != null">
+        HRES_MODIFY_USER,
+      </if>
+      <if test="hresModifyDate != null">
+        HRES_MODIFY_DATE,
+      </if>
+      <if test="hresSort != null">
+        HRES_SORT,
+      </if>
+      <if test="resourceType != null">
+        RESOURCE_TYPE,
+      </if>
+      <if test="flag != null">
+        FLAG,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="isshow != null">
+        IsShow,
+      </if>
+      <if test="hresType != null">
+        HRES_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hresId != null">
+        #{hresId,jdbcType=INTEGER},
+      </if>
+      <if test="hresPcode != null">
+        #{hresPcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="hresName != null">
+        #{hresName,jdbcType=NVARCHAR},
+      </if>
+      <if test="hresCode != null">
+        #{hresCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="hresContent != null">
+        #{hresContent,jdbcType=NVARCHAR},
+      </if>
+      <if test="hresCreateUser != null">
+        #{hresCreateUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="hresCreateDate != null">
+        #{hresCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hresModifyUser != null">
+        #{hresModifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="hresModifyDate != null">
+        #{hresModifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hresSort != null">
+        #{hresSort,jdbcType=INTEGER},
+      </if>
+      <if test="resourceType != null">
+        #{resourceType,jdbcType=NVARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="isshow != null">
+        #{isshow,jdbcType=CHAR},
+      </if>
+      <if test="hresType != null">
+        #{hresType,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.sysmgr.entity.ResourceExample" resultType="java.lang.Long">
+    select count(*) from IBDS_Resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update IBDS_Resource
+    <set>
+      <if test="record.hresId != null">
+        HRES_ID = #{record.hresId,jdbcType=INTEGER},
+      </if>
+      <if test="record.hresPcode != null">
+        HRES_PCODE = #{record.hresPcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.hresName != null">
+        HRES_NAME = #{record.hresName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.hresCode != null">
+        HRES_CODE = #{record.hresCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.hresContent != null">
+        HRES_CONTENT = #{record.hresContent,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.hresCreateUser != null">
+        HRES_CREATE_USER = #{record.hresCreateUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.hresCreateDate != null">
+        HRES_CREATE_DATE = #{record.hresCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.hresModifyUser != null">
+        HRES_MODIFY_USER = #{record.hresModifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.hresModifyDate != null">
+        HRES_MODIFY_DATE = #{record.hresModifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.hresSort != null">
+        HRES_SORT = #{record.hresSort,jdbcType=INTEGER},
+      </if>
+      <if test="record.resourceType != null">
+        RESOURCE_TYPE = #{record.resourceType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.flag != null">
+        FLAG = #{record.flag,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isshow != null">
+        IsShow = #{record.isshow,jdbcType=CHAR},
+      </if>
+      <if test="record.hresType != null">
+        HRES_TYPE = #{record.hresType,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update IBDS_Resource
+    set HRES_ID = #{record.hresId,jdbcType=INTEGER},
+      HRES_PCODE = #{record.hresPcode,jdbcType=NVARCHAR},
+      HRES_NAME = #{record.hresName,jdbcType=NVARCHAR},
+      HRES_CODE = #{record.hresCode,jdbcType=NVARCHAR},
+      HRES_CONTENT = #{record.hresContent,jdbcType=NVARCHAR},
+      HRES_CREATE_USER = #{record.hresCreateUser,jdbcType=NVARCHAR},
+      HRES_CREATE_DATE = #{record.hresCreateDate,jdbcType=TIMESTAMP},
+      HRES_MODIFY_USER = #{record.hresModifyUser,jdbcType=NVARCHAR},
+      HRES_MODIFY_DATE = #{record.hresModifyDate,jdbcType=TIMESTAMP},
+      HRES_SORT = #{record.hresSort,jdbcType=INTEGER},
+      RESOURCE_TYPE = #{record.resourceType,jdbcType=NVARCHAR},
+      FLAG = #{record.flag,jdbcType=NVARCHAR},
+      REMARK = #{record.remark,jdbcType=NVARCHAR},
+      IsShow = #{record.isshow,jdbcType=CHAR},
+      HRES_TYPE = #{record.hresType,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.h3c.mds.sysmgr.entity.Resource">
+    update IBDS_Resource
+    <set>
+      <if test="hresPcode != null">
+        HRES_PCODE = #{hresPcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="hresName != null">
+        HRES_NAME = #{hresName,jdbcType=NVARCHAR},
+      </if>
+      <if test="hresCode != null">
+        HRES_CODE = #{hresCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="hresContent != null">
+        HRES_CONTENT = #{hresContent,jdbcType=NVARCHAR},
+      </if>
+      <if test="hresCreateUser != null">
+        HRES_CREATE_USER = #{hresCreateUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="hresCreateDate != null">
+        HRES_CREATE_DATE = #{hresCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hresModifyUser != null">
+        HRES_MODIFY_USER = #{hresModifyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="hresModifyDate != null">
+        HRES_MODIFY_DATE = #{hresModifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hresSort != null">
+        HRES_SORT = #{hresSort,jdbcType=INTEGER},
+      </if>
+      <if test="resourceType != null">
+        RESOURCE_TYPE = #{resourceType,jdbcType=NVARCHAR},
+      </if>
+      <if test="flag != null">
+        FLAG = #{flag,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="isshow != null">
+        IsShow = #{isshow,jdbcType=CHAR},
+      </if>
+      <if test="hresType != null">
+        HRES_TYPE = #{hresType,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where HRES_ID = #{hresId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.h3c.mds.sysmgr.entity.Resource">
+    update IBDS_Resource
+    set HRES_PCODE = #{hresPcode,jdbcType=NVARCHAR},
+      HRES_NAME = #{hresName,jdbcType=NVARCHAR},
+      HRES_CODE = #{hresCode,jdbcType=NVARCHAR},
+      HRES_CONTENT = #{hresContent,jdbcType=NVARCHAR},
+      HRES_CREATE_USER = #{hresCreateUser,jdbcType=NVARCHAR},
+      HRES_CREATE_DATE = #{hresCreateDate,jdbcType=TIMESTAMP},
+      HRES_MODIFY_USER = #{hresModifyUser,jdbcType=NVARCHAR},
+      HRES_MODIFY_DATE = #{hresModifyDate,jdbcType=TIMESTAMP},
+      HRES_SORT = #{hresSort,jdbcType=INTEGER},
+      RESOURCE_TYPE = #{resourceType,jdbcType=NVARCHAR},
+      FLAG = #{flag,jdbcType=NVARCHAR},
+      REMARK = #{remark,jdbcType=NVARCHAR},
+      IsShow = #{isshow,jdbcType=CHAR},
+      HRES_TYPE = #{hresType,jdbcType=NVARCHAR}
+    where HRES_ID = #{hresId,jdbcType=INTEGER}
+  </update>
+</mapper>

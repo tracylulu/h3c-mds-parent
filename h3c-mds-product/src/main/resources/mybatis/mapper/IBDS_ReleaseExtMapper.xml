@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.IBDS_ReleaseMapper">
+	<select id="getMaxCode" resultType="String">
+		select max(releaseNo) from
+		IBDS_Release WHERE releaseNo LIKE 'PR%';
+	</select>
+
+	<select id="selectByCode" parameterType="String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from IBDS_Release WHERE releaseNo = #{code}
+	</select>
+
+	<select id="selectByID" parameterType="Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from IBDS_Release WHERE ID = #{code}
+	</select>
+
+	<select id="selectByMap" parameterType="map"
+		resultMap="BaseResultMap">
+		<if test="param.type =='PR' and param.sub_user !=null">
+			<if test="param.proStatus ==null">
+				select distinct isnull(r.PROJECTStatus,'')PROJECTStatus from
+				IBDS_Release
+				r left join IBDS_VERSION v on r.versionNo=v.VERSIONNo
+				left join IBDS_PDT p on r.pdtno=p.PDTNo
+				left join IBDS_Product pt on
+				r.productno=pt.productno
+				where r.status=1 and
+				CHARINDEX(#{param.sub_user},isnull(r.POP_ID,'')+isnull(v.POP_ID,'')+isnull(p.POP_ID,'')+isnull(pt.POP_ID,'')+isnull(r.CMO_ID,'')+isnull(v.CMO_ID,'')+isnull(p.CMO_ID,'')+isnull(pt.CMO_ID,''))>0
+				<!-- POP只显示配置自己为POP的数据 -->
+				<if test="param.code !=null">
+					and r.pdtno=#{param.code}
+				</if>
+			</if>
+			<if test="param.proStatus !=null ">
+				select distinct 
+				r.RELEASENo,r.RELEASE,r.engRELEASE from IBDS_Release
+				r
+				left join IBDS_VERSION v on r.versionNo=v.VERSIONNo
+				left join
+				IBDS_PDT p on r.pdtno=p.PDTNo
+				left join IBDS_Product pt on
+				r.productno=pt.productno
+				where r.status=1
+				<if test="param.proStatus ==''">
+					and (r.projectstatus=#{param.proStatus} or
+					r.projectstatus is null)
+				</if>
+				<if test="param.proStatus !=''">
+					and r.projectstatus=#{param.proStatus}
+				</if>
+				and
+				CHARINDEX(#{param.sub_user},isnull(r.POP_ID,'')+isnull(v.POP_ID,'')+isnull(p.POP_ID,'')+isnull(pt.POP_ID,'')+isnull(r.CMO_ID,'')+isnull(v.CMO_ID,'')+isnull(p.CMO_ID,'')+isnull(pt.CMO_ID,''))>0
+				<!-- POP只显示配置自己为POP的数据 -->
+				<if test="param.code !=null">
+					and r.pdtno=#{param.code}
+				</if>
+			</if>
+
+		</if>
+
+		<!--R版本层 -->
+		<if test="param.type =='PR' and param.code !=null">
+			<if test="param.proStatus ==null">
+				select distinct isnull(PROJECTStatus,'')PROJECTStatus from
+				IBDS_Release
+				where status=1 and pdtno=#{param.code}
+				<if test="param.sub_code !=null">
+					or releaseNo = #{param.sub_code}
+				</if>
+			</if>
+			<if test="param.proStatus !=null ">
+				select distinct  RELEASENo,RELEASE,engRELEASE
+				from
+				IBDS_Release
+				where status=1 and pdtno=#{param.code}
+				<if test="param.proStatus ==''">
+					and (projectstatus=#{param.proStatus} or projectstatus
+					is null)
+				</if>
+				<if test="param.proStatus !=''">
+					and projectstatus=#{param.proStatus}
+				</if>
+
+				<if test="param.sub_code !=null">
+					or releaseNo = #{param.sub_code}
+				</if>
+			</if>
+
+		</if>
+	</select>
+
+	<select id="selectByCodeList" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from IBDS_Release WHERE releaseno in
+		<foreach collection="codeList" item="code" index="index"
+			open="(" close=")" separator=",">
+			#{code}
+		</foreach>
+	</select>
+</mapper>

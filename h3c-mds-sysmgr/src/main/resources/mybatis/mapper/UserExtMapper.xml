@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.sysmgr.dao.UserMapper">
+	<select id="pageOfUser"
+		parameterType="com.h3c.mds.sysmgr.entity.User"
+		resultMap="BaseResultMap">
+		select name, uda_10_511 from tbl_2_10_EN
+		<where>
+			<!-- <if test="name!=null and name!=''"> or CHARINDEX(#{name},code+name)&gt;0}
+				</if> -->
+			<if test="code!=null and code!=''">
+				<!-- or code CHARINDEX #{code} -->
+				and CHARINDEX(#{name},code+name+uda_10_512)&gt;0
+			</if>
+		</where>
+
+	</select>
+
+	<select id="selUserbyparam" parameterType="map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tbl_2_10_EN
+		<where>
+			<if test="param.name!=null and param.name!=''"> -->
+				charindex(#{param.name},name+code+uda_10_509+uda_10_512)>0
+			</if>
+
+		</where>
+
+	</select>
+
+	<select id="selectByCode" resultMap="BaseResultMap" parameterType="String">
+		select top 1
+		<include refid="Base_Column_List" />
+		from tbl_2_10_EN where uda_10_512=#{code}
+	</select>
+	<!-- 根据拼音+code组合查询数据 -->
+	<select id="selectByPCode" resultMap="BaseResultMap" parameterType="String">
+		select top 1
+		<include refid="Base_Column_List" />
+		from tbl_2_10_EN where charindex(#{pcode},uda_10_509+' '+uda_10_512)>0
+	</select>
+	<select id="getUserByRoleCode" resultMap="BaseResultMap" parameterType="map">		
+		SELECT c.* FROM dbo.IBDS_Role a LEFT JOIN (SELECT DISTINCT HURR_HUL_CODE,HURR_HRL_CODE FROM dbo.IBDS_User_Role) b ON a.HRL_CODE=b.HURR_HRL_CODE 
+		 LEFT JOIN dbo.tbl_2_10_EN c  ON b.HURR_HUL_CODE=c.uda_10_511  WHERE a.HRL_CODE=#{params.roleCode} AND c.ID IS NOT NULL
+	
+	</select>
+
+</mapper>

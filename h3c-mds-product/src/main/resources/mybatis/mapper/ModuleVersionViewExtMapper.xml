@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.ModuleVersionViewMapper">
+  <select id="getDataList" parameterType="java.util.Map" resultMap="BaseResultMap">
+
+    <!-- IPMT层 -->
+    <if test="param.id == null and param.codes==null">
+      select distinct PRODLINENo as PRODLINENo ,PRODLINE,PL_ORDER from V_MODULE_VERSION_VIEW where status='1'
+    </if>
+
+
+    <if test="param.id != null">
+
+      <if test="param.type =='PL'">
+
+        select distinct PRODUCTNo+'_'+PRODLINENo as PRODLINENo,PRODLINE ,PRODUCT from V_MODULE_VERSION_VIEW
+        where PRODLINENo=#{param.id} and status='1'
+
+      </if>
+      <if test="param.type =='PP'">
+
+        select distinct RELEASENo+'_'+PRODUCTNo+'_'+PRODLINENo as PRODLINENo ,PRODLINE ,PRODUCT,RELEASE from V_MODULE_VERSION_VIEW
+        where PRODUCTNo=#{param.id} and status='1'
+
+      </if>
+      <if test="param.type =='PR'">
+
+        select distinct SUBSYSTEMNo+'_'+RELEASENo+'_'+PRODUCTNo+'_'+PRODLINENo as PRODLINENo ,PRODLINE ,PRODUCT,RELEASE,SUBSYSTEM,SUBSYSTEMNo from V_MODULE_VERSION_VIEW
+        where RELEASENo=#{param.id} and status='1'
+
+      </if>
+      <if test="param.type =='SS'">
+
+        select distinct MODULENo+'_'+SUBSYSTEMNo+'_'+RELEASENo+'_'+PRODUCTNo+'_'+PRODLINENo as PRODLINENo ,PRODLINE ,PRODUCT,RELEASE,SUBSYSTEM,MODULE from V_MODULE_VERSION_VIEW
+        where SUBSYSTEMNo=#{param.id} and status='1'
+
+      </if>
+      <if test="param.type =='MD'">
+
+        select distinct MDLVSNNo+'_'+ MODULENo+'_'+SUBSYSTEMNo+'_'+RELEASENo+'_'+PRODUCTNo+'_'+Convert(varchar,ID)+'_'+PRODLINENo as PRODLINENo ,PRODLINE ,PRODUCT,RELEASE,SUBSYSTEM,MODULE,MDLVSN,MDLVSNNo,MDLVSNOld,engMDLVSN,ID from V_MODULE_VERSION_VIEW
+        where MODULENo=#{param.id} and status='1'
+
+      </if>
+      
+      <if test="param.PRODLINENo!=null and param.PRODLINENo!=''">
+      	 and PRODLINENo=#{param.PRODLINENo}
+      </if>
+      <if test="param.PRODUCTNo!=null and param.PRODUCTNo!=''">
+      	 and PRODUCTNo=#{param.PRODUCTNo}
+      </if>
+      <if test="param.RELEASENo!=null and param.RELEASENo!=''">
+      	 and RELEASENo=#{param.RELEASENo}
+      </if>
+      <if test="param.SUBSYSTEMNo!=null and param.SUBSYSTEMNo!=''">
+      	 and SUBSYSTEMNo=#{param.SUBSYSTEMNo}
+      </if>
+    </if>
+ <if test="param.codes!=null">
+		  select distinct MDLVSNNo+'_'+ MODULENo+'_'+SUBSYSTEMNo+'_'+RELEASENo+'_'+PRODUCTNo+'_'+Convert(varchar,ID)+'_'+PRODLINENo as PRODLINENo ,MDLVSN,MDLVSNNo,MDLVSNOld,engMDLVSN,MODULENo,ID from V_MODULE_VERSION_VIEW
+
+        where  status='1' and MODULENo in
+		 <foreach collection="param.codes.split(';')" item="item" index="index" open="(" separator="," close=")">
+              #{item}
+              </foreach>
+		</if>
+    <if test="param.searchParas != null and param.searchParas != ''">
+      and CHARINDEX(#{param.searchParas},isnull(MDLVSN,'')+isnull(MDLVSNNo,'')+isnull(MDLVSNOld,'')+isnull(engMDLVSN,''))&gt;0
+    </if>
+    
+     <!-- 产品线层-->
+    <if test="param.id == null and param.codes==null">
+    order by PL_ORDER,PRODLINE
+    </if>
+     <if test="param.id != null">
+      <!-- 产品层 -->
+      <if test="param.type =='PL'">
+      order by Product
+      </if>
+      <!--R版本层 -->
+	  <if test="param.type =='PP'">
+	  order by release
+	  </if>
+	  	<!--子系统层 -->
+	  <if test="param.type =='PR'">
+	  order by SUBSYSTEM
+	  </if>
+	  <if test="param.type =='SS'">
+	  order by MODULE
+	  </if>
+	  <if test="param.type =='MD'">
+	  order by MDLVSN
+	  </if>
+      </if>
+  </select>
+
+  <select id="selectByCode" parameterType="string" resultMap="BaseResultMap">
+
+    select <include refid="Base_Column_List"/> from V_MODULE_VERSION_VIEW where MDLVSNNo=#{code}
+  </select>
+  
+   <select id="selectByID" parameterType="Integer" resultMap="BaseResultMap">
+
+    select <include refid="Base_Column_List"/> from V_MODULE_VERSION_VIEW where ID=#{code}
+  </select>
+  <select id="getExportList" parameterType="java.util.Map" resultMap="BaseResultMap">
+	 select  <include refid="Base_Column_List" /> from V_MODULE_VERSION_VIEW where status='1'
+    
+    <if test="param.searchParas != null and param.searchParas != ''">
+      and CHARINDEX(#{param.searchParas},isnull(MDLVSN,'')+isnull(MDLVSNNo,'')+isnull(MDLVSNOld,'')+isnull(engMDLVSN,''))&gt;0
+    </if>
+    
+     order by PL_ORDER,PRODLINE
+  </select>
+</mapper>

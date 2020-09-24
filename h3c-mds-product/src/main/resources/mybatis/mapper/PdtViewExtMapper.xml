@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.PdtViewMapper">
+	<select id="getDataList" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+
+		<!-- IPMT层 -->
+		<if test="param.id == null">
+			select distinct PRODLINENo as PRODLINENo
+			,PRODLINE,PL_ORDER from V_PDT_VIEW where
+			status='1'
+		</if>
+
+		<if test="param.id != null">
+
+			<!-- PDT层 -->
+			<if test="param.type =='PL'">
+
+				select distinct
+				PDTNo+'_'+Convert(varchar,ID)+'_'+PRODLINENo as PRODLINENo,PRODLINE
+				,PDTNo,PDT,engPDT,PDT_Manager,POP_ID,ID,Readers from V_PDT_VIEW
+				where PRODLINENo=#{param.id} and status='1'
+
+			</if>
+
+		</if>
+
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and
+			CHARINDEX(#{param.searchParas},isnull(PDTNo,'')+isnull(PDT,'')+isnull(engPDT,'')+isnull(PDT_Manager,'')+isnull(POP_ID,''))&gt;0
+		</if>
+
+		<!-- PDT层 -->
+		<if test="param.id == null">
+			order by PL_ORDER,PRODLINE
+		</if>
+		<if test="param.id != null">
+			<!-- 产品线层 -->
+			<if test="param.type =='PL'">
+				order by PDT
+			</if>
+		</if>
+	</select>
+
+	<select id="selectByCode" parameterType="String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from V_PDT_VIEW WHERE PDTNo = #{code}
+	</select>
+
+	<select id="selectByID" parameterType="Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from V_PDT_VIEW WHERE ID = #{code}
+	</select>
+
+	<select id="getExportList" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+
+		select <include refid="Base_Column_List" /> from
+		V_PDT_VIEW where status='1'
+
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and
+			CHARINDEX(#{param.searchParas},isnull(PDTNo,'')+isnull(PDT,'')+isnull(engPDT,'')+isnull(PDT_Manager,'')+isnull(POP_ID,''))&gt;0
+		</if>
+		order by PL_ORDER,PRODLINE
+	</select>
+</mapper>

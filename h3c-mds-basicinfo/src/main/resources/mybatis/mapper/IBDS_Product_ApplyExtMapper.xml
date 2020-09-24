@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.h3c.mds.basicinfo.dao.IBDS_Product_ApplyMapper">
+	<select id="getIdsByProcessCode" resultType="java.lang.Integer"
+		parameterType="java.lang.String">
+		SELECT ID FROM IBDS_Product_Apply WHERE PROCESS_CODE = #{processCode}
+	</select>
+
+	<select id="getByProcessCode" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM IBDS_Product_Apply WHERE PROCESS_CODE = #{applyCode}
+	</select>
+
+	<select id="getZTByProductCode" resultMap="BaseResultMap"
+		parameterType="map">
+		SELECT a.* FROM IBDS_Product_Apply a JOIN IBDS_PRODUCT_PROCESS b ON
+		a.PROCESS_CODE = b.ApplyCode where b.status='1'
+
+		<if test="param.productCode!=null">
+			and a.PRODUCTNo=#{param.productCode}
+		</if>
+		<if test="param.product!=null">
+			and a.PRODUCT=#{param.product}
+		</if>
+
+
+	</select>
+
+	<select id="getZTCountByProductCode"
+		resultType="java.lang.Integer" parameterType="map">
+		SELECT count(1) FROM IBDS_Product_Apply a JOIN IBDS_PRODUCT_PROCESS b
+		ON a.PROCESS_CODE = b.ApplyCode where b.status='1'
+		<if test="param.productCode!=null">
+			and a.PRODUCTNo=#{param.productCode}
+		</if>
+		<if test="param.product!=null">
+			and a.PRODUCT=#{param.product}
+		</if>
+	</select>
+	<!-- 停用产品库 -->
+	<update id="updateBaseinfo" parameterType="map">
+		<if test="param.tabName!=null and param.code!=null">
+			update ${param.tabName} set status='0'
+			<if test="param.modifyUser!=null">
+				,Modify_User=#{param.modifyUser}
+			</if>
+
+
+			<if test="param.tabName=='IBDS_Bversion' or param.tabName=='IBDS_FEATRUE' or param.tabName=='IBDS_Base_Line' or param.tabName=='IBDS_SUB_FEATRUE' or param.tabName=='IBDS_Team' or param.tabName=='IBDS_SUB_SYSTEM'  or param.tabName=='IBDS_Module' or param.tabName=='IBDS_MODULE_VERSION'">
+				<if test="param.modifyTime!=null">
+					,Modify_Data=#{param.modifyTime}
+				</if>
+			</if>
+			<if test="param.tabName=='IBDS_Version' or param.tabName=='IBDS_Release'">
+				<if test="param.modifyTime!=null">
+					,Modify_Date=#{param.modifyTime}
+				</if>
+			</if>
+
+			where productno=#{param.code}
+		</if>
+		<!-- <if test="param.type!=null and param.type=='PV' and param.code!=null"> 
+			update IBDS_VERSION set status='0' where productno=#{param.code} </if> <if 
+			test="param.type!=null and param.type=='PR' and param.code!=null"> update 
+			IBDS_Release set status='0' where productno=#{param.code} </if> <if test="param.type!=null 
+			and param.type=='PB' and param.code!=null"> update IBDS_Bversion set status='0' 
+			where productno=#{param.code} </if> <if test="param.type!=null and param.type=='FT' 
+			and param.code!=null"> update IBDS_Feature set status='0' where productno=#{param.code} 
+			</if> <if test="param.type!=null and param.type=='BL' and param.code!=null"> 
+			update IBDS_BASE_LINE set status='0' where productno=#{param.code} </if> 
+			<if test="param.type!=null and param.type=='SF' and param.code!=null"> update 
+			IBDS_SubFeature set status='0' where productno=#{param.code} </if> <if test="param.type!=null 
+			and param.type=='TM' and param.code!=null"> update IBDS_Team set status='0' 
+			where productno=#{param.code} </if> <if test="param.type!=null and param.type=='SS' 
+			and param.code!=null"> update IBDS_SubSystem set status='0' where productno=#{param.code} 
+			</if> <if test="param.type!=null and param.type=='MD' and param.code!=null"> 
+			update IBDS_Module set status='0' where productno=#{param.code} </if> <if 
+			test="param.type!=null and param.type=='MV' and param.code!=null"> update 
+			IBDS_ModuleVersion set status='0' where productno=#{param.code} </if> -->
+	</update>
+	<!-- 停用产品库 -->
+	<update id="updateVRChildren" parameterType="map">
+		<if test="param.tabName!=null and param.code!=null">
+			update ${param.tabName} set status='0'
+			<if test="param.modifyUser!=null">
+				,Modify_User=#{param.modifyUser}
+			</if>
+			<if
+				test="  param.tabName=='IBDS_Base_Line' or param.tabName=='IBDS_Team' or param.tabName=='IBDS_FEATRUE'   or param.tabName=='IBDS_SUB_FEATRUE'  or param.tabName=='IBDS_SUB_SYSTEM'  or param.tabName=='IBDS_Module' or param.tabName=='IBDS_MODULE_VERSION'">
+				<if test="param.modifyTime!=null">
+					,Modify_Data=#{param.modifyTime}
+				</if>
+			</if>
+			<if test="param.tabName=='IBDS_Version' or param.tabName=='IBDS_Release'">
+				<if test="param.modifyTime!=null">
+					,Modify_Date=#{param.modifyTime}
+				</if>
+			</if>
+
+			where ${param.column}=
+			<if test="param.column=='id'">
+			#{param.code,jdbcType=INTEGER}
+			</if>
+			<if test="param.column!='id'">
+			#{param.code,jdbcType=NVARCHAR}
+			</if>
+		</if>
+	</update>
+	
+	<!-- 停用产品库 -->
+	<update id="updateChildrenBatch" parameterType="map">
+		<if test="param.tabName!=null and param.code!=null and param.code!=''">
+			update ${param.tabName} set status='0'
+			<if test="param.modifyUser!=null">
+				,Modify_User=#{param.modifyUser}
+			</if>
+			<if test="param.tabName=='IBDS_Base_Line' or param.tabName=='IBDS_Team' or param.tabName=='IBDS_FEATRUE'   or param.tabName=='IBDS_SUB_FEATRUE'  or param.tabName=='IBDS_SUB_SYSTEM'  or param.tabName=='IBDS_Module' or param.tabName=='IBDS_MODULE_VERSION'">
+				<if test="param.modifyTime!=null">
+					,Modify_Data=#{param.modifyTime}
+				</if>
+			</if>
+			<if test="param.tabName=='IBDS_Version' or param.tabName=='IBDS_Release'">
+				<if test="param.modifyTime!=null">
+					,Modify_Date=#{param.modifyTime}
+				</if>
+			</if>
+			<if test="param.code!=null and param.code!=''">
+			where ${param.column} in
+			<foreach collection="param.code.split('\r')" item="record" index="index" open="(" separator="," close=")">
+			<if test="param.column=='id' and record!='' and record!=null">
+			#{record,jdbcType=INTEGER}
+			</if>
+			<if test="param.column!='id' and record!='' and record!=null">
+			#{record,jdbcType=NVARCHAR}
+			</if>
+     </foreach>
+     </if>
+		</if>
+	</update>
+	
+	
+	<select id="getCountByColunm"
+		resultType="java.lang.Integer" parameterType="map">
+		SELECT count(1) FROM ${param.tabName} 
+		<!--  where 1=1-->
+		<where>
+		
+		
+		<if test="param.codes!=null and param.codes!=''">
+		and ${param.column} in
+		<foreach collection="param.codes.split('\r')" item="record" index="index" open="(" separator="," close=")">
+		#{record,jdbcType=NVARCHAR}
+		 </foreach>
+		</if>
+		
+		<if test="param.names!=null and param.names!=''">
+		<if test="param.tabName=='IBDS_BASE_LINE' or param.tabName=='IBDS_Featrue' or param.tabName=='IBDS_Team' or param.tabName=='IBDS_SUB_SYSTEM'">
+		and ${param.column} in
+		<foreach collection="param.names.split(',')" item="record" index="index" open="(" separator="," close=")">
+		#{record,jdbcType=NVARCHAR}
+		 </foreach>
+		 </if>
+		  <if test="param.tabName=='IBDS_SUB_FEATRUE'">
+		  and featureno+'_'+subfeature in
+		  <foreach collection="param.names.split(',')" item="record" index="index" open="(" separator="," close=")">
+		  #{record,jdbcType=NVARCHAR}
+		  </foreach>
+		  </if>
+		   <if test="param.tabName=='IBDS_Module'">
+		  and subsystemno+'_'+module in
+		  <foreach collection="param.names.split(',')" item="record" index="index" open="(" separator="," close=")">
+		  #{record,jdbcType=NVARCHAR}
+		  </foreach>
+		  </if>
+		   <if test="param.tabName=='IBDS_MODULE_VERSION'">
+		  and subsystemno+'_'+moduleno+'_'+MDLVSN in
+		  <foreach collection="param.names.split(',')" item="record" index="index" open="(" separator="," close=")">
+		  #{record,jdbcType=NVARCHAR}
+		  </foreach>
+		  </if>
+		</if>
+		
+		 <if test="param.status!=null and param.status!=''">
+		 and status=#{param.status}
+		 </if>
+		 <if test="param.parentCode!=null and param.parentCode!=''">
+		 <if test="param.tabName=='IBDS_BASE_LINE' or param.tabName=='IBDS_Featrue' or param.tabName=='IBDS_Team' or param.tabName=='IBDS_SUB_SYSTEM'">
+		  and CHARINDEX(ISNULL(PLIPMTNo,'')+'_'+ISNULL(PRODLINENo,'')+'_'+ISNULL(PRODUCTNo,'')+'_'+ISNULL(VERSIONNo,'')+'_'+ISNULL(RELEASENo,''),#{param.parentCode})>0
+		 </if>
+		 <if test="param.tabName=='IBDS_SUB_FEATRUE'">
+          and CHARINDEX(ISNULL(PLIPMTNo,'')+'_'+ISNULL(PRODLINENo,'')+'_'+ISNULL(PRODUCTNo,'')+'_'+ISNULL(VERSIONNo,'')+'_'+ISNULL(RELEASENo,'')+'_'+ISNULL(FEATURENo,''),#{param.parentCode})>0
+		 </if>
+		 <if test="param.tabName=='IBDS_Module'">
+		  and CHARINDEX(ISNULL(PLIPMTNo,'')+'_'+ISNULL(PRODLINENo,'')+'_'+ISNULL(PRODUCTNo,'')+'_'+ISNULL(VERSIONNo,'')+'_'+ISNULL(RELEASENo,'')+'_'+ISNULL(SUBSYSTEMNo,''),#{param.parentCode})>0
+		 </if>
+		  <if test="param.tabName=='IBDS_MODULE_VERSION'">
+		  and CHARINDEX(ISNULL(PLIPMTNo,'')+'_'+ISNULL(PRODLINENo,'')+'_'+ISNULL(PRODUCTNo,'')+'_'+ISNULL(VERSIONNo,'')+'_'+ISNULL(RELEASENo,'')+'_'+ISNULL(SUBSYSTEMNo,'')+'_'+ISNULL(MODULENo,''),#{param.parentCode})>0
+		 </if>
+		 </if>
+		</where>
+	</select>
+	
+	
+	<select id="getNameByColunm"
+		resultType="java.lang.String" parameterType="map">
+		SELECT stuff(( select ','+ ${param.column} FROM ${param.tabName} 
+		<!--  where 1=1-->
+		<where>
+		
+		
+		<if test="param.codes!=null and param.codes!=''">
+		and ${param.column} in
+		<foreach collection="param.codes.split('\r')" item="record" index="index" open="(" separator="," close=")">
+		#{record,jdbcType=NVARCHAR}
+		 </foreach>
+		</if>
+		
+		<if test="param.names!=null and param.names!=''">
+		<if test="param.tabName=='IBDS_BASE_LINE' or param.tabName=='IBDS_Featrue' or param.tabName=='IBDS_Team' or param.tabName=='IBDS_SUB_SYSTEM'">
+		and ${param.column} in
+		<foreach collection="param.names.split(',')" item="record" index="index" open="(" separator="," close=")">
+		#{record,jdbcType=NVARCHAR}
+		 </foreach>
+		 </if>
+		  <if test="param.tabName=='IBDS_SUB_FEATRUE'">
+		  and featureno+'_'+subfeature in
+		  <foreach collection="param.names.split(',')" item="record" index="index" open="(" separator="," close=")">
+		  #{record,jdbcType=NVARCHAR}
+		  </foreach>
+		  </if>
+		   <if test="param.tabName=='IBDS_Module'">
+		  and subsystemno+'_'+module in
+		  <foreach collection="param.names.split(',')" item="record" index="index" open="(" separator="," close=")">
+		  #{record,jdbcType=NVARCHAR}
+		  </foreach>
+		  </if>
+		   <if test="param.tabName=='IBDS_MODULE_VERSION'">
+		  and subsystemno+'_'+moduleno+'_'+MDLVSN in
+		  <foreach collection="param.names.split(',')" item="record" index="index" open="(" separator="," close=")">
+		  #{record,jdbcType=NVARCHAR}
+		  </foreach>
+		  </if>
+		</if>
+		
+		 <if test="param.status!=null and param.status!=''">
+		 and status=#{param.status}
+		 </if>
+		 <if test="param.parentCode!=null and param.parentCode!=''">
+		  and CHARINDEX(ISNULL(PLIPMTNo,'')+'_'+ISNULL(PRODLINENo,'')+'_'+ISNULL(PRODUCTNo,'')+'_'+ISNULL(VERSIONNo,'')+'_'+ISNULL(RELEASENo,''),#{param.parentCode})>0
+		 </if>
+		</where>
+		for xml path('')),1,1,'') as name ;
+	</select>
+
+
+
+	<select id="getDataByColunm" parameterType="map" resultType="java.lang.String">
+	SELECT 
+	<if test="param.selcolumnName!='' and param.selcolumnName!=null and param.selcolumnCode!='' and param.selcolumnCode!=null">
+	${param.selcolumnName}+'||'+${param.selcolumnCode} 
+	</if>
+	<if test="param.selCode!='' and param.selCode!=null">
+	${param.selCode}
+	</if>
+	
+	FROM ${param.tabName} where ${param.column} in
+		<foreach collection='param.codes.split(",")' item="record" index="index" open="(" separator="," close=")">
+		#{record,jdbcType=NVARCHAR}
+     </foreach>
+	
+	</select>
+</mapper>

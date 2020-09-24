@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.ProdLineVewMapper">
+  <select id="getDataList" parameterType="java.util.Map" resultMap="BaseResultMap">
+
+    <!-- IPMT层 -->
+    <if test="param.id == null">
+      select distinct PLIPMT,PLIPMTNo,plipmt_order  from V_PRODLINE_VIEW  where  status='1'
+    </if>
+
+
+    <if test="param.id != null">
+      <!-- 产品线层 -->
+      <if test="param.type =='PI'">
+
+        select distinct PRODLINENo+'_'+Convert(varchar,ID)+'_'+PLIPMTNo as PLIPMTNo ,PLIPMT,PRODLINE,PRODLINENo,ID,Readers,PL_ORDER from V_PRODLINE_VIEW
+        where PLIPMTNo=#{param.id} and  status='1'
+
+      </if>
+
+    </if>
+
+    <if test="param.searchParas != null and param.searchParas != ''">
+      and CHARINDEX(#{param.searchParas},isnull(PRODLINENo,'')+isnull(PRODLINE,''))&gt;0
+    </if>
+    
+     <!-- IPMT层 -->
+    <if test="param.id == null">
+    order by plipmt_order,PLIPMT
+    </if>
+     <if test="param.id != null">
+      <!-- 产品线层 -->
+      <if test="param.type =='PI'">
+      order by PL_ORDER,PRODLINE
+      </if>
+      </if>
+  </select>
+
+  <select id="selectByCode" parameterType="String" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from V_PRODLINE_VIEW WHERE PRODLINENo=#{code}
+  </select>
+  
+   <select id="selectByID" parameterType="Integer" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from V_PRODLINE_VIEW WHERE ID=#{code}
+  </select>
+  
+  <select id="getExportList" parameterType="java.util.Map" resultMap="BaseResultMap">
+	select <include refid="Base_Column_List"/>  from V_PRODLINE_VIEW  where  status='1'
+
+    <if test="param.searchParas != null and param.searchParas != ''">
+      and CHARINDEX(#{param.searchParas},isnull(PRODLINENo,'')+isnull(PRODLINE,''))&gt;0
+    </if>    
+    order by plipmt_order,PLIPMT     
+  </select>
+</mapper>

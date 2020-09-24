@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.flowable.dao.PartExportMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.flowable.entity.PartExport">
+    <result column="PDM_APPLY_CODE" jdbcType="NVARCHAR" property="pdmApplyCode" />
+    <result column="PROJECT_NO" jdbcType="NVARCHAR" property="projectNo" />
+    <result column="PROJECT_NAME" jdbcType="NVARCHAR" property="projectName" />
+    <result column="PRODUCT_NUM" jdbcType="NVARCHAR" property="productNum" />
+    <result column="INSIDE_DESC_EN" jdbcType="NVARCHAR" property="insideDescEn" />
+    <result column="ABROAD_DESC_CN" jdbcType="NVARCHAR" property="abroadDescCn" />
+    <result column="ABROAD_DESC_EN" jdbcType="NVARCHAR" property="abroadDescEn" />
+    <result column="BUSINESS_MODEL" jdbcType="NVARCHAR" property="businessModel" />
+    <result column="PRODLINE_ID" jdbcType="INTEGER" property="prodlineId" />
+    <result column="PRODLINE_NO" jdbcType="NVARCHAR" property="prodlineNo" />
+    <result column="PRODLINE_NAME" jdbcType="NVARCHAR" property="prodlineName" />
+    <result column="PROD_NAME" jdbcType="NVARCHAR" property="prodName" />
+    <result column="PRODUCT_NAME_CN" jdbcType="NVARCHAR" property="productNameCn" />
+    <result column="PRODUCT_CODE" jdbcType="NVARCHAR" property="productCode" />
+    <result column="DataSource" jdbcType="VARCHAR" property="datasource" />
+    <result column="PDT_ID" jdbcType="INTEGER" property="pdtId" />
+    <result column="PROCESSMGN_DATE" jdbcType="TIMESTAMP" property="processmgnDate" />
+    <result column="APPLY_CODE" jdbcType="NVARCHAR" property="applyCode" />
+    <result column="HANDLER" jdbcType="NVARCHAR" property="handler" />
+    <result column="SUB_SIGN" jdbcType="NVARCHAR" property="subSign" />
+    <result column="STATUS" jdbcType="NVARCHAR" property="status" />
+    <result column="APPLY_PERSON" jdbcType="NVARCHAR" property="applyPerson" />
+    <result column="DEPT_TYPE" jdbcType="NVARCHAR" property="deptType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PDM_APPLY_CODE, PROJECT_NO, PROJECT_NAME, PRODUCT_NUM, INSIDE_DESC_EN, ABROAD_DESC_CN, 
+    ABROAD_DESC_EN, BUSINESS_MODEL, PRODLINE_ID, PRODLINE_NO, PRODLINE_NAME, PROD_NAME, 
+    PRODUCT_NAME_CN, PRODUCT_CODE, DataSource, PDT_ID, PROCESSMGN_DATE, APPLY_CODE, HANDLER, 
+    SUB_SIGN, STATUS, APPLY_PERSON, DEPT_TYPE
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.flowable.entity.PartExportExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from view_partExport
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.flowable.entity.PartExportExample">
+    delete from view_partExport
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.flowable.entity.PartExport">
+    insert into view_partExport (PDM_APPLY_CODE, PROJECT_NO, PROJECT_NAME, 
+      PRODUCT_NUM, INSIDE_DESC_EN, ABROAD_DESC_CN, 
+      ABROAD_DESC_EN, BUSINESS_MODEL, PRODLINE_ID, 
+      PRODLINE_NO, PRODLINE_NAME, PROD_NAME, 
+      PRODUCT_NAME_CN, PRODUCT_CODE, DataSource, 
+      PDT_ID, PROCESSMGN_DATE, APPLY_CODE, 
+      HANDLER, SUB_SIGN, STATUS, 
+      APPLY_PERSON, DEPT_TYPE)
+    values (#{pdmApplyCode,jdbcType=NVARCHAR}, #{projectNo,jdbcType=NVARCHAR}, #{projectName,jdbcType=NVARCHAR}, 
+      #{productNum,jdbcType=NVARCHAR}, #{insideDescEn,jdbcType=NVARCHAR}, #{abroadDescCn,jdbcType=NVARCHAR}, 
+      #{abroadDescEn,jdbcType=NVARCHAR}, #{businessModel,jdbcType=NVARCHAR}, #{prodlineId,jdbcType=INTEGER}, 
+      #{prodlineNo,jdbcType=NVARCHAR}, #{prodlineName,jdbcType=NVARCHAR}, #{prodName,jdbcType=NVARCHAR}, 
+      #{productNameCn,jdbcType=NVARCHAR}, #{productCode,jdbcType=NVARCHAR}, #{datasource,jdbcType=VARCHAR}, 
+      #{pdtId,jdbcType=INTEGER}, #{processmgnDate,jdbcType=TIMESTAMP}, #{applyCode,jdbcType=NVARCHAR}, 
+      #{handler,jdbcType=NVARCHAR}, #{subSign,jdbcType=NVARCHAR}, #{status,jdbcType=NVARCHAR}, 
+      #{applyPerson,jdbcType=NVARCHAR}, #{deptType,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.flowable.entity.PartExport">
+    insert into view_partExport
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pdmApplyCode != null">
+        PDM_APPLY_CODE,
+      </if>
+      <if test="projectNo != null">
+        PROJECT_NO,
+      </if>
+      <if test="projectName != null">
+        PROJECT_NAME,
+      </if>
+      <if test="productNum != null">
+        PRODUCT_NUM,
+      </if>
+      <if test="insideDescEn != null">
+        INSIDE_DESC_EN,
+      </if>
+      <if test="abroadDescCn != null">
+        ABROAD_DESC_CN,
+      </if>
+      <if test="abroadDescEn != null">
+        ABROAD_DESC_EN,
+      </if>
+      <if test="businessModel != null">
+        BUSINESS_MODEL,
+      </if>
+      <if test="prodlineId != null">
+        PRODLINE_ID,
+      </if>
+      <if test="prodlineNo != null">
+        PRODLINE_NO,
+      </if>
+      <if test="prodlineName != null">
+        PRODLINE_NAME,
+      </if>
+      <if test="prodName != null">
+        PROD_NAME,
+      </if>
+      <if test="productNameCn != null">
+        PRODUCT_NAME_CN,
+      </if>
+      <if test="productCode != null">
+        PRODUCT_CODE,
+      </if>
+      <if test="datasource != null">
+        DataSource,
+      </if>
+      <if test="pdtId != null">
+        PDT_ID,
+      </if>
+      <if test="processmgnDate != null">
+        PROCESSMGN_DATE,
+      </if>
+      <if test="applyCode != null">
+        APPLY_CODE,
+      </if>
+      <if test="handler != null">
+        HANDLER,
+      </if>
+      <if test="subSign != null">
+        SUB_SIGN,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="applyPerson != null">
+        APPLY_PERSON,
+      </if>
+      <if test="deptType != null">
+        DEPT_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pdmApplyCode != null">
+        #{pdmApplyCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="projectNo != null">
+        #{projectNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="projectName != null">
+        #{projectName,jdbcType=NVARCHAR},
+      </if>
+      <if test="productNum != null">
+        #{productNum,jdbcType=NVARCHAR},
+      </if>
+      <if test="insideDescEn != null">
+        #{insideDescEn,jdbcType=NVARCHAR},
+      </if>
+      <if test="abroadDescCn != null">
+        #{abroadDescCn,jdbcType=NVARCHAR},
+      </if>
+      <if test="abroadDescEn != null">
+        #{abroadDescEn,jdbcType=NVARCHAR},
+      </if>
+      <if test="businessModel != null">
+        #{businessModel,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineId != null">
+        #{prodlineId,jdbcType=INTEGER},
+      </if>
+      <if test="prodlineNo != null">
+        #{prodlineNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodlineName != null">
+        #{prodlineName,jdbcType=NVARCHAR},
+      </if>
+      <if test="prodName != null">
+        #{prodName,jdbcType=NVARCHAR},
+      </if>
+      <if test="productNameCn != null">
+        #{productNameCn,jdbcType=NVARCHAR},
+      </if>
+      <if test="productCode != null">
+        #{productCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="datasource != null">
+        #{datasource,jdbcType=VARCHAR},
+      </if>
+      <if test="pdtId != null">
+        #{pdtId,jdbcType=INTEGER},
+      </if>
+      <if test="processmgnDate != null">
+        #{processmgnDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyCode != null">
+        #{applyCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="handler != null">
+        #{handler,jdbcType=NVARCHAR},
+      </if>
+      <if test="subSign != null">
+        #{subSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="applyPerson != null">
+        #{applyPerson,jdbcType=NVARCHAR},
+      </if>
+      <if test="deptType != null">
+        #{deptType,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.flowable.entity.PartExportExample" resultType="java.lang.Long">
+    select count(*) from view_partExport
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update view_partExport
+    <set>
+      <if test="record.pdmApplyCode != null">
+        PDM_APPLY_CODE = #{record.pdmApplyCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.projectNo != null">
+        PROJECT_NO = #{record.projectNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.projectName != null">
+        PROJECT_NAME = #{record.projectName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productNum != null">
+        PRODUCT_NUM = #{record.productNum,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.insideDescEn != null">
+        INSIDE_DESC_EN = #{record.insideDescEn,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.abroadDescCn != null">
+        ABROAD_DESC_CN = #{record.abroadDescCn,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.abroadDescEn != null">
+        ABROAD_DESC_EN = #{record.abroadDescEn,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.businessModel != null">
+        BUSINESS_MODEL = #{record.businessModel,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodlineId != null">
+        PRODLINE_ID = #{record.prodlineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.prodlineNo != null">
+        PRODLINE_NO = #{record.prodlineNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodlineName != null">
+        PRODLINE_NAME = #{record.prodlineName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.prodName != null">
+        PROD_NAME = #{record.prodName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productNameCn != null">
+        PRODUCT_NAME_CN = #{record.productNameCn,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.productCode != null">
+        PRODUCT_CODE = #{record.productCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.datasource != null">
+        DataSource = #{record.datasource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pdtId != null">
+        PDT_ID = #{record.pdtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.processmgnDate != null">
+        PROCESSMGN_DATE = #{record.processmgnDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.applyCode != null">
+        APPLY_CODE = #{record.applyCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.handler != null">
+        HANDLER = #{record.handler,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.subSign != null">
+        SUB_SIGN = #{record.subSign,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.applyPerson != null">
+        APPLY_PERSON = #{record.applyPerson,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.deptType != null">
+        DEPT_TYPE = #{record.deptType,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update view_partExport
+    set PDM_APPLY_CODE = #{record.pdmApplyCode,jdbcType=NVARCHAR},
+      PROJECT_NO = #{record.projectNo,jdbcType=NVARCHAR},
+      PROJECT_NAME = #{record.projectName,jdbcType=NVARCHAR},
+      PRODUCT_NUM = #{record.productNum,jdbcType=NVARCHAR},
+      INSIDE_DESC_EN = #{record.insideDescEn,jdbcType=NVARCHAR},
+      ABROAD_DESC_CN = #{record.abroadDescCn,jdbcType=NVARCHAR},
+      ABROAD_DESC_EN = #{record.abroadDescEn,jdbcType=NVARCHAR},
+      BUSINESS_MODEL = #{record.businessModel,jdbcType=NVARCHAR},
+      PRODLINE_ID = #{record.prodlineId,jdbcType=INTEGER},
+      PRODLINE_NO = #{record.prodlineNo,jdbcType=NVARCHAR},
+      PRODLINE_NAME = #{record.prodlineName,jdbcType=NVARCHAR},
+      PROD_NAME = #{record.prodName,jdbcType=NVARCHAR},
+      PRODUCT_NAME_CN = #{record.productNameCn,jdbcType=NVARCHAR},
+      PRODUCT_CODE = #{record.productCode,jdbcType=NVARCHAR},
+      DataSource = #{record.datasource,jdbcType=VARCHAR},
+      PDT_ID = #{record.pdtId,jdbcType=INTEGER},
+      PROCESSMGN_DATE = #{record.processmgnDate,jdbcType=TIMESTAMP},
+      APPLY_CODE = #{record.applyCode,jdbcType=NVARCHAR},
+      HANDLER = #{record.handler,jdbcType=NVARCHAR},
+      SUB_SIGN = #{record.subSign,jdbcType=NVARCHAR},
+      STATUS = #{record.status,jdbcType=NVARCHAR},
+      APPLY_PERSON = #{record.applyPerson,jdbcType=NVARCHAR},
+      DEPT_TYPE = #{record.deptType,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

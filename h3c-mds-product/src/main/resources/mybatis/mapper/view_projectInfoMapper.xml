@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.product.dao.view_projectInfoMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.product.entity.view_projectInfo">
+    <result column="PROJECTNo" jdbcType="NVARCHAR" property="projectno" />
+    <result column="f_projno" jdbcType="VARCHAR" property="fProjno" />
+    <result column="PROJECT" jdbcType="NVARCHAR" property="project" />
+    <result column="engPROJECT" jdbcType="NVARCHAR" property="engproject" />
+    <result column="f_releaseno" jdbcType="VARCHAR" property="fReleaseno" />
+    <result column="f_releasename" jdbcType="NVARCHAR" property="fReleasename" />
+    <result column="f_bversionno" jdbcType="VARCHAR" property="fBversionno" />
+    <result column="f_bversionname" jdbcType="NVARCHAR" property="fBversionname" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PROJECTNo, f_projno, PROJECT, engPROJECT, f_releaseno, f_releasename, f_bversionno, 
+    f_bversionname
+  </sql>
+  <select id="selectByExample" parameterType="com.h3c.mds.product.entity.view_projectInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from view_projectInfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.h3c.mds.product.entity.view_projectInfoExample">
+    delete from view_projectInfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.h3c.mds.product.entity.view_projectInfo">
+    insert into view_projectInfo (PROJECTNo, f_projno, PROJECT, 
+      engPROJECT, f_releaseno, f_releasename, 
+      f_bversionno, f_bversionname)
+    values (#{projectno,jdbcType=NVARCHAR}, #{fProjno,jdbcType=VARCHAR}, #{project,jdbcType=NVARCHAR}, 
+      #{engproject,jdbcType=NVARCHAR}, #{fReleaseno,jdbcType=VARCHAR}, #{fReleasename,jdbcType=NVARCHAR}, 
+      #{fBversionno,jdbcType=VARCHAR}, #{fBversionname,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.h3c.mds.product.entity.view_projectInfo">
+    insert into view_projectInfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="projectno != null">
+        PROJECTNo,
+      </if>
+      <if test="fProjno != null">
+        f_projno,
+      </if>
+      <if test="project != null">
+        PROJECT,
+      </if>
+      <if test="engproject != null">
+        engPROJECT,
+      </if>
+      <if test="fReleaseno != null">
+        f_releaseno,
+      </if>
+      <if test="fReleasename != null">
+        f_releasename,
+      </if>
+      <if test="fBversionno != null">
+        f_bversionno,
+      </if>
+      <if test="fBversionname != null">
+        f_bversionname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="projectno != null">
+        #{projectno,jdbcType=NVARCHAR},
+      </if>
+      <if test="fProjno != null">
+        #{fProjno,jdbcType=VARCHAR},
+      </if>
+      <if test="project != null">
+        #{project,jdbcType=NVARCHAR},
+      </if>
+      <if test="engproject != null">
+        #{engproject,jdbcType=NVARCHAR},
+      </if>
+      <if test="fReleaseno != null">
+        #{fReleaseno,jdbcType=VARCHAR},
+      </if>
+      <if test="fReleasename != null">
+        #{fReleasename,jdbcType=NVARCHAR},
+      </if>
+      <if test="fBversionno != null">
+        #{fBversionno,jdbcType=VARCHAR},
+      </if>
+      <if test="fBversionname != null">
+        #{fBversionname,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.h3c.mds.product.entity.view_projectInfoExample" resultType="java.lang.Long">
+    select count(*) from view_projectInfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update view_projectInfo
+    <set>
+      <if test="record.projectno != null">
+        PROJECTNo = #{record.projectno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fProjno != null">
+        f_projno = #{record.fProjno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.project != null">
+        PROJECT = #{record.project,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.engproject != null">
+        engPROJECT = #{record.engproject,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fReleaseno != null">
+        f_releaseno = #{record.fReleaseno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fReleasename != null">
+        f_releasename = #{record.fReleasename,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fBversionno != null">
+        f_bversionno = #{record.fBversionno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBversionname != null">
+        f_bversionname = #{record.fBversionname,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update view_projectInfo
+    set PROJECTNo = #{record.projectno,jdbcType=NVARCHAR},
+      f_projno = #{record.fProjno,jdbcType=VARCHAR},
+      PROJECT = #{record.project,jdbcType=NVARCHAR},
+      engPROJECT = #{record.engproject,jdbcType=NVARCHAR},
+      f_releaseno = #{record.fReleaseno,jdbcType=VARCHAR},
+      f_releasename = #{record.fReleasename,jdbcType=NVARCHAR},
+      f_bversionno = #{record.fBversionno,jdbcType=VARCHAR},
+      f_bversionname = #{record.fBversionname,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

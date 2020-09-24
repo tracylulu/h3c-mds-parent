@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.dept.dao.IbdsDeptCoaDataRecordMapper">
+  <resultMap id="BaseResultMap" type="com.h3c.mds.dept.entity.IbdsDeptCoaDataRecord">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="SAPcode" jdbcType="NVARCHAR" property="sapcode" />
+    <result column="PersonCode" jdbcType="NVARCHAR" property="personcode" />
+    <result column="PassFlag" jdbcType="NVARCHAR" property="passflag" />
+    <result column="PassTime" jdbcType="TIMESTAMP" property="passtime" />
+    <result column="Other" jdbcType="NVARCHAR" property="other" />
+  </resultMap>
+
+
+	<sql id="condition_sql">
+		<where>
+			<if test="id !=null and id !='' ">
+				AND ID=#{id}
+			</if>
+			<if test="sapcode !=null and sapcode !='' ">
+				AND SAPcode=#{sapcode}
+			</if>
+			<if test="personcode !=null and personcode !='' ">
+				AND PersonCode=#{personcode}
+			</if>
+			<if test="passflag !=null and passflag !='' ">
+				AND PassFlag=#{passflag}
+			</if>
+			<if test="passtime !=null and passtime !='' ">
+				AND PassTime=#{passtime}
+			</if>
+			<if test="other !=null and other !='' ">
+				AND Other=#{other}
+			</if>
+		</where>
+	</sql>
+	
+  <sql id="Base_Column_List">
+    ID, SAPcode, PersonCode, PassFlag, PassTime,Other
+  </sql>
+
+  
+  
+  <insert id="insertDataRecord" parameterType="com.h3c.mds.dept.entity.IbdsDeptCoaDataRecord">
+    insert into IBDS_Dept_CoaDataRecord
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="sapcode != null">
+        SAPcode,
+      </if>
+      <if test="personcode != null">
+        PersonCode,
+      </if>
+      <if test="passflag != null">
+        PassFlag,
+      </if>
+      <if test="passtime != null">
+        PassTime,
+      </if>
+      <if test="other != null">
+        Other,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sapcode != null">
+        #{sapcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="personcode != null">
+        #{personcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="passflag != null">
+        #{passflag,jdbcType=NVARCHAR},
+      </if>
+      <if test="passtime != null">
+        #{passtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="other != null">
+        #{other,jdbcType=NVARCHAR},
+      </if>
+      
+    </trim>
+  </insert>
+  
+  
+  
+  <delete id="deleteDataRecord" >
+    delete from dbo.IBDS_Dept_CoaDataRecord
+  </delete>
+  
+  <select id="selectDataRecord" parameterType="com.h3c.mds.dept.entity.IbdsDeptCoaDataRecord" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dbo.IBDS_Dept_CoaDataRecord
+  </select>
+
+
+  
+  
+  <select id="getListByParam" parameterType="com.h3c.mds.dept.entity.IbdsDeptCoaDataRecord" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dbo.IBDS_Dept_CoaDataRecord
+    <if test="_parameter != null">
+    <include refid="condition_sql"></include>
+    </if>
+    
+  </select>
+  
+  
+   <update id="updateByPrimaryKey" parameterType="com.h3c.mds.dept.entity.IbdsDeptCoaDataRecord">
+    update IBDS_Dept_CoaDataRecord
+    <set>
+      <if test="sapcode != null">
+        SAPcode = #{sapcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="personcode != null">
+        PersonCode = #{personcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="passflag != null">
+        PassFlag = #{passflag,jdbcType=NVARCHAR},
+      </if>
+      <if test="passtime != null">
+        PassTime = #{passtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="other != null">
+        Other = #{other,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where Other = #{other,jdbcType=NVARCHAR}
+  </update>
+
+</mapper>

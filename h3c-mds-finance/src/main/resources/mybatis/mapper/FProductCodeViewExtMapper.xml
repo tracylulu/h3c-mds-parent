@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.h3c.mds.finance.dao.FProductCodeViewMapper">
+	<select id="getDataList" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+
+		<!-- IPMT层 -->
+		<if test="param.id == null">
+			select distinct 'PL_'+REPLACE(REPLACE(REPLACE(PRODLINE_NAME, '(', '--'), ')', '--'),'''','--') as CODE,PRODLINE_NAME
+			from VIEW_F_PRODUCT_CODE_VIEW WHERE 1=1
+		</if>
+
+
+		<if test="param.id != null">
+			<if test="param.listType == 1 or param.listType == 3">
+				<if test="param.type == 'PL'">
+					select distinct ID AS
+					CODE,PRODLINE_NAME,PDT_NAME,PRODUCT_CODE,PRODUCT_NAME_CN,PRODUCT_NAME_EN,BOM_CODE,STATUS,EFFECT_DATE,'FCODE'
+					AS NAME,MARK from VIEW_F_PRODUCT_CODE_VIEW
+					where REPLACE(REPLACE(REPLACE(PRODLINE_NAME, '(', '--'), ')', '--'),'''','--')=#{param.id}
+				</if>
+			</if>
+			<if test="param.listType == 2 or param.listType == 4">
+				<if test="param.type == 'PL'">
+					select distinct
+					'PDT'+REPLACE(REPLACE(REPLACE(PRODLINE_NAME, '(', '--'), ')', '--'),'''','--')+'_'+CONVERT(VARCHAR,PDT_NO) AS
+					CODE,PDT_NAME AS PRODLINE_NAME from VIEW_F_PRODUCT_CODE_VIEW
+					where REPLACE(REPLACE(REPLACE(PRODLINE_NAME, '(', '--'), ')', '--'),'''','--')=#{param.id}
+				</if>
+				<if test="param.type == 'PDT'">
+					select distinct ID AS
+					CODE,PDT_NAME AS PRODLINE_NAME,PRODUCT_CODE,PRODUCT_NAME_CN,PRODUCT_NAME_EN,BOM_CODE,STATUS,EFFECT_DATE,'FCODE'
+					AS NAME,MARK from VIEW_F_PRODUCT_CODE_VIEW
+					where PDT_NO=#{param.id}
+				</if>
+			</if>
+
+		</if>
+		<if test="param.listType == 1 or param.listType == 2">
+			AND MARK = '1'
+		</if>
+
+		<if test="param.prodLine!=null and param.prodLine!='' ">
+			and PRODLINE_NAME=#{param.prodLine}
+		</if>
+
+		<if test="param.pdt!=null and param.pdt!='' ">
+			and PDT_NO=#{param.pdt}
+		</if>
+		<if test="param.state!=null  "> 			
+			and status in
+			<foreach item="item" collection="param.state"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="param.start!=null and param.start!=''  and param.end!=null and param.end!='' ">
+			and EFFECT_DATE  between  #{param.start} and #{param.end}
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and
+			CHARINDEX(#{param.searchParas},CONVERT(NVARCHAR,isnull(PRODLINE_NO,''))+isnull(PRODLINE_NAME,'')+CONVERT(NVARCHAR,isnull(PDT_NO,''))
+			+isnull(PDT_NAME,'')+isnull(PRODUCT_CODE,'')+isnull(PRODUCT_NAME_CN,'')+isnull(PRODUCT_NAME_EN,'')+isnull(BOM_CODE,''))&gt;0
+		</if>
+
+		<if test="param.id == null">
+			ORDER BY PRODLINE_NAME
+		</if>
+		<if test="param.id != null">
+			<if test="param.listType == 2 or param.listType == 4">
+				<if test="param.type == 'PL'">
+					ORDER BY PDT_NAME
+				</if>
+				<if test="param.type == 'PDT'">
+					ORDER BY PRODUCT_CODE
+				</if>
+			</if>
+			<if test="param.listType == 1 or param.listType == 3">
+				ORDER BY PRODUCT_CODE
+			</if>
+		</if>
+
+
+	</select>
+
+	<select id="getProdTreeData" parameterType="map" resultMap="BaseResultMap">
+		<if test="param.id == null">
+			select distinct PRODUCT_ID as CODE,PROD_NAME
+			from VIEW_F_PRODUCT_CODE_VIEW WHERE MARK='1' AND PDT_NO=#{param.pdtId} AND PRODUCT_CODE NOT LIKE '%00'
+		</if>
+		<if test="param.id != null">
+			select distinct ID as CODE,PROD_NAME,PRODUCT_CODE,PRODUCT_NAME_CN,PRODUCT_NAME_EN
+			from VIEW_F_PRODUCT_CODE_VIEW WHERE MARK='1' AND  PDT_NO=#{param.pdtId} AND PRODUCT_ID=#{param.id} AND PRODUCT_CODE NOT LIKE '%00'
+		</if>
+
+		<if test="param.searchParas != null and param.searchParas != ''">
+			and
+			CHARINDEX(#{param.searchParas},CONVERT(NVARCHAR,isnull(PRODLINE_NO,''))+isnull(PRODLINE_NAME,'')+CONVERT(NVARCHAR,isnull(PDT_NO,''))
+			+isnull(PDT_NAME,'')+isnull(PRODUCT_CODE,'')+isnull(PRODUCT_NAME_CN,'')+isnull(PRODUCT_NAME_EN,'')+isnull(BOM_CODE,''))&gt;0
+		</if>
+
+		<if test="param.id == null">
+			ORDER BY CODE
+		</if>
+		<if test="param.id != null">
+			ORDER BY PRODUCT_CODE
+		</if>
+
+
+	</select>
+
+	<select id="selectByCode" parameterType="String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from VIEW_F_PRODUCT_CODE_VIEW WHERE PROD_NO=#{code}
+	</select>
+
+	<select id="getExportList" parameterType="map"
+	resultMap="BaseResultMap">
+	SELECT
+	ID,'PL_'+convert(VARCHAR,PRODLINE_NO) as
+	CODE,PRODLINE_NAME,PRODUCT_CODE,PRODUCT_NAME_CN,PRODUCT_NAME_EN,PDT_NAME,BOM_CODE,
+	<!-- convert(VARCHAR,case STATUS when '1' then '新增' when '2' then '修改' when 
+		'3' then '停用' end) STATUS, -->
+	STATUS,
+	EFFECT_DATE FROM dbo.VIEW_F_PRODUCT_CODE_VIEW
+	<where>
+		<if test="param.prodLine!=null and param.prodLine!='' ">
+			and PRODLINE_NAME=#{param.prodLine}
+		</if>
+
+		<if test="param.pdt!=null and param.pdt!='' ">
+			and PDT_NO=#{param.pdt}
+		</if>
+		<if test="param.state!=null  "> 			
+			and status in
+			<foreach item="item" collection="param.state"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="param.start!=null and param.start!=''  and param.end!=null and param.end!='' ">
+			and EFFECT_DATE  between  #{param.start} and #{param.end}
+		</if>
+		<if test="(param.listType == 1 or param.listType == 2) or param.listType == null or param.listType == ''">
+			AND MARK = '1'
+		</if>
+		<if test="param.searchParas != null and param.searchParas != ''">
+
+			and
+			CHARINDEX(#{param.searchParas},CONVERT(NVARCHAR,isnull(PRODLINE_NO,''))+isnull(PRODLINE_NAME,'')+CONVERT(NVARCHAR,isnull(PDT_NO,''))
+			+isnull(PDT_NAME,'')+isnull(PRODUCT_CODE,'')+isnull(PRODUCT_NAME_CN,'')+isnull(PRODUCT_NAME_EN,'')+isnull(BOM_CODE,''))&gt;0
+
+
+		</if>
+	</where>
+</select>
+</mapper>

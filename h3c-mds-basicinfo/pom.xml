@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>h3c-mds-parent</artifactId>
+		<groupId>com.h3c.mds</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<groupId>com.h3c.mds</groupId>
+	<artifactId>h3c-mds-basicinfo</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<dependencies>
+		<dependency>
+			<groupId>com.h3c.mds</groupId>
+			<artifactId>h3c-mds-commons</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+  			<groupId>com.h3c.mds</groupId>
+  			<artifactId>h3c-mds-flowable</artifactId>
+  			<version>0.0.1-SNAPSHOT</version>
+  		</dependency>
+  		<dependency>
+  			<groupId>com.h3c.mds</groupId>
+  			<artifactId>h3c-mds-sysmgr</artifactId>
+  			<version>0.0.1-SNAPSHOT</version>
+  		</dependency>
+	</dependencies>
+
+
+</project>

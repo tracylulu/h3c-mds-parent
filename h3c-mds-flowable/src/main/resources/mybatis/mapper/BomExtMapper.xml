@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h3c.mds.flowable.dao.BomMapper">
+  <select id="findByPage" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT <include refid="Base_Column_List" />
+    from IBDS_H3CPDM_Bom
+    <where>
+      <if test="_parameter != null and _parameter != ''">
+        S1PARTNUMBER LIKE #{searchStr}+'%' OR S1PARTDESCELEMENTS LIKE #{searchStr}+'%';
+
+      </if>
+    </where>
+  </select>
+</mapper>
